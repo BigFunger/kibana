@@ -18,6 +18,10 @@ describe('kibana cli', function () {
     var logger;
     var downloader;
 
+    function shouldReject() {
+      throw new Error('expected the promise to reject');
+    }
+
     beforeEach(function () {
       logger = pluginLogger(false);
       sinon.stub(logger, 'log');
@@ -45,7 +49,7 @@ describe('kibana cli', function () {
         downloader = pluginDownloader(settings, logger);
       });
 
-      it('should throw an error when it doesn\'t find a good url.', function (done) {
+      it('should throw an error when it doesn\'t find a good url.', function () {
         this.timeout(5000);
         var settings = {
           urls: [
@@ -70,21 +74,16 @@ describe('kibana cli', function () {
         .get('/badfile3.tar.gz')
         .reply(404);
 
-        var errorStub = sinon.stub();
         return downloader.download(settings, logger)
-        .catch(errorStub)
-        .then(function (data) {
-          expect(errorStub.called).to.be(true);
-          expect(errorStub.lastCall.args[0].message).to.match(/no valid url specified/i);
+        .then(shouldReject, function (err) {
+          expect(err.message).to.match(/no valid url specified/i);
 
           var files = glob.sync('**/*', { cwd: testWorkingPath });
           expect(files).to.eql([]);
-
-          done();
         });
       });
 
-      it('should throw an error when it doesn\'t find a good url.', function (done) {
+      it('should throw an error when it doesn\'t find a good url.', function () {
         this.timeout(5000);
         var settings = {
           urls: [
@@ -109,21 +108,16 @@ describe('kibana cli', function () {
         .get('/badfile3.tar.gz')
         .reply(404);
 
-        var errorStub = sinon.stub();
         return downloader.download(settings, logger)
-        .catch(errorStub)
-        .then(function (data) {
-          expect(errorStub.called).to.be(true);
-          expect(errorStub.lastCall.args[0].message).to.match(/no valid url specified/i);
+        .then(shouldReject, function (err) {
+          expect(err.message).to.match(/no valid url specified/i);
 
           var files = glob.sync('**/*', { cwd: testWorkingPath });
           expect(files).to.eql([]);
-
-          done();
         });
       });
 
-      it('should throw an error when it doesn\'t find a good url.', function (done) {
+      it('should throw an error when it doesn\'t find a good url.', function () {
         this.timeout(5000);
         var settings = {
           urls: [
@@ -148,21 +142,16 @@ describe('kibana cli', function () {
         .get('/badfile3.tar.gz')
         .reply(404);
 
-        var errorStub = sinon.stub();
         return downloader.download(settings, logger)
-        .catch(errorStub)
-        .then(function (data) {
-          expect(errorStub.called).to.be(true);
-          expect(errorStub.lastCall.args[0].message).to.match(/no valid url specified/i);
+        .then(shouldReject, function (err) {
+          expect(err.message).to.match(/no valid url specified/i);
 
           var files = glob.sync('**/*', { cwd: testWorkingPath });
           expect(files).to.eql([]);
-
-          done();
         });
       });
 
-      it('should throw an error when it doesn\'t find a good url.', function (done) {
+      it('should throw an error when it doesn\'t find a good url.', function () {
         this.timeout(5000);
         var settings = {
           urls: [
@@ -187,21 +176,16 @@ describe('kibana cli', function () {
         .get('/badfile3.tar.gz')
         .reply(404);
 
-        var errorStub = sinon.stub();
         return downloader.download(settings, logger)
-        .catch(errorStub)
-        .then(function (data) {
-          expect(errorStub.called).to.be(true);
-          expect(errorStub.lastCall.args[0].message).to.match(/no valid url specified/i);
+        .then(shouldReject, function (err) {
+          expect(err.message).to.match(/no valid url specified/i);
 
           var files = glob.sync('**/*', { cwd: testWorkingPath });
           expect(files).to.eql([]);
-
-          done();
         });
       });
 
-      it('should throw an error when it doesn\'t find a good url.', function (done) {
+      it('should throw an error when it doesn\'t find a good url.', function () {
         this.timeout(5000);
         var settings = {
           urls: [
@@ -226,21 +210,16 @@ describe('kibana cli', function () {
         .get('/badfile3.tar.gz')
         .reply(404);
 
-        var errorStub = sinon.stub();
         return downloader.download(settings, logger)
-        .catch(errorStub)
-        .then(function (data) {
-          expect(errorStub.called).to.be(true);
-          expect(errorStub.lastCall.args[0].message).to.match(/no valid url specified/i);
+        .then(shouldReject, function (err) {
+          expect(err.message).to.match(/no valid url specified/i);
 
           var files = glob.sync('**/*', { cwd: testWorkingPath });
           expect(files).to.eql([]);
-
-          done();
         });
       });
 
-      it('should throw an error when it doesn\'t find a good url.', function (done) {
+      it('should throw an error when it doesn\'t find a good url.', function () {
         this.timeout(5000);
         var settings = {
           urls: [
@@ -265,21 +244,16 @@ describe('kibana cli', function () {
         .get('/badfile3.tar.gz')
         .reply(404);
 
-        var errorStub = sinon.stub();
         return downloader.download(settings, logger)
-        .catch(errorStub)
-        .then(function (data) {
-          expect(errorStub.called).to.be(true);
-          expect(errorStub.lastCall.args[0].message).to.match(/no valid url specified/i);
+        .then(shouldReject, function (err) {
+          expect(err.message).to.match(/no valid url specified/i);
 
           var files = glob.sync('**/*', { cwd: testWorkingPath });
           expect(files).to.eql([]);
-
-          done();
         });
       });
 
-      it('should throw an error when it doesn\'t find a good url.', function (done) {
+      it('should throw an error when it doesn\'t find a good url.', function () {
         this.timeout(5000);
         var settings = {
           urls: [
@@ -304,21 +278,16 @@ describe('kibana cli', function () {
         .get('/badfile3.tar.gz')
         .reply(404);
 
-        var errorStub = sinon.stub();
         return downloader.download(settings, logger)
-        .catch(errorStub)
-        .then(function (data) {
-          expect(errorStub.called).to.be(true);
-          expect(errorStub.lastCall.args[0].message).to.match(/no valid url specified/i);
+        .then(shouldReject, function (err) {
+          expect(err.message).to.match(/no valid url specified/i);
 
           var files = glob.sync('**/*', { cwd: testWorkingPath });
           expect(files).to.eql([]);
-
-          done();
         });
       });
 
-      it('should throw an error when it doesn\'t find a good url.', function (done) {
+      it('should throw an error when it doesn\'t find a good url.', function () {
         this.timeout(5000);
         var settings = {
           urls: [
@@ -343,21 +312,16 @@ describe('kibana cli', function () {
         .get('/badfile3.tar.gz')
         .reply(404);
 
-        var errorStub = sinon.stub();
         return downloader.download(settings, logger)
-        .catch(errorStub)
-        .then(function (data) {
-          expect(errorStub.called).to.be(true);
-          expect(errorStub.lastCall.args[0].message).to.match(/no valid url specified/i);
+        .then(shouldReject, function (err) {
+          expect(err.message).to.match(/no valid url specified/i);
 
           var files = glob.sync('**/*', { cwd: testWorkingPath });
           expect(files).to.eql([]);
-
-          done();
         });
       });
 
-      it('should throw an error when it doesn\'t find a good url.', function (done) {
+      it('should throw an error when it doesn\'t find a good url.', function () {
         this.timeout(5000);
         var settings = {
           urls: [
@@ -382,21 +346,16 @@ describe('kibana cli', function () {
         .get('/badfile3.tar.gz')
         .reply(404);
 
-        var errorStub = sinon.stub();
         return downloader.download(settings, logger)
-        .catch(errorStub)
-        .then(function (data) {
-          expect(errorStub.called).to.be(true);
-          expect(errorStub.lastCall.args[0].message).to.match(/no valid url specified/i);
+        .then(shouldReject, function (err) {
+          expect(err.message).to.match(/no valid url specified/i);
 
           var files = glob.sync('**/*', { cwd: testWorkingPath });
           expect(files).to.eql([]);
-
-          done();
         });
       });
 
-      it('should throw an error when it doesn\'t find a good url.', function (done) {
+      it('should throw an error when it doesn\'t find a good url.', function () {
         this.timeout(5000);
         var settings = {
           urls: [
@@ -421,23 +380,18 @@ describe('kibana cli', function () {
         .get('/badfile3.tar.gz')
         .reply(404);
 
-        var errorStub = sinon.stub();
         return downloader.download(settings, logger)
-        .catch(errorStub)
-        .then(function (data) {
-          expect(errorStub.called).to.be(true);
-          expect(errorStub.lastCall.args[0].message).to.match(/no valid url specified/i);
+        .then(shouldReject, function (err) {
+          expect(err.message).to.match(/no valid url specified/i);
 
           var files = glob.sync('**/*', { cwd: testWorkingPath });
           expect(files).to.eql([]);
-
-          done();
         });
       });
 
     });
 
-    describe.skip('_downloadSingle', function () {
+    describe('_downloadSingle', function () {
 
       beforeEach(function () {
         var settings = {
@@ -449,9 +403,9 @@ describe('kibana cli', function () {
         downloader = pluginDownloader(settings, logger);
       });
 
-      describe.skip('http downloader', function () {
+      describe('http downloader', function () {
 
-        it('should download an unsupported file type, but return undefined for archiveType', function (done) {
+        it('should download an unsupported file type, but return undefined for archiveType', function () {
           var filename = join(__dirname, 'replies/Banana21.jpg');
 
           var couchdb = nock('http://www.files.com')
@@ -463,67 +417,48 @@ describe('kibana cli', function () {
             .replyWithFile(200, filename);
 
           var sourceUrl = 'http://www.files.com/banana21.jpg';
-          var errorStub = sinon.stub();
           return downloader._downloadSingle(sourceUrl)
-          .catch(errorStub)
           .then(function (data) {
-            expect(errorStub.called).to.be(false);
-
             expect(data.archiveType).to.be(undefined);
 
             var files = glob.sync('**/*', { cwd: testWorkingPath });
             var expected = [
               'archive.part'
             ];
-            expect(files.sort()).to.eql(expected.sort());
 
-            done();
+            expect(files.sort()).to.eql(expected.sort());
           });
         });
 
-        it('should throw an ENOTFOUND error for a http ulr that returns 404', function (done) {
+        it('should throw an ENOTFOUND error for a http ulr that returns 404', function () {
           var couchdb = nock('http://www.files.com')
             .get('/plugin.tar.gz')
             .reply(404);
 
           var sourceUrl = 'http://www.files.com/plugin.tar.gz';
 
-          var errorStub = sinon.stub();
           return downloader._downloadSingle(sourceUrl)
-          .catch(errorStub)
-          .then(function (data) {
-            expect(errorStub.called).to.be(true);
-            expect(errorStub.lastCall.args[0].message).to.match(/ENOTFOUND/);
-
-            expect(data).to.be(undefined);
+          .then(shouldReject, function (err) {
+            expect(err.message).to.match(/ENOTFOUND/);
 
             var files = glob.sync('**/*', { cwd: testWorkingPath });
             expect(files).to.eql([]);
-
-            done();
           });
         });
 
-        it('should throw an ENOTFOUND error for an invalid url', function (done) {
+        it('should throw an ENOTFOUND error for an invalid url', function () {
           var sourceUrl = 'i am an invalid url';
 
-          var errorStub = sinon.stub();
           return downloader._downloadSingle(sourceUrl)
-          .catch(errorStub)
-          .then(function (data) {
-            expect(errorStub.called).to.be(true);
-            expect(errorStub.lastCall.args[0].message).to.match(/ENOTFOUND/);
-
-            expect(data).to.be(undefined);
+          .then(shouldReject, function (err) {
+            expect(err.message).to.match(/ENOTFOUND/);
 
             var files = glob.sync('**/*', { cwd: testWorkingPath });
             expect(files).to.eql([]);
-
-            done();
           });
         });
 
-        it('should download a tarball from a valid http url', function (done) {
+        it('should download a tarball from a valid http url', function () {
           var filename = join(__dirname, 'replies/test-plugin-master.tar.gz');
 
           var couchdb = nock('http://www.files.com')
@@ -536,10 +471,8 @@ describe('kibana cli', function () {
 
           var sourceUrl = 'http://www.files.com/plugin.tar.gz';
 
-          var errorStub = sinon.stub();
           return downloader._downloadSingle(sourceUrl)
           .then(function (data) {
-            expect(errorStub.called).to.be(false);
 
             expect(data.archiveType).to.be('.tar.gz');
 
@@ -548,12 +481,10 @@ describe('kibana cli', function () {
               'archive.part'
             ];
             expect(files.sort()).to.eql(expected.sort());
-
-            done();
           });
         });
 
-        it('should download a zip from a valid http url', function (done) {
+        it('should download a zip from a valid http url', function () {
           var filename = join(__dirname, 'replies/funger-plugin-2015-11-10.zip');
 
           var couchdb = nock('http://www.files.com')
@@ -566,11 +497,8 @@ describe('kibana cli', function () {
 
           var sourceUrl = 'http://www.files.com/plugin.zip';
 
-          var errorStub = sinon.stub();
           return downloader._downloadSingle(sourceUrl)
           .then(function (data) {
-            expect(errorStub.called).to.be(false);
-
             expect(data.archiveType).to.be('.zip');
 
             var files = glob.sync('**/*', { cwd: testWorkingPath });
@@ -578,53 +506,36 @@ describe('kibana cli', function () {
               'archive.part'
             ];
             expect(files.sort()).to.eql(expected.sort());
-
-            done();
           });
         });
 
       });
 
-      describe.skip('local file downloader', function() {
-
-        it('should throw an ENOTFOUND error for an invalid local file', function (done) {
+      describe('local file downloader', function () {
+        it('should throw an ENOTFOUND error for an invalid local file', function () {
           var filePath = join(__dirname, 'replies/i-am-not-there.tar.gz');
           var sourceUrl = 'file://' + filePath.replace(/\\/g, '/');
 
-          var errorStub = sinon.stub();
           return downloader._downloadSingle(sourceUrl)
-          .catch(errorStub)
-          .then(function (data) {
-            expect(errorStub.called).to.be(true);
-            expect(errorStub.lastCall.args[0].message).to.match(/ENOTFOUND/);
+          .then(shouldReject, function (err) {
+            expect(err.message).to.match(/ENOTFOUND/);
 
             var files = glob.sync('**/*', { cwd: testWorkingPath });
             expect(files).to.eql([]);
-
-            done();
           });
         });
 
-        it('should download from a valid local file', function (done) {
+        it('should download from a valid local file', function () {
           var filePath = join(__dirname, 'replies/test-plugin-master.tar.gz');
           var sourceUrl = 'file://' + filePath.replace(/\\/g, '/');
 
-          var errorStub = sinon.stub();
           return downloader._downloadSingle(sourceUrl)
-          .catch((err) => {
-            console.log('error', err);
-            errorStub(err);
-          })
           .then(function (data) {
-            expect(errorStub.called).to.be(false);
-
             var files = glob.sync('**/*', { cwd: testWorkingPath });
             var expected = [
               'archive.part'
             ];
             expect(files.sort()).to.eql(expected.sort());
-
-            done();
           });
         });
 
@@ -632,9 +543,8 @@ describe('kibana cli', function () {
 
     });
 
-    describe.skip('download', function () {
-
-      it('should loop through bad urls until it finds a good one.', function (done) {
+    describe('download', function () {
+      it('should loop through bad urls until it finds a good one.', function () {
         var filename = join(__dirname, 'replies/test-plugin-master.tar.gz');
         var settings = {
           urls: [
@@ -660,15 +570,8 @@ describe('kibana cli', function () {
         .get('/goodfile.tar.gz')
         .replyWithFile(200, filename);
 
-        var errorStub = sinon.stub();
         return downloader.download(settings, logger)
-        .catch((err) => {
-          console.log(err);
-          errorStub(err);
-        })
         .then(function (data) {
-          expect(errorStub.called).to.be(false);
-
           expect(logger.log.getCall(0).args[0]).to.match(/badfile1.tar.gz/);
           expect(logger.log.getCall(1).args[0]).to.match(/badfile2.tar.gz/);
           expect(logger.log.getCall(2).args[0]).to.match(/I am a bad uri/);
@@ -680,12 +583,10 @@ describe('kibana cli', function () {
             'archive.part'
           ];
           expect(files.sort()).to.eql(expected.sort());
-
-          done();
         });
       });
 
-      it('should stop looping through urls when it finds a good one.', function (done) {
+      it('should stop looping through urls when it finds a good one.', function () {
         var filename = join(__dirname, 'replies/test-plugin-master.tar.gz');
         var settings = {
           urls: [
@@ -713,12 +614,8 @@ describe('kibana cli', function () {
         .get('/badfile3.tar.gz')
         .reply(404);
 
-        var errorStub = sinon.stub();
         return downloader.download(settings, logger)
-        .catch(errorStub)
         .then(function (data) {
-          expect(errorStub.called).to.be(false);
-
           for (var i = 0; i < logger.log.callCount; i++) {
             expect(logger.log.getCall(i).args[0]).to.not.match(/badfile3.tar.gz/);
           }
@@ -728,12 +625,10 @@ describe('kibana cli', function () {
             'archive.part'
           ];
           expect(files.sort()).to.eql(expected.sort());
-
-          done();
         });
       });
 
-      it('should throw an error when it doesn\'t find a good url.', function (done) {
+      it('should throw an error when it doesn\'t find a good url.', function () {
         var settings = {
           urls: [
             'http://www.files.com/badfile1.tar.gz',
@@ -757,17 +652,12 @@ describe('kibana cli', function () {
         .get('/badfile3.tar.gz')
         .reply(404);
 
-        var errorStub = sinon.stub();
         return downloader.download(settings, logger)
-        .catch(errorStub)
-        .then(function (data) {
-          expect(errorStub.called).to.be(true);
-          expect(errorStub.lastCall.args[0].message).to.match(/no valid url specified/i);
+        .then(shouldReject, function (err) {
+          expect(err.message).to.match(/no valid url specified/i);
 
           var files = glob.sync('**/*', { cwd: testWorkingPath });
           expect(files).to.eql([]);
-
-          done();
         });
       });
 

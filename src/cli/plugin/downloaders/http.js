@@ -65,7 +65,7 @@ module.exports = function (logger, sourceUrl, targetPath, timeout) {
       //console.log('_writeStream.finish');
       if (!_hasError) return;
 
-      setTimeout (function() {
+      setTimeout (function () {
         fs.unlinkSync(targetPath);
         _reject(new Error(_errorMessage));
       }, 10);
@@ -108,7 +108,7 @@ module.exports = function (logger, sourceUrl, targetPath, timeout) {
     //console.log('http.handleEnd', _hasError);
     if (_hasError) return;
 
-    setTimeout (function() {
+    setTimeout (function () {
       logger.log('Transfer complete');
       _resolve({
         archiveType: _archiveType
