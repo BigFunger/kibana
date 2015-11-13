@@ -6,12 +6,35 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test:quick', [
     'test:server',
+    'test:ui',
     'test:browser'
   ]);
 
   grunt.registerTask('test:dev', [
     'run:devTestServer',
     'karma:dev'
+  ]);
+
+  grunt.registerTask('test:ui', [
+    'esvm:ui',
+    'run:testUIServer',
+    'downloadSelenium',
+    'run:seleniumServer',
+    'intern:dev',
+    'esvm_shutdown:ui',
+    'stop:seleniumServer',
+    'stop:testUIServer'
+  ]);
+
+  grunt.registerTask('test:ui:server', [
+    'esvm:ui',
+    'run:testUIServer',
+    'downloadSelenium',
+    'run:devSeleniumServer:keepalive'
+  ]);
+
+  grunt.registerTask('test:ui:runner', [
+    'intern:dev'
   ]);
 
   grunt.registerTask('test', function (subTask) {

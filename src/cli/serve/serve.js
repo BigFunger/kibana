@@ -34,8 +34,8 @@ module.exports = function (program) {
   .option('-e, --elasticsearch <uri>', 'Elasticsearch instance')
   .option(
     '-c, --config <path>',
-    'Path to the config file',
-    fromRoot('config/kibana.yml'))
+    'Path to the config file, can be changed with the CONFIG_PATH environment variable as well',
+    process.env.CONFIG_PATH || fromRoot('config/kibana.yml'))
   .option('-p, --port <port>', 'The port to bind to', parseInt)
   .option('-q, --quiet', 'Prevent all logging except errors')
   .option('-Q, --silent', 'Prevent all logging')
@@ -119,7 +119,7 @@ module.exports = function (program) {
       let { server } = kbnServer;
 
       if (server) server.log(['fatal'], err);
-      else console.error('FATAL', err);
+      console.error('FATAL', err);
 
       kbnServer.close();
       process.exit(1); // eslint-disable-line no-process-exit
