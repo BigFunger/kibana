@@ -24,7 +24,7 @@ define(function (require) {
         $scope.currentTab = null;
         $scope.selectedItems = [];
 
-        var getData = function (filter) {
+        function getData (filter) {
           var services = registry.all().map(function (obj) {
             var service = $injector.get(obj.service);
             return service.find(filter).then(function (data) {
@@ -49,7 +49,6 @@ define(function (require) {
             });
           });
         };
-
 
         $scope.toggleAll = function () {
           if ($scope.selectedItems.length === $scope.currentTab.data.length) {

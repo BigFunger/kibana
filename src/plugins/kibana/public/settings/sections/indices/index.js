@@ -44,6 +44,7 @@ define(function (require) {
   });
 
   return {
+    order: 0,
     name: 'indices',
     display: 'Indices',
     url: '#/settings/indices',
