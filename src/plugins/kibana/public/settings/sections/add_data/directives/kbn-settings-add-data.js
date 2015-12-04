@@ -1,13 +1,14 @@
 const app = require('ui/modules').get('kibana');
 const _ = require('lodash');
 
+require('./object-changes.js');
+
 app.directive('kbnSettingsAddData', function () {
   return {
     restrict: 'E',
     controller: function ($scope, AppState) {
       let test = new AppState();
       console.log(test);
-      debugger;
 
       var $state = $scope.state = new AppState();
       console.log('AppState after new AppState', $state);
