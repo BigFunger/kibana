@@ -1,19 +1,11 @@
 const app = require('ui/modules').get('kibana');
 const _ = require('lodash');
 
-app.directive('objectChanges', function ($sanitize) {
+app.directive('objectChanges', function () {
   return {
     restrict: 'E',
     template: require('../views/object-changes.html'),
     controller: function ($scope) {
-      $scope.test = { blah: 'I am being bound correctly.' };
-
-      $scope.test2 =
-`{
-  <span>+ "@timestamp": "11/24/2015",</span>
-  + "message": "src=1.1.1.1 evil=1"
-}`;
-
       $scope.lines = [
         { state: 'neutral', text: '{' },
         { state: 'neutral', text: '  "_raw": "11/24/2015 -- src=1.1.1.1 evil=1' },
@@ -23,9 +15,9 @@ app.directive('objectChanges', function ($sanitize) {
         { state: 'neutral', text: '}' }
       ];
 
-      $scope.lines.forEach(line => {
-        line.text = line.text.replace(/ /g, '&nbsp;');
-      });
+      // $scope.lines.forEach(line => {
+      //   line.text = line.text.replace(/ /g, '&nbsp;');
+      // });
     }
   }
 });

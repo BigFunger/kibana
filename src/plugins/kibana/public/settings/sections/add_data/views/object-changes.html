@@ -28,6 +28,17 @@
     class="line"
     ng-class="{ added: line.state === 'added', removed: line.state === 'removed' }"
     ng-repeat="line in lines">
+<!--     <span>{{line.text}}</span> -->
     <span ng-bind-html="line.text"></span>
+  </div>
+
+
+  <div>
+    <code>
+    {
+     + I am stuff
+       I am also stuff
+    }
+    </code>
   </div>
 </div>
