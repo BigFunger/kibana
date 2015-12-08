@@ -1,12 +1,13 @@
 const app = require('ui/modules').get('kibana');
 const _ = require('lodash');
 
-require('./object-changes.js');
+require('./object_changes.js');
 
 app.directive('kbnSettingsAddData', function () {
   return {
     restrict: 'E',
     controller: function ($scope, AppState) {
+      /*
       let test = new AppState();
       console.log(test);
 
@@ -35,6 +36,7 @@ app.directive('kbnSettingsAddData', function () {
       }
 
       $scope.test = 'I am being bound correctly.';
+      */
     }
   };
 });

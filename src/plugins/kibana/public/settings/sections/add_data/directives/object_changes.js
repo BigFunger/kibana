@@ -1,11 +1,11 @@
 const app = require('ui/modules').get('kibana');
 const _ = require('lodash');
-const keysDeep = require('../lib/keys-deep.js');
+const keysDeep = require('../lib/keys_deep.js');
 
 app.directive('objectChanges', function () {
   return {
     restrict: 'E',
-    template: require('../views/object-changes.html'),
+    template: require('../views/object_changes.html'),
     controller: function ($scope) {
 
       var obj = {
