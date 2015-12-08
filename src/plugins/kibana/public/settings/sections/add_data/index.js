@@ -1,5 +1,6 @@
 define(function (require) {
   require('./directives/kbn-settings-add-data');
+  require('./directives/pipeline-setup');
 
   require('ui/routes')
   .when('/settings/add_data', {
