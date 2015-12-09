@@ -1,7 +1,8 @@
 const app = require('ui/modules').get('kibana');
 const _ = require('lodash');
 const $ = require('jquery');
-const keysDeep = require('../lib/keys_deep.js');
+const keysDeep = require('../lib/keys_deep');
+require('./processor_header');
 
 app.directive('processorRegex', function () {
   return {
@@ -11,14 +12,14 @@ app.directive('processorRegex', function () {
       $scope.expression = '';
 
       $scope.$watch('inputObject', refreshFields);
-      $scope.$watch('field', refreshFieldData);
+      $scope.$watch('sourceField', refreshFieldData);
       $scope.$watch('targetField', refreshOutput);
       $scope.$watch('fieldData', refreshOutput);
       $scope.$watch('expression', refreshOutput);
 
       function refreshFields() {
         $scope.fields = keysDeep($scope.inputObject);
-        $scope.field = $scope.fields[0];
+        $scope.sourceField = $scope.fields[0];
       }
 
       function refreshFieldData(field) {
@@ -30,11 +31,25 @@ app.directive('processorRegex', function () {
         const matches = $scope.fieldData.match(regex)
 
         const processorOutput = {};
-        if ($scope.targetField && matches && matches[0]) {
-          _.set(processorOutput, $scope.targetField, matches[0]);
+        if ($scope.targetField) {
+          if (matches && matches[0]) {
+            _.set(processorOutput, $scope.targetField, matches[0]);
+          } else {
+            _.set(processorOutput, $scope.targetField, '');
+          }
         }
 
+        const newProperties = _.cloneDeep(processorOutput);
         $scope.outputObject = _.defaultsDeep(processorOutput, $scope.inputObject);
+
+        //show the merged object
+        //$scope.outputDisplayObject = $scope.outputObject;
+
+        //show just the new properties
+        $scope.outputDisplayObject = newProperties;
+
+
+        //   ^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}
       }
     }
   };
