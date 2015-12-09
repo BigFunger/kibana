@@ -1,0 +1,33 @@
+<div class="form-group">
+  <label>Processor:</label>
+  <select class="form-control">
+    <option selected>grok</option>
+    <option>kv</option>
+    <option>geoip</option>
+    <option>date</option>
+  </select>
+</div>
+<div class="form-group">
+  <label>Field:</label>
+  <select
+    class="form-control"
+    ng-options="field as field for field in fields"
+    ng-model="field">
+  </select>
+</div>
+<div class="form-group">
+  <label>Field Data:</label>
+  <input type="text" class="form-control" ng-model="fieldData">
+</div>
+<div class="form-group">
+  <label>Target Field:</label>
+  <input type="text" class="form-control" ng-model="targetField">
+</div>
+<div class="form-group">
+  <label>Expression:</label>
+  <input type="text" class="form-control" ng-model="expression">
+</div>
+<div class="form-group">
+  <label>Output:</label>
+  <pre>{{ outputObject | json }}</pre>
+</div>

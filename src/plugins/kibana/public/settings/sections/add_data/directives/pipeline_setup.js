@@ -3,6 +3,7 @@ const _ = require('lodash');
 const $ = require('jquery');
 
 require('./processor_grok');
+require('./processor_regex');
 
 app.directive('pipelineSetup', function ($compile) {
   return {
@@ -11,6 +12,8 @@ app.directive('pipelineSetup', function ($compile) {
     link: function ($scope, $el) {
       const $container = $el;
       $el = $('<ul>').appendTo($container);
+
+      let lastProcessor = undefined;
 
       $scope.$watchCollection('processors', function (processors) {
         const currentProcessors = getCurrentProcessors();
@@ -38,14 +41,22 @@ app.directive('pipelineSetup', function ($compile) {
       function addProcessor(processor) {
         processor.$scope = $scope.$new();
         processor.$scope.processor = processor;
+        if (lastProcessor) {
+          processor.$scope.inputObject = lastProcessor.$scope.outputObject;
+        } else {
+          processor.$scope.inputObject = $scope.inputObject;
+        }
 
         processor.$el = $compile(`<li>${processor.template}</li>`)(processor.$scope);
         processor.$el.appendTo($el);
 
         processor.$el.data('processor', processor);
         processor.$el.data('$scope', processor.$scope);
+
+        lastProcessor = processor;
       }
 
+      //TODO: This functionality is completely untested.
       function removeProcessor(processor) {
         // destroy the scope
         processor.$scope.$destroy();
@@ -58,12 +69,8 @@ app.directive('pipelineSetup', function ($compile) {
       let processors = [];
 
       processors.push({
-        type: 'grok',
-        data: {
-          field: '_raw',
-          pattern: '%{@timestamp} - - %{GREEDYDATA:text}'
-        },
-        template: '<processor-grok></processor-grok>'
+        type: 'regex',
+        template: '<processor-regex></processor-regex>'
       });
 
       // processors.push({
@@ -95,6 +102,10 @@ app.directive('pipelineSetup', function ($compile) {
       //   template: '<h1>I am a date processor</h1>',
       //   //template: '<pipeline-date></pipeline-date>'
       // });
+
+      $scope.inputObject = {
+        '_raw': '11/24/2015 - - src=1.1.1.1 evil=1'
+      };
 
       $scope.processors = processors;
 

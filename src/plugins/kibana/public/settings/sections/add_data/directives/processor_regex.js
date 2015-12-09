@@ -3,17 +3,18 @@ const _ = require('lodash');
 const $ = require('jquery');
 const keysDeep = require('../lib/keys_deep.js');
 
-app.directive('processorGrok', function () {
+app.directive('processorRegex', function () {
   return {
     restrict: 'E',
-    template: require('../views/processor_grok.html'),
+    template: require('../views/processor_regex.html'),
     controller: function ($scope) {
-      $scope.pattern = '';
+      $scope.expression = '';
 
       $scope.$watch('inputObject', refreshFields);
       $scope.$watch('field', refreshFieldData);
+      $scope.$watch('targetField', refreshOutput);
       $scope.$watch('fieldData', refreshOutput);
-      $scope.$watch('pattern', refreshOutput);
+      $scope.$watch('expression', refreshOutput);
 
       function refreshFields() {
         $scope.fields = keysDeep($scope.inputObject);
@@ -24,15 +25,14 @@ app.directive('processorGrok', function () {
         $scope.fieldData = _.get($scope.inputObject, field);
       }
 
-      let evilCounter = 0;
       function refreshOutput() {
-        evilCounter += 1;
+        const regex = new RegExp($scope.expression, 'i');
+        const matches = $scope.fieldData.match(regex)
 
-        const processorOutput = {
-          '@timestamp': '11/24/2015',
-          'message': 'src=1.1.1.1 evil=1',
-          'counter': evilCounter
-        };
+        const processorOutput = {};
+        if ($scope.targetField && matches && matches[0]) {
+          _.set(processorOutput, $scope.targetField, matches[0]);
+        }
 
         $scope.outputObject = _.defaultsDeep(processorOutput, $scope.inputObject);
       }
