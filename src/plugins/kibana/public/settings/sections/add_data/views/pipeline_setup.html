@@ -1,1 +1,11 @@
-<button ng-click="addSomething()">Click me, bitch</button>
+<ul class="pipeline-wrapper"></ul>
+
+<div class="form-group">
+  <label>Processsor Type:</label>
+  <select
+    class="form-control"
+    ng-options="processorType as processorType.title for processorType in processorTypes"
+    ng-model="processorType">
+  </select>
+</div>
+<button ng-click="addProcessor()">Add Processor</button>

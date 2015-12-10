@@ -7,7 +7,7 @@ app.directive('processorGrok', function () {
   return {
     restrict: 'E',
     template: require('../views/processor_grok.html'),
-    controller: function ($scope) {
+    controller: function ($scope, $http) {
       $scope.pattern = '';
 
       $scope.$watch('inputObject', refreshFields);
@@ -26,8 +26,6 @@ app.directive('processorGrok', function () {
 
       let evilCounter = 0;
       function refreshOutput() {
-        evilCounter += 1;
-
         const processorOutput = {
           '@timestamp': '11/24/2015',
           'message': 'src=1.1.1.1 evil=1',

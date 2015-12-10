@@ -10,18 +10,17 @@ app.directive('pipelineSetup', function ($compile) {
     restrict: 'E',
     template: require('../views/pipeline_setup.html'),
     link: function ($scope, $el) {
+      let counter = 0;
+
       const $container = $el;
-      $el = $('<ul>').appendTo($container);
+      $el = $container.find('.pipeline-wrapper');
 
       let lastProcessor = undefined;
 
       $scope.$watchCollection('processors', function (processors) {
         const currentProcessors = getCurrentProcessors();
 
-        // processors that are now missing from the processors array
         var removed = _.difference(currentProcessors, processors);
-
-        // processors that have been added
         var added = _.difference(processors, currentProcessors);
 
         if (removed.length) removed.forEach(removeProcessor);
@@ -39,8 +38,11 @@ app.directive('pipelineSetup', function ($compile) {
       }
 
       function addProcessor(processor) {
+        counter += 1;
+
         processor.$scope = $scope.$new();
         processor.$scope.processor = processor;
+        processor.$scope.counter = counter;
         if (lastProcessor) {
           processor.$scope.inputObject = lastProcessor.$scope.outputObject;
         } else {
@@ -66,60 +68,23 @@ app.directive('pipelineSetup', function ($compile) {
       }
     },
     controller: function ($scope, AppState) {
-      let processors = [];
-
-      processors.push({
-        type: 'regex',
-        template: '<processor-regex></processor-regex>'
-      });
-
-      // processors.push({
-      //   type: 'kv',
-      //   data: {
-      //     field: 'message',
-      //     separator: '=',
-      //     stringDelimiter: '"'
-      //   },
-      //   template: '<h1>I am a kv processor</h1>',
-      //   //template: '<pipeline-kv></pipeline-kv>'
-      // });
-
-      // processors.push({
-      //   type: 'geoip',
-      //   data: {
-      //     field: 'src'
-      //   },
-      //   template: '<h1>I am a geoip processor</h1>',
-      //   //template: '<pipeline-geoip></pipeline-geoip>'
-      // });
-
-      // processors.push({
-      //   type: 'date',
-      //   data: {
-      //     field: '@timestamp',
-      //     pattern: 'MM/dd/yyyy'
-      //   },
-      //   template: '<h1>I am a date processor</h1>',
-      //   //template: '<pipeline-date></pipeline-date>'
-      // });
+      $scope.processorTypes = require('../lib/processor_registry.js');
+      $scope.defaultProcessorType = getDefaultProcessorType();
+      $scope.processorType = $scope.defaultProcessorType;
+      $scope.processors = [ $scope.defaultProcessorType ];
 
       $scope.inputObject = {
         '_raw': '11/24/2015 - - src=1.1.1.1 evil=1',
         '_deal': 'I am a simple string'
       };
 
-      $scope.processors = processors;
-
-
-      //var index = 3;
-      $scope.addSomething = function() {
-        //index += 1;
-        //if (index > 3) index = 0;
-        let index = 0;
-
-        var newProcessor = _.cloneDeep(processors[index]);
-
+      $scope.addProcessor = function() {
+        var newProcessor = _.cloneDeep($scope.processorType);
         $scope.processors.push(newProcessor);
+      }
+
+      function getDefaultProcessorType() {
+        return _.first(_.filter($scope.processorTypes, processor => { return processor.default }));
       }
     }
   };

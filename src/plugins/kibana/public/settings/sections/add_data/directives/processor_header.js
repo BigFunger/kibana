@@ -12,6 +12,17 @@ app.directive('processorHeader', function () {
     },
     template: require('../views/processor_header.html'),
     controller: function ($scope) {
+      $scope.moveUp = function() {
+        console.log('Move Up');
+      }
+
+      $scope.moveDown = function() {
+        console.log('Move Down');
+      }
+
+      $scope.remove = function() {
+        console.log('Remove');
+      }
     }
   };
 });
