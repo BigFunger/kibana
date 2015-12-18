@@ -1,6 +1,7 @@
 define(function (require) {
   require('./directives/kbn_settings_add_data');
   require('./directives/pipeline_setup');
+  require('./directives/source_data');
   require('./styles/_add_data.less');
 
   require('ui/routes')

@@ -77,8 +77,8 @@ app.directive('processorRegex', function () {
       }
       refreshOutput = debounce(refreshOutput, 200);
 
+      //TODO: This is only here for debugging purposes.
       $scope.expression = '^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}';
-      //$scope.outputObject = _.cloneDeep($scope.inputObject);
 
       $scope.$watch('sourceField', refreshFieldData);
       $scope.$watch('targetField', refreshOutput);
@@ -90,5 +90,3 @@ app.directive('processorRegex', function () {
     }
   };
 });
-
-//   ^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}
