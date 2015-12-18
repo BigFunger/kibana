@@ -3,6 +3,7 @@ define(function (require) {
   var config = require('intern').config;
   var Promise = require('bluebird');
   var moment = require('moment');
+  var testSubjSelector = require('intern/dojo/node!@spalger/test-subj-selector');
   var getUrl = require('intern/dojo/node!../../utils/getUrl');
   var fs = require('intern/dojo/node!fs');
   var path = require('intern/dojo/node!path');
@@ -18,12 +19,16 @@ define(function (require) {
 
     navigateToApp: function (appName, testStatusPage) {
       var self = this;
-      var appUrl = getUrl(config.servers.kibana, config.apps[appName]);
-      self.debug('navigating to ' + appName + ' url: ' + appUrl);
+      // navUrl includes user:password@ for use with Shield
+      // appUrl excludes user:password@ to match what getCurrentUrl returns
+      var navUrl = getUrl(config.servers.kibana, config.apps[appName]);
+      var appUrl = getUrl.noAuth(config.servers.kibana, config.apps[appName]);
+      self.debug('navigating to ' + appName + ' url: ' + navUrl);
 
       var doNavigation = function (url) {
         return self.tryForTime(defaultTimeout, function () {
           // since we're using hash URLs, always reload first to force re-render
+          self.debug('navigate to: ' + url);
           return self.remote.get(url)
           .then(function () {
             return self.remote.refresh();
@@ -48,6 +53,7 @@ define(function (require) {
             if (!navSuccessful) {
               var msg = 'App failed to load: ' + appName +
               ' in ' + defaultTimeout + 'ms' +
+              ' appUrl = ' + appUrl +
               ' currentUrl = ' + currentUrl;
               self.debug(msg);
               throw new Error(msg);
@@ -58,7 +64,7 @@ define(function (require) {
         });
       };
 
-      return doNavigation(appUrl)
+      return doNavigation(navUrl)
       .then(function (currentUrl) {
         var lastUrl = currentUrl;
         return self.tryForTime(defaultTimeout, function () {
@@ -199,6 +205,11 @@ define(function (require) {
       .catch(function (err) {
         self.log('SCREENSHOT FAILED: ' + err);
       });
+    },
+
+    findTestSubject: function findTestSubject(selector) {
+      this.debug('in findTestSubject: ' + selector);
+      return this.remote.findByCssSelector(testSubjSelector(selector));
     }
   };
 
