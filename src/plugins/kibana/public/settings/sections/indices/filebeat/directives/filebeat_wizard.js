@@ -5,6 +5,7 @@ require('plugins/kibana/settings/sections/indices/add_data_steps/pattern_review_
 require('plugins/kibana/settings/sections/indices/add_data_steps/paste_samples_step');
 require('plugins/kibana/settings/sections/indices/add_data_steps/pipeline_setup');
 require('plugins/kibana/settings/sections/indices/add_data_steps/install_filebeat_step');
+require('../styles/filebeat_wizard.less');
 
 // wrapper directive, which sets up the breadcrumb for all filebeat steps
 modules.get('apps/settings')
