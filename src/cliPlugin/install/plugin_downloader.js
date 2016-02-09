@@ -1,12 +1,9 @@
 import _ from 'lodash';
 import downloadHttpFile from './downloaders/http';
 import downloadLocalFile from './downloaders/file';
-import { parse as urlParse } from 'url';
+import { parse } from 'url';
 
 export default function createPluginDownloader(settings, logger) {
-  let archiveType;
-  let sourceType;
-
   //Attempts to download each url in turn until one is successful
   function download() {
     const urls = settings.urls.slice(0);
@@ -32,12 +29,14 @@ export default function createPluginDownloader(settings, logger) {
   }
 
   function downloadSingle(sourceUrl) {
-    const urlInfo = urlParse(sourceUrl);
+    const urlInfo = parse(sourceUrl);
     let downloadPromise;
 
     if (/^file/.test(urlInfo.protocol)) {
-      downloadPromise = downloadLocalFile(logger, urlInfo.path, settings.tempArchiveFile);
+      console.log(`yep. It's a local file url. "${urlInfo.path}", "${decodeURI(urlInfo.path)}"`);
+      downloadPromise = downloadLocalFile(logger, decodeURI(urlInfo.path), settings.tempArchiveFile);
     } else {
+      console.log(`yep. It's a http url.`);
       downloadPromise = downloadHttpFile(logger, sourceUrl, settings.tempArchiveFile, settings.timeout);
     }
 

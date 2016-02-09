@@ -3,17 +3,15 @@ const utils = require('requirefrom')('src/utils');
 const fromRoot = utils('fromRoot');
 import pluginDownloader from './plugin_downloader';
 import pluginCleaner from './plugin_cleaner';
-import pluginExtractor from './plugin_extractor';
+import { extractZip, getPluginName } from './extractors/zip';
 import KbnServer from '../../server/KbnServer';
-import readYamlConfig from '../serve/read_yaml_config';
+import readYamlConfig from '../../cli/serve/read_yaml_config';
 import Promise from 'bluebird';
 import { sync as rimrafSync } from 'rimraf';
+import { ZIP } from './file_type';
 import { statSync, renameSync } from 'fs';
-const mkdirp = Promise.promisify(require('mkdirp'));
 
-export default {
-  install: install
-};
+const mkdirp = Promise.promisify(require('mkdirp'));
 
 function checkForExistingInstall(settings, logger) {
   try {
@@ -55,33 +53,38 @@ async function rebuildKibanaCache(settings, logger) {
   await kbnServer.close();
 }
 
-async function install(settings, logger) {
-  logger.log(`Installing ${settings.package}`);
+export default async function install(settings, logger) {
+  //logger.log(`Installing ${settings.package}`);
 
   const cleaner = pluginCleaner(settings, logger);
 
   try {
-    checkForExistingInstall(settings, logger);
-
     await cleaner.cleanPrevious();
 
     await mkdirp(settings.workingPath);
 
     const downloader = pluginDownloader(settings, logger);
-    const { archiveType } = await downloader.download();
+    await downloader.download();
 
-    await pluginExtractor (settings, logger, archiveType);
+    settings.plugin = await getPluginName(settings);
 
-    rimrafSync(settings.tempArchiveFile);
+    console.log(`@@@@@@@@@@@@${settings.plugin}@@@@@@@@@@@@@@`);
+    process.exit(70); // eslint-disable-line no-process-exit
 
-    renameSync(settings.workingPath, settings.pluginPath);
+    await extractZip (settings, logger, ZIP);
 
-    await rebuildKibanaCache(settings, logger);
+    //rimrafSync(settings.tempArchiveFile);
+
+    //checkForExistingInstall(settings, logger);
+
+    //renameSync(settings.workingPath, settings.pluginPath);
+
+    //await rebuildKibanaCache(settings, logger);
 
     logger.log('Plugin installation complete');
   } catch (err) {
     logger.error(`Plugin installation was unsuccessful due to error "${err.message}"`);
-    cleaner.cleanError();
+    //cleaner.cleanError();
     process.exit(70); // eslint-disable-line no-process-exit
   }
 }
