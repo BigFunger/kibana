@@ -31,38 +31,55 @@ async function extractArchive(settings) {
   });
 }
 
-export async function getPluginName(settings) {
-  function getPackNameFromFiles(files) {
-    const fileParts = files.map((file) => {
-      return file.toLowerCase().split(sep);
-    });
-    const filePart = _.find(fileParts, (parts) => {
-      return (parts[0] === 'kibana' && parts[1]);
-    });
-    return filePart ? filePart[1] : undefined;
-  };
+export async function examineArchive(settings) {
+  const plugins = await new Promise((resolve, reject) => {
+    const lister = new DecompressZip(settings.tempArchiveFile);
 
-  await new Promise((resolve, reject) => {
-    const unzipper = new DecompressZip(settings.tempArchiveFile);
+    lister.on('list', (files) => {
+      files = files.map(file => file.replace(/\\/g, '/'));
 
-    unzipper.on('list', (files) => {
-      console.log(files);
-      resolve(getPackNameFromFiles(files));
+      for (var file of files) {
+        var regExp = new RegExp('kibana/([^/]+)');
+        var matches = file.match(regExp);
+        if (matches) {
+          resolve(matches[1]);
+        }
+      }
+
+      reject('No plugins found');
     });
 
-    unzipper.list();
+    lister.list();
   });
+
+  return plugins;
+}
+
+
+export async function getPluginNames(settings, logger) {
+  try {
+    logger.log('Retrieving metadata from plugin archive');
+
+    const pluginNames = await examineArchive(settings);
+
+    logger.log(`Retrieval complete - "${pluginNames}"`);
+
+    return pluginNames;
+  } catch (err) {
+    logger.error(err);
+    throw new Error('Error retrieving metadata from plugin archive');
+  }
 }
 
 export default async function extractZip(settings, logger) {
-  //try {
+  try {
     logger.log('Extracting plugin archive');
 
     await extractArchive(settings);
 
     logger.log('Extraction complete');
-  // } catch (err) {
-  //   logger.error(err);
-  //   throw new Error('Error extracting plugin archive');
-  // }
+  } catch (err) {
+    logger.error(err);
+    throw new Error('Error extracting plugin archive');
+  }
 };
