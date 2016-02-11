@@ -5,7 +5,11 @@ import pkg from '../../utils/packageJson';
 
 function generateUrls(settings) {
   const { version, plugin } = settings;
-  return [ plugin, `https://download.elastic.co/packs/${plugin}/${plugin}-${version}.zip` ];
+  return [
+    plugin,
+    `https://download.elastic.co/packs/${plugin}/${plugin}-${version}.zip`,
+    `https://s3.amazonaws.com/jimtars/${plugin}-${version}.zip` //TODO: REMOVE THIS!!!
+  ];
 }
 
 export function parseMilliseconds(val) {
@@ -29,12 +33,17 @@ export function parse(command, options) {
     config: options.config ? options.config : '',
     plugin: command,
     version: pkg.version,
+    pluginDir: options.pluginDir ? options.pluginDir : '',
   };
 
   settings.urls = generateUrls(settings);
-  settings.pluginDir = options.pluginDir;
   settings.workingPath = resolve(settings.pluginDir, '.plugin.installing');
   settings.tempArchiveFile = resolve(settings.workingPath, 'archive.part');
+  settings.tempPackageFile = resolve(settings.workingPath, 'package.json');
+  settings.setPlugin = function (plugin) {
+    settings.plugin = plugin;
+    settings.pluginPath = resolve(settings.pluginDir, settings.plugin);
+  };
 
   return settings;
 };

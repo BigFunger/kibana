@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import DecompressZip from '@bigfunger/decompress-zip';
-import { sep } from 'path';
 
 async function extractArchive(settings) {
   await new Promise((resolve, reject) => {
@@ -31,47 +30,50 @@ async function extractArchive(settings) {
   });
 }
 
-export async function examineArchive(settings) {
+async function getPluginNamesFromArchive(settings) {
   const plugins = await new Promise((resolve, reject) => {
-    const lister = new DecompressZip(settings.tempArchiveFile);
+    const unzipper = new DecompressZip(settings.tempArchiveFile);
 
-    lister.on('list', (files) => {
+    unzipper.on('error', reject);
+
+    unzipper.on('list', (files) => {
+      const regExp = new RegExp('kibana/([^/]+)');
+
       files = files.map(file => file.replace(/\\/g, '/'));
 
-      for (var file of files) {
-        var regExp = new RegExp('kibana/([^/]+)');
-        var matches = file.match(regExp);
-        if (matches) {
-          resolve(matches[1]);
-        }
-      }
+      const duplicatedNames = files.map((file) => {
+        const matches = file.match(regExp);
+        if (matches) return matches[1];
+      });
 
-      reject('No plugins found');
+      const pluginNames = _.chain(duplicatedNames).compact().uniq().value();
+      resolve(pluginNames);
     });
 
-    lister.list();
+    unzipper.list();
   });
 
   return plugins;
 }
 
-
-export async function getPluginNames(settings, logger) {
+export async function readMetadata(settings, logger) {
   try {
     logger.log('Retrieving metadata from plugin archive');
 
-    const pluginNames = await examineArchive(settings);
+    const pluginNames = await getPluginNamesFromArchive(settings);
 
-    logger.log(`Retrieval complete - "${pluginNames}"`);
+    if (pluginNames.length === 0) {
+      throw new Error('No kibana plugins found in archive');
+    }
 
-    return pluginNames;
+    settings.setPlugin(pluginNames[0]);
   } catch (err) {
     logger.error(err);
     throw new Error('Error retrieving metadata from plugin archive');
   }
 }
 
-export default async function extractZip(settings, logger) {
+export async function extract(settings, logger) {
   try {
     logger.log('Extracting plugin archive');
 

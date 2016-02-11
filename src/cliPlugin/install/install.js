@@ -1,90 +1,40 @@
 import _ from 'lodash';
-const utils = require('requirefrom')('src/utils');
-const fromRoot = utils('fromRoot');
-import pluginDownloader from './plugin_downloader';
-import pluginCleaner from './plugin_cleaner';
-import { extractZip, getPluginName } from './extractors/zip';
-import KbnServer from '../../server/KbnServer';
-import readYamlConfig from '../../cli/serve/read_yaml_config';
+import download from './download';
 import Promise from 'bluebird';
+import { cleanPrevious, cleanError } from './cleanup';
+import { extract, readMetadata } from './zip';
 import { sync as rimrafSync } from 'rimraf';
-import { ZIP } from './file_type';
 import { statSync, renameSync } from 'fs';
+import { existingInstall, rebuildCache, checkVersion } from './kibana';
 
 const mkdirp = Promise.promisify(require('mkdirp'));
 
-function checkForExistingInstall(settings, logger) {
-  try {
-    statSync(settings.pluginPath);
-
-    logger.error(`Plugin ${settings.package} already exists, please remove before installing a new version`);
-    process.exit(70); // eslint-disable-line no-process-exit
-  } catch (e) {
-    if (e.code !== 'ENOENT') throw e;
-  }
-}
-
-async function rebuildKibanaCache(settings, logger) {
-  logger.log('Optimizing and caching browser bundles...');
-  const serverConfig = _.merge(
-    readYamlConfig(settings.config),
-    {
-      env: 'production',
-      logging: {
-        silent: settings.silent,
-        quiet: !settings.silent,
-        verbose: false
-      },
-      optimize: {
-        useBundleCache: false
-      },
-      server: {
-        autoListen: false
-      },
-      plugins: {
-        initialize: false,
-        scanDirs: [settings.pluginDir, fromRoot('src/plugins')]
-      }
-    }
-  );
-
-  const kbnServer = new KbnServer(serverConfig);
-  await kbnServer.ready();
-  await kbnServer.close();
-}
-
 export default async function install(settings, logger) {
-  //logger.log(`Installing ${settings.package}`);
-
-  const cleaner = pluginCleaner(settings, logger);
-
   try {
-    await cleaner.cleanPrevious();
+    await cleanPrevious(settings, logger);
 
     await mkdirp(settings.workingPath);
 
-    const downloader = pluginDownloader(settings, logger);
-    await downloader.download();
+    await download(settings, logger);
 
-    settings.plugin = await getPluginName(settings);
+    await readMetadata(settings, logger);
 
-    console.log(`@@@@@@@@@@@@${settings.plugin}@@@@@@@@@@@@@@`);
-    process.exit(70); // eslint-disable-line no-process-exit
+    await extract (settings, logger);
 
-    await extractZip (settings, logger, ZIP);
+    rimrafSync(settings.tempArchiveFile);
 
-    //rimrafSync(settings.tempArchiveFile);
+    existingInstall(settings, logger);
 
-    //checkForExistingInstall(settings, logger);
+    checkVersion(settings);
 
-    //renameSync(settings.workingPath, settings.pluginPath);
+    renameSync(settings.workingPath, settings.pluginPath);
 
-    //await rebuildKibanaCache(settings, logger);
+    await rebuildCache(settings, logger);
 
     logger.log('Plugin installation complete');
   } catch (err) {
     logger.error(`Plugin installation was unsuccessful due to error "${err.message}"`);
-    //cleaner.cleanError();
+    cleanError(settings);
     process.exit(70); // eslint-disable-line no-process-exit
   }
 }

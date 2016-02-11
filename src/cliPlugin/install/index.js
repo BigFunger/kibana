@@ -1,7 +1,7 @@
 import fromRoot from '../../utils/fromRoot';
 import pkg from '../../utils/packageJson';
 import install from './install';
-import pluginLogger from '../lib/plugin_logger';
+import Logger from '../lib/logger';
 import { parse, parseMilliseconds } from './settings';
 
 export default function pluginInstall(program) {
@@ -15,7 +15,7 @@ export default function pluginInstall(program) {
       process.exit(64); // eslint-disable-line no-process-exit
     }
 
-    const logger = pluginLogger(settings);
+    const logger = new Logger(settings);
     install(settings, logger);
   }
 

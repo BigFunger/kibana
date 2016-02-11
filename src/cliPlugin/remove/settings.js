@@ -1,28 +1,15 @@
 import { resolve } from 'path';
 
-export function parse(options) {
-  let settings = {
-    silent: false,
-    quiet: false
+export function parse(command, options) {
+  const settings = {
+    quiet: options.quiet ? options.quiet : false,
+    silent: options.silent ? options.silent : false,
+    config: options.config ? options.config : '',
+    pluginDir: options.pluginDir ? options.pluginDir : '',
+    plugin: command
   };
 
-  if (options.parent && options.parent.quiet) {
-    settings.quiet = options.parent.quiet;
-  }
-
-  if (options.silent) {
-    settings.silent = options.silent;
-  }
-
-  if (options.config) {
-    settings.config = options.config;
-  }
-
-  settings.pluginDir = options.pluginDir;
-
-  if (settings.package) {
-    settings.pluginPath = resolve(settings.pluginDir, settings.package);
-  }
+  settings.pluginPath = resolve(settings.pluginDir, settings.plugin);
 
   return settings;
 };

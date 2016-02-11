@@ -4,7 +4,7 @@ import fs from 'fs';
 import rimraf from 'rimraf';
 
 import pluginCleaner from '../plugin_cleaner';
-import pluginLogger from '../plugin_logger';
+import PluginLogger from '../plugin_logger';
 
 describe('kibana cli', function () {
 
