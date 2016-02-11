@@ -10,13 +10,13 @@ export function cleanPrevious(settings, logger) {
       try {
         rimraf.sync(settings.workingPath);
       } catch (e) {
-        return reject(e);
+        reject(e);
       }
-      return resolve();
+      resolve();
     } catch (e) {
-      if (e.code !== 'ENOENT') return reject(e);
+      if (e.code !== 'ENOENT') reject(e);
 
-      return resolve();
+      resolve();
     }
   });
 };
