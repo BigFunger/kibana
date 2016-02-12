@@ -17,7 +17,7 @@ export function _downloadSingle(settings, logger, sourceUrl) {
 }
 
 //Attempts to download each url in turn until one is successful
-export default function download(settings, logger) {
+export function download(settings, logger) {
   const urls = settings.urls.slice(0);
 
   function tryNext() {

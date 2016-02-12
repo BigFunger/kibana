@@ -1,14 +1,14 @@
 import fromRoot from '../../utils/fromRoot';
-import pkg from '../../utils/packageJson';
 import install from './install';
 import Logger from '../lib/logger';
+import pkg from '../../utils/packageJson';
 import { parse, parseMilliseconds } from './settings';
 
 export default function pluginInstall(program) {
   function processCommand(command, options) {
     let settings;
     try {
-      settings = parse(command, options);
+      settings = parse(command, options, pkg);
     } catch (ex) {
       //The logger has not yet been initialized.
       console.error(ex.message);

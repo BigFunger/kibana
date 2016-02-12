@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import download from './download';
+import { download } from './download';
 import Promise from 'bluebird';
 import { cleanPrevious, cleanError } from './cleanup';
 import { extract, readMetadata } from './zip';

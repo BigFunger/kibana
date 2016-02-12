@@ -57,20 +57,20 @@ async function getPluginNamesFromArchive(settings) {
 }
 
 export async function readMetadata(settings, logger) {
-  try {
+  let pluginNames;  try {
     logger.log('Retrieving metadata from plugin archive');
 
-    const pluginNames = await getPluginNamesFromArchive(settings);
-
-    if (pluginNames.length === 0) {
-      throw new Error('No kibana plugins found in archive');
-    }
-
-    settings.setPlugin(pluginNames[0]);
+    pluginNames = await getPluginNamesFromArchive(settings);
   } catch (err) {
     logger.error(err);
     throw new Error('Error retrieving metadata from plugin archive');
   }
+
+  if (pluginNames.length === 0) {
+    throw new Error('No kibana plugins found in archive');
+  }
+
+  settings.setPlugin(pluginNames[0]);
 }
 
 export async function extract(settings, logger) {
