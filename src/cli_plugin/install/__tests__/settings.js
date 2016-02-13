@@ -68,8 +68,8 @@ describe('kibana cli', function () {
 
       describe('parse function', function () {
 
-        let options;
-        let parser;
+        const command = 'plugin name';
+        let options = {};
         const kbnPackage = { version: 1234 };
         beforeEach(function () {
           options = { pluginDir: fromRoot('installedPlugins') };
@@ -78,14 +78,14 @@ describe('kibana cli', function () {
         describe('timeout option', function () {
 
           it('should default to 0 (milliseconds)', function () {
-            const settings = parse('install', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
 
             expect(settings.timeout).to.be(0);
           });
 
           it('should set settings.timeout property', function () {
             options.timeout = 1234;
-            const settings = parse('install', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
 
             expect(settings.timeout).to.be(1234);
           });
@@ -95,14 +95,14 @@ describe('kibana cli', function () {
         describe('quiet option', function () {
 
           it('should default to false', function () {
-            const settings = parse('install', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
 
             expect(settings.quiet).to.be(false);
           });
 
           it('should set settings.quiet property to true', function () {
             options.quiet = true;
-            const settings = parse('install', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
 
             expect(settings.quiet).to.be(true);
           });
@@ -112,14 +112,14 @@ describe('kibana cli', function () {
         describe('silent option', function () {
 
           it('should default to false', function () {
-            const settings = parse('install', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
 
             expect(settings.silent).to.be(false);
           });
 
           it('should set settings.silent property to true', function () {
             options.silent = true;
-            const settings = parse('install', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
 
             expect(settings.silent).to.be(true);
           });
@@ -129,14 +129,14 @@ describe('kibana cli', function () {
         describe('config option', function () {
 
           it('should default to ZLS', function () {
-            const settings = parse('install', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
 
             expect(settings.config).to.be('');
           });
 
           it('should set settings.config property', function () {
             options.config = 'foo bar baz';
-            const settings = parse('install', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
 
             expect(settings.config).to.be('foo bar baz');
           });
@@ -146,14 +146,14 @@ describe('kibana cli', function () {
         describe('pluginDir option', function () {
 
           it('should default to installedPlugins', function () {
-            const settings = parse('install', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
 
             expect(settings.pluginDir).to.be(fromRoot('installedPlugins'));
           });
 
           it('should set settings.config property', function () {
             options.pluginDir = 'foo bar baz';
-            const settings = parse('install', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
 
             expect(settings.pluginDir).to.be('foo bar baz');
           });
@@ -163,9 +163,9 @@ describe('kibana cli', function () {
         describe('command value', function () {
 
           it('should set settings.plugin property', function () {
-            const settings = parse('temp-plugin', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
 
-            expect(settings.plugin).to.be('temp-plugin');
+            expect(settings.plugin).to.be(command);
           });
 
         });
@@ -173,11 +173,11 @@ describe('kibana cli', function () {
         describe('urls collection', function () {
 
           it('should populate the settings.urls property', function () {
-            const settings = parse('temp-plugin', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
 
             const expected = [
-              'temp-plugin',
-              'https://download.elastic.co/packs/temp-plugin/temp-plugin-1234.zip'
+              command,
+              `https://download.elastic.co/packs/${command}/${command}-1234.zip`
             ];
 
             expect(settings.urls).to.eql(expected);
@@ -189,7 +189,7 @@ describe('kibana cli', function () {
 
           it('should set settings.workingPath property', function () {
             options.pluginDir = 'foo/bar/baz';
-            const settings = parse('temp-plugin', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
             const expected = resolve('foo/bar/baz', '.plugin.installing');
 
             expect(settings.workingPath).to.be(expected);
@@ -201,7 +201,7 @@ describe('kibana cli', function () {
 
           it('should set settings.tempArchiveFile property', function () {
             options.pluginDir = 'foo/bar/baz';
-            const settings = parse('temp-plugin', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
             const expected = resolve('foo/bar/baz', '.plugin.installing', 'archive.part');
 
             expect(settings.tempArchiveFile).to.be(expected);
@@ -213,7 +213,7 @@ describe('kibana cli', function () {
 
           it('should set settings.tempPackageFile property', function () {
             options.pluginDir = 'foo/bar/baz';
-            const settings = parse('temp-plugin', options, kbnPackage);
+            const settings = parse(command, options, kbnPackage);
             const expected = resolve('foo/bar/baz', '.plugin.installing', 'package.json');
 
             expect(settings.tempPackageFile).to.be(expected);
