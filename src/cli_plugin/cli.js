@@ -13,6 +13,7 @@ program
 );
 
 require('./list')(program);
+require('./install')(program);
 require('./remove')(program);
 
 program
