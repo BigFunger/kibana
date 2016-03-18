@@ -4,14 +4,14 @@ const base = Joi.object({
   processor_id: Joi.string().required()
 });
 
-export const set = base.keys({
-  type_id: Joi.string().only('set').required(),
-  target_field: Joi.string().allow(''),
-  value: Joi.string().allow('')
-});
-
 export const append = base.keys({
   type_id: Joi.string().only('append').required(),
   target_field: Joi.string().allow(''),
   values: Joi.array().items(Joi.string().allow(''))
+});
+
+export const set = base.keys({
+  type_id: Joi.string().only('set').required(),
+  target_field: Joi.string().allow(''),
+  value: Joi.string().allow('')
 });
