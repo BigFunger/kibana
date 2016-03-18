@@ -9,3 +9,9 @@ export const set = base.keys({
   target_field: Joi.string().allow(''),
   value: Joi.string().allow('')
 });
+
+export const append = base.keys({
+  type_id: Joi.string().only('append').required(),
+  target_field: Joi.string().allow(''),
+  values: Joi.array().items(Joi.string().allow(''))
+});
