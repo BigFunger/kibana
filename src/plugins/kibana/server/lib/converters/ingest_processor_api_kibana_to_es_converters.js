@@ -8,6 +8,16 @@ export function append(processorApiDocument) {
   };
 }
 
+export function convert(processorApiDocument) {
+  return {
+    convert: {
+      tag: processorApiDocument.processor_id,
+      field: processorApiDocument.source_field,
+      type: processorApiDocument.type
+    }
+  };
+}
+
 export function set(processorApiDocument) {
   return {
     set: {

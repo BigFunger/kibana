@@ -10,6 +10,12 @@ export const append = base.keys({
   values: Joi.array().items(Joi.string().allow(''))
 });
 
+export const convert = base.keys({
+  type_id: Joi.string().only('convert').required(),
+  source_field: Joi.string().allow(''),
+  type: Joi.string().required()
+});
+
 export const set = base.keys({
   type_id: Joi.string().only('set').required(),
   target_field: Joi.string().allow(''),

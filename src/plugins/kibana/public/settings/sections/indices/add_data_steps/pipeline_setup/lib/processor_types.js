@@ -42,7 +42,29 @@ export class Append extends Processor {
       values: this.values
     };
   }
+}
 
+export class Convert extends Processor {
+  constructor(processorId) {
+    super(processorId, 'convert', 'Convert');
+    this.sourceField = '';
+    this.type = 'string';
+  }
+
+  get description() {
+    const source = (this.sourceField) ? this.sourceField : '?';
+    const type = (this.type) ? this.type : '?';
+    return `[${source}] to ${type}`;
+  }
+
+  get model() {
+    return {
+      processorId: this.processorId,
+      typeId: this.typeId,
+      sourceField: this.sourceField,
+      type: this.type
+    };
+  }
 }
 
 export class Set extends Processor {
