@@ -1,5 +1,5 @@
 import uiModules from 'ui/modules';
-import keysDeep from '../../../../../../../common/lib/keys_deep';
+import keysDeep from '../lib/keys_deep';
 
 const app = uiModules.get('kibana');
 
