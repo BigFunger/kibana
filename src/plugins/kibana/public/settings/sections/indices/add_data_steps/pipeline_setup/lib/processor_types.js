@@ -52,8 +52,8 @@ export class Convert extends Processor {
   }
 
   get description() {
-    const source = (this.sourceField) ? this.sourceField : '?';
-    const type = (this.type) ? this.type : '?';
+    const source = this.sourceField || '?';
+    const type = this.type || '?';
     return `[${source}] to ${type}`;
   }
 
@@ -79,8 +79,8 @@ export class Date extends Processor {
   }
 
   get description() {
-    const source = (this.sourceField) ? this.sourceField : '?';
-    const target = (this.targetField) ? this.targetField : '?';
+    const source = this.sourceField || '?';
+    const target = this.targetField || '?';
     return `[${source}] -> [${target}]`;
   }
 
@@ -107,6 +107,29 @@ export class Date extends Processor {
     };
   }
 }
+
+export class GeoIp extends Processor {
+  constructor(processorId) {
+    super(processorId, 'geoip', 'Geo IP');
+    this.sourceField = '';
+    this.targetField = 'geoip';
+  }
+
+  get description() {
+    const source = this.sourceField || '?';
+    const target = this.targetField || '?';
+    return `[${source}] -> [${target}]`;
+  }
+
+  get model() {
+    return {
+      processorId: this.processorId,
+      typeId: this.typeId,
+      targetField: this.targetField,
+      sourceField: this.sourceField
+    };
+  }
+};
 
 export class Set extends Processor {
   constructor(processorId) {

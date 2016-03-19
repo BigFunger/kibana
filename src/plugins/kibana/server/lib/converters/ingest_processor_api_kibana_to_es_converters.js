@@ -31,6 +31,16 @@ export function date(processorApiDocument) {
   };
 }
 
+export function geoip(processorApiDocument) {
+  return {
+    geoip: {
+      tag: processorApiDocument.processor_id,
+      source_field: processorApiDocument.source_field,
+      target_field: processorApiDocument.target_field
+    }
+  };
+}
+
 export function set(processorApiDocument) {
   return {
     set: {
