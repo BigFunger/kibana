@@ -18,6 +18,19 @@ export function convert(processorApiDocument) {
   };
 }
 
+export function date(processorApiDocument) {
+  return {
+    date: {
+      tag: processorApiDocument.processor_id,
+      match_field: processorApiDocument.source_field,
+      target_field: processorApiDocument.target_field,
+      match_formats: processorApiDocument.formats,
+      timezone: processorApiDocument.timezone,
+      locale: processorApiDocument.locale
+    }
+  };
+}
+
 export function set(processorApiDocument) {
   return {
     set: {

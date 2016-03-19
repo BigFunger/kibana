@@ -67,6 +67,47 @@ export class Convert extends Processor {
   }
 }
 
+export class Date extends Processor {
+  constructor(processorId) {
+    super(processorId, 'date', 'Date');
+    this.sourceField = '';
+    this.targetField = '@timestamp';
+    this.formats = [];
+    this.timezone = 'Etc/UTC';
+    this.locale = 'ENGLISH';
+    this.customFormat = '';
+  }
+
+  get description() {
+    const source = (this.sourceField) ? this.sourceField : '?';
+    const target = (this.targetField) ? this.targetField : '?';
+    return `[${source}] -> [${target}]`;
+  }
+
+  get model() {
+    const formats = [];
+    this.formats.forEach((format) => {
+      if (format === 'Custom') {
+        if (this.customFormat) {
+          formats.push(this.customFormat);
+        }
+      } else {
+        formats.push(format);
+      }
+    });
+
+    return {
+      processorId: this.processorId,
+      typeId: this.typeId,
+      sourceField: this.sourceField,
+      targetField: this.targetField,
+      formats: formats,
+      timezone: this.timezone,
+      locale: this.locale
+    };
+  }
+}
+
 export class Set extends Processor {
   constructor(processorId) {
     super(processorId, 'set', 'Set');

@@ -16,6 +16,15 @@ export const convert = base.keys({
   type: Joi.string().required()
 });
 
+export const date = base.keys({
+  type_id: Joi.string().only('date').required(),
+  source_field: Joi.string().allow(''),
+  target_field: Joi.string().allow(''),
+  formats: Joi.array().items(Joi.string().allow('')),
+  timezone: Joi.string().allow(''),
+  locale: Joi.string().allow('')
+});
+
 export const set = base.keys({
   type_id: Joi.string().only('set').required(),
   target_field: Joi.string().allow(''),
