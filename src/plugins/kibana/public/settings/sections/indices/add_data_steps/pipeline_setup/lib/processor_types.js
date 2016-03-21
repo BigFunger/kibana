@@ -41,8 +41,8 @@ export class Append extends Processor {
     return {
       processorId: this.processorId,
       typeId: this.typeId,
-      targetField: this.targetField,
-      values: this.values
+      targetField: this.targetField || '',
+      values: this.values || []
     };
   }
 }
@@ -64,8 +64,8 @@ export class Convert extends Processor {
     return {
       processorId: this.processorId,
       typeId: this.typeId,
-      sourceField: this.sourceField,
-      type: this.type
+      sourceField: this.sourceField || '',
+      type: this.type || 'string'
     };
   }
 }
@@ -102,11 +102,11 @@ export class Date extends Processor {
     return {
       processorId: this.processorId,
       typeId: this.typeId,
-      sourceField: this.sourceField,
-      targetField: this.targetField,
-      formats: formats,
-      timezone: this.timezone,
-      locale: this.locale
+      sourceField: this.sourceField || '',
+      targetField: this.targetField || '',
+      formats: formats || [],
+      timezone: this.timezone || '',
+      locale: this.locale || ''
     };
   }
 }
@@ -128,8 +128,8 @@ export class GeoIp extends Processor {
     return {
       processorId: this.processorId,
       typeId: this.typeId,
-      targetField: this.targetField,
-      sourceField: this.sourceField
+      targetField: this.targetField || '',
+      sourceField: this.sourceField || ''
     };
   }
 };
@@ -156,8 +156,8 @@ export class Grok extends Processor {
     return {
       processorId: this.processorId,
       typeId: this.typeId,
-      sourceField: this.sourceField,
-      pattern: this.pattern
+      sourceField: this.sourceField || '',
+      pattern: this.pattern || ''
     };
   }
 };
@@ -179,9 +179,9 @@ export class Gsub extends Processor {
     return {
       processorId: this.processorId,
       typeId: this.typeId,
-      sourceField: this.sourceField,
-      pattern: this.pattern,
-      replacement: this.replacement
+      sourceField: this.sourceField || '',
+      pattern: this.pattern || '',
+      replacement: this.replacement || ''
     };
   }
 };
@@ -225,8 +225,8 @@ export class Set extends Processor {
     return {
       processorId: this.processorId,
       typeId: this.typeId,
-      targetField: this.targetField,
-      value: this.value
+      targetField: this.targetField || '',
+      value: this.value || ''
     };
   }
 };
