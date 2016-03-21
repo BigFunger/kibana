@@ -82,3 +82,8 @@ export const trim = base.keys({
   type_id: Joi.string().only('trim').required(),
   source_field: Joi.string().allow('')
 });
+
+export const uppercase = base.keys({
+  type_id: Joi.string().only('uppercase').required(),
+  source_field: Joi.string().allow('')
+});
