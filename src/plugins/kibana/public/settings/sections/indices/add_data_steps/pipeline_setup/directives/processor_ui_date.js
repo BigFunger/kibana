@@ -1,6 +1,6 @@
 import uiModules from 'ui/modules';
 import _ from 'lodash';
-import keysDeep from '../lib/keys_deep';
+import keysDeep from '../../../../../../../common/lib/keys_deep';
 import selectableArray from '../lib/selectable_array';
 import '../styles/_processor_ui_date.less';
 

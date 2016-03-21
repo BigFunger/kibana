@@ -1,6 +1,6 @@
 import uiModules from 'ui/modules';
 import _ from 'lodash';
-import keysDeep from '../lib/keys_deep';
+import keysDeep from '../../../../../../../common/lib/keys_deep';
 
 const app = uiModules.get('kibana');
 

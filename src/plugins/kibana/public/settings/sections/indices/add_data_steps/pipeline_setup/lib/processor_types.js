@@ -1,3 +1,6 @@
+import _ from 'lodash';
+import keysDeep from '../../../../../../../common/lib/keys_deep';
+
 class Processor {
   constructor(processorId, typeId, title) {
     if (!typeId || !title) {
@@ -127,6 +130,34 @@ export class GeoIp extends Processor {
       typeId: this.typeId,
       targetField: this.targetField,
       sourceField: this.sourceField
+    };
+  }
+};
+
+export class Grok extends Processor {
+  constructor(processorId) {
+    super(processorId, 'grok', 'Grok');
+    this.sourceField = '';
+    this.pattern = '';
+  }
+
+  get description() {
+    let inputKeys = keysDeep(this.inputObject);
+    let outputKeys = keysDeep(this.outputObject);
+    let added = _.difference(outputKeys, inputKeys);
+
+    let addedDescription = added.sort().map(field => `[${field}]`).join(', ');
+
+    const source = this.sourceField || '?';
+    return `[${source}] -> ${addedDescription}`;
+  }
+
+  get model() {
+    return {
+      processorId: this.processorId,
+      typeId: this.typeId,
+      sourceField: this.sourceField,
+      pattern: this.pattern
     };
   }
 };
