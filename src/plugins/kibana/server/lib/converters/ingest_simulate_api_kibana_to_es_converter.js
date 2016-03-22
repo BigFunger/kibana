@@ -11,5 +11,5 @@ export default function ingestSimulateApiKibanaToEsConverter(simulateApiDocument
     ]
   };
 
-  return JSON.stringify(esDoc);
+  return esDoc;
 }

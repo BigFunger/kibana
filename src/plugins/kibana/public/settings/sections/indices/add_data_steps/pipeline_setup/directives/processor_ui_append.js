@@ -13,7 +13,7 @@ app.directive('processorUiAppend', function () {
       const pipeline = $scope.pipeline;
 
       function processorUiChanged() {
-        pipeline.dirty = true;
+        pipeline.setDirty(processor);
       }
 
       function splitValues(delimitedList) {

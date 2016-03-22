@@ -12,7 +12,7 @@ app.directive('processorUiSet', function () {
       const pipeline = $scope.pipeline;
 
       function processorUiChanged() {
-        pipeline.dirty = true;
+        pipeline.setDirty(processor);
       }
 
       $scope.$watch('processor.targetField', processorUiChanged);

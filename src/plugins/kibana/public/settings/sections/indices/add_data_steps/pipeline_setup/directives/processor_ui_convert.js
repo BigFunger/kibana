@@ -23,7 +23,7 @@ app.directive('processorUiConvert', function () {
       }
 
       function processorUiChanged() {
-        pipeline.dirty = true;
+        pipeline.setDirty(processor);
       }
 
       $scope.types = ['integer', 'float', 'string', 'boolean'];

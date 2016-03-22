@@ -6,7 +6,33 @@ function translateError(esError) {
   return _.get(rootCause, 'reason') || _.get(rootCause, 'type');
 }
 
-export default function processESIngestSimulateResponse(processors, resp) {
+export function processESIngestSimulateError(dirtyProcessorId, processors, error) {
+  const results = [];
+
+  results.push({
+    processorId: dirtyProcessorId,
+    error: {
+      isNested: false,
+      message: _.get(error, 'body.error.reason')
+    }
+  });
+
+  const errorIndex = _.findIndex(processors, { 'processorId': dirtyProcessorId });
+  if (errorIndex !== -1) {
+    for (let i = errorIndex + 1; i < processors.length; i++) {
+      const processor = processors[i];
+
+      results.push({
+        processorId: processor.processorId,
+        error: { isNested: true, message: 'Invalid Parent Processor' }
+      });
+    }
+  }
+
+  return results;
+}
+
+export function processESIngestSimulateResponse(processors, resp) {
   const results = processors.map((processor) => {
     return {
       processorId: processor.processorId,

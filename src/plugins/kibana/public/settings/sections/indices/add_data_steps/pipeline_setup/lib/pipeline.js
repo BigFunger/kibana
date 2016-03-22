@@ -8,13 +8,21 @@ export default class Pipeline {
     this.input = {};
     this.output = undefined;
     this.dirty = false;
+    this.dirtyProcessor = undefined;
   }
 
   get model() {
-    return {
+    const pipeline = {
       input: this.input,
-      processors: _.map(this.processors, processor => processor.model)
+      processors: _.map(this.processors, processor => processor.model),
+      dirtyProcessorId: _.get(this.dirtyProcessor, 'processorId')
     };
+    return pipeline;
+  }
+
+  setDirty(processor) {
+    this.dirty = true;
+    this.dirtyProcessor = processor;
   }
 
   load(pipeline) {
@@ -96,6 +104,7 @@ export default class Pipeline {
       this.output = processors[processors.length - 1].outputObject;
     }
     this.dirty = false;
+    this.dirtyProcessor = undefined;
   }
 
   getProcessorById(processorId) {

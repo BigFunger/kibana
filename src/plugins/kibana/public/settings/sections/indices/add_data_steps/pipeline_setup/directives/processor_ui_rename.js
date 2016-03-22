@@ -23,7 +23,7 @@ app.directive('processorUiRename', function () {
       }
 
       function processorUiChanged() {
-        pipeline.dirty = true;
+        pipeline.setDirty(processor);
       }
 
       $scope.$watch('processor.inputObject', consumeNewInputObject);
