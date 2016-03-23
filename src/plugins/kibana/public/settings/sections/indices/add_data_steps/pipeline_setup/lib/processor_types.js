@@ -172,7 +172,7 @@ export class Gsub extends Processor {
 
   get description() {
     const source = this.sourceField || '?';
-    return `[${source}] - '${this.pattern}' -> '${this.replacement}'`;
+    return `[${source}] - /${this.pattern}/ -> '${this.replacement}'`;
   }
 
   get model() {

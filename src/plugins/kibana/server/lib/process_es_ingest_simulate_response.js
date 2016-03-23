@@ -7,27 +7,17 @@ function translateError(esError) {
 }
 
 export function processESIngestSimulateError(dirtyProcessorId, processors, error) {
-  const results = [];
-
-  results.push({
-    processorId: dirtyProcessorId,
-    error: {
-      isNested: false,
-      message: _.get(error, 'body.error.reason')
-    }
+  const results = processors.map((processor) => {
+    return {
+      processorId: processor.processorId,
+      output: undefined,
+      error: { isNested: true, compile: false, message: 'Pipeline Compilation Error' }
+    };
   });
 
-  const errorIndex = _.findIndex(processors, { 'processorId': dirtyProcessorId });
-  if (errorIndex !== -1) {
-    for (let i = errorIndex + 1; i < processors.length; i++) {
-      const processor = processors[i];
-
-      results.push({
-        processorId: processor.processorId,
-        error: { isNested: true, message: 'Invalid Parent Processor' }
-      });
-    }
-  }
+  const errorMessage = _.get(error, 'body.error.reason');
+  const badResult = _.find(results, { 'processorId': dirtyProcessorId });
+  badResult.error = { isNested: false, compile: true, message: errorMessage };
 
   return results;
 }
@@ -50,7 +40,7 @@ export function processESIngestSimulateResponse(processors, resp) {
     const badResult = _.find(results, { 'processorId': processorId });
 
     badResult.output = errorMessage ? undefined : output;
-    badResult.error = errorMessage ? { isNested: false, message: errorMessage } : undefined;
+    badResult.error = errorMessage ? { isNested: false, compile: false, message: errorMessage } : undefined;
   });
 
   const errorIndex = _.findIndex(results, (result) => { return result.error !== undefined; });
@@ -59,7 +49,7 @@ export function processESIngestSimulateResponse(processors, resp) {
       const badResult = results[i];
 
       badResult.output = undefined;
-      badResult.error = { isNested: true, message: 'Invalid Parent Processor' };
+      badResult.error = { isNested: true, compile: false, message: 'Invalid Parent Processor' };
     }
   }
 

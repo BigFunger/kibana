@@ -9,7 +9,8 @@ app.directive('sourceData', function () {
     restrict: 'E',
     scope: {
       samples: '=',
-      sample: '='
+      sample: '=',
+      disabled: '='
     },
     template: require('../views/source_data.html'),
     controller: function ($scope) {
