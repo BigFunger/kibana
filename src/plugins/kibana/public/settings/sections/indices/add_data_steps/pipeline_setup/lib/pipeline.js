@@ -149,19 +149,6 @@ export default class Pipeline {
           processor.inputObject = _.cloneDeep(processor.parent.outputObject);
         }
       }
-/*
-      //we don't want to change the inputObject if the parent processor
-      //is in error because that can cause us to lose state.
-      if (!_.get(processor, 'error.isNested')) {
-        //the parent property of the first processor is set to the pipeline.input.
-        //In all other cases it is set to processor[index-1]
-        if (!processor.parent.processorId) {
-          processor.inputObject = _.cloneDeep(processor.parent);
-        } else {
-          processor.inputObject = _.cloneDeep(processor.parent.outputObject);
-        }
-      }
-*/
     });
 
     this.updateOutput();
