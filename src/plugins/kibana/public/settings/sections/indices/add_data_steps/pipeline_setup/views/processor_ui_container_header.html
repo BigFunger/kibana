@@ -32,7 +32,7 @@
       ng-click="pipeline.moveUp(processor)"
       type="button"
       class="btn btn-xs btn-default"
-      ng-disabled="pipeline.compileError">
+      ng-disabled="pipeline.hasCompileError">
       <i aria-hidden="true" class="fa fa-caret-up"></i>
     </button>
 
@@ -43,7 +43,7 @@
       ng-click="pipeline.moveDown(processor)"
       type="button"
       class="btn btn-xs btn-default"
-      ng-disabled="pipeline.compileError">
+      ng-disabled="pipeline.hasCompileError">
       <i aria-hidden="true" class="fa fa-caret-down"></i>
     </button>
 
@@ -54,7 +54,7 @@
       ng-click="pipeline.remove(processor)"
       type="button"
       class="btn btn-xs btn-danger"
-      ng-disabled="pipeline.compileError">
+      ng-disabled="pipeline.hasCompileError && !processor.error">
       <i aria-hidden="true" class="fa fa-times"></i>
     </button>
   </div>
