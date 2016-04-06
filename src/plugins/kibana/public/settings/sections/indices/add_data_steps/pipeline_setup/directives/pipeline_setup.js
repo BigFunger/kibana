@@ -68,6 +68,21 @@ app.directive('pipelineSetup', function () {
         pipeline.updateParents();
       });
 
+      $scope.$watch('processorType', (newVal) => {
+        // debugger;
+        $scope.processorType = null;
+
+        if (pipeline.hasCompileError) return;
+        if (!newVal) return;
+
+        pipeline.add(newVal.Type);
+// <button
+//   ng-click="pipeline.add(processorType.Type)"
+//   ng-disabled="!processorType || pipeline.hasCompileError">
+//   Add Processor
+// </button>
+      });
+
       $scope.$watch('pipeline.dirty', simulatePipeline);
     }
   };

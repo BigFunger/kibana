@@ -18,17 +18,21 @@ modules.get('apps/settings')
         }
 
         $scope.$watch('pasteStep.rawSamples', (newValue) => {
-          const splitRawSamples = newValue.split('\n');
-
           try {
-            this.samples = _.map(splitRawSamples, (sample) => {
-              return JSON.parse(sample);
-            });
-          }
-          catch (error) {
-            this.samples = _.map(splitRawSamples, (sample) => {
-              return {message: sample};
-            });
+            this.samples = [ JSON.parse(newValue) ];
+          } catch (error) {
+            const splitRawSamples = newValue.split('\n');
+
+            try {
+              this.samples = _.map(splitRawSamples, (sample) => {
+                return JSON.parse(sample);
+              });
+            }
+            catch (error) {
+              this.samples = _.map(splitRawSamples, (sample) => {
+                return { message: sample };
+              });
+            }
           }
         });
       }
