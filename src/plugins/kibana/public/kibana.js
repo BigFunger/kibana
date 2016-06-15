@@ -12,6 +12,7 @@ import 'plugins/kibana/discover/index';
 import 'plugins/kibana/visualize/index';
 import 'plugins/kibana/dashboard/index';
 import 'plugins/kibana/settings/index';
+import 'plugins/kibana/pipeline/index';
 import 'plugins/kibana/doc';
 import 'ui/vislib';
 import 'ui/agg_response';
