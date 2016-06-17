@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import uiModules from 'ui/modules';
-import keysDeep from '../../lib/keys_deep';
+//import keysDeep from '../../lib/keys_deep';
 import template from './view.html';
 
 const app = uiModules.get('kibana');
@@ -15,7 +15,7 @@ app.directive('processorUiConvert', function () {
       const pipeline = $scope.pipeline;
 
       function consumeNewInputObject() {
-        $scope.fields = keysDeep(processor.inputObject);
+        //$scope.fields = keysDeep(processor.inputObject);
         refreshFieldData();
       }
 

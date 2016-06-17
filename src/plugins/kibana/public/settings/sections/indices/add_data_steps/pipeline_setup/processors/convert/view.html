@@ -1,11 +1,10 @@
 <div class="form-group">
   <label>Field:</label>
-  <select
+  <input
+    type="text"
     class="form-control"
-    ng-options="field as field for field in fields"
     ng-model="processor.sourceField"
-    set-focus>
-  </select>
+    set-focus />
 </div>
 <div class="form-group">
   <label>Field Data:</label>
