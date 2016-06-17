@@ -5,7 +5,8 @@ export default {
     return {
       lowercase: {
         tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field
+        field: processorApiDocument.source_field,
+        ignore_failure: processorApiDocument.ignore_failure
       }
     };
   },
@@ -17,7 +18,8 @@ export default {
     return {
       typeId: 'lowercase',
       processor_id: processorEsDocument.lowercase.tag,
-      source_field: processorEsDocument.lowercase.field
+      source_field: processorEsDocument.lowercase.field,
+      ignore_failure: processorEsDocument.lowercase.ignore_failure
     };
   }
 };

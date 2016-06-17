@@ -6,7 +6,8 @@ export default {
       join: {
         tag: processorApiDocument.processor_id,
         field: processorApiDocument.source_field,
-        separator: processorApiDocument.separator
+        separator: processorApiDocument.separator,
+        ignore_failure: processorApiDocument.ignore_failure
       }
     };
   },
@@ -19,7 +20,8 @@ export default {
       typeId: 'join',
       processor_id: processorEsDocument.join.tag,
       source_field: processorEsDocument.join.field,
-      separator: processorEsDocument.join.separator
+      separator: processorEsDocument.join.separator,
+      ignore_failure: processorEsDocument.join.ignore_failure
     };
   }
 };

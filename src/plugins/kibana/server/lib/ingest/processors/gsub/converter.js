@@ -7,7 +7,8 @@ export default {
         tag: processorApiDocument.processor_id,
         field: processorApiDocument.source_field,
         pattern: processorApiDocument.pattern,
-        replacement: processorApiDocument.replacement
+        replacement: processorApiDocument.replacement,
+        ignore_failure: processorApiDocument.ignore_failure
       }
     };
   },
@@ -21,7 +22,8 @@ export default {
       processor_id: processorEsDocument.gsub.tag,
       source_field: processorEsDocument.gsub.field,
       pattern: processorEsDocument.gsub.pattern,
-      replacement: processorEsDocument.gsub.replacement
+      replacement: processorEsDocument.gsub.replacement,
+      ignore_failure: processorEsDocument.gsub.ignore_failure
     };
   }
 };

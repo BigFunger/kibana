@@ -6,7 +6,8 @@ export default {
       rename: {
         tag: processorApiDocument.processor_id,
         field: processorApiDocument.source_field,
-        target_field: processorApiDocument.target_field
+        target_field: processorApiDocument.target_field,
+        ignore_failure: processorApiDocument.ignore_failure
       }
     };
   },
@@ -19,7 +20,8 @@ export default {
       typeId: 'rename',
       processor_id: processorEsDocument.rename.tag,
       source_field: processorEsDocument.rename.field,
-      target_field: processorEsDocument.rename.target_field
+      target_field: processorEsDocument.rename.target_field,
+      ignore_failure: processorEsDocument.rename.ignore_failure
     };
   }
 };

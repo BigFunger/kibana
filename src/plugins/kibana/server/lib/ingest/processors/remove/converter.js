@@ -5,7 +5,8 @@ export default {
     return {
       remove: {
         tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field
+        field: processorApiDocument.source_field,
+        ignore_failure: processorApiDocument.ignore_failure
       }
     };
   },
@@ -17,7 +18,8 @@ export default {
     return {
       typeId: 'remove',
       processor_id: processorEsDocument.remove.tag,
-      source_field: processorEsDocument.remove.field
+      source_field: processorEsDocument.remove.field,
+      ignore_failure: processorEsDocument.remove.ignore_failure
     };
   }
 };

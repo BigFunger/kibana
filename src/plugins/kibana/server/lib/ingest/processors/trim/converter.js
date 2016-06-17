@@ -5,7 +5,8 @@ export default {
     return {
       trim: {
         tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field
+        field: processorApiDocument.source_field,
+        ignore_failure: processorApiDocument.ignore_failure
       }
     };
   },
@@ -17,7 +18,8 @@ export default {
     return {
       typeId: 'trim',
       processor_id: processorEsDocument.trim.tag,
-      source_field: processorEsDocument.trim.field
+      source_field: processorEsDocument.trim.field,
+      ignore_failure: processorEsDocument.trim.ignore_failure
     };
   }
 };

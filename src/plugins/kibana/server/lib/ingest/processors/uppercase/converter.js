@@ -5,7 +5,8 @@ export default {
     return {
       uppercase: {
         tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field
+        field: processorApiDocument.source_field,
+        ignore_failure: processorApiDocument.ignore_failure
       }
     };
   },
@@ -17,7 +18,8 @@ export default {
     return {
       typeId: 'uppercase',
       processor_id: processorEsDocument.uppercase.tag,
-      source_field: processorEsDocument.uppercase.field
+      source_field: processorEsDocument.uppercase.field,
+      ignore_failure: processorEsDocument.uppercase.ignore_failure
     };
   }
 };

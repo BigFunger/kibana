@@ -6,7 +6,8 @@ export default {
       split: {
         tag: processorApiDocument.processor_id,
         field: processorApiDocument.source_field,
-        separator: processorApiDocument.separator
+        separator: processorApiDocument.separator,
+        ignore_failure: processorApiDocument.ignore_failure
       }
     };
   },
@@ -19,7 +20,8 @@ export default {
       typeId: 'split',
       processor_id: processorEsDocument.split.tag,
       source_field: processorEsDocument.split.field,
-      separator: processorEsDocument.split.separator
+      separator: processorEsDocument.split.separator,
+      ignore_failure: processorEsDocument.split.ignore_failure
     };
   }
 };

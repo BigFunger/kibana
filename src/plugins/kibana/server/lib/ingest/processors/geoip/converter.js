@@ -5,7 +5,8 @@ export default {
     const processor = {
       geoip: {
         tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field
+        field: processorApiDocument.source_field,
+        ignore_failure: processorApiDocument.ignore_failure
       }
     };
     if (!_.isEmpty(processorApiDocument.target_field)) {
@@ -31,7 +32,8 @@ export default {
       source_field: processorEsDocument.geoip.field,
       target_field: processorEsDocument.geoip.target_field,
       database_file: processorEsDocument.geoip.database_file,
-      database_fields: processorEsDocument.geoip.properties
+      database_fields: processorEsDocument.geoip.properties,
+      ignore_failure: processorEsDocument.geoip.ignore_failure
     };
   }
 };

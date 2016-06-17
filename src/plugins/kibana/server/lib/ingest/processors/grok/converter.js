@@ -6,7 +6,8 @@ export default {
       grok: {
         tag: processorApiDocument.processor_id,
         field: processorApiDocument.source_field,
-        patterns: [ processorApiDocument.pattern ]
+        patterns: [ processorApiDocument.pattern ],
+        ignore_failure: processorApiDocument.ignore_failure
       }
     };
   },
@@ -24,7 +25,8 @@ export default {
       typeId: 'grok',
       processor_id: processorEsDocument.grok.tag,
       source_field: processorEsDocument.grok.field,
-      pattern: pattern
+      pattern: pattern,
+      ignore_failure: processorEsDocument.grok.ignore_failure
     };
   }
 };

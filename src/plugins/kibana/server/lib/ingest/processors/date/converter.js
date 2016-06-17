@@ -20,7 +20,8 @@ export default {
         target_field: processorApiDocument.target_field,
         formats: formats,
         timezone: processorApiDocument.timezone,
-        locale: processorApiDocument.locale
+        locale: processorApiDocument.locale,
+        ignore_failure: processorApiDocument.ignore_failure
       }
     };
   },
@@ -50,7 +51,8 @@ export default {
       formats: _.uniq(formats),
       custom_format: customFormat,
       timezone: processorEsDocument.date.timezone,
-      locale: processorEsDocument.date.locale
+      locale: processorEsDocument.date.locale,
+      ignore_failure: processorEsDocument.date.ignore_failure
     };
   }
 };

@@ -18,14 +18,16 @@ describe('ingest', () => {
             source = {
               processor_id: 'foo_processor_id',
               source_field: 'foo_source_field',
-              pattern: 'foo_pattern'
+              pattern: 'foo_pattern',
+              ignore_failure: 'foo_ignore_failure'
             };
 
             expected = {
               grok: {
                 tag: 'foo_processor_id',
                 field: 'foo_source_field',
-                patterns: [ 'foo_pattern' ]
+                patterns: [ 'foo_pattern' ],
+                ignore_failure: 'foo_ignore_failure'
               }
             };
           });
@@ -54,7 +56,8 @@ describe('ingest', () => {
               grok: {
                 tag: 'foo_tag',
                 field: 'foo_field',
-                patterns: [ 'foo_pattern' ]
+                patterns: [ 'foo_pattern' ],
+                ignore_failure: 'foo_ignore_failure'
               }
             };
 
@@ -62,7 +65,8 @@ describe('ingest', () => {
               typeId: 'grok',
               processor_id: 'foo_tag',
               source_field: 'foo_field',
-              pattern: 'foo_pattern'
+              pattern: 'foo_pattern',
+              ignore_failure: 'foo_ignore_failure'
             };
           });
 
