@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import uiModules from 'ui/modules';
-import keysDeep from '../../lib/keys_deep';
 import template from './view.html';
 
 const app = uiModules.get('kibana');
@@ -15,8 +14,6 @@ app.directive('processorUiUppercase', function () {
       const pipeline = $scope.pipeline;
 
       function consumeNewInputObject() {
-        const allKeys = keysDeep(processor.inputObject);
-        $scope.fields = _.filter(allKeys, (key) => { return _.isString(_.get(processor.inputObject, key)); });
         refreshFieldData();
       }
 

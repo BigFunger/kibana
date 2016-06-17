@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import uiModules from 'ui/modules';
-import keysDeep from '../../lib/keys_deep';
 import createMultiSelectModel from '../../lib/create_multi_select_model';
 import template from './view.html';
 import './styles.less';
@@ -17,7 +16,6 @@ app.directive('processorUiDate', function () {
       const pipeline = $scope.pipeline;
 
       function consumeNewInputObject() {
-        $scope.fields = keysDeep(processor.inputObject);
         refreshFieldData();
       }
 

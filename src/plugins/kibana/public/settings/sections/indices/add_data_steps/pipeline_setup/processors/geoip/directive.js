@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import uiModules from 'ui/modules';
-import keysDeep from '../../lib/keys_deep';
 import template from './view.html';
 import './styles.less';
 
@@ -16,7 +15,6 @@ app.directive('processorUiGeoip', function () {
       const pipeline = $scope.pipeline;
 
       function consumeNewInputObject() {
-        $scope.fields = keysDeep(processor.inputObject);
         refreshFieldData();
       }
 
