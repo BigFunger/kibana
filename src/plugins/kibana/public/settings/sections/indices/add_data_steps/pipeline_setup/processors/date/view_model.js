@@ -28,7 +28,7 @@ export class Date extends Processor {
         timezone: 'Etc/UTC',
         locale: 'ENGLISH',
         customFormat: '',
-        ignoreFailure: false
+        ignoreFailure: 'index_fail'
       }
     );
   }

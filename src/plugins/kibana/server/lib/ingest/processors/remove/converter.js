@@ -1,14 +1,14 @@
 import _ from 'lodash';
+import baseConverter from '../base/converter';
 
 export default {
   kibanaToEs: function (processorApiDocument) {
-    return {
-      remove: {
-        tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field,
-        ignore_failure: processorApiDocument.ignore_failure
-      }
-    };
+    const result = baseConverter.kibanaToEs(processorApiDocument, 'remove');
+    _.assign(result.remove, {
+      field: processorApiDocument.source_field
+    });
+
+    return result;
   },
   esToKibana: function (processorEsDocument) {
     if (!_.has(processorEsDocument, 'remove')) {

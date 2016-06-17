@@ -1,15 +1,15 @@
 import _ from 'lodash';
+import baseConverter from '../base/converter';
 
 export default {
   kibanaToEs: function (processorApiDocument) {
-    return {
-      grok: {
-        tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field,
-        patterns: [ processorApiDocument.pattern ],
-        ignore_failure: processorApiDocument.ignore_failure
-      }
-    };
+    const result = baseConverter.kibanaToEs(processorApiDocument, 'grok');
+    _.assign(result.grok, {
+      field: processorApiDocument.source_field,
+      patterns: [ processorApiDocument.pattern ]
+    });
+
+    return result;
   },
   esToKibana: function (processorEsDocument) {
     if (!_.has(processorEsDocument, 'grok')) {

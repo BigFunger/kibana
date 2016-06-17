@@ -1,16 +1,16 @@
 import _ from 'lodash';
+import baseConverter from '../base/converter';
 
 export default {
   kibanaToEs: function (processorApiDocument) {
-    return {
-      gsub: {
-        tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field,
-        pattern: processorApiDocument.pattern,
-        replacement: processorApiDocument.replacement,
-        ignore_failure: processorApiDocument.ignore_failure
-      }
-    };
+    const result = baseConverter.kibanaToEs(processorApiDocument, 'gsub');
+    _.assign(result.gsub, {
+      field: processorApiDocument.source_field,
+      pattern: processorApiDocument.pattern,
+      replacement: processorApiDocument.replacement
+    });
+
+    return result;
   },
   esToKibana: function (processorEsDocument) {
     if (!_.has(processorEsDocument, 'gsub')) {

@@ -21,7 +21,7 @@ separator character between each element. `
       {
         sourceField: '',
         separator: '',
-        ignoreFailure: false
+        ignoreFailure: 'index_fail'
       }
     );
   }

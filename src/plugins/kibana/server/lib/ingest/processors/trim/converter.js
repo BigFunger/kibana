@@ -1,14 +1,14 @@
 import _ from 'lodash';
+import baseConverter from '../base/converter';
 
 export default {
   kibanaToEs: function (processorApiDocument) {
-    return {
-      trim: {
-        tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field,
-        ignore_failure: processorApiDocument.ignore_failure
-      }
-    };
+    const result = baseConverter.kibanaToEs(processorApiDocument, 'trim');
+    _.assign(result.trim, {
+      field: processorApiDocument.source_field
+    });
+
+    return result;
   },
   esToKibana: function (processorEsDocument) {
     if (!_.has(processorEsDocument, 'trim')) {

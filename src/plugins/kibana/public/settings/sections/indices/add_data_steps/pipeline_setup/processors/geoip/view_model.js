@@ -25,7 +25,7 @@ based on data from the Maxmind database.`
         targetField: '',
         databaseFile: '',
         databaseFields: [],
-        ignoreFailure: false
+        ignoreFailure: 'index_fail'
       }
     );
   }

@@ -1,25 +1,23 @@
 import _ from 'lodash';
+import baseConverter from '../base/converter';
 
 export default {
   kibanaToEs: function (processorApiDocument) {
-    const processor = {
-      geoip: {
-        tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field,
-        ignore_failure: processorApiDocument.ignore_failure
-      }
-    };
+    const result = baseConverter.kibanaToEs(processorApiDocument, 'geoip');
+    _.assign(result.geoip, {
+      field: processorApiDocument.source_field
+    });
     if (!_.isEmpty(processorApiDocument.target_field)) {
-      processor.geoip.target_field = processorApiDocument.target_field;
+      result.geoip.target_field = processorApiDocument.target_field;
     }
     if (!_.isEmpty(processorApiDocument.database_file)) {
-      processor.geoip.database_file = processorApiDocument.database_file;
+      result.geoip.database_file = processorApiDocument.database_file;
     }
     if (!_.isEmpty(processorApiDocument.database_fields)) {
-      processor.geoip.properties = processorApiDocument.database_fields;
+      result.geoip.properties = processorApiDocument.database_fields;
     }
 
-    return processor;
+    return result;
   },
   esToKibana: function (processorEsDocument) {
     if (!_.has(processorEsDocument, 'geoip')) {

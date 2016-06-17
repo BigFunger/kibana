@@ -24,7 +24,7 @@ converted.`
         sourceField: '',
         targetField: '',
         type: 'auto',
-        ignoreFailure: false
+        ignoreFailure: 'index_fail'
       }
     );
   }

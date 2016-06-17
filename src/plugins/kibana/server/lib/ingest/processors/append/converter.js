@@ -1,15 +1,15 @@
 import _ from 'lodash';
+import baseConverter from '../base/converter';
 
 export default {
   kibanaToEs: function (processorApiDocument) {
-    return {
-      append: {
-        tag: processorApiDocument.processor_id,
-        field: processorApiDocument.target_field,
-        value: processorApiDocument.values,
-        ignore_failure: processorApiDocument.ignore_failure
-      }
-    };
+    const result = baseConverter.kibanaToEs(processorApiDocument, 'append');
+    _.assign(result.append, {
+      field: processorApiDocument.target_field,
+      value: processorApiDocument.values
+    });
+
+    return result;
   },
   esToKibana: function (processorEsDocument) {
     if (!_.has(processorEsDocument, 'append')) {

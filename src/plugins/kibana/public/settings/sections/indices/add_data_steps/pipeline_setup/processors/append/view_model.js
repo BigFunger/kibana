@@ -23,7 +23,7 @@ containing the provided values if the field doesn’t exist.`
       {
         targetField: '',
         values: [],
-        ignoreFailure: false
+        ignoreFailure: 'index_fail'
       }
     );
   }

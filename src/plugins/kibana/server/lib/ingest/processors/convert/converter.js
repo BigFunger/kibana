@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import baseConverter from '../base/converter';
 
 export default {
   kibanaToEs: function (processorApiDocument) {
@@ -10,19 +11,16 @@ export default {
       boolean: 'boolean'
     };
 
-    const processor = {
-      convert: {
-        tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field,
-        type: types[processorApiDocument.type],
-        ignore_failure: processorApiDocument.ignore_failure
-      }
-    };
+    const result = baseConverter.kibanaToEs(processorApiDocument, 'convert');
+    _.assign(result.convert, {
+      field: processorApiDocument.source_field,
+      type: types[processorApiDocument.type],
+    });
     if (!_.isEmpty(processorApiDocument.target_field)) {
-      processor.convert.target_field = processorApiDocument.target_field;
+      result.convert.target_field = processorApiDocument.target_field;
     }
 
-    return processor;
+    return result;
   },
   esToKibana: function (processorEsDocument) {
     if (!_.has(processorEsDocument, 'convert')) {

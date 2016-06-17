@@ -1,4 +1,5 @@
-const _ = require('lodash');
+import _ from 'lodash';
+import baseConverter from '../base/converter';
 
 export default {
   kibanaToEs: function (processorApiDocument) {
@@ -13,17 +14,16 @@ export default {
       }
     });
 
-    return {
-      date: {
-        tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field,
-        target_field: processorApiDocument.target_field,
-        formats: formats,
-        timezone: processorApiDocument.timezone,
-        locale: processorApiDocument.locale,
-        ignore_failure: processorApiDocument.ignore_failure
-      }
-    };
+    const result = baseConverter.kibanaToEs(processorApiDocument, 'date');
+    _.assign(result.date, {
+      field: processorApiDocument.source_field,
+      target_field: processorApiDocument.target_field,
+      formats: formats,
+      timezone: processorApiDocument.timezone,
+      locale: processorApiDocument.locale
+    });
+
+    return result;
   },
   esToKibana: function (processorEsDocument) {
     if (!_.has(processorEsDocument, 'date')) {

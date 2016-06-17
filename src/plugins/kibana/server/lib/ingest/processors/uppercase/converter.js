@@ -1,14 +1,14 @@
 import _ from 'lodash';
+import baseConverter from '../base/converter';
 
 export default {
   kibanaToEs: function (processorApiDocument) {
-    return {
-      uppercase: {
-        tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field,
-        ignore_failure: processorApiDocument.ignore_failure
-      }
-    };
+    const result = baseConverter.kibanaToEs(processorApiDocument, 'uppercase');
+    _.assign(result.uppercase, {
+      field: processorApiDocument.source_field
+    });
+
+    return result;
   },
   esToKibana: function (processorEsDocument) {
     if (!_.has(processorEsDocument, 'uppercase')) {

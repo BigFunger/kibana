@@ -22,7 +22,7 @@ export class Gsub extends Processor {
         sourceField: '',
         pattern: '',
         replacement: '',
-        ignoreFailure: false
+        ignoreFailure: 'index_fail'
       }
     );
   }

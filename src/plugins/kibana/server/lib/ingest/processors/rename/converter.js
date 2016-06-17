@@ -1,15 +1,15 @@
 import _ from 'lodash';
+import baseConverter from '../base/converter';
 
 export default {
   kibanaToEs: function (processorApiDocument) {
-    return {
-      rename: {
-        tag: processorApiDocument.processor_id,
-        field: processorApiDocument.source_field,
-        target_field: processorApiDocument.target_field,
-        ignore_failure: processorApiDocument.ignore_failure
-      }
-    };
+    const result = baseConverter.kibanaToEs(processorApiDocument, 'rename');
+    _.assign(result.rename, {
+      field: processorApiDocument.source_field,
+      target_field: processorApiDocument.target_field
+    });
+
+    return result;
   },
   esToKibana: function (processorEsDocument) {
     if (!_.has(processorEsDocument, 'rename')) {

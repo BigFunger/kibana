@@ -21,7 +21,7 @@ already exists, its value will be replaced with the provided one.`
       {
         targetField: '',
         value: '',
-        ignoreFailure: false
+        ignoreFailure: 'index_fail'
       }
     );
   }

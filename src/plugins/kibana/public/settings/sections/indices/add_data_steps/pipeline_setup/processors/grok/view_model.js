@@ -24,7 +24,7 @@ expression that supports aliased expressions that can be reused.`
       {
         sourceField: '',
         pattern: '',
-        ignoreFailure: false
+        ignoreFailure: 'index_fail'
       }
     );
   }

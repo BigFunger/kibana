@@ -20,7 +20,7 @@ export class Split extends Processor {
       {
         sourceField: '',
         separator: '',
-        ignoreFailure: false
+        ignoreFailure: 'index_fail'
       }
     );
   }

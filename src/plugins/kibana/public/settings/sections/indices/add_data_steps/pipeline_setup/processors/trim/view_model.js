@@ -18,7 +18,7 @@ export class Trim extends Processor {
       ]),
       {
         sourceField: '',
-        ignoreFailure: false
+        ignoreFailure: 'index_fail'
       }
     );
   }
