@@ -63,6 +63,8 @@ export function registerSimulate(server) {
       const simulateApiDocument = request.payload;
       const body = simulateConverter.kibanaToEs(simulateApiDocument);
 
+      console.log(JSON.stringify(body));
+
       return boundCallWithRequest('transport.request', {
         path: '/_ingest/pipeline/_simulate',
         query: { verbose: true },

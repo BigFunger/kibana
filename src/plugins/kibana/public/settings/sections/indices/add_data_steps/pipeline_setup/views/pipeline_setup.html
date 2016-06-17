@@ -18,16 +18,20 @@
     <div class="pipeline">
       <ul
         class="pipeline-container"
-        ng-show="pipeline.processors.length > 0">
-        <li ng-repeat="processor in pipeline.processors track by processor.processorId">
-          <processor-ui-container pipeline="pipeline" processor="processor"></processor-ui-container>
+        ng-show="activeProcessorCollection.processors.length > 0">
+        <li ng-repeat="processor in activeProcessorCollection.processors track by processor.processorId">
+          <processor-ui-container
+            pipeline="pipeline"
+            processor-collection="activeProcessorCollection"
+            processor="processor">
+          </processor-ui-container>
         </li>
       </ul>
 
       <div class="add-processor">
         <div
           class="form-group"
-          ng-hide="pipeline.processors.length > 0">
+          ng-hide="activeProcessorCollection.processors.length > 0">
           <label>
             Your pipeline is currently empty. Add a processor to get started!
           </label>
@@ -67,3 +71,6 @@
     <pipeline-output pipeline="pipeline" samples="samples" sample="sample"></pipeline-output>
   </div>
 </div>
+
+<field-select fields="jimFields" field="jimField"></field-select>
+

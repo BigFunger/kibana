@@ -4,6 +4,7 @@ export default class ProcessorCollection {
 
   constructor(processors) {
     this.processors = [];
+    this.input = {};
   }
 
   add(ProcessorType, oldProcessor) {
@@ -55,7 +56,10 @@ export default class ProcessorCollection {
     processors[index] = temp;
   }
 
-  updateParents() {
+  updateParents(rootInput) {
+    if (rootInput) {
+      this.input = rootInput;
+    }
     const processors = this.processors;
 
     processors.forEach((processor, index) => {
@@ -66,9 +70,9 @@ export default class ProcessorCollection {
         newParent = processors[index - 1];
       }
 
+      //TODO: Once I add a processorCollection to processor, this needs to be recursive.
       processor.setParent(newParent);
     });
-    this.dirty = true;
   }
 
   getProcessorById(processorId) {
@@ -79,6 +83,22 @@ export default class ProcessorCollection {
     }
 
     return result;
+  }
+
+  updateInputs() {
+    this.processors.forEach((processor) => {
+      //we don't want to change the inputObject if the parent processor
+      //is in error because that can cause us to lose state.
+      if (!_.get(processor, 'parent.error')) {
+        //the parent property of the first processor is set to the pipeline.input.
+        //In all other cases it is set to processor[index-1]
+        if (!processor.parent.processorId) {
+          processor.inputObject = _.cloneDeep(processor.parent);
+        } else {
+          processor.inputObject = _.cloneDeep(processor.parent.outputObject);
+        }
+      }
+    });
   }
 
 }

@@ -1,0 +1,14 @@
+<ui-select
+  ng-model="selectedItem.value"
+  tagging="fieldAdded"
+  tagging-label="false">
+  <ui-select-match>
+    <span ng-bind="$select.selected"></span>
+  </ui-select-match>
+<!--   <ui-select-choices
+    repeat="field in (fields | filter: $select.search)"> -->
+  <ui-select-choices
+    repeat="field in fields">
+    <label ng-bind="field"></label>
+  </ui-select-choices>
+</ui-select>

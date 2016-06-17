@@ -13,6 +13,7 @@ app.directive('processorUiContainer', function ($compile) {
     restrict: 'E',
     scope: {
       pipeline: '=',
+      processorCollection: '=',
       processor: '='
     },
     template: template,

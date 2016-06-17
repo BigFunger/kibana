@@ -3,7 +3,7 @@ import template from './view.html';
 
 const app = uiModules.get('kibana');
 
-//scope.processor, scope.pipeline are attached by the process_container.
+//scope.pipeline, scope.processor are attached by the process_container.
 app.directive('processorUiSet', function () {
   return {
     restrict: 'E',

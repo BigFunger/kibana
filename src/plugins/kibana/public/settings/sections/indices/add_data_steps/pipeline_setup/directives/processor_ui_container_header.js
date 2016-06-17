@@ -8,8 +8,8 @@ app.directive('processorUiContainerHeader', function () {
   return {
     restrict: 'E',
     scope: {
+      processorCollection: '=',
       processor: '=',
-      field: '=',
       pipeline: '='
     },
     template: processorUiContainerHeaderTemplate

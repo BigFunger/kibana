@@ -29,7 +29,7 @@
       aria-label="Increase Priority"
       tooltip="Increase Priority"
       tooltip-append-to-body="true"
-      ng-click="pipeline.moveUp(processor)"
+      ng-click="processorCollection.moveUp(processor)"
       type="button"
       class="btn btn-xs btn-primary"
       ng-disabled="pipeline.hasCompileError">
@@ -40,7 +40,7 @@
       aria-label="Decrease Priority"
       tooltip="Decrease Priority"
       tooltip-append-to-body="true"
-      ng-click="pipeline.moveDown(processor)"
+      ng-click="processorCollection.moveDown(processor)"
       type="button"
       class="btn btn-xs btn-primary"
       ng-disabled="pipeline.hasCompileError">
@@ -51,7 +51,7 @@
       aria-label="Remove Processor"
       tooltip="Remove Processor"
       tooltip-append-to-body="true"
-      ng-click="pipeline.remove(processor)"
+      ng-click="processorCollection.remove(processor)"
       type="button"
       class="btn btn-xs btn-danger"
       ng-disabled="pipeline.hasCompileError && !processor.error">
