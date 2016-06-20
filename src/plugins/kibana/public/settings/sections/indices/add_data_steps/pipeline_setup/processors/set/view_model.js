@@ -32,12 +32,12 @@ already exists, its value will be replaced with the provided one.`
   }
 
   get model() {
-    return {
-      processorId: this.processorId,
-      typeId: this.typeId,
-      targetField: this.targetField || '',
-      value: this.value || '',
-      ignoreFailure: this.ignoreFailure
-    };
+    return _.assign(
+      super.model,
+      {
+        targetField: this.targetField || '',
+        value: this.value || ''
+      }
+    );
   }
 };

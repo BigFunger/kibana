@@ -5,6 +5,8 @@ export default class Pipeline {
 
   constructor() {
     this.processorCollection = new ProcessorCollection();
+    this.processorCollections = [];
+    this.activeProcessorCollection = this.processorCollection;
     this.input = {};
     this.output = undefined;
     this.dirty = false;
@@ -30,6 +32,16 @@ export default class Pipeline {
     });
   }
 
+  ///TODO: Rename this function
+  pushProcessorCollection(processorCollection) {
+    this.processorCollections.push(this.activeProcessorCollection);
+    this.activeProcessorCollection = processorCollection;
+  }
+
+  popProcessorCollection() {
+    this.activeProcessorCollection = this.processorCollections.pop();
+  }
+
   updateOutput() {
     const processors = _.reject(this.processors, { new: true });
 
@@ -49,15 +61,35 @@ export default class Pipeline {
     this.updateOutput();
   }
 
+  //Returns a flattened object containing one property per processor
+  //regardless of where in the hierarchy it exists.
+  getAllProcessors() {
+    const result = {};
+
+    function iteration(processorCollection) {
+      _.forEach(processorCollection.processors, processor => {
+        iteration(processor.errorProcessorCollection);
+        result[processor.processorId] = processor;
+      });
+    }
+
+    iteration(this.processorCollection);
+
+    return result;
+  }
 }
 
 function updateProcessorOutputs(pipeline, simulateResults) {
-  simulateResults.forEach((result) => {
-    const processor = pipeline.processorCollection.getProcessorById(result.processorId);
+  //TODO: Should we instead loop through all the processors and look up the simulate result? :)
+  const allProcessors = pipeline.getAllProcessors();
 
-    if (!processor.new) {
-      processor.outputObject = _.get(result, 'output');
-      processor.error = _.get(result, 'error');
+  simulateResults.forEach((result) => {
+    const processor = allProcessors[result.processorId];
+
+    if (processor) {
+      const output = _.get(result, 'output');
+      const error = _.get(result, 'error');
+      processor.setOutput(output, error);
     }
   });
 }
@@ -85,3 +117,17 @@ function updateErrorState(pipeline) {
   //   }
   // });
 }
+
+// function updateInputs(pipeline) {
+//   function iteration(processorCollection) {
+//     _.forEach(processorCollection.processors, processor => {
+//       if (!processor.parent.processorId) {
+//         processor.setInputObject(processor.parent);
+//       } else {
+//         processor.setInputObject(processor.parent.outputObject);
+//       }
+
+//       iteration(processor.errorProcessorCollection);
+//     });
+//   };
+// }

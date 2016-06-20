@@ -40,16 +40,16 @@ export class Date extends Processor {
   }
 
   get model() {
-    return {
-      processorId: this.processorId,
-      typeId: this.typeId,
-      sourceField: this.sourceField || '',
-      targetField: this.targetField || '',
-      formats: this.formats || [],
-      timezone: this.timezone || '',
-      locale: this.locale || '',
-      customFormat: this.customFormat || '',
-      ignoreFailure: this.ignoreFailure
-    };
+    return _.assign(
+      super.model,
+      {
+        sourceField: this.sourceField || '',
+        targetField: this.targetField || '',
+        formats: this.formats || [],
+        timezone: this.timezone || '',
+        locale: this.locale || '',
+        customFormat: this.customFormat || ''
+      }
+    );
   }
 };

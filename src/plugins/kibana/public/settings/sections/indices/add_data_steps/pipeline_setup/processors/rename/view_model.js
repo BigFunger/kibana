@@ -14,11 +14,13 @@ export class Rename extends Processor {
       this,
       _.pick(model, [
         'sourceField',
-        'targetField'
+        'targetField',
+        'ignoreFailure'
       ]),
       {
         sourceField: '',
-        targetField: ''
+        targetField: '',
+        ignoreFailure: 'index_fail'
       }
     );
   }
@@ -30,11 +32,12 @@ export class Rename extends Processor {
   }
 
   get model() {
-    return {
-      processorId: this.processorId,
-      typeId: this.typeId,
-      sourceField: this.sourceField || '',
-      targetField: this.targetField || ''
-    };
+    return _.assign(
+      super.model,
+      {
+        sourceField: this.sourceField || '',
+        targetField: this.targetField || ''
+      }
+    );
   }
 };

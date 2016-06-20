@@ -37,14 +37,14 @@ based on data from the Maxmind database.`
   }
 
   get model() {
-    return {
-      processorId: this.processorId,
-      typeId: this.typeId,
-      sourceField: this.sourceField || '',
-      targetField: this.targetField || '',
-      databaseFile: this.databaseFile || '',
-      databaseFields: this.databaseFields || [],
-      ignoreFailure: this.ignoreFailure
-    };
+    return _.assign(
+      super.model,
+      {
+        sourceField: this.sourceField || '',
+        targetField: this.targetField || '',
+        databaseFile: this.databaseFile || '',
+        databaseFields: this.databaseFields || []
+      }
+    );
   }
 };

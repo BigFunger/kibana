@@ -13,10 +13,12 @@ export class Remove extends Processor {
     _.defaults(
       this,
       _.pick(model, [
-        'sourceField'
+        'sourceField',
+        'ignoreFailure'
       ]),
       {
-        sourceField: ''
+        sourceField: '',
+        ignoreFailure: 'index_fail'
       }
     );
   }
@@ -27,10 +29,11 @@ export class Remove extends Processor {
   }
 
   get model() {
-    return {
-      processorId: this.processorId,
-      typeId: this.typeId,
-      sourceField: this.sourceField || ''
-    };
+    return _.assign(
+      super.model,
+      {
+        sourceField: this.sourceField || ''
+      }
+    );
   }
 };

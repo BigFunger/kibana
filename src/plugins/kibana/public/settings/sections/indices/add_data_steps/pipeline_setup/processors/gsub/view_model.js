@@ -33,13 +33,13 @@ export class Gsub extends Processor {
   }
 
   get model() {
-    return {
-      processorId: this.processorId,
-      typeId: this.typeId,
-      sourceField: this.sourceField || '',
-      pattern: this.pattern || '',
-      replacement: this.replacement || '',
-      ignoreFailure: this.ignoreFailure
-    };
+    return _.assign(
+      super.model,
+      {
+        sourceField: this.sourceField || '',
+        pattern: this.pattern || '',
+        replacement: this.replacement || ''
+      }
+    );
   }
 };

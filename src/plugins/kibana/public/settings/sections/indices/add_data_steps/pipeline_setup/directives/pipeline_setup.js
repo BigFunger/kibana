@@ -42,7 +42,7 @@ app.directive('pipelineSetup', function () {
         $scope.sample = $scope.pipeline.input;
       }
       $scope.pipeline = pipeline;
-      $scope.activeProcessorCollection = pipeline.processorCollection;
+      //$scope.activeProcessorCollection = pipeline.processorCollection;
 
       //initiates the simulate call if the pipeline is dirty
       const simulatePipeline = debounce((event, message) => {
@@ -56,8 +56,8 @@ app.directive('pipelineSetup', function () {
         .catch(notify.error);
       }, 200);
 
-      $scope.$watchCollection('activeProcessorCollection.processors', (newVal, oldVal) => {
-        $scope.activeProcessorCollection.updateParents();
+      $scope.$watchCollection('pipeline.activeProcessorCollection.processors', (newVal, oldVal) => {
+        pipeline.activeProcessorCollection.updateParents();
         pipeline.dirty = true;
       });
 
@@ -75,8 +75,7 @@ app.directive('pipelineSetup', function () {
       $scope.$watch('processorType', processorType => {
         if (!processorType) return;
 
-        $scope.activeProcessorCollection.add(processorType);
-        //pipeline.add(processorType);
+        pipeline.activeProcessorCollection.add(processorType);
         $scope.processorType = null;
       });
 
@@ -86,16 +85,7 @@ app.directive('pipelineSetup', function () {
 
 
 
-
-      $scope.jimFields = [
-        'field1',
-        'field2',
-        'field3'
-      ];
-
-      $scope.$watch('jimField', (newVal) => {
-        //console.log(`jimField=${newVal}`);
-      });
+      window.pipeline = pipeline;
     }
   };
 });

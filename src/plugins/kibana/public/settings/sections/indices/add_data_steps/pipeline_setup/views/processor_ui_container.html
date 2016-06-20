@@ -10,6 +10,9 @@
     <div
       class="processor-ui-container-body-content"
       ng-hide="processor.collapsed">
+      <div>
+        <pre>{{ processor.inputObject | json }}</pre>
+      </div>
       <div class="processor-ui-content"></div>
       <div
         ng-show="processor.error"

@@ -29,11 +29,11 @@ export class Trim extends Processor {
   }
 
   get model() {
-    return {
-      processorId: this.processorId,
-      typeId: this.typeId,
-      sourceField: this.sourceField || '',
-      ignoreFailure: this.ignoreFailure
-    };
+    return _.assign(
+      super.model,
+      {
+        sourceField: this.sourceField || ''
+      }
+    );
   }
 };

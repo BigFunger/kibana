@@ -16,13 +16,24 @@
       </a>
     </label>
     <div class="pipeline">
+      <div
+        class="error-path-header"
+        ng-show="pipeline.processorCollections.length > 0">
+        <label>You are currently editing an error branch. (name something better)</label>
+        <button
+          class="btn btn-primary"
+          ng-click="pipeline.popProcessorCollection()">
+          Return
+        </button>
+      </div>
+
       <ul
         class="pipeline-container"
-        ng-show="activeProcessorCollection.processors.length > 0">
-        <li ng-repeat="processor in activeProcessorCollection.processors track by processor.processorId">
+        ng-show="pipeline.activeProcessorCollection.processors.length > 0">
+        <li ng-repeat="processor in pipeline.activeProcessorCollection.processors track by processor.processorId">
           <processor-ui-container
             pipeline="pipeline"
-            processor-collection="activeProcessorCollection"
+            processor-collection="pipeline.activeProcessorCollection"
             processor="processor">
           </processor-ui-container>
         </li>

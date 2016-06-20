@@ -40,9 +40,19 @@ export default function IngestProvider($rootScope, $http, config, $q) {
   };
 
   this.simulate = function (pipeline) {
+    //TODO: Name these variables better!!!
+    function packProcessors(processors) {
+      return _.map(processors, (processor) => {
+        const result = keysToSnakeCaseShallow(processor);
+        result.processors = packProcessors(processor.processors);
+
+        return result;
+      });
+    }
+
     function pack(pipeline) {
       const result = keysToSnakeCaseShallow(pipeline);
-      result.processors = _.map(result.processors, processor => keysToSnakeCaseShallow(processor));
+      result.processors = packProcessors(result.processors);
 
       return result;
     }

@@ -37,13 +37,13 @@ converted.`
   }
 
   get model() {
-    return {
-      processorId: this.processorId,
-      typeId: this.typeId,
-      sourceField: this.sourceField || '',
-      targetField: this.targetField || '',
-      type: this.type || 'auto',
-      ignoreFailure: this.ignoreFailure
-    };
+    return _.assign(
+      super.model,
+      {
+        sourceField: this.sourceField || '',
+        targetField: this.targetField || '',
+        type: this.type || 'auto'
+      }
+    );
   }
 };

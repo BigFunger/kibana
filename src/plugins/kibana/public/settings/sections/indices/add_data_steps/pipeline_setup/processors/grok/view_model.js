@@ -40,12 +40,12 @@ expression that supports aliased expressions that can be reused.`
   }
 
   get model() {
-    return {
-      processorId: this.processorId,
-      typeId: this.typeId,
-      sourceField: this.sourceField || '',
-      pattern: this.pattern || '',
-      ignoreFailure: this.ignoreFailure
-    };
+    return _.assign(
+      super.model,
+      {
+        sourceField: this.sourceField || '',
+        pattern: this.pattern || ''
+      }
+    );
   }
 };

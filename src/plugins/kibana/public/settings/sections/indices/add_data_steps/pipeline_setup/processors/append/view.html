@@ -10,4 +10,7 @@
   <label>Values:</label><span> (line delimited)</span>
   <textarea ng-model="values" class="form-control"></textarea>
 </div>
-<failure-options value="processor.ignoreFailure"></failure-options>
+<failure-options
+  processor="processor"
+  pipeline="pipeline">
+</failure-options>

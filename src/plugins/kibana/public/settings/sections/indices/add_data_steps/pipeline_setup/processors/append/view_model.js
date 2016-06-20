@@ -34,12 +34,12 @@ containing the provided values if the field doesn’t exist.`
   }
 
   get model() {
-    return {
-      processorId: this.processorId,
-      typeId: this.typeId,
-      targetField: this.targetField || '',
-      values: this.values || [],
-      ignoreFailure: this.ignoreFailure
-    };
+    return _.assign(
+      super.model,
+      {
+        targetField: this.targetField || '',
+        values: this.values || []
+      }
+    );
   }
 };

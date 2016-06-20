@@ -14,4 +14,7 @@
   <label>Pattern:</label>
   <input type="text" class="form-control" ng-model="processor.pattern">
 </div>
-<failure-options value="processor.ignoreFailure"></failure-options>
+<failure-options
+  processor="processor"
+  pipeline="pipeline">
+</failure-options>

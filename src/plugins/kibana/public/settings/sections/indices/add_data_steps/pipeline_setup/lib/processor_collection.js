@@ -62,6 +62,7 @@ export default class ProcessorCollection {
     }
     const processors = this.processors;
 
+    //TODO: What benefit do we gfet from assigning parent of the first processor to the sample? Seems confusing.
     processors.forEach((processor, index) => {
       let newParent;
       if (index === 0) {
@@ -70,33 +71,17 @@ export default class ProcessorCollection {
         newParent = processors[index - 1];
       }
 
-      //TODO: Once I add a processorCollection to processor, this needs to be recursive.
+      //TODO: Once I add a processorCollection to processor, this needs to be recursive....
       processor.setParent(newParent);
     });
   }
 
-  getProcessorById(processorId) {
-    const result = _.find(this.processors, { processorId });
-
-    if (!result) {
-      throw new Error(`Could not find processor by id [${processorId}]`);
-    }
-
-    return result;
-  }
-
   updateInputs() {
-    this.processors.forEach((processor) => {
-      //we don't want to change the inputObject if the parent processor
-      //is in error because that can cause us to lose state.
-      if (!_.get(processor, 'parent.error')) {
-        //the parent property of the first processor is set to the pipeline.input.
-        //In all other cases it is set to processor[index-1]
-        if (!processor.parent.processorId) {
-          processor.inputObject = _.cloneDeep(processor.parent);
-        } else {
-          processor.inputObject = _.cloneDeep(processor.parent.outputObject);
-        }
+    this.processors.forEach((processor, index) => {
+      if (index === 0) {
+        processor.setInput(this.input);
+      } else {
+        processor.setInput(processor.parent.outputObject);
       }
     });
   }
