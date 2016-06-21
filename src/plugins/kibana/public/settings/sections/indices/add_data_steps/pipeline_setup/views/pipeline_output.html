@@ -15,4 +15,9 @@
     disabled="pipeline.hasCompileError">
   </source-data>
 </div>
-<pre class="output">{{ pipeline.output | json }}</pre>
+<pre ng-hide="pipeline.error" class="output">{{ pipeline.output | json }}</pre>
+<div
+  ng-show="pipeline.error"
+  class="alert alert-danger">
+  Current pipeline will not successfully index the sample document.
+</div>

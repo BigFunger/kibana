@@ -6,7 +6,13 @@
     ng-hide="expandContext < 1"
     class="left-panel">
     <label>
-      Processor Pipeline
+      Pipeline Details
+    </label>
+    <div class="pipeline-details panel">
+      <pipeline-details pipeline="pipeline"></pipeline-details>
+    </div>
+    <label>
+      Pipeline Processors
       <a
         aria-label="A pipeline is a definition of a series of processors that are to be executed in the same order as they are declared."
         tooltip="A pipeline is a definition of a series of processors that are to be executed in the same order as they are declared."
@@ -15,7 +21,7 @@
         <i aria-hidden="true" class="fa fa-question-circle"></i>
       </a>
     </label>
-    <div class="pipeline">
+    <div class="pipeline panel">
       <div
         class="error-path-header"
         ng-show="pipeline.processorCollections.length > 0">
@@ -42,7 +48,7 @@
       <div class="add-processor">
         <div
           class="form-group"
-          ng-hide="activeProcessorCollection.processors.length > 0">
+          ng-hide="pipeline.activeProcessorCollection.processors.length > 0">
           <label>
             Your pipeline is currently empty. Add a processor to get started!
           </label>
@@ -79,9 +85,12 @@
   <div
     ng-hide="expandContext > 1"
     class="right-panel">
+    <label>
+      Pipeline Inputs
+    </label>
+    <div class="pipeline-input panel">
+      <pipeline-input pipeline="pipeline" samples="samples" sample="sample"></pipeline-input>
+    </div>
     <pipeline-output pipeline="pipeline" samples="samples" sample="sample"></pipeline-output>
   </div>
 </div>
-
-<field-select fields="jimFields" field="jimField"></field-select>
-

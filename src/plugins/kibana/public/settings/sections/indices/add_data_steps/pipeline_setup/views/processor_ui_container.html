@@ -10,17 +10,30 @@
     <div
       class="processor-ui-container-body-content"
       ng-hide="processor.collapsed">
-      <div>
-        <pre>{{ processor.inputObject | json }}</pre>
-      </div>
       <div class="processor-ui-content"></div>
       <div
-        ng-show="processor.error"
+        ng-show="processor.state === 'error fail'"
         class="alert alert-danger">
         {{processor.error.message}}
       </div>
+      <div
+        ng-show="processor.state === 'error recover'"
+        class="alert alert-warning">
+        {{processor.error.message}}
+      </div>
+      <div
+        ng-show="processor.state === 'error compile'"
+        class="alert alert-danger">
+        <div>Compile Error</div>
+        {{processor.error.message}}
+      </div>
+      <div
+        ng-show="processor.state === 'no result'"
+        class="alert alert-info">
+        No results were returned for this processor. May be part of a failure path that was not triggered.
+      </div>
       <output-preview
-        ng-hide="processor.error"
+        ng-show="processor.state === 'valid'"
         processor="processor">
       </output-preview>
     </div>

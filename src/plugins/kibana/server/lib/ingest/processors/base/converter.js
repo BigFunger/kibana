@@ -12,11 +12,6 @@ export default {
     }
 
     if (processorApiDocument.ignore_failure === 'on_error') {
-      console.log('*****************************');
-      console.log(JSON.stringify(processorApiDocument));
-      console.log('*****************************');
-      console.log('');
-
       subObject.on_failure = _.map(processorApiDocument.processors, (processor) => {
         const processorConverter = processorConverters[processor.type_id];
         return processorConverter.kibanaToEs(processor);

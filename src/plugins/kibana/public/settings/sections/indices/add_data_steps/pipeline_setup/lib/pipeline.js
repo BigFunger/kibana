@@ -5,12 +5,14 @@ export default class Pipeline {
 
   constructor() {
     this.processorCollection = new ProcessorCollection();
+    this.errorProcessorCollection = new ProcessorCollection();
     this.processorCollections = [];
     this.activeProcessorCollection = this.processorCollection;
     this.input = {};
     this.output = undefined;
     this.dirty = false;
     this.hasCompileError = false;
+    this.ignoreFailure = 'index_fail';
   }
 
   get model() {
@@ -34,6 +36,8 @@ export default class Pipeline {
 
   ///TODO: Rename this function
   pushProcessorCollection(processorCollection) {
+    if (this.activeProcessorCollection === processorCollection) return;
+
     this.processorCollections.push(this.activeProcessorCollection);
     this.activeProcessorCollection = processorCollection;
   }
@@ -42,12 +46,19 @@ export default class Pipeline {
     this.activeProcessorCollection = this.processorCollections.pop();
   }
 
-  updateOutput() {
-    const processors = _.reject(this.processors, { new: true });
+  updateOutput(simulateResults) {
+    const lastResult = _.last(simulateResults);
+    const output = _.get(lastResult, 'output');
+    const error = _.get(lastResult, 'error');
 
-    const errorIndex = _.findIndex(processors, 'error');
-    const goodProcessor = errorIndex === -1 ? _.last(processors) : processors[errorIndex - 1];
-    this.output = goodProcessor ? goodProcessor.outputObject : this.input;
+    this.output = output;
+    this.error = !!error;
+
+    // const processors = _.reject(this.processors, { new: true });
+
+    // const errorIndex = _.findIndex(processors, 'error');
+    // const goodProcessor = errorIndex === -1 ? _.last(processors) : processors[errorIndex - 1];
+    // this.output = goodProcessor ? goodProcessor.outputObject : this.input;
 
     this.dirty = false;
   }
@@ -58,7 +69,7 @@ export default class Pipeline {
     updateProcessorOutputs(this, simulateResults);
     updateErrorState(this);
     this.processorCollection.updateInputs();
-    this.updateOutput();
+    this.updateOutput(simulateResults);
   }
 
   //Returns a flattened object containing one property per processor
@@ -80,17 +91,18 @@ export default class Pipeline {
 }
 
 function updateProcessorOutputs(pipeline, simulateResults) {
-  //TODO: Should we instead loop through all the processors and look up the simulate result? :)
   const allProcessors = pipeline.getAllProcessors();
+  const allResults = {};
+  _.forEach(simulateResults, result => {
+    allResults[result.processorId] = result;
+  });
 
-  simulateResults.forEach((result) => {
-    const processor = allProcessors[result.processorId];
+  _.forEach(allProcessors, (processor) => {
+    const result = allResults[processor.processorId];
 
-    if (processor) {
-      const output = _.get(result, 'output');
-      const error = _.get(result, 'error');
-      processor.setOutput(output, error);
-    }
+    const output = _.get(result, 'output');
+    const error = _.get(result, 'error');
+    processor.setOutput(output, error);
   });
 }
 
@@ -117,17 +129,3 @@ function updateErrorState(pipeline) {
   //   }
   // });
 }
-
-// function updateInputs(pipeline) {
-//   function iteration(processorCollection) {
-//     _.forEach(processorCollection.processors, processor => {
-//       if (!processor.parent.processorId) {
-//         processor.setInputObject(processor.parent);
-//       } else {
-//         processor.setInputObject(processor.parent.outputObject);
-//       }
-
-//       iteration(processor.errorProcessorCollection);
-//     });
-//   };
-// }

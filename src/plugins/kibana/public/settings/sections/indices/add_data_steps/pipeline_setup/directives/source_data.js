@@ -1,5 +1,6 @@
 import uiModules from 'ui/modules';
 import angular from 'angular';
+import _ from 'lodash';
 import '../styles/_source_data.less';
 import sourceDataTemplate from '../views/source_data.html';
 
@@ -15,16 +16,26 @@ app.directive('sourceData', function () {
     },
     template: sourceDataTemplate,
     controller: function ($scope) {
-      const samples = $scope.samples;
-
-      if (samples.length > 0) {
-        $scope.selectedSample = samples[0];
-      }
+      let samples;
 
       $scope.$watch('selectedSample', (newValue) => {
         //the added complexity of this directive is to strip out the properties
         //that angular adds to array objects that are bound via ng-options
         $scope.sample = angular.copy(newValue);
+      });
+
+      $scope.$watch('samples', (newValue) => {
+        samples = $scope.samples;
+
+        let currentIndex = _.findIndex(samples, $scope.sample);
+        if (currentIndex === -1) currentIndex = 0;
+        $scope.selectedSample = samples[currentIndex];
+
+        // if (!_.some($scope.samples, (sample) => {
+        //   return _.isEqual(sample, $scope.sample);
+        // })) {
+        //   $scope.sample = _.first($scope.samples);
+        // }
       });
 
       $scope.previousLine = function () {

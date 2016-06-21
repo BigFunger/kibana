@@ -19,8 +19,20 @@
     </span>
 
     <!-- error -->
-    <span ng-if="processor.error" class="processor-description danger">
+<!--     <span ng-if="processor.error" class="processor-description danger">
       - Error
+    </span> -->
+    <span ng-if="processor.state === 'error compile'" class="processor-description danger">
+      - Compile Error
+    </span>
+    <span ng-if="processor.state === 'error fail'" class="processor-description danger">
+      - Error
+    </span>
+    <span ng-if="processor.state === 'error recover'" class="processor-description warning">
+      - Error with recovery
+    </span>
+    <span ng-if="processor.state === 'no result'" class="processor-description info">
+      - No Results
     </span>
   </div>
 

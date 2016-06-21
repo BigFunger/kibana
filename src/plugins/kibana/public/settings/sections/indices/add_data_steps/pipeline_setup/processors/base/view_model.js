@@ -18,6 +18,8 @@ export default class Processor {
     this.error = undefined;
     this.new = true;
 
+    this.state = 'not initialized';
+
     this.errorProcessorCollection = new ProcessorCollection();
   }
 
@@ -39,6 +41,21 @@ export default class Processor {
 
     this.outputObject = output;
     this.error = error;
+
+    if (this.outputObject && !this.error) {
+      this.state = 'valid';
+    } else if (!this.outputObject && !this.error) {
+      this.state = 'no result';
+    } else if (this.error && this.ignoreFailure === 'ignore_error') {
+      this.state = 'error recover';
+    } else if (this.error && this.ignoreFailure === 'on_error' &&
+        this.errorProcessorCollection.processors.length > 0) {
+      this.state = 'error recover';
+    } else if (this.error && this.error.compile) {
+      this.state = 'error compile';
+    } else {
+      this.state = 'error fail';
+    }
   }
 
   get model() {
