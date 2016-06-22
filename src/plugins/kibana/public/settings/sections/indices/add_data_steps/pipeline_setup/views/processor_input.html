@@ -1,0 +1,13 @@
+<div class="form-group">
+  <label>Processor Input:</label>
+  <a
+    style="float: right"
+    ng-click="size = size - 1"
+    ng-show="size > 1">collapse</a>
+  <span style="float: right" ng-hide="size === 1 || size === 3">&nbsp;/&nbsp;</span>
+  <a
+    style="float: right"
+    ng-click="size = size + 1"
+    ng-show="size < 3">expand</a>
+  <pre ng-class="{ 'full': size === 3, 'small': size === 2, 'collapsed': size === 1 }">{{ processor.inputObject | json }}</pre>
+</div>

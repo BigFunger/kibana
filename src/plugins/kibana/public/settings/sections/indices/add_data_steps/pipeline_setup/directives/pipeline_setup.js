@@ -14,6 +14,7 @@ import './failure_options';
 import './pipeline_failure_options';
 import './pipeline_details';
 import './pipeline_input';
+import './processor_input';
 import './set_focus';
 import '../processors';
 import template from '../views/pipeline_setup.html';
