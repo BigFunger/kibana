@@ -66,4 +66,8 @@ export default class Processor {
       processors: _.map(this.errorProcessorCollection.processors, processor => processor.model)
     };
   }
+
+  get output() {
+    return this.outputObject ? this.outputObject : this.errorProcessorCollection.output;
+  }
 }

@@ -81,9 +81,15 @@ export default class ProcessorCollection {
       if (index === 0) {
         processor.setInput(this.input);
       } else {
-        processor.setInput(processor.parent.outputObject);
+        //processor.setInput(processor.parent.outputObject);
+        processor.setInput(processor.parent.output);
       }
     });
+  }
+
+  get output() {
+    const lastValidProcessor = _.findLast(this.processors, (processor) => !!processor.output);
+    return lastValidProcessor ? lastValidProcessor.output : undefined;
   }
 
 }
