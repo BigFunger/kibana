@@ -6,6 +6,73 @@ export default function IngestProvider($rootScope, $http, config, $q) {
 
   const ingestAPIPrefix = '../api/kibana/ingest';
 
+  function packProcessors(processors) {
+    return _.map(processors, (processor) => {
+      const result = keysToSnakeCaseShallow(processor);
+      result.processors = packProcessors(processor.processors);
+
+      return result;
+    });
+  }
+
+  function packPipeline(pipeline) {
+    const result = keysToSnakeCaseShallow(pipeline);
+    result.processors = packProcessors(result.processors);
+    if (result.error_processors) {
+      result.error_processors = packProcessors(result.error_processors);
+    }
+
+    return result;
+  }
+
+  function unpackProcessors(processors) {
+    return _.map(processors, (processor) => {
+      const result = keysToCamelCaseShallow(processor);
+      result.processors = packProcessors(processor.processors);
+
+      return result;
+    });
+  }
+
+  function unpackPipeline(pipeline) {
+    const result = keysToCamelCaseShallow(pipeline);
+    result.processors = unpackProcessors(result.processors);
+    if (result.errorProcessors) {
+      result.errorProcessors = unpackProcessors(result.errorProcessors);
+    }
+
+    return result;
+  }
+
+  this.pipeline = {
+    save: function (pipeline) {
+      return $http.put(`${ingestAPIPrefix}/pipeline`, packPipeline(pipeline))
+      .catch(err => {
+        return $q.reject(new Error('Error saving pipeline'));
+      });
+    },
+    load: function (pipelineId) {
+      function unpack(response) {
+        return unpackPipeline(response.data);
+      }
+
+      return $http.get(`${ingestAPIPrefix}/pipeline/${pipelineId}`)
+      .then(unpack)
+      .catch(err => {
+        return $q.reject(new Error('Error fetching pipeline'));
+      });
+    },
+    delete: function () {
+
+    }
+  };
+
+  this.pipelines = {
+    load: function () {
+
+    }
+  };
+
   this.save = function (indexPattern, pipeline) {
     if (_.isEmpty(indexPattern)) {
       throw new Error('index pattern is required');
@@ -39,20 +106,12 @@ export default function IngestProvider($rootScope, $http, config, $q) {
     });
   };
 
-  this.simulate = function (pipeline) {
-    //TODO: Name these variables better!!!
-    function packProcessors(processors) {
-      return _.map(processors, (processor) => {
-        const result = keysToSnakeCaseShallow(processor);
-        result.processors = packProcessors(processor.processors);
-
-        return result;
-      });
-    }
-
-    function pack(pipeline) {
-      const result = keysToSnakeCaseShallow(pipeline);
-      result.processors = packProcessors(result.processors);
+  this.simulate = function (pipeline, input) {
+    function pack(pipeline, input) {
+      const result = {
+        pipeline: packPipeline(pipeline),
+        input: input
+      };
 
       return result;
     }
@@ -62,7 +121,8 @@ export default function IngestProvider($rootScope, $http, config, $q) {
       return data;
     }
 
-    return $http.post(`${ingestAPIPrefix}/simulate`, pack(pipeline))
+    const payload = pack(pipeline, input);
+    return $http.post(`${ingestAPIPrefix}/simulate`, payload)
     .then(unpack)
     .catch(err => {
       return $q.reject(new Error('Error simulating pipeline'));

@@ -1,8 +1,7 @@
 import Joi from 'joi';
-import * as ingestProcessorSchemas from '../processors/schemas';
-import _ from 'lodash';
+import pipelineSchema from '../pipeline/schema';
 
 export default Joi.object({
-  processors: Joi.array().items(_.values(ingestProcessorSchemas)).required().min(1),
+  pipeline: pipelineSchema,
   input: Joi.object().required()
 });

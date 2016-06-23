@@ -4,5 +4,5 @@ import pipelineSchema from '../pipeline/schema';
 
 module.exports = Joi.object({
   index_pattern: indexPatternSchema.required(),
-  pipeline: pipelineSchema
+  pipeline: pipelineSchema.required()
 });

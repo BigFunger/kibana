@@ -4,6 +4,7 @@ import ProcessorCollection from './processor_collection';
 export default class Pipeline {
 
   constructor() {
+    this.pipelineId = 'foobar';
     this.processorCollection = new ProcessorCollection();
     this.errorProcessorCollection = new ProcessorCollection();
     this.processorCollections = [];
@@ -13,14 +14,17 @@ export default class Pipeline {
     this.dirty = false;
     this.hasCompileError = false;
     this.ignoreFailure = 'index_fail';
+    this.description = '';
   }
 
   get model() {
-    const pipeline = {
-      input: this.input,
+    return {
+      pipelineId: this.pipelineId,
+      description: this.description,
+      ignoreFailure: this.ignoreFailure,
+      errorProcessors: _.map(this.errorProcessorCollection.processors, processor => processor.model),
       processors: _.map(this.processorCollection.processors, processor => processor.model)
     };
-    return pipeline;
   }
 
   setDirty() {

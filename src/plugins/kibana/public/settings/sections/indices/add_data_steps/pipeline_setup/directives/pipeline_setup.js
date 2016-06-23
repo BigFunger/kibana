@@ -15,6 +15,7 @@ import './pipeline_failure_options';
 import './pipeline_details';
 import './pipeline_input';
 import './processor_input';
+import './pipeline_crud';
 import './set_focus';
 import '../processors';
 import template from '../views/pipeline_setup.html';
@@ -55,7 +56,7 @@ app.directive('pipelineSetup', function () {
           return;
         }
 
-        return ingest.simulate(pipeline.model)
+        return ingest.simulate(pipeline.model, pipeline.input)
         .then((results) => { pipeline.applySimulateResults(results); })
         .catch(notify.error);
       }, 200);
