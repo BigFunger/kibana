@@ -14,38 +14,19 @@ export default class ProcessorCollection {
     });
 
     const collection = this;
-    _.forEach(processors, (processor) => {
-      collection.newAddExisting(processor);
+    _.forEach(processors, (processorModel) => {
+      collection.add(null, processorModel);
     });
     this.updateParents();
   }
 
-  add(ProcessorType, oldProcessor) {
-    const processors = this.processors;
-
+  add(typeId, processorModel) {
+    typeId = _.get(processorModel, 'typeId') || typeId;
+    const ProcessorType = this.ProcessorTypes[typeId];
     const counter = ProcessorCollection.counter += 1;
     const processorId = `processor_${counter}`;
-    const newProcessor = new ProcessorType(processorId, oldProcessor);
-    processors.push(newProcessor);
-
-    return newProcessor;
-  }
-
-  //TODO: Figure out how I want to do this consistantly.
-  newAddExisting(processorModel) {
-    const Type = this.ProcessorTypes[processorModel.typeId];
-    const newProcessor = this.add(Type, processorModel);
-    newProcessor.collapsed = true;
-    newProcessor.new = false;
-
-    return newProcessor;
-  }
-
-  addExisting(oldProcessor) {
-    const Type = oldProcessor.constructor;
-    const newProcessor = this.add(Type, oldProcessor.model);
-    newProcessor.collapsed = true;
-    newProcessor.new = false;
+    const newProcessor = new ProcessorType(processorId, processorModel);
+    this.processors.push(newProcessor);
 
     return newProcessor;
   }
