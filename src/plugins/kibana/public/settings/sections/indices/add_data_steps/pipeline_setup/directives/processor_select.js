@@ -15,8 +15,7 @@ function buildProcessorTypeList(enabledProcessorTypeIds) {
       return {
         typeId: instance.typeId,
         title: instance.title,
-        helpText: instance.helpText,
-        Type
+        helpText: instance.helpText
       };
     })
     .compact()
@@ -30,7 +29,7 @@ app.directive('processorSelect', function ($timeout) {
     restrict: 'E',
     template: template,
     scope: {
-      processorType: '='
+      processorTypeId: '='
     },
     link: function ($scope, $element) {
       $timeout(() => {
@@ -51,7 +50,7 @@ app.directive('processorSelect', function ($timeout) {
       $scope.$watch('selectedItem.value', (newVal) => {
         if (!newVal) return;
 
-        $scope.processorType = newVal.Type;
+        $scope.processorTypeId = newVal.typeId;
       });
 
       $scope.$watch('processorType', processorType => {

@@ -26,6 +26,12 @@ export default class ProcessorCollection {
     const counter = ProcessorCollection.counter += 1;
     const processorId = `processor_${counter}`;
     const newProcessor = new ProcessorType(processorId, processorModel);
+
+    if (processorModel) {
+      newProcessor.new = false;
+      newProcessor.collapsed = true;
+    }
+
     this.processors.push(newProcessor);
 
     return newProcessor;

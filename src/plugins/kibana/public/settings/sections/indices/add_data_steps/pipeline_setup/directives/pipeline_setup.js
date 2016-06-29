@@ -54,13 +54,13 @@ app.directive('pipelineSetup', function () {
         pipeline.dirty = true;
       });
 
-      $scope.$watch('processorType', processorType => {
-        if (!processorType) return;
+      $scope.$watch('processorTypeId', processorTypeId => {
+        if (!processorTypeId) return;
 
         const pipeline = $scope.pipeline;
 
-        pipeline.activeProcessorCollection.add(processorType.id);
-        $scope.processorType = null;
+        pipeline.activeProcessorCollection.add(processorTypeId);
+        $scope.processorTypeId = null;
       });
 
       $scope.$watch('pipeline.dirty', simulatePipeline);
