@@ -9,7 +9,7 @@ define(function (require) {
       type_id: 'geoip',
       source_field: 'ip',
       target_field: 'geoip',
-      ignore_failure: false
+      failure_action: false
     }],
     input: { ip: '74.125.21.103' }
   };
@@ -32,7 +32,7 @@ define(function (require) {
   //             type_id: 'geoip',
   //             source_field: 42,
   //             target_field: 'geoip',
-  //             ignore_failure: false
+  //             failure_action: false
   //           }]
   //         })
   //         .expect(400)
@@ -62,7 +62,7 @@ define(function (require) {
   //           typeId: 'geoip',
   //           sourceField: 'ip',
   //           targetField: 'geoip',
-  //           ignore_failure: false
+  //           failure_action: false
   //         }],
   //         input: { ip: '74.125.21.103' }
   //       })

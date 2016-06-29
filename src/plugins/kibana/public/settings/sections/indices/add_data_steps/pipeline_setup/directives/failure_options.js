@@ -27,7 +27,7 @@ app.directive('failureOptions', function () {
         pipeline.pushProcessorCollection(processor.errorProcessorCollection);
       };
 
-      $scope.$watch('processor.ignoreFailure', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.failureAction', () => { pipeline.setDirty(); });
     }
   };
 });

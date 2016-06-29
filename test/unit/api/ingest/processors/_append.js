@@ -9,7 +9,7 @@ define(function (require) {
       type_id: 'append',
       target_field: 'foo',
       values: [ 'value1', 'value2' ],
-      ignore_failure: false
+      failure_action: false
     }],
     input: {}
   };
@@ -28,7 +28,7 @@ define(function (require) {
               type_id: 'append',
               values: [ 'value1', 'value2' ],
               target_field: 42,
-              ignore_failure: false
+              failure_action: false
             }]
           })
           .expect(400)
@@ -58,7 +58,7 @@ define(function (require) {
             typeId: 'append',
             targetField: 'foo',
             value: [ 'value1', 'value2' ],
-            ignore_failure: false
+            failure_action: false
           }],
           input: {}
         })

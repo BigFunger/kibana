@@ -9,7 +9,7 @@ define(function (require) {
       type_id: 'split',
       source_field: 'foo',
       separator: ',',
-      ignore_failure: false
+      failure_action: false
     }],
     input: { foo: 'foo,bar,baz' }
   };
@@ -27,7 +27,7 @@ define(function (require) {
               type_id: 'split',
               source_field: 1234,
               separator: ',',
-              ignore_failure: false
+              failure_action: false
             }],
             input: { foo: 'foo,bar,baz' }
           })
@@ -58,7 +58,7 @@ define(function (require) {
             typeId: 'split',
             sourceField: 'foo',
             separator: ',',
-            ignore_failure: false
+            failure_action: false
           }],
           input: { foo: 'foo,bar,baz' }
         })

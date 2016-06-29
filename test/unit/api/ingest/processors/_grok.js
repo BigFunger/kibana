@@ -9,7 +9,7 @@ define(function (require) {
       type_id: 'grok',
       source_field: 'foo',
       pattern: '%{GREEDYDATA:bar} - %{GREEDYDATA:baz}',
-      ignore_failure: false
+      failure_action: false
     }],
     input: { foo: 'value1 - value2' }
   };
@@ -28,7 +28,7 @@ define(function (require) {
               type_id: 'grok',
               source_field: 123,
               pattern: '%{GREEDYDATA:bar} - %{GREEDYDATA:baz}',
-              ignore_failure: false
+              failure_action: false
             }],
           })
           .expect(400)
@@ -63,7 +63,7 @@ define(function (require) {
             typeId: 'grok',
             sourceField: 'foo',
             pattern: '%{GREEDYDATA:bar} - %{GREEDYDATA:baz}',
-            ignore_failure: false
+            failure_action: false
           }],
           input: { foo: 'value1 - value2' }
         })

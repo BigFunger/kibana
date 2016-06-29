@@ -15,7 +15,7 @@ export default class Pipeline {
     return {
       pipelineId: this.pipelineId,
       description: this.description,
-      ignoreFailure: this.ignoreFailure,
+      failureAction: this.failureAction,
       errorProcessors: _.map(this.errorProcessorCollection.processors, processor => processor.model),
       processors: _.map(this.processorCollection.processors, processor => processor.model)
     };
@@ -24,7 +24,7 @@ export default class Pipeline {
   set model(newModel) {
     this.pipelineId = newModel.pipelineId || '';
     this.description = newModel.description || '';
-    this.ignoreFailure = newModel.ignoreFailure || 'index_fail';
+    this.failureAction = newModel.failureAction || 'index_fail';
 
     this.processorCollection = new ProcessorCollection(newModel.processors);
     this.errorProcessorCollection = new ProcessorCollection(newModel.errorProcessors);

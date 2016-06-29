@@ -11,7 +11,7 @@ export default {
       })
     };
 
-    if (pipelineApiDocument.ignore_failure === 'on_error') {
+    if (pipelineApiDocument.failure_action === 'on_error') {
       result.on_failure = _.map(pipelineApiDocument.error_processors, (processor) => {
         const processorConverter = processorConverters[processor.type_id];
         return processorConverter.kibanaToEs(processor);
@@ -33,14 +33,14 @@ export default {
     });
 
     if (pipelineEsDocument.config.on_failure) {
-      result.ignore_failure = 'on_error';
+      result.failure_action = 'on_error';
       result.error_processors = _.map(pipelineEsDocument.config.on_failure, (processor) => {
         const typeId = _.keys(processor)[0];
         const processorConverter = processorConverters[typeId];
         return processorConverter.esToKibana(processor);
       });
     } else {
-      result.ignore_failure = 'index_fail';
+      result.failure_action = 'index_fail';
     }
 
     return result;

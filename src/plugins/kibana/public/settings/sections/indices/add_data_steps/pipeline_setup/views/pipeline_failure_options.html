@@ -4,13 +4,13 @@
   <div class="controls">
     <select
       class="form-control"
-      ng-model="pipeline.ignoreFailure"
+      ng-model="pipeline.failureAction"
       ng-options="option.value as option.label for option in options">
     </select>
 
     <button
       class="btn btn-primary"
-      ng-show="pipeline.ignoreFailure === 'on_error'"
+      ng-show="pipeline.failureAction === 'on_error'"
       ng-click="defineFailureProcessors()">
       Define processors
     </button>

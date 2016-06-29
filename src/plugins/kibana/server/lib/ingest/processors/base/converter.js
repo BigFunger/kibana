@@ -7,11 +7,11 @@ export default {
       tag: processorApiDocument.processor_id
     };
 
-    if (processorApiDocument.ignore_failure === 'ignore_error') {
+    if (processorApiDocument.failure_action === 'ignore_error') {
       subObject.ignore_failure = true;
     }
 
-    if (processorApiDocument.ignore_failure === 'on_error') {
+    if (processorApiDocument.failure_action === 'on_error') {
       subObject.on_failure = _.map(processorApiDocument.processors, (processor) => {
         const processorConverter = processorConverters[processor.type_id];
         return processorConverter.kibanaToEs(processor);
@@ -30,8 +30,7 @@ export default {
 
     const result = {
       type_id: typeId,
-      processor_id: subObject.tag,
-      ignore_failure: subObject.ignore_failure
+      processor_id: subObject.tag
     };
 
     result.processors = _.map(subObject.on_failure, (processor) => {
@@ -41,11 +40,11 @@ export default {
     });
 
     if (subObject.on_failure) {
-      result.ignore_failure = 'on_error';
+      result.failure_action = 'on_error';
     } else if (subObject.ignore_failure === true) {
-      result.ignore_failure = 'ignore_error';
+      result.failure_action = 'ignore_error';
     } else {
-      result.ignore_failure = 'index_fail';
+      result.failure_action = 'index_fail';
     }
 
     return result;

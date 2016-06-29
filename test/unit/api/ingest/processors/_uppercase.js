@@ -8,7 +8,7 @@ define(function (require) {
       processor_id: 'processor1',
       type_id: 'uppercase',
       source_field: 'foo',
-      ignore_failure: false
+      failure_action: false
     }],
     input: { foo: 'bar baz' }
   };
@@ -25,7 +25,7 @@ define(function (require) {
               processor_id: 'processor1',
               type_id: 'uppercase',
               source_field: 1234,
-              ignore_failure: false
+              failure_action: false
             }],
             input: { foo: 'bar baz' }
           })
@@ -55,7 +55,7 @@ define(function (require) {
             processorId: 'processor1',
             typeId: 'uppercase',
             sourceField: 'foo',
-            ignore_failure: false
+            failure_action: false
           }],
           input: { foo: 'bar baz' }
         })

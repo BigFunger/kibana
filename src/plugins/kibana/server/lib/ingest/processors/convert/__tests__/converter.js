@@ -21,7 +21,7 @@ describe('ingest', () => {
               source_field: 'foo_field',
               target_field: 'foo_target_field',
               type: 'auto',
-              ignore_failure: 'foo_ignore_failure'
+              failure_action: 'foo_failure_action'
             };
 
             expected = {
@@ -30,7 +30,7 @@ describe('ingest', () => {
                 field: 'foo_field',
                 target_field: 'foo_target_field',
                 type: 'auto',
-                ignore_failure: 'foo_ignore_failure'
+                failure_action: 'foo_failure_action'
               }
             };
           });
@@ -83,7 +83,7 @@ describe('ingest', () => {
                 field: 'foo_field',
                 target_field: 'foo_target_field',
                 type: 'auto',
-                ignore_failure: 'foo_ignore_failure'
+                failure_action: 'foo_failure_action'
               }
             };
 
@@ -93,7 +93,7 @@ describe('ingest', () => {
               source_field: 'foo_field',
               target_field: 'foo_target_field',
               type: 'auto',
-              ignore_failure: 'foo_ignore_failure'
+              failure_action: 'foo_failure_action'
             };
           });
 

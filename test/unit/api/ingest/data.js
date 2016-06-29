@@ -29,7 +29,7 @@ module.exports = function createTestData() {
       type_id: 'set',
       target_field: 'foo',
       value: 'bar',
-      ignore_failure: false
+      failure_action: false
     }]
   };
 };

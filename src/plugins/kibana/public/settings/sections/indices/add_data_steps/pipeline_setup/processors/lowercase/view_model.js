@@ -9,8 +9,7 @@ export class Lowercase extends Processor {
       'Lowercase',
       `Converts a string to its lowercase equivalent.`,
       {
-        sourceField: '',
-        ignoreFailure: 'index_fail'
+        sourceField: ''
       },
       model
     );

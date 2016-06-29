@@ -10,7 +10,7 @@ define(function (require) {
       source_field: 'foo',
       target_field: 'foo',
       type: 'auto',
-      ignore_failure: false
+      failure_action: false
     }],
     input: { foo: '1234' }
   };
@@ -30,7 +30,7 @@ define(function (require) {
               value: 'auto',
               source_field: 42,
               target_field: 'foo',
-              ignore_failure: false
+              failure_action: false
             }]
           })
           .expect(400)
@@ -61,7 +61,7 @@ define(function (require) {
             sourceField: 'foo',
             targetField: 'foo',
             type: 'string',
-            ignore_failure: false
+            failure_action: false
           }],
           input: {}
         })

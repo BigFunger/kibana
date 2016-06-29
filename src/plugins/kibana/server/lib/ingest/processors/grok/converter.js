@@ -14,13 +14,6 @@ export default {
   esToKibana: function (processorEsDocument) {
     const result = baseConverter.esToKibana(processorEsDocument, 'grok');
 
-    console.log('****************************************');
-    console.log(JSON.stringify(processorEsDocument));
-    console.log('****************************************');
-    console.log(JSON.stringify(result));
-    console.log('****************************************');
-    console.log('');
-
     let pattern = '';
     if (processorEsDocument.grok.patterns.length > 0) {
       pattern = processorEsDocument.grok.patterns[0];

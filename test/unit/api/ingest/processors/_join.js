@@ -9,7 +9,7 @@ define(function (require) {
       type_id: 'join',
       source_field: 'foo',
       separator: ' ',
-      ignore_failure: false
+      failure_action: false
     }],
     input: { foo: ['value1', 'value2'] }
   };
@@ -27,7 +27,7 @@ define(function (require) {
               type_id: 'join',
               source_field: 1234,
               separator: ' ',
-              ignore_failure: false
+              failure_action: false
             }],
             input: { foo: ['value1', 'value2'] }
           })
@@ -58,7 +58,7 @@ define(function (require) {
             typeId: 'join',
             sourceField: 'foo',
             separator: ' ',
-            ignore_failure: false
+            failure_action: false
           }],
           input: { foo: ['value1', 'value2'] }
         })

@@ -10,7 +10,7 @@ define(function (require) {
       source_field: 'foo',
       pattern: 'bar',
       replacement: 'baz',
-      ignore_failure: false
+      failure_action: false
     }],
     input: { foo: 'bar' }
   };
@@ -30,7 +30,7 @@ define(function (require) {
               source_field: 42,
               pattern: 'bar',
               replacement: 'baz',
-              ignore_failure: false
+              failure_action: false
             }]
           })
           .expect(400)
@@ -61,7 +61,7 @@ define(function (require) {
             sourceField: 'foo',
             pattern: 'bar',
             replacement: 'baz',
-            ignore_failure: false
+            failure_action: false
           }],
           input: { foo: 'bar' }
         })

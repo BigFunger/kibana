@@ -9,7 +9,7 @@ define(function (require) {
       type_id: 'set',
       target_field: 'foo',
       value: 'bar',
-      ignore_failure: false
+      failure_action: false
     }],
     input: {}
   };
@@ -28,7 +28,7 @@ define(function (require) {
               type_id: 'set',
               value: 'bar',
               target_field: 42,
-              ignore_failure: false
+              failure_action: false
             }]
           })
           .expect(400)
@@ -58,7 +58,7 @@ define(function (require) {
             typeId: 'set',
             targetField: 'foo',
             value: 'bar',
-            ignore_failure: false
+            failure_action: false
           }],
           input: {}
         })

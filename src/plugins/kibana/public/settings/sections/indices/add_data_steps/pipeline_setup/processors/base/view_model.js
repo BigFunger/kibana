@@ -19,7 +19,7 @@ export default class Processor {
     this.new = true;
     this.state = 'not initialized';
 
-    defaultModel.ignoreFailure = 'index_fail';
+    defaultModel.failureAction = 'index_fail';
 
     _.defaults(
       this,
@@ -53,9 +53,9 @@ export default class Processor {
       this.state = 'valid';
     } else if (!this.outputObject && !this.error) {
       this.state = 'no result';
-    } else if (this.error && this.ignoreFailure === 'ignore_error') {
+    } else if (this.error && this.failureAction === 'ignore_error') {
       this.state = 'error recover';
-    } else if (this.error && this.ignoreFailure === 'on_error' &&
+    } else if (this.error && this.failureAction === 'on_error' &&
         this.errorProcessorCollection.processors.length > 0) {
       this.state = 'error recover';
     } else if (this.error && this.error.compile) {
@@ -69,7 +69,7 @@ export default class Processor {
     return {
       processorId: this.processorId,
       typeId: this.typeId,
-      ignoreFailure: this.ignoreFailure,
+      failureAction: this.failureAction,
       processors: _.map(this.errorProcessorCollection.processors, processor => processor.model)
     };
   }

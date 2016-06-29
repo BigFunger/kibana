@@ -53,7 +53,9 @@ export default function IngestProvider($rootScope, $http, config, $q) {
     },
     load: function (pipelineId) {
       function unpack(response) {
-        return unpackPipeline(response.data);
+        const result = unpackPipeline(response.data);
+        console.log(response, result);
+        return result;
       }
 
       return $http.get(`${ingestAPIPrefix}/pipeline/${pipelineId}`)

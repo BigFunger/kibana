@@ -9,7 +9,7 @@ define(function (require) {
       type_id: 'rename',
       source_field: 'foo',
       target_field: 'bar',
-      ignore_failure: false
+      failure_action: false
     }],
     input: { foo: 'value1' }
   };
@@ -27,7 +27,7 @@ define(function (require) {
               type_id: 'rename',
               source_field: 1234,
               target_field: 'bar',
-              ignore_failure: false
+              failure_action: false
             }],
             input: { foo: 'value1' }
           })
@@ -58,7 +58,7 @@ define(function (require) {
             typeId: 'rename',
             sourceField: 'foo',
             targetField: 'bar',
-            ignore_failure: false
+            failure_action: false
           }],
           input: { foo: 'value1' }
         })

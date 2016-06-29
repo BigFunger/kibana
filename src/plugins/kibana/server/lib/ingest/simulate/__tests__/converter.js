@@ -10,7 +10,7 @@ describe('ingestSimulateApiKibanaToEsConverter', function () {
 
       function buildSamplePipeline(input) {
         return {
-          processors: [ { processor_id: 'processor1', type_id: 'set', target_field: 'bar', value: 'foo', ignore_failure: false } ],
+          processors: [ { processor_id: 'processor1', type_id: 'set', target_field: 'bar', value: 'foo', failure_action: false } ],
           input: input
         };
       }
@@ -23,7 +23,7 @@ describe('ingestSimulateApiKibanaToEsConverter', function () {
                 field: 'bar',
                 tag: 'processor1',
                 value: 'foo',
-                ignore_failure: false
+                failure_action: false
               }
             }]
           },
@@ -52,8 +52,8 @@ describe('ingestSimulateApiKibanaToEsConverter', function () {
     it('handles multiple processors', function () {
       const pipeline = {
         processors: [
-          { processor_id: 'processor1', type_id: 'set', target_field: 'bar', value: 'foo', ignore_failure: false },
-          { processor_id: 'processor2', type_id: 'set', target_field: 'bar', value: 'foo', ignore_failure: false },
+          { processor_id: 'processor1', type_id: 'set', target_field: 'bar', value: 'foo', failure_action: false },
+          { processor_id: 'processor2', type_id: 'set', target_field: 'bar', value: 'foo', failure_action: false },
         ],
         input: {}
       };
@@ -65,7 +65,7 @@ describe('ingestSimulateApiKibanaToEsConverter', function () {
                 field: 'bar',
                 tag: 'processor1',
                 value: 'foo',
-                ignore_failure: false
+                failure_action: false
               }
             },
             {
@@ -73,7 +73,7 @@ describe('ingestSimulateApiKibanaToEsConverter', function () {
                 field: 'bar',
                 tag: 'processor2',
                 value: 'foo',
-                ignore_failure: false
+                failure_action: false
               }
             }
           ]

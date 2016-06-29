@@ -19,7 +19,7 @@ describe('ingest', () => {
               processor_id: 'foo_processor_id',
               target_field: 'foo_target_field',
               values: 'foo_values',
-              ignore_failure: 'foo_ignore_failure'
+              failure_action: 'foo_failure_action'
             };
 
             expected = {
@@ -27,7 +27,7 @@ describe('ingest', () => {
                 tag: 'foo_processor_id',
                 field: 'foo_target_field',
                 value: 'foo_values',
-                ignore_failure: 'foo_ignore_failure'
+                failure_action: 'foo_failure_action'
               }
             };
           });
@@ -57,7 +57,7 @@ describe('ingest', () => {
                 tag: 'foo_tag',
                 field: 'foo_field',
                 value: 'foo_value',
-                ignore_failure: 'foo_ignore_failure'
+                failure_action: 'foo_failure_action'
               }
             };
 
@@ -66,7 +66,7 @@ describe('ingest', () => {
               processor_id: 'foo_tag',
               target_field: 'foo_field',
               values: 'foo_value',
-              ignore_failure: 'foo_ignore_failure'
+              failure_action: 'foo_failure_action'
             };
           });
 

@@ -18,14 +18,14 @@ describe('ingest', () => {
             source = {
               processor_id: 'foo_processor_id',
               source_field: 'foo_source_field',
-              ignore_failure: 'foo_ignore_failure'
+              failure_action: 'foo_failure_action'
             };
 
             expected = {
               uppercase: {
                 tag: 'foo_processor_id',
                 field: 'foo_source_field',
-                ignore_failure: 'foo_ignore_failure'
+                failure_action: 'foo_failure_action'
               }
             };
           });
@@ -54,7 +54,7 @@ describe('ingest', () => {
               uppercase: {
                 tag: 'foo_tag',
                 field: 'foo_field',
-                ignore_failure: 'foo_ignore_failure'
+                failure_action: 'foo_failure_action'
               }
             };
 
@@ -62,7 +62,7 @@ describe('ingest', () => {
               typeId: 'uppercase',
               processor_id: 'foo_tag',
               source_field: 'foo_field',
-              ignore_failure: 'foo_ignore_failure'
+              failure_action: 'foo_failure_action'
             };
           });
 
