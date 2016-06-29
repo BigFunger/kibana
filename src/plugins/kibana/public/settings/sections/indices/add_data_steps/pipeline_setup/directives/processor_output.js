@@ -1,15 +1,15 @@
 import uiModules from 'ui/modules';
 import jsondiffpatch from '@bigfunger/jsondiffpatch';
-import '../styles/_output_preview.less';
-import outputPreviewTemplate from '../views/output_preview.html';
+import '../styles/_processor_output.less';
+import template from '../views/processor_output.html';
 
 const htmlFormat = jsondiffpatch.formatters.html.format;
 const app = uiModules.get('kibana');
 
-app.directive('outputPreview', function () {
+app.directive('processorOutput', function () {
   return {
     restrict: 'E',
-    template: outputPreviewTemplate,
+    template: template,
     scope: {
       processor: '='
     },

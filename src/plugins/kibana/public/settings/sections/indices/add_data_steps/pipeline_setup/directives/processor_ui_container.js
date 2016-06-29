@@ -2,7 +2,7 @@ import uiModules from 'ui/modules';
 import angular from 'angular';
 import _ from 'lodash';
 import '../styles/_processor_ui_container.less';
-import './output_preview';
+import './processor_output';
 import './processor_ui_container_header';
 import template from '../views/processor_ui_container.html';
 
