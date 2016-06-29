@@ -20,18 +20,15 @@ export default {
     return result;
   },
   esToKibana: function (processorEsDocument) {
-    if (!_.has(processorEsDocument, 'geoip')) {
-      throw new Error('Elasticsearch processor document missing [geoip] property');
-    }
+    const result = baseConverter.esToKibana(processorEsDocument, 'geoip');
 
-    return {
-      typeId: 'geoip',
-      processor_id: processorEsDocument.geoip.tag,
+    _.assign(result, {
       source_field: processorEsDocument.geoip.field,
       target_field: processorEsDocument.geoip.target_field,
       database_file: processorEsDocument.geoip.database_file,
-      database_fields: processorEsDocument.geoip.properties,
-      ignore_failure: processorEsDocument.geoip.ignore_failure
-    };
+      database_fields: processorEsDocument.geoip.properties
+    });
+
+    return result;
   }
 };

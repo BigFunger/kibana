@@ -12,16 +12,13 @@ export default {
     return result;
   },
   esToKibana: function (processorEsDocument) {
-    if (!_.has(processorEsDocument, 'join')) {
-      throw new Error('Elasticsearch processor document missing [join] property');
-    }
+    const result = baseConverter.esToKibana(processorEsDocument, 'join');
 
-    return {
-      typeId: 'join',
-      processor_id: processorEsDocument.join.tag,
+    _.assign(result, {
       source_field: processorEsDocument.join.field,
-      separator: processorEsDocument.join.separator,
-      ignore_failure: processorEsDocument.join.ignore_failure
-    };
+      separator: processorEsDocument.join.separator
+    });
+
+    return result;
   }
 };

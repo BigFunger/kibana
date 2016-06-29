@@ -11,15 +11,12 @@ export default {
     return result;
   },
   esToKibana: function (processorEsDocument) {
-    if (!_.has(processorEsDocument, 'uppercase')) {
-      throw new Error('Elasticsearch processor document missing [uppercase] property');
-    }
+    const result = baseConverter.esToKibana(processorEsDocument, 'uppercase');
 
-    return {
-      typeId: 'uppercase',
-      processor_id: processorEsDocument.uppercase.tag,
-      source_field: processorEsDocument.uppercase.field,
-      ignore_failure: processorEsDocument.uppercase.ignore_failure
-    };
+    _.assign(result, {
+      source_field: processorEsDocument.uppercase.field
+    });
+
+    return result;
   }
 };

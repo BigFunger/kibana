@@ -17,6 +17,8 @@ app.directive('pipelineCrud', function () {
       const ingest = Private(IngestProvider);
       const notify = new Notifier({ location: `Ingest Pipeline Setup` });
 
+      $scope.pipelineId = 'foobar';
+
       $scope.save = function () {
         return ingest.pipeline.save(pipeline.model)
         .then((result) => {
@@ -26,11 +28,11 @@ app.directive('pipelineCrud', function () {
       };
 
       $scope.load = function () {
-        const pipelineId = 'foobar';
-
-        return ingest.pipeline.load(pipelineId)
+        return ingest.pipeline.load($scope.pipelineId)
         .then((result) => {
-          notify.info(`Pipeline '${result.pipelineId}' loaded!`);
+          //notify.info(`Pipeline '${result.pipelineId}' loaded!`);
+          //console.log(result);
+          pipeline.model = result;
           //TODO: Load this model into the pipeline view_model.
         })
         .catch(notify.error);

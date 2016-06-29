@@ -7,23 +7,13 @@ export class Gsub extends Processor {
       processorId,
       'gsub',
       'Gsub',
-      `Converts a string field by applying a regular expression and a replacement.`
-    );
-
-    _.defaults(
-      this,
-      _.pick(model, [
-        'sourceField',
-        'pattern',
-        'replacement',
-        'ignoreFailure'
-      ]),
+      `Converts a string field by applying a regular expression and a replacement.`,
       {
         sourceField: '',
         pattern: '',
-        replacement: '',
-        ignoreFailure: 'index_fail'
-      }
+        replacement: ''
+      },
+      model
     );
   }
 
@@ -43,3 +33,5 @@ export class Gsub extends Processor {
     );
   }
 };
+
+Gsub.id = 'gsub';

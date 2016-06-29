@@ -12,16 +12,13 @@ export default {
     return result;
   },
   esToKibana: function (processorEsDocument) {
-    if (!_.has(processorEsDocument, 'set')) {
-      throw new Error('Elasticsearch processor document missing [set] property');
-    }
+    const result = baseConverter.esToKibana(processorEsDocument, 'set');
 
-    return {
-      typeId: 'set',
-      processor_id: processorEsDocument.set.tag,
+    _.assign(result, {
       target_field: processorEsDocument.set.field,
-      value: processorEsDocument.set.value,
-      ignore_failure: processorEsDocument.set.ignore_failure
-    };
+      value: processorEsDocument.set.value
+    });
+
+    return result;
   }
 };

@@ -4,17 +4,19 @@ import ProcessorCollection from './processor_collection';
 export default class Pipeline {
 
   constructor() {
-    this.pipelineId = 'foobar';
-    this.processorCollection = new ProcessorCollection();
-    this.errorProcessorCollection = new ProcessorCollection();
-    this.processorCollections = [];
-    this.activeProcessorCollection = this.processorCollection;
+    // this.pipelineId = 'foobar';
+    // this.processorCollection = new ProcessorCollection();
+    // this.errorProcessorCollection = new ProcessorCollection();
+    // this.processorCollections = [];
+    // this.activeProcessorCollection = this.processorCollection;
     this.input = {};
     this.output = undefined;
     this.dirty = false;
     this.hasCompileError = false;
-    this.ignoreFailure = 'index_fail';
-    this.description = '';
+    //this.ignoreFailure = 'index_fail';
+    //this.description = '';
+
+    this.model = {};
   }
 
   get model() {
@@ -25,6 +27,17 @@ export default class Pipeline {
       errorProcessors: _.map(this.errorProcessorCollection.processors, processor => processor.model),
       processors: _.map(this.processorCollection.processors, processor => processor.model)
     };
+  }
+
+  set model(newModel) {
+    this.pipelineId = newModel.pipelineId || 'foobar';
+    this.description = newModel.description || '';
+    this.ignoreFailure = newModel.ignoreFailure || 'index_fail';
+
+    this.processorCollection = new ProcessorCollection(newModel.processors);
+    this.errorProcessorCollection = new ProcessorCollection(newModel.errorProcessors);
+    this.processorCollections = [];
+    this.activeProcessorCollection = this.processorCollection;
   }
 
   setDirty() {
@@ -106,6 +119,7 @@ function updateProcessorOutputs(pipeline, simulateResults) {
 
     const output = _.get(result, 'output');
     const error = _.get(result, 'error');
+
     processor.setOutput(output, error);
   });
 }

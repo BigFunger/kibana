@@ -7,19 +7,11 @@ export class Trim extends Processor {
       processorId,
       'trim',
       'Trim',
-      `Trims whitespace from field.`
-    );
-
-    _.defaults(
-      this,
-      _.pick(model, [
-        'sourceField',
-        'ignoreFailure'
-      ]),
+      `Trims whitespace from field.`,
       {
-        sourceField: '',
-        ignoreFailure: 'index_fail'
-      }
+        sourceField: ''
+      },
+      model
     );
   }
 
@@ -37,3 +29,5 @@ export class Trim extends Processor {
     );
   }
 };
+
+Trim.id = 'trim';

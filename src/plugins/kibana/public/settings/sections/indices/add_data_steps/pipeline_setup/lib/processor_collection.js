@@ -1,10 +1,22 @@
 import _ from 'lodash';
+import * as ProcessorViewModels from '../processors/view_models';
+
+const ProcessorTypes = {};
+_.forIn(ProcessorViewModels, (ViewModel) => {
+  ProcessorTypes[ViewModel.id] = ViewModel;
+});
 
 export default class ProcessorCollection {
 
   constructor(processors) {
     this.processors = [];
     this.input = {};
+
+    const collection = this;
+    _.forEach(processors, (processor) => {
+      collection.newAddExisting(processor);
+    });
+    this.updateParents();
   }
 
   add(ProcessorType, oldProcessor) {
@@ -14,6 +26,16 @@ export default class ProcessorCollection {
     const processorId = `processor_${counter}`;
     const newProcessor = new ProcessorType(processorId, oldProcessor);
     processors.push(newProcessor);
+
+    return newProcessor;
+  }
+
+  //TODO: Figure out how I want to do this consistantly.
+  newAddExisting(processorModel) {
+    const Type = ProcessorTypes[processorModel.typeId];
+    const newProcessor = this.add(Type, processorModel);
+    newProcessor.collapsed = true;
+    newProcessor.new = false;
 
     return newProcessor;
   }

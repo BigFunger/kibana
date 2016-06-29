@@ -7,19 +7,12 @@ export class Lowercase extends Processor {
       processorId,
       'lowercase',
       'Lowercase',
-      `Converts a string to its lowercase equivalent.`
-    );
-
-    _.defaults(
-      this,
-      _.pick(model, [
-        'sourceField',
-        'ignoreFailure'
-      ]),
+      `Converts a string to its lowercase equivalent.`,
       {
         sourceField: '',
         ignoreFailure: 'index_fail'
-      }
+      },
+      model
     );
   }
 
@@ -37,3 +30,5 @@ export class Lowercase extends Processor {
     );
   }
 };
+
+Lowercase.id = 'lowercase';

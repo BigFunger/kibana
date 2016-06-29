@@ -7,19 +7,11 @@ export class Remove extends Processor {
       processorId,
       'remove',
       'Remove',
-      `Removes an existing field.`
-    );
-
-    _.defaults(
-      this,
-      _.pick(model, [
-        'sourceField',
-        'ignoreFailure'
-      ]),
+      `Removes an existing field.`,
       {
-        sourceField: '',
-        ignoreFailure: 'index_fail'
-      }
+        sourceField: ''
+      },
+      model
     );
   }
 
@@ -37,3 +29,5 @@ export class Remove extends Processor {
     );
   }
 };
+
+Remove.id = 'remove';

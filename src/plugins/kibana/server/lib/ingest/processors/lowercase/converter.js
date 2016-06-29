@@ -11,15 +11,12 @@ export default {
     return result;
   },
   esToKibana: function (processorEsDocument) {
-    if (!_.has(processorEsDocument, 'lowercase')) {
-      throw new Error('Elasticsearch processor document missing [lowercase] property');
-    }
+    const result = baseConverter.esToKibana(processorEsDocument, 'lowercase');
 
-    return {
-      typeId: 'lowercase',
-      processor_id: processorEsDocument.lowercase.tag,
-      source_field: processorEsDocument.lowercase.field,
-      ignore_failure: processorEsDocument.lowercase.ignore_failure
-    };
+    _.assign(result, {
+      source_field: processorEsDocument.lowercase.field
+    });
+
+    return result;
   }
 };

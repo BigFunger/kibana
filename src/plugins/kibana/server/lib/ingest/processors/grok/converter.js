@@ -12,21 +12,25 @@ export default {
     return result;
   },
   esToKibana: function (processorEsDocument) {
-    if (!_.has(processorEsDocument, 'grok')) {
-      throw new Error('Elasticsearch processor document missing [grok] property');
-    }
+    const result = baseConverter.esToKibana(processorEsDocument, 'grok');
+
+    console.log('****************************************');
+    console.log(JSON.stringify(processorEsDocument));
+    console.log('****************************************');
+    console.log(JSON.stringify(result));
+    console.log('****************************************');
+    console.log('');
 
     let pattern = '';
     if (processorEsDocument.grok.patterns.length > 0) {
       pattern = processorEsDocument.grok.patterns[0];
     }
 
-    return {
-      typeId: 'grok',
-      processor_id: processorEsDocument.grok.tag,
+    _.assign(result, {
       source_field: processorEsDocument.grok.field,
-      pattern: pattern,
-      ignore_failure: processorEsDocument.grok.ignore_failure
-    };
+      pattern: pattern
+    });
+
+    return result;
   }
 };

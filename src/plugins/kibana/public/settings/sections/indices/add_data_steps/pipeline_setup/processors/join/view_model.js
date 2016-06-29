@@ -8,21 +8,12 @@ export class Join extends Processor {
       'join',
       'Join',
       `Joins each element of an array into a single string using a
-separator character between each element. `
-    );
-
-    _.defaults(
-      this,
-      _.pick(model, [
-        'sourceField',
-        'separator',
-        'ignoreFailure'
-      ]),
+separator character between each element. `,
       {
         sourceField: '',
-        separator: '',
-        ignoreFailure: 'index_fail'
-      }
+        separator: ''
+      },
+      model
     );
   }
 
@@ -42,3 +33,5 @@ separator character between each element. `
     );
   }
 };
+
+Join.id = 'join';

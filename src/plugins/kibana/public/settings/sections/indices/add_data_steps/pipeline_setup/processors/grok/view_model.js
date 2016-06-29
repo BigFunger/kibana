@@ -11,21 +11,12 @@ export class Grok extends Processor {
       `Extracts structured fields out of a single text field within a document.
 You choose which field to extract matched fields from, as well as the
 grok pattern you expect will match. A grok pattern is like a regular
-expression that supports aliased expressions that can be reused.`
-    );
-
-    _.defaults(
-      this,
-      _.pick(model, [
-        'sourceField',
-        'pattern',
-        'ignoreFailure'
-      ]),
+expression that supports aliased expressions that can be reused.`,
       {
         sourceField: '',
-        pattern: '',
-        ignoreFailure: 'index_fail'
-      }
+        pattern: ''
+      },
+      model
     );
   }
 
@@ -49,3 +40,5 @@ expression that supports aliased expressions that can be reused.`
     );
   }
 };
+
+Grok.id = 'grok';

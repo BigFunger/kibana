@@ -28,7 +28,7 @@ export default function IngestProvider($rootScope, $http, config, $q) {
   function unpackProcessors(processors) {
     return _.map(processors, (processor) => {
       const result = keysToCamelCaseShallow(processor);
-      result.processors = packProcessors(processor.processors);
+      result.processors = unpackProcessors(processor.processors);
 
       return result;
     });

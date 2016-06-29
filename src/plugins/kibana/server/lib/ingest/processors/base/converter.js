@@ -22,6 +22,32 @@ export default {
     return result;
   },
   esToKibana: function (processorEsDocument, typeId) {
-    throw new Error('Not Implemented.');
+    if (!_.has(processorEsDocument, typeId)) {
+      throw new Error(`Elasticsearch processor document missing [${typeId}] property`);
+    }
+
+    const subObject = _.get(processorEsDocument, typeId);
+
+    const result = {
+      type_id: typeId,
+      processor_id: subObject.tag,
+      ignore_failure: subObject.ignore_failure
+    };
+
+    result.processors = _.map(subObject.on_failure, (processor) => {
+      const typeId = _.keys(processor)[0];
+      const processorConverter = processorConverters[typeId];
+      return processorConverter.esToKibana(processor, typeId);
+    });
+
+    if (subObject.on_failure) {
+      result.ignore_failure = 'on_error';
+    } else if (subObject.ignore_failure === true) {
+      result.ignore_failure = 'ignore_error';
+    } else {
+      result.ignore_failure = 'index_fail';
+    }
+
+    return result;
   }
 };

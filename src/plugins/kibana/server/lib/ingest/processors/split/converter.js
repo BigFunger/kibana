@@ -12,16 +12,13 @@ export default {
     return result;
   },
   esToKibana: function (processorEsDocument) {
-    if (!_.has(processorEsDocument, 'split')) {
-      throw new Error('Elasticsearch processor document missing [split] property');
-    }
+    const result = baseConverter.esToKibana(processorEsDocument, 'split');
 
-    return {
-      typeId: 'split',
-      processor_id: processorEsDocument.split.tag,
+    _.assign(result, {
       source_field: processorEsDocument.split.field,
-      separator: processorEsDocument.split.separator,
-      ignore_failure: processorEsDocument.split.ignore_failure
-    };
+      separator: processorEsDocument.split.separator
+    });
+
+    return result;
   }
 };

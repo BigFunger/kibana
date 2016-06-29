@@ -11,15 +11,12 @@ export default {
     return result;
   },
   esToKibana: function (processorEsDocument) {
-    if (!_.has(processorEsDocument, 'remove')) {
-      throw new Error('Elasticsearch processor document missing [remove] property');
-    }
+    const result = baseConverter.esToKibana(processorEsDocument, 'remove');
 
-    return {
-      typeId: 'remove',
-      processor_id: processorEsDocument.remove.tag,
-      source_field: processorEsDocument.remove.field,
-      ignore_failure: processorEsDocument.remove.ignore_failure
-    };
+    _.assign(result, {
+      source_field: processorEsDocument.remove.field
+    });
+
+    return result;
   }
 };

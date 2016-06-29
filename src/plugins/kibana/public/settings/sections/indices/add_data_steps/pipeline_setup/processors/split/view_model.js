@@ -7,21 +7,12 @@ export class Split extends Processor {
       processorId,
       'split',
       'Split',
-      `Splits a field into an array using a separator character.`
-    );
-
-    _.defaults(
-      this,
-      _.pick(model, [
-        'sourceField',
-        'separator',
-        'ignoreFailure'
-      ]),
+      `Splits a field into an array using a separator character.`,
       {
         sourceField: '',
-        separator: '',
-        ignoreFailure: 'index_fail'
-      }
+        separator: ''
+      },
+      model
     );
   }
 
@@ -41,3 +32,5 @@ export class Split extends Processor {
     );
   }
 };
+
+Split.id = 'split';

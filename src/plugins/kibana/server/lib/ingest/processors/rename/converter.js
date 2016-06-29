@@ -12,16 +12,13 @@ export default {
     return result;
   },
   esToKibana: function (processorEsDocument) {
-    if (!_.has(processorEsDocument, 'rename')) {
-      throw new Error('Elasticsearch processor document missing [rename] property');
-    }
+    const result = baseConverter.esToKibana(processorEsDocument, 'rename');
 
-    return {
-      typeId: 'rename',
-      processor_id: processorEsDocument.rename.tag,
+    _.assign(result, {
       source_field: processorEsDocument.rename.field,
-      target_field: processorEsDocument.rename.target_field,
-      ignore_failure: processorEsDocument.rename.ignore_failure
-    };
+      target_field: processorEsDocument.rename.target_field
+    });
+
+    return result;
   }
 };

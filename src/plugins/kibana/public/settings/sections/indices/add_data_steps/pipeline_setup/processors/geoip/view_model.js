@@ -8,25 +8,14 @@ export class GeoIp extends Processor {
       'geoip',
       'Geo IP',
       `Adds information about the geographical location of IP addresses,
-based on data from the Maxmind database.`
-    );
-
-    _.defaults(
-      this,
-      _.pick(model, [
-        'sourceField',
-        'targetField',
-        'databaseFile',
-        'databaseFields',
-        'ignoreFailure'
-      ]),
+based on data from the Maxmind database.`,
       {
         sourceField: '',
         targetField: '',
         databaseFile: '',
-        databaseFields: [],
-        ignoreFailure: 'index_fail'
-      }
+        databaseFields: []
+      },
+      model
     );
   }
 
@@ -48,3 +37,5 @@ based on data from the Maxmind database.`
     );
   }
 };
+
+GeoIp.id = 'geoip';

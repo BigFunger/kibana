@@ -7,19 +7,11 @@ export class Uppercase extends Processor {
       processorId,
       'uppercase',
       'Uppercase',
-      `Converts a string to its uppercase equivalent.`
-    );
-
-    _.defaults(
-      this,
-      _.pick(model, [
-        'sourceField',
-        'ignoreFailure'
-      ]),
+      `Converts a string to its uppercase equivalent.`,
       {
-        sourceField: '',
-        ignoreFailure: 'index_fail'
-      }
+        sourceField: ''
+      },
+      model
     );
   }
 
@@ -37,3 +29,5 @@ export class Uppercase extends Processor {
     );
   }
 };
+
+Uppercase.id = 'uppercase';

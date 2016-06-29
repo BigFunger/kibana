@@ -26,9 +26,7 @@ export default {
     return result;
   },
   esToKibana: function (processorEsDocument) {
-    if (!_.has(processorEsDocument, 'date')) {
-      throw new Error('Elasticsearch processor document missing [date] property');
-    }
+    const result = baseConverter.esToKibana(processorEsDocument, 'date');
 
     const standardFormats = ['ISO8601', 'UNIX', 'UNIX_MS', 'TAI64N'];
 
@@ -43,16 +41,15 @@ export default {
       }
     });
 
-    return {
-      typeId: 'date',
-      processor_id: processorEsDocument.date.tag,
+    _.assign(result, {
       source_field: processorEsDocument.date.field,
       target_field: processorEsDocument.date.target_field,
       formats: _.uniq(formats),
       custom_format: customFormat,
       timezone: processorEsDocument.date.timezone,
-      locale: processorEsDocument.date.locale,
-      ignore_failure: processorEsDocument.date.ignore_failure
-    };
+      locale: processorEsDocument.date.locale
+    });
+
+    return result;
   }
 };

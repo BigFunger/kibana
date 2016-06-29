@@ -11,15 +11,13 @@ export default {
     return result;
   },
   esToKibana: function (processorEsDocument) {
-    if (!_.has(processorEsDocument, 'trim')) {
-      throw new Error('Elasticsearch processor document missing [trim] property');
-    }
+    const result = baseConverter.esToKibana(processorEsDocument, 'trim');
 
-    return {
-      typeId: 'trim',
-      processor_id: processorEsDocument.trim.tag,
-      source_field: processorEsDocument.trim.field,
-      ignore_failure: processorEsDocument.trim.ignore_failure
-    };
+
+    _.assign(result, {
+      source_field: processorEsDocument.trim.field
+    });
+
+    return result;
   }
 };

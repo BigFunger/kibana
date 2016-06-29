@@ -9,23 +9,13 @@ export class Convert extends Processor {
       'Convert',
       `Converts an existing field’s value to a different type, such as converting
 a string to an integer. If the field value is an array, all members will be
-converted.`
-    );
-
-    _.defaults(
-      this,
-      _.pick(model, [
-        'sourceField',
-        'targetField',
-        'type',
-        'ignoreFailure'
-      ]),
+converted.`,
       {
         sourceField: '',
         targetField: '',
-        type: 'auto',
-        ignoreFailure: 'index_fail'
-      }
+        type: 'auto'
+      },
+      model
     );
   }
 
@@ -47,3 +37,5 @@ converted.`
     );
   }
 };
+
+Convert.id = 'convert';

@@ -7,29 +7,16 @@ export class Date extends Processor {
       processorId,
       'date',
       'Date',
-      `Parses dates from fields.`
-    );
-
-    _.defaults(
-      this,
-      _.pick(model, [
-        'sourceField',
-        'targetField',
-        'formats',
-        'timezone',
-        'locale',
-        'customFormat',
-        'ignoreFailure'
-      ]),
+      `Parses dates from fields.`,
       {
         sourceField: '',
         targetField: '@timestamp',
         formats: [],
         timezone: 'Etc/UTC',
         locale: 'ENGLISH',
-        customFormat: '',
-        ignoreFailure: 'index_fail'
-      }
+        customFormat: ''
+      },
+      model
     );
   }
 
@@ -53,3 +40,5 @@ export class Date extends Processor {
     );
   }
 };
+
+Date.id = 'date';

@@ -13,17 +13,13 @@ export default {
     return result;
   },
   esToKibana: function (processorEsDocument) {
-    if (!_.has(processorEsDocument, 'gsub')) {
-      throw new Error('Elasticsearch processor document missing [gsub] property');
-    }
+    const result = baseConverter.esToKibana(processorEsDocument, 'gsub');
 
-    return {
-      typeId: 'gsub',
-      processor_id: processorEsDocument.gsub.tag,
-      source_field: processorEsDocument.gsub.field,
+    _.assign(result, {
       pattern: processorEsDocument.gsub.pattern,
-      replacement: processorEsDocument.gsub.replacement,
-      ignore_failure: processorEsDocument.gsub.ignore_failure
-    };
+      replacement: processorEsDocument.gsub.replacement
+    });
+
+    return result;
   }
 };

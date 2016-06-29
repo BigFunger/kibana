@@ -8,21 +8,12 @@ export class Set extends Processor {
       'set',
       'Set',
       `Sets one field and associates it with the specified value. If the field
-already exists, its value will be replaced with the provided one.`
-    );
-
-    _.defaults(
-      this,
-      _.pick(model, [
-        'targetField',
-        'value',
-        'ignoreFailure'
-      ]),
+already exists, its value will be replaced with the provided one.`,
       {
         targetField: '',
-        value: '',
-        ignoreFailure: 'index_fail'
-      }
+        value: ''
+      },
+      model
     );
   }
 
@@ -41,3 +32,5 @@ already exists, its value will be replaced with the provided one.`
     );
   }
 };
+
+Set.id = 'set';

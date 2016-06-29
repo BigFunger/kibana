@@ -7,21 +7,12 @@ export class Rename extends Processor {
       processorId,
       'rename',
       'Rename',
-      `Renames an existing field.`
-    );
-
-    _.defaults(
-      this,
-      _.pick(model, [
-        'sourceField',
-        'targetField',
-        'ignoreFailure'
-      ]),
+      `Renames an existing field.`,
       {
         sourceField: '',
-        targetField: '',
-        ignoreFailure: 'index_fail'
-      }
+        targetField: ''
+      },
+      model
     );
   }
 
@@ -41,3 +32,5 @@ export class Rename extends Processor {
     );
   }
 };
+
+Rename.id = 'rename';
