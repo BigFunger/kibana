@@ -12,10 +12,12 @@
       ng-hide="processor.collapsed">
       <processor-input processor="processor"></processor-input>
       <div class="processor-ui-content"></div>
-      <failure-options
-        pipeline="pipeline"
-        processor="processor">
-      </failure-options>
+      <failure-action
+        failure-action="processor.failureAction"
+        allow-ignore="true"
+        processor-collection="processor.errorProcessorCollection"
+        pipeline="pipeline">
+      </failure-action>
       <div
         ng-show="processor.state === 'error fail'"
         class="alert alert-danger">

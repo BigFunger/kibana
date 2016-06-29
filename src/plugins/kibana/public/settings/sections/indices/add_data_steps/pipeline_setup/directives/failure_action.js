@@ -1,33 +1,37 @@
 import _ from 'lodash';
 import uiModules from 'ui/modules';
-import template from '../views/failure_options.html';
-import '../styles/_failure_options.less';
+import template from '../views/failure_action.html';
+import '../styles/_failure_action.less';
 
 const app = uiModules.get('kibana');
 
-app.directive('failureOptions', function () {
+app.directive('failureAction', function () {
   return {
     restrict: 'E',
     template: template,
     scope: {
-      processor: '=',
+      failureAction: '=',
+      allowIgnore: '=',
+      processorCollection: '=',
       pipeline: '='
     },
     controller: function ($scope) {
-      const pipeline = $scope.pipeline;
-      const processor = $scope.processor;
-
+      $scope.allowIgnore = !!$scope.allowIgnore;
       $scope.options = [
         { label: 'Ignore, and index document', value: 'ignore_error' },
         { label: 'Do not index document', value: 'index_fail' },
         { label: 'Execute other processors', value: 'on_error' }
       ];
 
+      if (!$scope.allowIgnore) {
+        _.pullAt($scope.options, 0);
+      }
+
       $scope.defineProcessors = () => {
-        pipeline.pushProcessorCollection(processor.errorProcessorCollection);
+        $scope.pipeline.pushProcessorCollection($scope.processorCollection);
       };
 
-      $scope.$watch('processor.failureAction', () => { pipeline.setDirty(); });
+      $scope.$watch('failureAction', () => { $scope.pipeline.setDirty(); });
     }
   };
 });
