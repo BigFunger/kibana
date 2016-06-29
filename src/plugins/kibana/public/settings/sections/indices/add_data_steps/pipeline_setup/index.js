@@ -1,1 +1,13 @@
+import './directives/pipeline_output';
+import './directives/source_data';
+import './directives/processor_ui_container';
+import './directives/processor_select';
+import './directives/field_select';
+import './directives/pipeline_details';
+import './directives/failure_action';
+import './directives/pipeline_input';
+import './directives/processor_input';
+import './directives/pipeline_crud';
+import './directives/set_focus';
 import './directives/pipeline_setup';
+import './processors';

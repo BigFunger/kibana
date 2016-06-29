@@ -27,6 +27,9 @@ modules.get('apps/settings')
       var totalSteps = 4;
       this.stepResults = {};
 
+      // const jsonString = `{"pipelineId":"small_pipeline","description":"small pipeline","failureAction":"index_fail","errorProcessors":[],"processors":[{"processorId":"processor_18","typeId":"set","failureAction":"index_fail","processors":[],"targetField":"message","value":"64.242.88.10 - - [07/Mar/2004:16:58:54 -0800] \\"GET /mailman/listinfo/administration HTTP/1.1\\" 200 6459"},{"processorId":"processor_19","typeId":"grok","failureAction":"index_fail","processors":[],"sourceField":"message","pattern":"%{COMMONAPACHELOG}"}]}`;
+      // this.stepResults.pipelineModel = JSON.parse(jsonString);
+
       this.setCurrentStep = (step) => {
         if (!this.complete) {
           $state.currentStep = step;

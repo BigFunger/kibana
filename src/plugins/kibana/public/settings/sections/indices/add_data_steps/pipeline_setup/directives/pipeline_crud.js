@@ -14,21 +14,18 @@ app.directive('pipelineCrud', function () {
       pipeline: '='
     },
     controller: function ($scope, Private, Notifier) {
-      const pipeline = $scope.pipeline;
       const ingest = Private(IngestProvider);
       const notify = new Notifier({ location: `Ingest Pipeline Setup` });
 
       $scope.pipelineId = 'foobar';
 
       $scope.new = function () {
-        //const newPipeline = new Pipeline();
-        // newPipeline.model = { pipelineId: $scope.pipelineId };
-        // $scope.pipeline = newPipeline;
-        // pipeline = $scope.pipeline;
-        pipeline.model = {};
+        $scope.pipeline = new Pipeline();
       };
 
       $scope.save = function () {
+        const pipeline = $scope.pipeline;
+
         pipeline.pipelineId = $scope.pipelineId;
         return ingest.pipeline.save(pipeline.model)
         .then((result) => {
@@ -40,9 +37,13 @@ app.directive('pipelineCrud', function () {
       $scope.load = function () {
         return ingest.pipeline.load($scope.pipelineId)
         .then((result) => {
-          pipeline.model = result;
+          $scope.pipeline = new Pipeline(result);
         })
         .catch(notify.error);
+      };
+
+      $scope.debug = function () {
+        console.log(JSON.stringify($scope.pipeline.model));
       };
     }
   };

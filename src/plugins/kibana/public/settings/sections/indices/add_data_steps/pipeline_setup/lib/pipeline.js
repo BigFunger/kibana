@@ -3,12 +3,29 @@ import ProcessorCollection from './processor_collection';
 
 export default class Pipeline {
 
-  constructor() {
+  constructor(model) {
+    const defaultModel = {
+      pipelineId: '',
+      description: '',
+      failureAction: 'index_fail'
+    };
+
+    _.defaults(
+      this,
+      _.pick(model, _.keys(defaultModel)),
+      defaultModel
+    );
+
+    this.processorCollection = new ProcessorCollection(_.get(model, 'processors'));
+    this.errorProcessorCollection = new ProcessorCollection(_.get(model, 'errorProcessors'));
+
+
+    this.processorCollections = [];
+    this.activeProcessorCollection = this.processorCollection;
     this.input = {};
     this.output = undefined;
     this.dirty = false;
     this.hasCompileError = false;
-    this.model = {}; //TODO: Remove model setter and initialize the object in the constructor
   }
 
   get model() {
@@ -19,17 +36,6 @@ export default class Pipeline {
       errorProcessors: _.map(this.errorProcessorCollection.processors, processor => processor.model),
       processors: _.map(this.processorCollection.processors, processor => processor.model)
     };
-  }
-
-  set model(newModel) {
-    this.pipelineId = newModel.pipelineId || '';
-    this.description = newModel.description || '';
-    this.failureAction = newModel.failureAction || 'index_fail';
-
-    this.processorCollection = new ProcessorCollection(newModel.processors);
-    this.errorProcessorCollection = new ProcessorCollection(newModel.errorProcessors);
-    this.processorCollections = [];
-    this.activeProcessorCollection = this.processorCollection;
   }
 
   setDirty() {
@@ -51,6 +57,7 @@ export default class Pipeline {
     this.activeProcessorCollection = processorCollection;
   }
 
+  ///TODO: Rename this function
   popProcessorCollection() {
     this.activeProcessorCollection = this.processorCollections.pop();
   }
@@ -63,12 +70,6 @@ export default class Pipeline {
     this.output = output;
     this.error = !!error;
 
-    // const processors = _.reject(this.processors, { new: true });
-
-    // const errorIndex = _.findIndex(processors, 'error');
-    // const goodProcessor = errorIndex === -1 ? _.last(processors) : processors[errorIndex - 1];
-    // this.output = goodProcessor ? goodProcessor.outputObject : this.input;
-
     this.dirty = false;
   }
 
@@ -76,7 +77,6 @@ export default class Pipeline {
   // from an ingest simulate call.
   applySimulateResults(simulateResults) {
     updateProcessorOutputs(this, simulateResults);
-    updateErrorState(this);
     this.processorCollection.updateInputs();
     this.updateOutput(simulateResults);
   }
@@ -114,28 +114,4 @@ function updateProcessorOutputs(pipeline, simulateResults) {
 
     processor.setOutput(output, error);
   });
-}
-
-//Updates the error state of the pipeline and its processors
-//If a pipeline compile error is returned, lock all processors but the error
-//If a pipeline data error is returned, lock all processors after the error
-function updateErrorState(pipeline) {
-  // pipeline.hasCompileError = _.some(pipeline.processors, (processor) => {
-  //   return _.get(processor, 'error.compile');
-  // });
-  // _.forEach(pipeline.processors, processor => {
-  //   processor.locked = false;
-  // });
-
-  // const errorIndex = _.findIndex(pipeline.processors, 'error');
-  // if (errorIndex === -1) return;
-
-  // _.forEach(pipeline.processors, (processor, index) => {
-  //   if (pipeline.hasCompileError && index !== errorIndex) {
-  //     processor.locked = true;
-  //   }
-  //   if (!pipeline.hasCompileError && index > errorIndex) {
-  //     processor.locked = true;
-  //   }
-  // });
 }

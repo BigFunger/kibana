@@ -18,6 +18,9 @@ app.directive('processorUiContainer', function ($compile) {
     },
     template: template,
     link: function ($scope, $el) {
+      //TODO: I THINK I can get away with this here, because if a new pipeline is
+      //created, these processors will be destroyed. A processor should never have
+      //its pipeline changed.
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
       const $container = $el.find('.processor-ui-content');
