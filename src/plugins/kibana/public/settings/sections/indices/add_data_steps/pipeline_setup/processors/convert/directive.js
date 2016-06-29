@@ -21,22 +21,17 @@ app.directive('processorUiConvert', function () {
         $scope.fieldData = _.get(processor.inputObject, processor.sourceField);
       }
 
-      function processorUiChanged() {
-        pipeline.setDirty();
-      }
-
       $scope.types = ['auto', 'number', 'string', 'boolean'];
 
       $scope.$watch('processor.inputObject', consumeNewInputObject);
 
       $scope.$watch('processor.sourceField', () => {
         refreshFieldData();
-        processorUiChanged();
+        pipeline.setDirty();
       });
 
-      $scope.$watch('processor.type', processorUiChanged);
-      $scope.$watch('processor.targetField', processorUiChanged);
-      $scope.$watch('processor.ignoreFailure', processorUiChanged);
+      $scope.$watch('processor.type', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.targetField', () => { pipeline.setDirty(); });
     }
   };
 });

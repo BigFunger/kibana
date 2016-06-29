@@ -12,13 +12,8 @@ app.directive('processorUiSet', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
-      function processorUiChanged() {
-        pipeline.setDirty();
-      }
-
-      $scope.$watch('processor.targetField', processorUiChanged);
-      $scope.$watch('processor.value', processorUiChanged);
-      $scope.$watch('processor.ignoreFailure', processorUiChanged);
+      $scope.$watch('processor.targetField', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.value', () => { pipeline.setDirty(); });
     }
   };
 });

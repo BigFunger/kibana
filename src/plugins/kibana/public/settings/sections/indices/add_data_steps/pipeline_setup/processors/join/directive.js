@@ -21,19 +21,14 @@ app.directive('processorUiJoin', function () {
         $scope.fieldData = _.get(processor.inputObject, processor.sourceField);
       }
 
-      function processorUiChanged() {
-        pipeline.setDirty();
-      }
-
       $scope.$watch('processor.inputObject', consumeNewInputObject);
 
       $scope.$watch('processor.sourceField', () => {
         refreshFieldData();
-        processorUiChanged();
+        pipeline.setDirty();
       });
 
-      $scope.$watch('processor.separator', processorUiChanged);
-      $scope.$watch('processor.ignoreFailure', processorUiChanged);
+      $scope.$watch('processor.separator', () => { pipeline.setDirty(); });
     }
   };
 });

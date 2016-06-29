@@ -22,10 +22,6 @@ app.directive('processorUiGeoip', function () {
         $scope.fieldData = _.get(processor.inputObject, processor.sourceField);
       }
 
-      function processorUiChanged() {
-        pipeline.setDirty();
-      }
-
       function splitValues(delimitedList) {
         return delimitedList.split('\n');
       }
@@ -48,13 +44,12 @@ app.directive('processorUiGeoip', function () {
 
       $scope.$watch('processor.sourceField', () => {
         refreshFieldData();
-        processorUiChanged();
+        pipeline.setDirty();
       });
 
-      $scope.$watch('processor.targetField', processorUiChanged);
-      $scope.$watch('processor.databaseFile', processorUiChanged);
-      $scope.$watchCollection('processor.databaseFields', processorUiChanged);
-      $scope.$watch('processor.ignoreFailure', processorUiChanged);
+      $scope.$watch('processor.targetField', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.databaseFile', () => { pipeline.setDirty(); });
+      $scope.$watchCollection('processor.databaseFields', () => { pipeline.setDirty(); });
     }
   };
 });

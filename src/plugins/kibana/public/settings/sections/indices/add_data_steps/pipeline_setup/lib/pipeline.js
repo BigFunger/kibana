@@ -4,19 +4,11 @@ import ProcessorCollection from './processor_collection';
 export default class Pipeline {
 
   constructor() {
-    // this.pipelineId = 'foobar';
-    // this.processorCollection = new ProcessorCollection();
-    // this.errorProcessorCollection = new ProcessorCollection();
-    // this.processorCollections = [];
-    // this.activeProcessorCollection = this.processorCollection;
     this.input = {};
     this.output = undefined;
     this.dirty = false;
     this.hasCompileError = false;
-    //this.ignoreFailure = 'index_fail';
-    //this.description = '';
-
-    this.model = {};
+    this.model = {}; //TODO: Remove model setter and initialize the object in the constructor
   }
 
   get model() {
@@ -30,7 +22,7 @@ export default class Pipeline {
   }
 
   set model(newModel) {
-    this.pipelineId = newModel.pipelineId || 'foobar';
+    this.pipelineId = newModel.pipelineId || '';
     this.description = newModel.description || '';
     this.ignoreFailure = newModel.ignoreFailure || 'index_fail';
 

@@ -67,11 +67,7 @@ app.directive('pipelineSetup', function () {
       });
 
       $scope.$watch('sample', (newVal) => {
-        //pipeline.input = $scope.sample;
-
-        //if the sample changes, we want to propegate the update through the entire pipeline,
-        //and not just the current processorCollection we're focussed on. (need to make sure that updateParents
-        //is recursive.)
+        //TODO: (need to make sure that updateParents is recursive.)
         pipeline.input = $scope.sample;
         pipeline.processorCollection.updateParents(pipeline.input);
         pipeline.dirty = true;

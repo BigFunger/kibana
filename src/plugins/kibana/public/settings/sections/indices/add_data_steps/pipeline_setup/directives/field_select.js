@@ -17,14 +17,12 @@ app.directive('fieldSelect', function () {
     controller: function ($scope) {
       $scope.selectedItem = { value: '' };
       $scope.$watch('selectedItem.value', (newVal) => {
-        //debugger;
         if (!newVal) return;
 
         $scope.field = newVal;
       });
 
       $scope.fieldAdded = function (newField) {
-        //console.log(newField);
         $scope.fields.push(newField);
 
         return newField;

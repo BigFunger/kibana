@@ -25,10 +25,11 @@ app.directive('pipelineCrud', function () {
         // newPipeline.model = { pipelineId: $scope.pipelineId };
         // $scope.pipeline = newPipeline;
         // pipeline = $scope.pipeline;
-        pipeline.model = { pipelineId: $scope.pipelineId };
+        pipeline.model = {};
       };
 
       $scope.save = function () {
+        pipeline.pipelineId = $scope.pipelineId;
         return ingest.pipeline.save(pipeline.model)
         .then((result) => {
           notify.info(`Pipeline '${pipeline.pipelineId}' saved!`);
@@ -39,10 +40,7 @@ app.directive('pipelineCrud', function () {
       $scope.load = function () {
         return ingest.pipeline.load($scope.pipelineId)
         .then((result) => {
-          //notify.info(`Pipeline '${result.pipelineId}' loaded!`);
-          //console.log(result);
           pipeline.model = result;
-          //TODO: Load this model into the pipeline view_model.
         })
         .catch(notify.error);
       };

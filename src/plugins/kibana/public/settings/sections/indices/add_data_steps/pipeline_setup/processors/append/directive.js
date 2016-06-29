@@ -12,10 +12,6 @@ app.directive('processorUiAppend', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
-      function processorUiChanged() {
-        pipeline.setDirty();
-      }
-
       function splitValues(delimitedList) {
         return delimitedList.split('\n');
       }
@@ -31,9 +27,8 @@ app.directive('processorUiAppend', function () {
       $scope.values = joinValues(processor.values);
 
       $scope.$watch('values', updateValues);
-      $scope.$watch('processor.targetField', processorUiChanged);
-      $scope.$watchCollection('processor.values', processorUiChanged);
-      $scope.$watch('processor.ignoreFailure', processorUiChanged);
+      $scope.$watch('processor.targetField', () => { pipeline.setDirty(); });
+      $scope.$watchCollection('processor.values', () => { pipeline.setDirty(); });
     }
   };
 });

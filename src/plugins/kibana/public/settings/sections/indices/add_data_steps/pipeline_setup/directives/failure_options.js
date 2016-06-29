@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import uiModules from 'ui/modules';
 import template from '../views/failure_options.html';
 import '../styles/_failure_options.less';
@@ -25,6 +26,8 @@ app.directive('failureOptions', function () {
       $scope.defineProcessors = () => {
         pipeline.pushProcessorCollection(processor.errorProcessorCollection);
       };
+
+      $scope.$watch('processor.ignoreFailure', () => { pipeline.setDirty(); });
     }
   };
 });

@@ -23,10 +23,6 @@ app.directive('processorUiDate', function () {
         $scope.fieldData = _.get(processor.inputObject, processor.sourceField);
       }
 
-      function processorUiChanged() {
-        pipeline.setDirty();
-      }
-
       const updateFormats = debounce(() => {
         processor.formats = _($scope.formats)
         .filter('selected')
@@ -34,7 +30,7 @@ app.directive('processorUiDate', function () {
         .value();
 
         $scope.customFormatSelected = _.includes(processor.formats, 'Custom');
-        processorUiChanged();
+        pipeline.setDirty();
       }, 200);
 
       $scope.updateFormats = updateFormats;
@@ -44,14 +40,13 @@ app.directive('processorUiDate', function () {
 
       $scope.$watch('processor.sourceField', () => {
         refreshFieldData();
-        processorUiChanged();
+        pipeline.setDirty();
       });
 
       $scope.$watch('processor.customFormat', updateFormats);
-      $scope.$watch('processor.targetField', processorUiChanged);
-      $scope.$watch('processor.timezone', processorUiChanged);
-      $scope.$watch('processor.locale', processorUiChanged);
-      $scope.$watch('processor.ignoreFailure', processorUiChanged);
+      $scope.$watch('processor.targetField', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.timezone', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.locale', () => { pipeline.setDirty(); });
     }
   };
 });
