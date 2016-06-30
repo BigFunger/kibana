@@ -48,9 +48,8 @@ app.directive('pipelineSetup', function () {
       $scope.$watch('sample', (newVal) => {
         const pipeline = $scope.pipeline;
 
-        //TODO: (need to make sure that updateParents is recursive.)
         pipeline.input = $scope.sample;
-        pipeline.processorCollection.updateParents(pipeline.input);
+        pipeline.processorCollection.updateInputs(pipeline.input);
         pipeline.dirty = true;
       });
 
@@ -64,6 +63,15 @@ app.directive('pipelineSetup', function () {
       });
 
       $scope.$watch('pipeline.dirty', simulatePipeline);
+
+      $scope.$watch('pipeline', (newPipeline) => {
+        //TODO: Not sure what to do in this case... since the samples are going to be associated with a pipeline.
+        const pipeline = $scope.pipeline;
+
+        pipeline.input = $scope.sample;
+        pipeline.processorCollection.updateInputs(pipeline.input);
+        pipeline.dirty = true;
+      });
 
       $scope.expandContext = 1;
     }

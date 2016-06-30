@@ -23,8 +23,8 @@ export default class ProcessorCollection {
   add(typeId, processorModel) {
     typeId = _.get(processorModel, 'typeId') || typeId;
     const ProcessorType = this.ProcessorTypes[typeId];
-    const counter = ProcessorCollection.counter += 1;
-    const processorId = `processor_${counter}`;
+    const processorCounter = ProcessorCollection.processorCounter += 1;
+    const processorId = `processor_${processorCounter}`;
     const newProcessor = new ProcessorType(processorId, processorModel);
 
     if (processorModel) {
@@ -66,27 +66,15 @@ export default class ProcessorCollection {
     processors[index] = temp;
   }
 
-  updateParents(rootInput) {
-    if (rootInput) {
-      this.input = rootInput;
-    }
-    const processors = this.processors;
-
-    //TODO: What benefit do we gfet from assigning parent of the first processor to the sample? Seems confusing.
-    processors.forEach((processor, index) => {
-      let newParent;
-      if (index === 0) {
-        newParent = this.input;
-      } else {
-        newParent = processors[index - 1];
-      }
-
-      //TODO: Once I add a processorCollection to processor, this needs to be recursive....
+  updateParents() {
+    this.processors.forEach((processor, index) => {
+      const newParent = index > 0 ? this.processors[index - 1] : null;
       processor.setParent(newParent);
     });
   }
 
-  updateInputs() {
+  updateInputs(rootInput) {
+    this.input = rootInput || this.input;
     this.processors.forEach((processor, index) => {
       if (index === 0) {
         processor.setInput(this.input);
@@ -103,4 +91,5 @@ export default class ProcessorCollection {
 
 }
 
-ProcessorCollection.counter = 0;
+//static processor counter across all collections
+ProcessorCollection.processorCounter = 0;
