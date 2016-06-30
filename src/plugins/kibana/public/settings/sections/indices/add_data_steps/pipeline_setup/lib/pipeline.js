@@ -26,6 +26,11 @@ export default class Pipeline {
     this.output = undefined;
     this.dirty = false;
     this.hasCompileError = false;
+
+    this.failureOptions = {
+      index_fail: 'Do not index document',
+      on_error: 'Execute other processors'
+    };
   }
 
   get model() {

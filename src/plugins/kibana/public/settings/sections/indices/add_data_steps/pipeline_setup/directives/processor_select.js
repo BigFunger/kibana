@@ -53,8 +53,8 @@ app.directive('processorSelect', function ($timeout) {
         $scope.processorTypeId = newVal.typeId;
       });
 
-      $scope.$watch('processorType', processorType => {
-        if (!processorType) {
+      $scope.$watch('processorTypeId', processorTypeId => {
+        if (!processorTypeId) {
           $scope.selectedItem = { value: '' };
         }
       });

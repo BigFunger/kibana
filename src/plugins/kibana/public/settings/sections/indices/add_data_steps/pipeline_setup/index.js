@@ -11,4 +11,5 @@ import './directives/pipeline_crud';
 import './directives/set_focus';
 import './directives/pipeline_setup';
 import './directives/processor_collection_header';
+import './directives/pipeline_on_failure';
 import './processors';

@@ -14,9 +14,9 @@
       <div class="processor-ui-content"></div>
       <failure-action
         failure-action="processor.failureAction"
-        allow-ignore="true"
         processor-collection="processor.errorProcessorCollection"
-        pipeline="pipeline">
+        pipeline="pipeline"
+        options="processor.failureOptions">
       </failure-action>
       <div
         ng-show="processor.state === 'error fail'"

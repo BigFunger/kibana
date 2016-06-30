@@ -11,22 +11,11 @@ app.directive('failureAction', function () {
     template: template,
     scope: {
       failureAction: '=',
-      allowIgnore: '=',
       processorCollection: '=',
-      pipeline: '='
+      pipeline: '=',
+      options: '='
     },
     controller: function ($scope) {
-      $scope.allowIgnore = !!$scope.allowIgnore;
-      $scope.options = [
-        { label: 'Ignore, and index document', value: 'ignore_error' },
-        { label: 'Do not index document', value: 'index_fail' },
-        { label: 'Execute other processors', value: 'on_error' }
-      ];
-
-      if (!$scope.allowIgnore) {
-        _.pullAt($scope.options, 0);
-      }
-
       $scope.defineProcessors = () => {
         $scope.pipeline.pushProcessorCollection($scope.processorCollection);
       };

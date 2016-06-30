@@ -38,6 +38,9 @@
             processor="processor">
           </processor-ui-container>
         </li>
+        <li ng-hide="pipeline.processorCollections.length > 0">
+          <pipeline-on-failure pipeline="pipeline"></pipeline-on-failure>
+        </li>
       </ul>
 
       <div class="add-processor">

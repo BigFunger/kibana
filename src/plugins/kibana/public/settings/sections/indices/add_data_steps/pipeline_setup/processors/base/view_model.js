@@ -28,6 +28,12 @@ export default class Processor {
     );
 
     this.errorProcessorCollection = new ProcessorCollection(title, _.get(model, 'processors'));
+
+    this.failureOptions = {
+      ignore_error: 'Ignore, and index document',
+      index_fail: 'Do not index document',
+      on_error: 'Execute other processors'
+    };
   }
 
   setParent(newParent) {
