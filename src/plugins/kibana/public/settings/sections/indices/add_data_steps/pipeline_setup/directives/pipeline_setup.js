@@ -22,7 +22,6 @@ app.directive('pipelineSetup', function () {
       $scope.sample = {};
 
       $scope.pipeline = new Pipeline($scope.pipelineModel);
-      window.pipeline = $scope.pipeline;
 
       //initiates the simulate call if the pipeline is dirty
       const simulatePipeline = debounce((event, message) => {
@@ -71,6 +70,8 @@ app.directive('pipelineSetup', function () {
         pipeline.input = $scope.sample;
         pipeline.processorCollection.updateInputs(pipeline.input);
         pipeline.dirty = true;
+
+        window.pipeline = $scope.pipeline;
       });
 
       $scope.expandContext = 1;

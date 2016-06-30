@@ -12,7 +12,8 @@
       <pipeline-details pipeline="pipeline"></pipeline-details>
     </div>
     <label>
-      Pipeline Processors
+      <span ng-show="pipeline.processorCollections.length === 0">Main Pipeline Processors</span>
+      <span ng-show="pipeline.processorCollections.length > 0">On-Failure Processors</span>
       <a
         aria-label="A pipeline is a definition of a series of processors that are to be executed in the same order as they are declared."
         tooltip="A pipeline is a definition of a series of processors that are to be executed in the same order as they are declared."
@@ -22,16 +23,10 @@
       </a>
     </label>
     <div class="pipeline panel">
-      <div
-        class="error-path-header"
+      <processor-collection-header
+        pipeline="pipeline"
         ng-show="pipeline.processorCollections.length > 0">
-        <label>You are currently editing an error branch. (name something better)</label>
-        <button
-          class="btn btn-primary"
-          ng-click="pipeline.popProcessorCollection()">
-          Return
-        </button>
-      </div>
+      </processor-collection-header>
 
       <ul
         class="pipeline-container"
@@ -48,7 +43,7 @@
       <div class="add-processor">
         <div
           class="form-group"
-          ng-hide="pipeline.activeProcessorCollection.processors.length > 0">
+          ng-hide="pipeline.activeProcessorCollection.processors.length > 0 || pipeline.processorCollections.length > 0">
           <label>
             Your pipeline is currently empty. Add a processor to get started!
           </label>

@@ -54,7 +54,7 @@ export default function IngestProvider($rootScope, $http, config, $q) {
     load: function (pipelineId) {
       function unpack(response) {
         const result = unpackPipeline(response.data);
-        console.log(response, result);
+        //console.log(response, result);
         return result;
       }
 

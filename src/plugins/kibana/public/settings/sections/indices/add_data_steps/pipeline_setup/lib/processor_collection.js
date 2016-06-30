@@ -4,7 +4,8 @@ import * as ProcessorViewModels from '../processors/view_models';
 
 export default class ProcessorCollection {
 
-  constructor(processors) {
+  constructor(title, processors) {
+    this.title = title;
     this.processors = [];
     this.input = {};
 

@@ -27,7 +27,7 @@ export default class Processor {
       defaultModel
     );
 
-    this.errorProcessorCollection = new ProcessorCollection(_.get(model, 'processors'));
+    this.errorProcessorCollection = new ProcessorCollection(title, _.get(model, 'processors'));
   }
 
   setParent(newParent) {

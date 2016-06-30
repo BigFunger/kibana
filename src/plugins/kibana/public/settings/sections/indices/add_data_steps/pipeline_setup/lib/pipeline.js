@@ -16,8 +16,8 @@ export default class Pipeline {
       defaultModel
     );
 
-    this.processorCollection = new ProcessorCollection(_.get(model, 'processors'));
-    this.errorProcessorCollection = new ProcessorCollection(_.get(model, 'errorProcessors'));
+    this.processorCollection = new ProcessorCollection('Main Pipeline', _.get(model, 'processors'));
+    this.errorProcessorCollection = new ProcessorCollection('General Failure', _.get(model, 'errorProcessors'));
 
 
     this.processorCollections = [];
@@ -57,9 +57,10 @@ export default class Pipeline {
     this.activeProcessorCollection = processorCollection;
   }
 
-  ///TODO: Rename this function
-  popProcessorCollection() {
-    this.activeProcessorCollection = this.processorCollections.pop();
+  jumpToProcessorCollection(index) {
+    while (this.processorCollections.length > index) {
+      this.activeProcessorCollection = this.processorCollections.pop();
+    }
   }
 
   updateOutput(simulateResults) {
