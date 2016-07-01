@@ -1,22 +1,17 @@
 import _ from 'lodash';
-import * as processorConverters from '../processors/converters';
+import processorArrayConverter from '../processors/processor_array/converter';
+//import * as processorConverters from '../processors/converters';
 
 export default {
   kibanaToEs: function (pipelineApiDocument) {
     const result = {
       description: pipelineApiDocument.description,
-      processors: _.map(pipelineApiDocument.processors, (processor) => {
-        const processorConverter = processorConverters[processor.type_id];
-        return processorConverter.kibanaToEs(processor);
-      })
+      processors: processorArrayConverter.kibanaToEs(pipelineApiDocument.processors)
     };
 
     if (pipelineApiDocument.failure_action === 'on_error' &&
       pipelineApiDocument.failure_processors.length > 0) {
-      result.on_failure = _.map(pipelineApiDocument.failure_processors, (processor) => {
-        const processorConverter = processorConverters[processor.type_id];
-        return processorConverter.kibanaToEs(processor);
-      });
+      result.on_failure = processorArrayConverter.kibanaToEs(pipelineApiDocument.failure_processors);
     }
 
     return result;
@@ -24,22 +19,13 @@ export default {
   esToKibana: function (pipelineEsDocument) {
     const result = {
       pipeline_id: pipelineEsDocument.id,
-      description: pipelineEsDocument.config.description
+      description: pipelineEsDocument.config.description,
+      processors: processorArrayConverter.esToKibana(pipelineEsDocument.config.processors)
     };
-
-    result.processors = _.map(pipelineEsDocument.config.processors, (processor) => {
-      const typeId = _.keys(processor)[0];
-      const processorConverter = processorConverters[typeId];
-      return processorConverter.esToKibana(processor);
-    });
 
     if (pipelineEsDocument.config.on_failure) {
       result.failure_action = 'on_error';
-      result.failure_processors = _.map(pipelineEsDocument.config.on_failure, (processor) => {
-        const typeId = _.keys(processor)[0];
-        const processorConverter = processorConverters[typeId];
-        return processorConverter.esToKibana(processor);
-      });
+      result.failure_processors = processorArrayConverter.esToKibana(pipelineEsDocument.config.on_failure);
     } else {
       result.failure_action = 'index_fail';
     }

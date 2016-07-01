@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import * as processorConverters from '../converters';
+import processorArrayConverter from '../processor_array/converter';
 
 export default {
   kibanaToEs: function (processorApiDocument, typeId) {
@@ -12,10 +12,7 @@ export default {
     }
 
     if (processorApiDocument.failure_action === 'on_error' && processorApiDocument.failure_processors.length > 0) {
-      subObject.on_failure = _.map(processorApiDocument.failure_processors, (processor) => {
-        const processorConverter = processorConverters[processor.type_id];
-        return processorConverter.kibanaToEs(processor);
-      });
+      subObject.on_failure = processorArrayConverter.kibanaToEs(processorApiDocument.failure_processors);
     }
 
     const result = _.set({}, typeId, subObject);
@@ -33,11 +30,7 @@ export default {
       processor_id: subObject.tag
     };
 
-    result.failure_processors = _.map(subObject.on_failure, (processor) => {
-      const typeId = _.keys(processor)[0];
-      const processorConverter = processorConverters[typeId];
-      return processorConverter.esToKibana(processor, typeId);
-    });
+    result.failure_processors = processorArrayConverter.esToKibana(subObject.on_failure);
 
     if (subObject.on_failure) {
       result.failure_action = 'on_error';
