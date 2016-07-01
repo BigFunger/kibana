@@ -8,6 +8,7 @@ export join from '../processors/join/converter';
 export lowercase from '../processors/lowercase/converter';
 export remove from '../processors/remove/converter';
 export rename from '../processors/rename/converter';
+export script from '../processors/script/converter';
 export set from '../processors/set/converter';
 export split from '../processors/split/converter';
 export trim from '../processors/trim/converter';

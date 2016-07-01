@@ -8,6 +8,7 @@ export { join } from './join/schema';
 export { lowercase } from './lowercase/schema';
 export { remove } from './remove/schema';
 export { rename } from './rename/schema';
+export { script } from './script/schema';
 export { set } from './set/schema';
 export { split } from './split/schema';
 export { trim } from './trim/schema';

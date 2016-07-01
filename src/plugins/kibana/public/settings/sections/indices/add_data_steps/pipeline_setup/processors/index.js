@@ -8,6 +8,7 @@ import './join/directive';
 import './lowercase/directive';
 import './remove/directive';
 import './rename/directive';
+import './script/directive';
 import './set/directive';
 import './split/directive';
 import './trim/directive';
