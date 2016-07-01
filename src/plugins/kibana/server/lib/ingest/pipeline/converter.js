@@ -11,7 +11,8 @@ export default {
       })
     };
 
-    if (pipelineApiDocument.failure_action === 'on_error') {
+    if (pipelineApiDocument.failure_action === 'on_error' &&
+      pipelineApiDocument.error_processors.length > 0) {
       result.on_failure = _.map(pipelineApiDocument.error_processors, (processor) => {
         const processorConverter = processorConverters[processor.type_id];
         return processorConverter.kibanaToEs(processor);

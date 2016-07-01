@@ -100,6 +100,7 @@ export default class Pipeline {
     }
 
     iteration(this.processorCollection);
+    iteration(this.errorProcessorCollection);
 
     return result;
   }
