@@ -1,0 +1,26 @@
+<label>
+<!--   <span ng-show="pipeline.processorCollections.length === 0">Main Pipeline Processors</span>
+  <span ng-show="pipeline.processorCollections.length > 0">On-Failure Processors</span> -->
+  <span>Processors</span>
+  <a
+    aria-label="A pipeline is a definition of a series of processors that are to be executed in the same order as they are declared."
+    tooltip="A pipeline is a definition of a series of processors that are to be executed in the same order as they are declared."
+    tooltip-append-to-body="true"
+    target="_blank">
+    <i aria-hidden="true" class="fa fa-question-circle"></i>
+  </a>
+</label>
+<div>
+  <ul>
+    <li ng-repeat="crumb in breadcrumbs">
+      <span
+        class="spacer"
+        ng-show="$index > 0">/</span>
+      <a
+        ng-hide="$last"
+        ng-click="navigateTo($index)"
+        href>{{crumb}}</a>
+      <span ng-show="$last">{{crumb}}</span>
+    </li>
+  </ul>
+</div>

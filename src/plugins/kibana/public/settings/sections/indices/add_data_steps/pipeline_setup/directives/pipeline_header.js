@@ -1,11 +1,11 @@
 import uiModules from 'ui/modules';
 import _ from 'lodash';
-import '../styles/_processor_collection_header.less';
-import template from '../views/processor_collection_header.html';
+import '../styles/_pipeline_header.less';
+import template from '../views/pipeline_header.html';
 
 const app = uiModules.get('kibana');
 
-app.directive('processorCollectionHeader', function () {
+app.directive('pipelineHeader', function () {
   return {
     restrict: 'E',
     template: template,

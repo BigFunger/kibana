@@ -11,23 +11,10 @@
     <div class="pipeline-details panel">
       <pipeline-details pipeline="pipeline"></pipeline-details>
     </div>
-    <label>
-      <span ng-show="pipeline.processorCollections.length === 0">Main Pipeline Processors</span>
-      <span ng-show="pipeline.processorCollections.length > 0">On-Failure Processors</span>
-      <a
-        aria-label="A pipeline is a definition of a series of processors that are to be executed in the same order as they are declared."
-        tooltip="A pipeline is a definition of a series of processors that are to be executed in the same order as they are declared."
-        tooltip-append-to-body="true"
-        target="_blank">
-        <i aria-hidden="true" class="fa fa-question-circle"></i>
-      </a>
-    </label>
-    <div class="pipeline panel">
-      <processor-collection-header
-        pipeline="pipeline"
-        ng-show="pipeline.processorCollections.length > 0">
-      </processor-collection-header>
 
+    <pipeline-header pipeline="pipeline">
+    </pipeline-header>
+    <div class="pipeline panel">
       <ul
         class="pipeline-container"
         ng-show="pipeline.activeProcessorCollection.processors.length > 0">
