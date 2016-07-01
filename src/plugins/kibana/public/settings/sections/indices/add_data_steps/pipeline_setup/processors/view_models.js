@@ -11,6 +11,7 @@ export { Remove } from './remove/view_model';
 export { Rename } from './rename/view_model';
 export { Script } from './script/view_model';
 export { Set } from './set/view_model';
+export { Sort } from './sort/view_model';
 export { Split } from './split/view_model';
 export { Trim } from './trim/view_model';
 export { Uppercase } from './uppercase/view_model';

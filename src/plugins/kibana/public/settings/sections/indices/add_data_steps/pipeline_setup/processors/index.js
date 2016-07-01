@@ -11,6 +11,7 @@ import './remove/directive';
 import './rename/directive';
 import './script/directive';
 import './set/directive';
+import './sort/directive';
 import './split/directive';
 import './trim/directive';
 import './uppercase/directive';

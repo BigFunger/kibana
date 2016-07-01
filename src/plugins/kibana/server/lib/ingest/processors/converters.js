@@ -11,6 +11,7 @@ export remove from '../processors/remove/converter';
 export rename from '../processors/rename/converter';
 export script from '../processors/script/converter';
 export set from '../processors/set/converter';
+export sort from '../processors/sort/converter';
 export split from '../processors/split/converter';
 export trim from '../processors/trim/converter';
 export uppercase from '../processors/uppercase/converter';

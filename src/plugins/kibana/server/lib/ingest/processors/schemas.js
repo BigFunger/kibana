@@ -11,6 +11,7 @@ export { remove } from './remove/schema';
 export { rename } from './rename/schema';
 export { script } from './script/schema';
 export { set } from './set/schema';
+export { sort } from './sort/schema';
 export { split } from './split/schema';
 export { trim } from './trim/schema';
 export { uppercase } from './uppercase/schema';
