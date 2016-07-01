@@ -11,7 +11,7 @@ export default {
       subObject.ignore_failure = true;
     }
 
-    if (processorApiDocument.failure_action === 'on_error') {
+    if (processorApiDocument.failure_action === 'on_error' && processorApiDocument.processors.length > 0) {
       subObject.on_failure = _.map(processorApiDocument.processors, (processor) => {
         const processorConverter = processorConverters[processor.type_id];
         return processorConverter.kibanaToEs(processor);

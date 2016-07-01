@@ -27,7 +27,7 @@ export default class Processor {
       defaultModel
     );
 
-    this.errorProcessorCollection = new ProcessorCollection(title, _.get(model, 'processors'));
+    this.failureProcessorCollection = new ProcessorCollection(title, _.get(model, 'processors'));
 
     this.failureOptions = {
       ignore_error: 'Ignore, and index document',
@@ -45,8 +45,8 @@ export default class Processor {
 
   setInput(newInputObject) {
     this.inputObject = _.cloneDeep(newInputObject);
-    this.errorProcessorCollection.input = this.inputObject;
-    this.errorProcessorCollection.updateInputs();
+    this.failureProcessorCollection.input = this.inputObject;
+    this.failureProcessorCollection.updateInputs();
   }
 
   setOutput(output, error) {
@@ -62,7 +62,7 @@ export default class Processor {
     } else if (this.error && this.failureAction === 'ignore_error') {
       this.state = 'error recover';
     } else if (this.error && this.failureAction === 'on_error' &&
-        this.errorProcessorCollection.processors.length > 0) {
+        this.failureProcessorCollection.processors.length > 0) {
       this.state = 'error recover';
     } else if (this.error && this.error.compile) {
       this.state = 'error compile';
@@ -76,11 +76,11 @@ export default class Processor {
       processorId: this.processorId,
       typeId: this.typeId,
       failureAction: this.failureAction,
-      processors: _.map(this.errorProcessorCollection.processors, processor => processor.model)
+      processors: _.map(this.failureProcessorCollection.processors, processor => processor.model)
     };
   }
 
   get output() {
-    return this.outputObject ? this.outputObject : this.errorProcessorCollection.output;
+    return this.outputObject ? this.outputObject : this.failureProcessorCollection.output;
   }
 }

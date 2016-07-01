@@ -17,7 +17,7 @@ export default class Pipeline {
     );
 
     this.processorCollection = new ProcessorCollection('Main Pipeline', _.get(model, 'processors'));
-    this.errorProcessorCollection = new ProcessorCollection('General Failure', _.get(model, 'errorProcessors'));
+    this.failureProcessorCollection = new ProcessorCollection('General Failure', _.get(model, 'errorProcessors'));
 
 
     this.processorCollections = [];
@@ -38,7 +38,7 @@ export default class Pipeline {
       pipelineId: this.pipelineId,
       description: this.description,
       failureAction: this.failureAction,
-      errorProcessors: _.map(this.errorProcessorCollection.processors, processor => processor.model),
+      errorProcessors: _.map(this.failureProcessorCollection.processors, processor => processor.model),
       processors: _.map(this.processorCollection.processors, processor => processor.model)
     };
   }
@@ -94,13 +94,13 @@ export default class Pipeline {
 
     function iteration(processorCollection) {
       _.forEach(processorCollection.processors, processor => {
-        iteration(processor.errorProcessorCollection);
+        iteration(processor.failureProcessorCollection);
         result[processor.processorId] = processor;
       });
     }
 
     iteration(this.processorCollection);
-    iteration(this.errorProcessorCollection);
+    iteration(this.failureProcessorCollection);
 
     return result;
   }
