@@ -12,8 +12,8 @@ export default {
     };
 
     if (pipelineApiDocument.failure_action === 'on_error' &&
-      pipelineApiDocument.error_processors.length > 0) {
-      result.on_failure = _.map(pipelineApiDocument.error_processors, (processor) => {
+      pipelineApiDocument.failure_processors.length > 0) {
+      result.on_failure = _.map(pipelineApiDocument.failure_processors, (processor) => {
         const processorConverter = processorConverters[processor.type_id];
         return processorConverter.kibanaToEs(processor);
       });
@@ -35,7 +35,7 @@ export default {
 
     if (pipelineEsDocument.config.on_failure) {
       result.failure_action = 'on_error';
-      result.error_processors = _.map(pipelineEsDocument.config.on_failure, (processor) => {
+      result.failure_processors = _.map(pipelineEsDocument.config.on_failure, (processor) => {
         const typeId = _.keys(processor)[0];
         const processorConverter = processorConverters[typeId];
         return processorConverter.esToKibana(processor);

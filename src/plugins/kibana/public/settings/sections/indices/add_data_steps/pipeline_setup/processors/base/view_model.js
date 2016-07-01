@@ -27,7 +27,7 @@ export default class Processor {
       defaultModel
     );
 
-    this.failureProcessorCollection = new ProcessorCollection(title, _.get(model, 'processors'));
+    this.failureProcessorCollection = new ProcessorCollection(title, _.get(model, 'failureProcessors'));
 
     this.failureOptions = {
       ignore_error: 'Ignore, and index document',
@@ -76,7 +76,7 @@ export default class Processor {
       processorId: this.processorId,
       typeId: this.typeId,
       failureAction: this.failureAction,
-      processors: _.map(this.failureProcessorCollection.processors, processor => processor.model)
+      failureProcessors: _.map(this.failureProcessorCollection.processors, processor => processor.model)
     };
   }
 

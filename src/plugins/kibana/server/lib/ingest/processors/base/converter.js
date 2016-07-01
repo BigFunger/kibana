@@ -11,8 +11,8 @@ export default {
       subObject.ignore_failure = true;
     }
 
-    if (processorApiDocument.failure_action === 'on_error' && processorApiDocument.processors.length > 0) {
-      subObject.on_failure = _.map(processorApiDocument.processors, (processor) => {
+    if (processorApiDocument.failure_action === 'on_error' && processorApiDocument.failure_processors.length > 0) {
+      subObject.on_failure = _.map(processorApiDocument.failure_processors, (processor) => {
         const processorConverter = processorConverters[processor.type_id];
         return processorConverter.kibanaToEs(processor);
       });
@@ -33,7 +33,7 @@ export default {
       processor_id: subObject.tag
     };
 
-    result.processors = _.map(subObject.on_failure, (processor) => {
+    result.failure_processors = _.map(subObject.on_failure, (processor) => {
       const typeId = _.keys(processor)[0];
       const processorConverter = processorConverters[typeId];
       return processorConverter.esToKibana(processor, typeId);

@@ -9,7 +9,10 @@ export default function IngestProvider($rootScope, $http, config, $q) {
   function packProcessors(processors) {
     return _.map(processors, (processor) => {
       const result = keysToSnakeCaseShallow(processor);
-      result.processors = packProcessors(processor.processors);
+      result.failure_processors = packProcessors(result.failure_processors);
+      if (result.processors) {
+        result.processors = packProcessors(result.processors); //for the foreach processor
+      }
 
       return result;
     });
@@ -18,8 +21,8 @@ export default function IngestProvider($rootScope, $http, config, $q) {
   function packPipeline(pipeline) {
     const result = keysToSnakeCaseShallow(pipeline);
     result.processors = packProcessors(result.processors);
-    if (result.error_processors) {
-      result.error_processors = packProcessors(result.error_processors);
+    if (result.failure_processors) {
+      result.failure_processors = packProcessors(result.failure_processors);
     }
 
     return result;
@@ -28,7 +31,10 @@ export default function IngestProvider($rootScope, $http, config, $q) {
   function unpackProcessors(processors) {
     return _.map(processors, (processor) => {
       const result = keysToCamelCaseShallow(processor);
-      result.processors = unpackProcessors(processor.processors);
+      result.failureProcessors = unpackProcessors(result.failureProcessors);
+      if (result.processors) {
+        result.processors = unpackProcessors(result.processors); //for the foreach processor
+      }
 
       return result;
     });
@@ -37,8 +43,8 @@ export default function IngestProvider($rootScope, $http, config, $q) {
   function unpackPipeline(pipeline) {
     const result = keysToCamelCaseShallow(pipeline);
     result.processors = unpackProcessors(result.processors);
-    if (result.errorProcessors) {
-      result.errorProcessors = unpackProcessors(result.errorProcessors);
+    if (result.failureProcessors) {
+      result.failureProcessors = unpackProcessors(result.failureProcessors);
     }
 
     return result;
@@ -54,7 +60,6 @@ export default function IngestProvider($rootScope, $http, config, $q) {
     load: function (pipelineId) {
       function unpack(response) {
         const result = unpackPipeline(response.data);
-        //console.log(response, result);
         return result;
       }
 
