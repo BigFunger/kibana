@@ -1,6 +1,7 @@
 export append from '../processors/append/converter';
 export convert from '../processors/convert/converter';
 export date from '../processors/date/converter';
+export fail from '../processors/fail/converter';
 export geoip from '../processors/geoip/converter';
 export grok from '../processors/grok/converter';
 export gsub from '../processors/gsub/converter';

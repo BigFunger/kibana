@@ -1,6 +1,7 @@
 export { Append } from './append/view_model';
 export { Convert } from './convert/view_model';
 export { Date } from './date/view_model';
+export { Fail } from './fail/view_model';
 export { GeoIp } from './geoip/view_model';
 export { Grok } from './grok/view_model';
 export { Gsub } from './gsub/view_model';

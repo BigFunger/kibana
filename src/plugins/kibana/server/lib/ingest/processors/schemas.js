@@ -1,6 +1,7 @@
 export { append } from './append/schema';
 export { convert } from './convert/schema';
 export { date } from './date/schema';
+export { fail } from './fail/schema';
 export { geoip } from './geoip/schema';
 export { grok } from './grok/schema';
 export { gsub } from './gsub/schema';
