@@ -129,6 +129,7 @@ export default function IngestProvider($rootScope, $http, config, $q) {
     }
 
     const payload = pack(pipeline, input);
+    console.log('simulate', payload);
     return $http.post(`${ingestAPIPrefix}/simulate`, payload)
     .then(unpack)
     .catch(err => {

@@ -2,6 +2,7 @@ import './append/directive';
 import './convert/directive';
 import './date/directive';
 import './fail/directive';
+import './foreach/directive';
 import './geoip/directive';
 import './grok/directive';
 import './gsub/directive';
