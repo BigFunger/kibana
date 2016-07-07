@@ -16,8 +16,16 @@ export default class Pipeline {
       defaultModel
     );
 
-    this.processorCollection = new ProcessorCollection('Main Pipeline', _.get(model, 'processors'));
-    this.failureProcessorCollection = new ProcessorCollection('General Failure', _.get(model, 'failureProcessors'));
+    this.processorCollection = new ProcessorCollection(
+      'Main Pipeline',
+      _.get(model, 'processors'),
+      ProcessorCollection.types.MAIN
+    );
+    this.failureProcessorCollection = new ProcessorCollection(
+      'General Failure',
+      _.get(model, 'failureProcessors'),
+      ProcessorCollection.types.GLOBAL_ERROR
+    );
 
 
     this.processorCollections = [];

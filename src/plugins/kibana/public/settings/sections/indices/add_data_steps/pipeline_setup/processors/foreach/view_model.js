@@ -15,13 +15,22 @@ export class Foreach extends Processor {
       model
     );
 
-    this.processorCollection = new ProcessorCollection('processors', _.get(model, 'processors'));
+    this.processorCollection = new ProcessorCollection(
+      'processors',
+      _.get(model, 'processors'),
+      ProcessorCollection.types.FOREACH
+    );
+    this.updateProcessorCollection();
   }
 
   setInput(newInputObject) {
     super.setInput(newInputObject);
-    this.processorCollection.input = this.inputObject;
-    this.processorCollection.updateInputs();
+    this.processorCollection.updateInputs(this.inputObject);
+    this.updateProcessorCollection();
+  }
+
+  updateProcessorCollection() {
+    this.processorCollection.valueField = this.targetField;
   }
 
   get description() {

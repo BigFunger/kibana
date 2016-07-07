@@ -1,5 +1,6 @@
 import uiModules from 'ui/modules';
 import template from './view.html';
+import './styles.less';
 
 const app = uiModules.get('kibana');
 
@@ -12,7 +13,10 @@ app.directive('processorUiForeach', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
-      $scope.$watch('processor.targetField', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.targetField', () => {
+        $scope.processor.updateProcessorCollection();
+        pipeline.setDirty();
+      });
 
       $scope.defineProcessors = () => {
         $scope.pipeline.pushProcessorCollection(processor.processorCollection);

@@ -1,11 +1,12 @@
 import _ from 'lodash';
 import * as ProcessorViewModels from '../processors/view_models';
 
-
 export default class ProcessorCollection {
 
-  constructor(title, processors) {
+  constructor(title, processors, type) {
     this.title = title;
+    this.type = type;
+    this.valueField;
     this.processors = [];
     this.input = {};
 
@@ -75,7 +76,18 @@ export default class ProcessorCollection {
   }
 
   updateInputs(rootInput) {
-    this.input = rootInput || this.input;
+    if (rootInput) {
+      this.input = rootInput;
+
+      if (this.valueField) {
+        this.input = {
+          _value: _.get(this.input, this.valueField)
+        };
+      }
+    }
+    //this.input = rootInput || this.input;
+
+
     this.processors.forEach((processor, index) => {
       if (index === 0) {
         processor.setInput(this.input);
@@ -94,3 +106,10 @@ export default class ProcessorCollection {
 
 //static processor counter across all collections
 ProcessorCollection.processorCounter = 0;
+
+ProcessorCollection.types = {
+  MAIN: 'main processors',
+  FAILURE: 'failure branch',
+  GLOBAL_FAILURE: 'global failure branch',
+  FOREACH: 'foreach branch'
+};

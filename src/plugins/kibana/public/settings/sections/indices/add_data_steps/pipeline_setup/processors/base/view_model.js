@@ -27,7 +27,11 @@ export default class Processor {
       defaultModel
     );
 
-    this.failureProcessorCollection = new ProcessorCollection(title, _.get(model, 'failureProcessors'));
+    this.failureProcessorCollection = new ProcessorCollection(
+      title,
+      _.get(model, 'failureProcessors'),
+      ProcessorCollection.types.ERROR
+    );
 
     this.failureOptions = {
       ignore_error: 'Ignore, and index document',
@@ -45,8 +49,7 @@ export default class Processor {
 
   setInput(newInputObject) {
     this.inputObject = _.cloneDeep(newInputObject);
-    this.failureProcessorCollection.input = this.inputObject;
-    this.failureProcessorCollection.updateInputs();
+    this.failureProcessorCollection.updateInputs(this.inputObject);
   }
 
   setOutput(output, error) {
