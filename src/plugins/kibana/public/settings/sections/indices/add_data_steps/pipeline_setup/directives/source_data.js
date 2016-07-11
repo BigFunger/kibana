@@ -16,8 +16,6 @@ app.directive('sourceData', function () {
     },
     template: sourceDataTemplate,
     controller: function ($scope) {
-      let samples;
-
       $scope.$watch('selectedSample', (newValue) => {
         //the added complexity of this directive is to strip out the properties
         //that angular adds to array objects that are bound via ng-options
@@ -25,20 +23,17 @@ app.directive('sourceData', function () {
       });
 
       $scope.$watch('samples', (newValue) => {
-        samples = $scope.samples;
+        if (!newValue) return;
+        const samples = $scope.samples;
 
         let currentIndex = _.findIndex(samples, $scope.sample);
         if (currentIndex === -1) currentIndex = 0;
         $scope.selectedSample = samples[currentIndex];
-
-        // if (!_.some($scope.samples, (sample) => {
-        //   return _.isEqual(sample, $scope.sample);
-        // })) {
-        //   $scope.sample = _.first($scope.samples);
-        // }
       });
 
       $scope.previousLine = function () {
+        const samples = $scope.samples;
+
         let currentIndex = samples.indexOf($scope.selectedSample);
         if (currentIndex <= 0) currentIndex = samples.length;
 
@@ -46,6 +41,8 @@ app.directive('sourceData', function () {
       };
 
       $scope.nextLine = function () {
+        const samples = $scope.samples;
+
         let currentIndex = samples.indexOf($scope.selectedSample);
         if (currentIndex >= samples.length - 1) currentIndex = -1;
 

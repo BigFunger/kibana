@@ -7,7 +7,8 @@ export default class Pipeline {
     const defaultModel = {
       pipelineId: '',
       description: '',
-      failureAction: 'index_fail'
+      failureAction: 'index_fail',
+      rawSamples: ''
     };
 
     _.defaults(
@@ -47,7 +48,8 @@ export default class Pipeline {
       description: this.description,
       failureAction: this.failureAction,
       failureProcessors: _.map(this.failureProcessorCollection.processors, processor => processor.model),
-      processors: _.map(this.processorCollection.processors, processor => processor.model)
+      processors: _.map(this.processorCollection.processors, processor => processor.model),
+      rawSamples: this.rawSamples
     };
   }
 

@@ -13,7 +13,6 @@ app.directive('pipelineSetup', function () {
     restrict: 'E',
     template: template,
     scope: {
-      samples: '=',
       pipelineModel: '='
     },
     controller: function ($scope, debounce, Private, Notifier) {
@@ -44,10 +43,9 @@ app.directive('pipelineSetup', function () {
         pipeline.dirty = true;
       });
 
-      $scope.$watch('sample', (newVal) => {
+      $scope.$watch('pipeline.input', (newVal) => {
         const pipeline = $scope.pipeline;
 
-        pipeline.input = $scope.sample;
         pipeline.processorCollection.updateInputs(pipeline.input);
         pipeline.dirty = true;
       });
@@ -64,10 +62,8 @@ app.directive('pipelineSetup', function () {
       $scope.$watch('pipeline.dirty', simulatePipeline);
 
       $scope.$watch('pipeline', (newPipeline) => {
-        //TODO: Not sure what to do in this case... since the samples are going to be associated with a pipeline.
         const pipeline = $scope.pipeline;
 
-        pipeline.input = $scope.sample;
         pipeline.processorCollection.updateInputs(pipeline.input);
         pipeline.dirty = true;
 

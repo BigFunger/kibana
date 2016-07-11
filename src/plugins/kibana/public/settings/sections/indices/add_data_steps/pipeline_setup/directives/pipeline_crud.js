@@ -37,7 +37,8 @@ app.directive('pipelineCrud', function () {
       $scope.load = function () {
         return ingest.pipeline.load($scope.pipelineId)
         .then((result) => {
-          $scope.pipeline = new Pipeline(result);
+          const pipeline = new Pipeline(result);
+          $scope.pipeline = pipeline;
         })
         .catch(notify.error);
       };

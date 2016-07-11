@@ -11,15 +11,10 @@ app.directive('pipelineInput', function () {
     template: template,
     scope: {
       pipeline: '=',
-      samples: '=',
-      sample: '='
+      samples: '='
     },
     controller: function ($scope) {
-      if (_.isUndefined($scope.rawSample)) {
-        $scope.rawSample = '';
-      }
-
-      $scope.$watch('rawSample', (newValue) => {
+      $scope.$watch('pipeline.rawSamples', (newValue) => {
         const splitRawSamples = newValue.split('\n');
 
         $scope.samples = _.map(splitRawSamples, (sample) => {

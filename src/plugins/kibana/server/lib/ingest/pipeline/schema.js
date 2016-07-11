@@ -7,5 +7,6 @@ export default Joi.object({
   description: Joi.string().allow(''),
   failure_action: Joi.string().allow(''),
   failure_processors: processorArraySchema.optional(),
-  processors: processorArraySchema
+  processors: processorArraySchema,
+  raw_samples: Joi.string().allow('')
 });

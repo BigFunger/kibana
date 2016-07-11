@@ -16,12 +16,21 @@ export function registerPipeline(server) {
       const boundCallWithRequest = _.partial(server.plugins.elasticsearch.callWithRequest, request);
       const pipelineApiDocument = request.payload;
       const body = pipelineConverter.kibanaToEs(pipelineApiDocument);
+      const kibanaIndex = server.config().get('kibana.index');
 
       return boundCallWithRequest('transport.request', {
         path: `/_ingest/pipeline/${pipelineApiDocument.pipeline_id}`,
         method: 'PUT',
         body: body
       })
+      .then(boundCallWithRequest('index', {
+        index: kibanaIndex,
+        type: 'pipeline-meta',
+        id: pipelineApiDocument.pipeline_id,
+        body: {
+          'raw-samples': pipelineApiDocument.raw_samples,
+        }
+      }))
       .then(reply)
       .catch((error) => {
         reply(handleESError(error));
@@ -29,9 +38,11 @@ export function registerPipeline(server) {
     }
   });
 
-  function handlePipelineResponse(response) {
+  function handlePipelineResponse(response, metaResponse) {
     const esPipeline =  _.get(response, 'pipelines[0]');
     const kibanaPipeline = pipelineConverter.esToKibana(esPipeline);
+
+    kibanaPipeline.raw_samples = metaResponse._source['raw-samples'];
     return kibanaPipeline;
   }
 
@@ -40,12 +51,20 @@ export function registerPipeline(server) {
     method: 'GET',
     handler: function (request, reply) {
       const boundCallWithRequest = _.partial(server.plugins.elasticsearch.callWithRequest, request);
+      const kibanaIndex = server.config().get('kibana.index');
 
       return boundCallWithRequest('transport.request', {
         path: `/_ingest/pipeline/${request.params.id}`,
         method: 'GET'
       })
-      .then(handlePipelineResponse)
+      .then((response) => {
+        return boundCallWithRequest('get', {
+          index: kibanaIndex,
+          type: 'pipeline-meta',
+          id: request.params.id
+        })
+        .then(_.partial(handlePipelineResponse, response));
+      })
       .then(reply)
       .catch((error) => {
         reply(handleESError(error));
