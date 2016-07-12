@@ -5,6 +5,7 @@ import angular from 'angular';
 import IngestProvider from 'ui/ingest';
 import '../styles/_pipeline_setup.less';
 import template from '../views/pipeline_setup.html';
+import ProcessorCollection from '../lib/processor_collection';
 
 const app = uiModules.get('kibana');
 
@@ -18,7 +19,7 @@ app.directive('pipelineSetup', function () {
     controller: function ($scope, debounce, Private, Notifier) {
       const ingest = Private(IngestProvider);
       const notify = new Notifier({ location: `Ingest Pipeline Setup` });
-      $scope.sample = {};
+      $scope.collectionTypes = ProcessorCollection.types;
 
       $scope.pipeline = new Pipeline($scope.pipelineModel);
 

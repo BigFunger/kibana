@@ -27,6 +27,7 @@ export default class ProcessorCollection {
     const ProcessorType = this.ProcessorTypes[typeId];
     const processorCounter = ProcessorCollection.processorCounter += 1;
     const processorId = `processor_${processorCounter}`;
+    //const processorId = `${ProcessorType.name}_${processorCounter}`;
     const newProcessor = new ProcessorType(processorId, processorModel);
 
     if (processorModel) {
@@ -80,13 +81,9 @@ export default class ProcessorCollection {
       this.input = rootInput;
 
       if (this.valueField) {
-        this.input = {
-          _value: _.get(this.input, this.valueField)
-        };
+        this.input = _.set({}, this.valueField, _.get(this.input, this.valueField));
       }
     }
-    //this.input = rootInput || this.input;
-
 
     this.processors.forEach((processor, index) => {
       if (index === 0) {

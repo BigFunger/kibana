@@ -1,5 +1,15 @@
+<label>
+  <span>Processors</span>
+  <a
+    aria-label="A pipeline is a definition of a series of processors that are to be executed in the same order as they are declared."
+    tooltip="A pipeline is a definition of a series of processors that are to be executed in the same order as they are declared."
+    tooltip-append-to-body="true"
+    target="_blank">
+    <i aria-hidden="true" class="fa fa-question-circle"></i>
+  </a>
+</label>
 <div
-  class="alert alert-info"
+  class="alert alert-soft-info"
   ng-show="collectionType!=collectionTypes.MAIN">
   <!-- <h1 ng-show="collectionType===collectionTypes.MAIN">You are defining the main processor chain</h1> -->
   <span ng-show="collectionType===collectionTypes.PROCESSOR_FAILURE">
@@ -25,13 +35,3 @@
     </li>
   </ul>
 </div>
-<label>
-  <span>Processors</span>
-  <a
-    aria-label="A pipeline is a definition of a series of processors that are to be executed in the same order as they are declared."
-    tooltip="A pipeline is a definition of a series of processors that are to be executed in the same order as they are declared."
-    tooltip-append-to-body="true"
-    target="_blank">
-    <i aria-hidden="true" class="fa fa-question-circle"></i>
-  </a>
-</label>
