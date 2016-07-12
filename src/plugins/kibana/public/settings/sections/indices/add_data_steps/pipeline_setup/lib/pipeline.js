@@ -25,7 +25,7 @@ export default class Pipeline {
     this.failureProcessorCollection = new ProcessorCollection(
       'General Failure',
       _.get(model, 'failureProcessors'),
-      ProcessorCollection.types.GLOBAL_ERROR
+      ProcessorCollection.types.GLOBAL_FAILURE
     );
 
 

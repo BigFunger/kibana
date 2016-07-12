@@ -109,7 +109,7 @@ ProcessorCollection.processorCounter = 0;
 
 ProcessorCollection.types = {
   MAIN: 'main processors',
-  FAILURE: 'failure branch',
+  PROCESSOR_FAILURE: 'processor failure branch',
   GLOBAL_FAILURE: 'global failure branch',
   FOREACH: 'foreach branch'
 };
