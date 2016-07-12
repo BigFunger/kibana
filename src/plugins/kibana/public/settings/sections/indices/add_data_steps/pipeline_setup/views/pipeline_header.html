@@ -24,14 +24,12 @@
 
   <ul>
     <li ng-repeat="crumb in breadcrumbs">
-      <span
-        class="spacer"
-        ng-show="$index > 0">/</span>
       <a
         ng-hide="$last"
         ng-click="navigateTo($index)"
-        href>{{crumb}}</a>
-      <span ng-show="$last">{{crumb}}</span>
+        href>{{crumb.primary}}</a>
+      <span ng-show="$last">{{crumb.primary}}</span>
+      <span class="secondary" ng-show="crumb.secondary">- {{crumb.secondary}}</span>
     </li>
   </ul>
 </div>

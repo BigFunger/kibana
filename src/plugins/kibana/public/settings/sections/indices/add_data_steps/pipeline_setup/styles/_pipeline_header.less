@@ -12,19 +12,11 @@ pipeline-header {
   }
 
   ul {
-    list-style: none;
-    padding-left: 0;
+    //list-style: none;
+    //padding-left: 0;
+    padding-left: 20px;
     margin-bottom: 2px;
     margin-top: 10px;
-
-    li {
-      display: inline-block;
-
-      .spacer {
-        margin-left: 5px;
-        margin-right: 5px;
-      }
-    }
   }
 
   .alert {
@@ -37,6 +29,11 @@ pipeline-header {
 
   .alert.alert-soft-info {
     background-color: #FBF1D4;
+  }
+
+  span.secondary {
+    font-size: 12px;
+    color: @kibanaGray3;
   }
 
 }

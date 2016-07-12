@@ -18,7 +18,8 @@ export class Foreach extends Processor {
     this.processorCollection = new ProcessorCollection(
       'For Each',
       _.get(model, 'processors'),
-      ProcessorCollection.types.FOREACH
+      ProcessorCollection.types.FOREACH,
+      this
     );
     this.updateProcessorCollection();
   }

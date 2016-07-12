@@ -3,12 +3,13 @@ import * as ProcessorViewModels from '../processors/view_models';
 
 export default class ProcessorCollection {
 
-  constructor(title, processors, type) {
+  constructor(title, processors, type, parentProcessor) {
     this.title = title;
     this.type = type;
     this.valueField;
     this.processors = [];
     this.input = {};
+    this.parentProcessor = parentProcessor;
 
     this.ProcessorTypes = {};
     _.forIn(ProcessorViewModels, (ViewModel) => {
@@ -27,7 +28,6 @@ export default class ProcessorCollection {
     const ProcessorType = this.ProcessorTypes[typeId];
     const processorCounter = ProcessorCollection.processorCounter += 1;
     const processorId = `processor_${processorCounter}`;
-    //const processorId = `${ProcessorType.name}_${processorCounter}`;
     const newProcessor = new ProcessorType(processorId, processorModel);
 
     if (processorModel) {

@@ -30,7 +30,8 @@ export default class Processor {
     this.failureProcessorCollection = new ProcessorCollection(
       title,
       _.get(model, 'failureProcessors'),
-      ProcessorCollection.types.PROCESSOR_FAILURE
+      ProcessorCollection.types.PROCESSOR_FAILURE,
+      this
     );
 
     this.failureOptions = {

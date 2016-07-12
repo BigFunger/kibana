@@ -21,14 +21,28 @@ app.directive('pipelineHeader', function () {
         updateBreadcrumbs();
       });
 
+      function getCrumb(processorCollection) {
+        if (processorCollection.parentProcessor) {
+          const processor = processorCollection.parentProcessor;
+          return {
+            primary: processor.title,
+            secondary: processor.description
+          };
+        } else {
+          return {
+            primary: processorCollection.title
+          };
+        }
+      }
+
       function updateBreadcrumbs() {
         const pipeline = $scope.pipeline;
         const breadcrumbs = [];
 
         _.forEach(pipeline.processorCollections, (processorCollection) => {
-          breadcrumbs.push(processorCollection.title);
+          breadcrumbs.push(getCrumb(processorCollection));
         });
-        breadcrumbs.push(pipeline.activeProcessorCollection.title);
+        breadcrumbs.push(getCrumb(pipeline.activeProcessorCollection));
 
         $scope.breadcrumbs = breadcrumbs;
       }
