@@ -125,11 +125,12 @@ export default function IngestProvider($rootScope, $http, config, $q) {
 
     function unpack(response) {
       const data = response.data.map(result => keysToCamelCaseShallow(result));
+      // console.log('simulate result', data);
       return data;
     }
 
     const payload = pack(pipeline, input);
-    console.log('simulate', payload);
+    //console.log('simulate request', payload);
     return $http.post(`${ingestAPIPrefix}/simulate`, payload)
     .then(unpack)
     .catch(err => {

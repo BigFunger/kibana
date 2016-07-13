@@ -2,7 +2,7 @@ import _ from 'lodash';
 import ProcessorCollection from '../../lib/processor_collection';
 
 export default class Processor {
-  constructor(processorId, typeId, title, helpText, defaultModel, model) {
+  constructor(processorId, typeId, title, helpText, mainField, defaultModel, model) {
     if (!typeId || !title) {
       throw new Error('Cannot instantiate the base Processor class.');
     }
@@ -18,6 +18,7 @@ export default class Processor {
     this.error = undefined;
     this.new = true;
     this.state = 'not initialized';
+    this.mainField = mainField;
 
     defaultModel.failureAction = 'index_fail';
 

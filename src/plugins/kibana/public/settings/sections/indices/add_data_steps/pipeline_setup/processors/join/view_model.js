@@ -9,6 +9,7 @@ export class Join extends Processor {
       'Join',
       `Joins each element of an array into a single string using a
 separator character between each element. `,
+      'sourceField',
       {
         sourceField: '',
         separator: ''

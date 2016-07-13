@@ -10,6 +10,7 @@ export class Sort extends Processor {
       `Sorts the elements of an array ascending or descending. Homogeneous arrays
 of numbers will be sorted numerically, while arrays of strings or heterogeneous
 arrays of strings + numbers will be sorted lexicographically.`,
+      'targetField',
       {
         targetField: '',
         sortOrder: 'asc'

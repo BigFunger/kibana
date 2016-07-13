@@ -12,6 +12,7 @@ export class Grok extends Processor {
 You choose which field to extract matched fields from, as well as the
 grok pattern you expect will match. A grok pattern is like a regular
 expression that supports aliased expressions that can be reused.`,
+      'sourceField',
       {
         sourceField: '',
         pattern: ''

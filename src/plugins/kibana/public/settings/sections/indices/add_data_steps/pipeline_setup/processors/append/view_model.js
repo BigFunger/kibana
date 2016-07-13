@@ -11,6 +11,7 @@ export class Append extends Processor {
 and it is an array. Converts a scalar to an array and appends one or more
 values to it if the field exists and it is a scalar. Creates an array
 containing the provided values if the field doesn’t exist.`,
+      'targetField',
       {
         targetField: '',
         values: []

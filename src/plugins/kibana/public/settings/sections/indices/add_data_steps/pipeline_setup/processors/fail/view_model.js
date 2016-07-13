@@ -8,6 +8,7 @@ export class Fail extends Processor {
       'fail',
       'Fail',
       `Raises an exception.`,
+      null,
       {
         message: ''
       },

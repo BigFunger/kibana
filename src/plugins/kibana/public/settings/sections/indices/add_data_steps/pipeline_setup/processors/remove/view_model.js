@@ -8,6 +8,7 @@ export class Remove extends Processor {
       'remove',
       'Remove',
       `Removes an existing field.`,
+      'sourceField',
       {
         sourceField: ''
       },

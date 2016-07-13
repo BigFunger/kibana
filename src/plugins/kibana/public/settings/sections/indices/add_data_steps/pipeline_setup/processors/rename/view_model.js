@@ -8,6 +8,7 @@ export class Rename extends Processor {
       'rename',
       'Rename',
       `Renames an existing field.`,
+      'sourceField',
       {
         sourceField: '',
         targetField: ''

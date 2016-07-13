@@ -8,6 +8,7 @@ export class Date extends Processor {
       'date',
       'Date',
       `Parses dates from fields.`,
+      'sourceField',
       {
         sourceField: '',
         targetField: '@timestamp',

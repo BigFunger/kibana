@@ -8,6 +8,7 @@ export class Lowercase extends Processor {
       'lowercase',
       'Lowercase',
       `Converts a string to its lowercase equivalent.`,
+      'sourceField',
       {
         sourceField: ''
       },

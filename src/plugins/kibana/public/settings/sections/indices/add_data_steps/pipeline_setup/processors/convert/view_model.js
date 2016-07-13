@@ -10,6 +10,7 @@ export class Convert extends Processor {
       `Converts an existing field’s value to a different type, such as converting
 a string to an integer. If the field value is an array, all members will be
 converted.`,
+      'sourceField',
       {
         sourceField: '',
         targetField: '',

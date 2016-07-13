@@ -33,6 +33,14 @@ export default class ProcessorCollection {
     if (processorModel) {
       newProcessor.new = false;
       newProcessor.collapsed = true;
+    } else {
+      if (this.type === ProcessorCollection.types.FOREACH) {
+        if (newProcessor.mainField) {
+          _.set(newProcessor, newProcessor.mainField, '_value');
+          newProcessor.new = false;
+          //since we're defaulting the mainField, this should be included in the results.
+        }
+      }
     }
 
     this.processors.push(newProcessor);

@@ -8,6 +8,7 @@ export class Split extends Processor {
       'split',
       'Split',
       `Splits a field into an array using a separator character.`,
+      'sourceField',
       {
         sourceField: '',
         separator: ''

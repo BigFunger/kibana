@@ -9,6 +9,7 @@ export class Set extends Processor {
       'Set',
       `Sets one field and associates it with the specified value. If the field
 already exists, its value will be replaced with the provided one.`,
+      'targetField',
       {
         targetField: '',
         value: ''

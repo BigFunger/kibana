@@ -8,6 +8,7 @@ export class Trim extends Processor {
       'trim',
       'Trim',
       `Trims whitespace from field.`,
+      'sourceField',
       {
         sourceField: ''
       },

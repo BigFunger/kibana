@@ -9,6 +9,7 @@ export class Foreach extends Processor {
       'foreach',
       'For Each',
       `Processes elements in an array of unknown length.`,
+      'targetField',
       {
         targetField: ''
       },
@@ -32,7 +33,10 @@ export class Foreach extends Processor {
 
 
   setOutput(output, error) {
+    if (this.new) return;
+
     super.setOutput(output, error);
+
     if (this.processorCollection.processors.length > 0) {
       this.processorCollection.processors[0].setOutput(output, error);
     }

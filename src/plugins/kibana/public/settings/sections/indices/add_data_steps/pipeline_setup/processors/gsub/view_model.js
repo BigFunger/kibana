@@ -8,6 +8,7 @@ export class Gsub extends Processor {
       'gsub',
       'Gsub',
       `Converts a string field by applying a regular expression and a replacement.`,
+      'sourceField',
       {
         sourceField: '',
         pattern: '',

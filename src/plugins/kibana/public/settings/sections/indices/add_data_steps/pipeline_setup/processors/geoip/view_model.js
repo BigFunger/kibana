@@ -9,6 +9,7 @@ export class GeoIp extends Processor {
       'Geo IP',
       `Adds information about the geographical location of IP addresses,
 based on data from the Maxmind database.`,
+      'sourceField',
       {
         sourceField: '',
         targetField: '',

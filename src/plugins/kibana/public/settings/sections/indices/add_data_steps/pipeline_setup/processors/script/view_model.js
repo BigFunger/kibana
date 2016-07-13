@@ -8,6 +8,7 @@ export class Script extends Processor {
       'script',
       'Script',
       `Allows inline, stored, and file scripts to be executed within ingest pipelines.`,
+      'targetField',
       {
         targetField: '',
         language: '',
