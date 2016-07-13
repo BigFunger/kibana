@@ -30,13 +30,23 @@ export class Foreach extends Processor {
     this.updateProcessorCollection();
   }
 
+
+  setOutput(output, error) {
+    super.setOutput(output, error);
+    if (this.processorCollection.processors.length > 0) {
+      this.processorCollection.processors[0].setOutput(output, error);
+    }
+  }
+
   updateProcessorCollection() {
     this.processorCollection.valueField = this.targetField;
   }
 
   get description() {
     const target = this.targetField || '?';
-    return `[${target}]`;
+
+    const processor = _.get(this.processorCollection, 'processors[0].title') || '?';
+    return `[${processor}] on [${target}]`;
   }
 
   get model() {

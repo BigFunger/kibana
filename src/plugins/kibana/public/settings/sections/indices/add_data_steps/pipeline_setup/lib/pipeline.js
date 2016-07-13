@@ -57,13 +57,6 @@ export default class Pipeline {
     this.dirty = true;
   }
 
-  load(pipeline) {
-    this.processorCollection = new ProcessorCollection();
-    pipeline.processors.forEach((processor) => {
-      this.processorCollection.addExisting(processor);
-    });
-  }
-
   ///TODO: Rename this function
   pushProcessorCollection(processorCollection) {
     if (this.activeProcessorCollection === processorCollection) return;
@@ -72,6 +65,7 @@ export default class Pipeline {
     this.activeProcessorCollection = processorCollection;
   }
 
+  ///TODO: Rename this function
   jumpToProcessorCollection(index) {
     while (this.processorCollections.length > index) {
       this.activeProcessorCollection = this.processorCollections.pop();
