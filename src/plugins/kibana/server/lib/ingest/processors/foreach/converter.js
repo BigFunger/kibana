@@ -17,7 +17,7 @@ export default {
 
     _.assign(result, {
       target_field: processorEsDocument.foreach.field,
-      processors: processorArrayConverter.esToKibana(processorEsDocument.processors)
+      processors: processorArrayConverter.esToKibana(processorEsDocument.foreach.processors)
     });
 
     return result;
