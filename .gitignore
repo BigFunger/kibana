@@ -1,4 +1,5 @@
 .aws-config.json
+.signing-config.json
 .ackrc
 .DS_Store
 .node_binaries
@@ -11,11 +12,15 @@ target
 .idea
 *.iml
 *.log
-/test/output
+/test/screenshots/diff
+/test/screenshots/failure
+/test/screenshots/session
+/test/screenshots/visual_regression_gallery.html
 /esvm
 .htpasswd
 .eslintcache
-installedPlugins
+plugins
+data
 disabledPlugins
 webpackstats.json
 config/kibana.dev.yml

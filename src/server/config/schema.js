@@ -6,6 +6,7 @@ import { randomBytes } from 'crypto';
 import os from 'os';
 
 import { fromRoot } from '../../utils';
+import { getData } from '../path';
 
 module.exports = () => Joi.object({
   pkg: Joi.object({
@@ -86,13 +87,17 @@ module.exports = () => Joi.object({
   .default(),
 
   ops: Joi.object({
-    interval: Joi.number().default(10000),
+    interval: Joi.number().default(5000),
   }),
 
   plugins: Joi.object({
     paths: Joi.array().items(Joi.string()).default([]),
     scanDirs: Joi.array().items(Joi.string()).default([]),
     initialize: Joi.boolean().default(true)
+  }).default(),
+
+  path: Joi.object({
+    data: Joi.string().default(getData())
   }).default(),
 
   optimize: Joi.object({
@@ -121,6 +126,10 @@ module.exports = () => Joi.object({
       )
       .default(Joi.ref('$dev')),
     profile: Joi.boolean().default(false)
+  }).default(),
+
+  status: Joi.object({
+    allowAnonymous: Joi.boolean().default(false)
   }).default()
 
 }).default();
