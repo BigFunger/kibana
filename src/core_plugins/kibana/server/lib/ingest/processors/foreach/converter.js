@@ -5,9 +5,10 @@ import processorArrayConverter from '../processor_array/converter';
 export default {
   kibanaToEs: function (processorApiDocument) {
     const result = baseConverter.kibanaToEs(processorApiDocument, 'foreach');
+    const processors = processorArrayConverter.kibanaToEs(processorApiDocument.processors);
     _.assign(result.foreach, {
       field: processorApiDocument.target_field,
-      processors: processorArrayConverter.kibanaToEs(processorApiDocument.processors)
+      processor: _.first(processors) || {}
     });
 
     return result;
@@ -17,7 +18,7 @@ export default {
 
     _.assign(result, {
       target_field: processorEsDocument.foreach.field,
-      processors: processorArrayConverter.esToKibana(processorEsDocument.foreach.processors)
+      processors: processorArrayConverter.esToKibana([processorEsDocument.foreach.processor])
     });
 
     return result;
