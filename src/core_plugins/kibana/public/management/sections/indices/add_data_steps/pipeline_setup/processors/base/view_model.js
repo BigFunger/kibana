@@ -81,7 +81,7 @@ export default class Processor {
       processorId: this.processorId,
       typeId: this.typeId,
       failureAction: this.failureAction,
-      failureProcessors: _.map(this.failureProcessorCollection.processors, processor => processor.model)
+      failureProcessors: this.failureProcessorCollection.model
     };
   }
 

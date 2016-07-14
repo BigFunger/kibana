@@ -107,6 +107,23 @@ export default class ProcessorCollection {
     return lastValidProcessor ? lastValidProcessor.output : undefined;
   }
 
+  get model() {
+    const result = [];
+    let newFlag = false;
+
+    _.forEach(this.processors, (processor) => {
+      if (processor.new) {
+        newFlag = true;
+      }
+
+      if (!newFlag) {
+        result.push(processor.model);
+      }
+    });
+
+    return result;
+  }
+
 }
 
 //static processor counter across all collections

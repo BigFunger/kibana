@@ -43,14 +43,16 @@ export default class Pipeline {
   }
 
   get model() {
-    return {
+    const result = {
       pipelineId: this.pipelineId,
       description: this.description,
       failureAction: this.failureAction,
-      failureProcessors: _.map(this.failureProcessorCollection.processors, processor => processor.model),
-      processors: _.map(this.processorCollection.processors, processor => processor.model),
+      failureProcessors: this.failureProcessorCollection.model,
+      processors: this.processorCollection.model,
       rawSamples: this.rawSamples
     };
+
+    return result;
   }
 
   setDirty() {
