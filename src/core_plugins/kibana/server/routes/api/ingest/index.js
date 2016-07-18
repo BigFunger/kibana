@@ -4,6 +4,7 @@ import { registerProcessors } from './register_processors';
 import { registerSimulate } from './register_simulate';
 import { registerData } from './register_data';
 import { registerPipeline } from './register_pipeline';
+import { registerPipelines } from './register_pipelines';
 
 export default function (server) {
   registerPost(server);
@@ -12,4 +13,5 @@ export default function (server) {
   registerSimulate(server);
   registerData(server);
   registerPipeline(server);
+  registerPipelines(server);
 }

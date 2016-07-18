@@ -42,10 +42,6 @@ app.directive('pipelineCrud', function () {
         })
         .catch(notify.error);
       };
-
-      $scope.debug = function () {
-        console.log(JSON.stringify($scope.pipeline.model));
-      };
     }
   };
 });

@@ -79,7 +79,17 @@ export default function IngestProvider($rootScope, $http, config, $q, Private, i
 
   this.pipelines = {
     load: function () {
+      function unpack(response) {
+        return _.map(response.data, (pipeline) => {
+          return unpackPipeline(pipeline);
+        });
+      }
 
+      return $http.get(`${ingestAPIPrefix}/pipelines`)
+      .then(unpack)
+      .catch(err => {
+        return $q.reject(new Error('Error fetching pipelines'));
+      });
     }
   };
 
