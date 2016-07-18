@@ -3,7 +3,6 @@ import routes from 'ui/routes';
 import IngestProvider from 'ui/ingest';
 import Pipeline from './lib/pipeline';
 import template from './views/edit_app.html';
-//import saveTemplate from './partials/_pipeline_save.html';
 import './directives/pipeline_edit';
 
 routes

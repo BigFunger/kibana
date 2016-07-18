@@ -2,7 +2,7 @@ import _ from 'lodash';
 import 'ui/paginated_table';
 import modules from 'ui/modules';
 import template from '../views/pipeline_menu.html';
-import '../styles/pipeline_menu.less';
+import '../styles/_pipeline_menu.less';
 import pipelineControlsTemplate from '../partials/_pipeline_controls.html';
 
 const app = modules.get('apps/management');
@@ -12,8 +12,11 @@ app.directive('pipelineMenu', function () {
     restrict: 'E',
     template: template,
     controller: function ($scope, $route, kbnUrl) {
-      $scope.greeting = 'Hello Pipeline Menu!';
       $scope.pipelines = $route.current.locals.pipelines;
+
+      $scope.addNew = function () {
+        kbnUrl.change(`/management/elasticsearch/pipeline`, {});
+      };
 
       const deletePipeline = (pipeline) => {
         //console.log('you are deleting a pipeline!', pipeline);

@@ -5,6 +5,7 @@ import template from '../views/pipeline_edit.html';
 import IngestProvider from 'ui/ingest';
 import Pipeline from '../lib/pipeline';
 import saveTemplate from '../partials/_pipeline_save.html';
+import '../styles/_pipeline_edit.less';
 import './pipeline_output';
 import './source_data';
 import './processor_ui_container';
