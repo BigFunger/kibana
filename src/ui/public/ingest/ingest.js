@@ -72,8 +72,12 @@ export default function IngestProvider($rootScope, $http, config, $q, Private, i
         return $q.reject(new Error('Error fetching pipeline'));
       });
     },
-    delete: function () {
+    delete: function (pipelineId) {
+      if (_.isEmpty(pipelineId)) {
+        throw new Error('pipeline id is required');
+      }
 
+      return $http.delete(`${ingestAPIPrefix}/pipeline/${pipelineId}`);
     }
   };
 

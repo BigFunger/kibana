@@ -71,4 +71,22 @@ export function registerPipeline(server) {
       });
     }
   });
+
+  server.route({
+    path: '/api/kibana/ingest/pipeline/{id}',
+    method: 'DELETE',
+    handler: function (request, reply) {
+      const boundCallWithRequest = _.partial(server.plugins.elasticsearch.callWithRequest, request);
+      const kibanaIndex = server.config().get('kibana.index');
+
+      return boundCallWithRequest('transport.request', {
+        path: `/_ingest/pipeline/${request.params.id}`,
+        method: 'DELETE'
+      })
+      .then(reply)
+      .catch((error) => {
+        reply(handleESError(error));
+      });
+    }
+  });
 };
