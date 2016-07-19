@@ -15,7 +15,9 @@ expression that supports aliased expressions that can be reused.`,
       'sourceField',
       {
         sourceField: '',
-        pattern: ''
+        patterns: [],
+        traceMatch: false,
+        patternDefinitions: []
       },
       model
     );
@@ -36,7 +38,9 @@ expression that supports aliased expressions that can be reused.`,
       super.model,
       {
         sourceField: this.sourceField || '',
-        pattern: this.pattern || ''
+        patterns: this.patterns || [],
+        traceMatch: this.traceMatch,
+        patternDefinitions: this.patternDefinitions || []
       }
     );
   }

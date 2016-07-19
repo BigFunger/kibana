@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import uiModules from 'ui/modules';
 import template from './view.html';
+import './grok_pattern_definitions';
 
 const app = uiModules.get('kibana');
 
@@ -13,6 +14,18 @@ app.directive('processorUiGrok', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
+      function splitPatterns(delimitedList) {
+        return delimitedList.split('\n');
+      }
+
+      function joinPatterns(valueArray) {
+        return valueArray.join('\n');
+      }
+
+      function updatePatterns() {
+        processor.patterns = splitPatterns($scope.patterns);
+      }
+
       function consumeNewInputObject() {
         refreshFieldData();
       }
@@ -21,6 +34,13 @@ app.directive('processorUiGrok', function () {
         $scope.fieldData = _.get(processor.inputObject, processor.sourceField);
       }
 
+      // $scope.patternDefinitionsChanged = () => {
+      //   console.log('patternDefinitionsChanged fired');
+      //   pipeline.setDirty();
+      // };
+
+      $scope.patterns = joinPatterns(processor.patterns);
+
       $scope.$watch('processor.inputObject', consumeNewInputObject);
 
       $scope.$watch('processor.sourceField', () => {
@@ -28,7 +48,10 @@ app.directive('processorUiGrok', function () {
         pipeline.setDirty();
       });
 
-      $scope.$watch('processor.pattern', () => { pipeline.setDirty(); });
+      $scope.$watch('patterns', updatePatterns);
+      $scope.$watchCollection('processor.patterns', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.traceMatch', () => { pipeline.setDirty(); });
+      $scope.$watchCollection('processor.patternDefinitions', () => { pipeline.setDirty(); }, true);
     }
   };
 });

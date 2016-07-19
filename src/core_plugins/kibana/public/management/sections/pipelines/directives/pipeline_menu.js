@@ -26,7 +26,7 @@ app.directive('pipelineMenu', function () {
         ingest.pipeline.delete(pipeline.pipelineId)
         .then(() => {
           _.remove($scope.pipelines, pipeline);
-          buildRows(); //TODO: How to do this?
+          //buildRows(); //TODO: How to do this?
         });
       };
 
@@ -59,7 +59,9 @@ app.directive('pipelineMenu', function () {
         {title: '', sortable: false}
       ];
 
-      buildRows();
+      //buildRows();
+
+      $scope.$watchCollection('pipelines', () => { buildRows(); });
     }
   };
 });
