@@ -4,6 +4,8 @@ import ProcessorCollection from './processor_collection';
 export default class Pipeline {
 
   constructor(model) {
+    ProcessorCollection.resetIdCounters();
+
     const defaultModel = {
       pipelineId: '',
       description: '',
@@ -27,7 +29,6 @@ export default class Pipeline {
       _.get(model, 'failureProcessors'),
       ProcessorCollection.types.GLOBAL_FAILURE
     );
-
 
     this.processorCollections = [];
     this.activeProcessorCollection = this.processorCollection;

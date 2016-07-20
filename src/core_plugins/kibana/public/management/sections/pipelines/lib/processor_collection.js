@@ -25,9 +25,11 @@ export default class ProcessorCollection {
 
   add(typeId, processorModel) {
     typeId = _.get(processorModel, 'typeId') || typeId;
+
+    const processorId = _.get(processorModel, 'processorId') || ProcessorCollection.generateId(typeId);
+    ProcessorCollection.useId(processorId);
+
     const ProcessorType = this.ProcessorTypes[typeId];
-    const processorCounter = ProcessorCollection.processorCounter += 1;
-    const processorId = `processor_${processorCounter}`;
     const newProcessor = new ProcessorType(processorId, processorModel);
 
     if (processorModel) {
@@ -37,8 +39,9 @@ export default class ProcessorCollection {
       if (this.type === ProcessorCollection.types.FOREACH) {
         if (newProcessor.mainField) {
           _.set(newProcessor, newProcessor.mainField, '_value');
-          newProcessor.new = false;
+
           //since we're defaulting the mainField, this should be included in the results.
+          newProcessor.new = false;
         }
       }
     }
@@ -126,12 +129,33 @@ export default class ProcessorCollection {
 
 }
 
-//static processor counter across all collections
-ProcessorCollection.processorCounter = 0;
-
 ProcessorCollection.types = {
   MAIN: 'main processors',
   PROCESSOR_FAILURE: 'processor failure branch',
   GLOBAL_FAILURE: 'global failure branch',
   FOREACH: 'foreach branch'
+};
+
+ProcessorCollection.usedProcessorIds = [];
+ProcessorCollection.resetIdCounters = function () {
+  ProcessorCollection.usedProcessorIds = [];
+  ProcessorCollection.processorCounters = {};
+  _.forEach(ProcessorViewModels, (ViewModel) => {
+    ProcessorCollection.processorCounters[ViewModel.id] = 0;
+  });
+};
+
+ProcessorCollection.generateId = function (typeId) {
+  if (!_.has(ProcessorCollection.processorCounters, typeId)) {
+    return undefined;
+  }
+
+  const processorCounter = ProcessorCollection.processorCounters[typeId] += 1;
+  const processorId = `${typeId}_${processorCounter}`;
+
+  return processorId;
+};
+
+ProcessorCollection.useId = function (processorId) {
+  ProcessorCollection.usedProcessorIds.push(processorId);
 };
