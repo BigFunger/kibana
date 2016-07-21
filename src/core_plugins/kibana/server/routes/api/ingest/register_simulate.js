@@ -10,7 +10,9 @@ export function handleResponse(resp) {
     let processorError;
     const errorMessage =
       _.get(processorResult, 'error.root_cause[0].reason') ||
-      _.get(processorResult, 'error.root_cause[0].type');
+      _.get(processorResult, 'error.root_cause[0].type') ||
+      _.get(processorResult, 'ignored_error.error.root_cause[0].reason') ||
+      _.get(processorResult, 'ignored_error.error.root_cause[0].type');
 
     if (errorMessage) {
       processorError = {
@@ -22,6 +24,7 @@ export function handleResponse(resp) {
     return {
       processorId: _.get(processorResult, 'tag'),
       output: _.get(processorResult, 'doc._source'),
+      ingestMeta: _.get(processorResult, 'doc._ingest'),
       error: processorError
     };
   });

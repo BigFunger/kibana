@@ -81,7 +81,7 @@ export default class Pipeline {
     const error = _.get(lastResult, 'error');
 
     this.output = output;
-    this.error = !!error;
+    this.error = lastResult && !output;
 
     this.dirty = false;
   }
