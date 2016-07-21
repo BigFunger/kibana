@@ -23,6 +23,12 @@ export default class ProcessorCollection {
     this.updateParents();
   }
 
+  get allProcessors() {
+    return _.reduce(this.processors, (result, processor) => {
+      return _.assign(result, processor.allProcessors);
+    }, {});
+  }
+
   add(typeId, processorModel) {
     typeId = _.get(processorModel, 'typeId') || typeId;
 

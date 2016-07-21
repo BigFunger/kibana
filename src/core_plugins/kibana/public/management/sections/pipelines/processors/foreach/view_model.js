@@ -62,6 +62,12 @@ export class Foreach extends Processor {
       }
     );
   }
+
+  get allProcessors() {
+    return _.assign(
+      super.allProcessors,
+      this.processorCollection.allProcessors);
+  }
 };
 
 Foreach.id = 'foreach';

@@ -88,4 +88,10 @@ export default class Processor {
   get output() {
     return this.outputObject ? this.outputObject : this.failureProcessorCollection.output;
   }
+
+  get allProcessors() {
+    return _.assign(
+      _.set({}, this.processorId, this),
+      this.failureProcessorCollection.allProcessors);
+  }
 }

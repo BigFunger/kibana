@@ -94,27 +94,15 @@ export default class Pipeline {
     this.updateOutput(simulateResults);
   }
 
-  //Returns a flattened object containing one property per processor
-  //regardless of where in the hierarchy it exists.
-  getAllProcessors() {
-    const result = {};
-
-    function iteration(processorCollection) {
-      _.forEach(processorCollection.processors, processor => {
-        iteration(processor.failureProcessorCollection);
-        result[processor.processorId] = processor;
-      });
-    }
-
-    iteration(this.processorCollection);
-    iteration(this.failureProcessorCollection);
-
-    return result;
+  get allProcessors() {
+    return _.assign(
+      this.processorCollection.allProcessors,
+      this.failureProcessorCollection.allProcessors);
   }
 }
 
 function updateProcessorOutputs(pipeline, simulateResults) {
-  const allProcessors = pipeline.getAllProcessors();
+  const allProcessors = pipeline.allProcessors;
   const allResults = {};
   _.forEach(simulateResults, result => {
     allResults[result.processorId] = result;
