@@ -36,6 +36,8 @@ export default class Pipeline {
     this.output = undefined;
     this.dirty = false;
     this.hasCompileError = false;
+    this.globalFailureProcessorIds = [];
+
 
     this.failureOptions = {
       index_fail: 'Do not index document',
@@ -89,8 +91,23 @@ export default class Pipeline {
   // Updates the state of the pipeline and processors with the results
   // from an ingest simulate call.
   applySimulateResults(simulateResults) {
-    updateProcessorOutputs(this, simulateResults);
-    this.processorCollection.updateInputs();
+    const allProcessors = this.allProcessors;
+    const allResults = {};
+
+    _.forEach(simulateResults, result => {
+      allResults[result.processorId] = result;
+    });
+
+    _.forEach(allProcessors, (processor) => {
+      processor.setSimulateResult(allResults[processor.processorId]);
+    });
+
+    this.processorCollection.applySimulateResults(this.input);
+
+    const failureProcessorId = _.get(this.failureProcessorCollection, 'processors[0].failureProcessorId');
+    const failureSourceInput = failureProcessorId ? allProcessors[failureProcessorId].inputObject : undefined;
+    this.failureProcessorCollection.applySimulateResults(failureSourceInput);
+
     this.updateOutput(simulateResults);
   }
 
@@ -99,21 +116,4 @@ export default class Pipeline {
       this.processorCollection.allProcessors,
       this.failureProcessorCollection.allProcessors);
   }
-}
-
-function updateProcessorOutputs(pipeline, simulateResults) {
-  const allProcessors = pipeline.allProcessors;
-  const allResults = {};
-  _.forEach(simulateResults, result => {
-    allResults[result.processorId] = result;
-  });
-
-  _.forEach(allProcessors, (processor) => {
-    const result = allResults[processor.processorId];
-
-    const output = _.get(result, 'output');
-    const error = _.get(result, 'error');
-
-    processor.setOutput(output, error);
-  });
 }

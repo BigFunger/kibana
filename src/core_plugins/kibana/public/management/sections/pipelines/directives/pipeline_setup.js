@@ -41,8 +41,6 @@ app.directive('pipelineSetup', function () {
 
       $scope.$watch('pipeline.input', (newVal) => {
         const pipeline = $scope.pipeline;
-
-        pipeline.processorCollection.updateInputs(pipeline.input);
         pipeline.dirty = true;
       });
 
@@ -59,8 +57,6 @@ app.directive('pipelineSetup', function () {
 
       $scope.$watch('pipeline', (newPipeline) => {
         const pipeline = $scope.pipeline;
-
-        pipeline.processorCollection.updateInputs(pipeline.input);
         pipeline.dirty = true;
 
         window.pipeline = $scope.pipeline;

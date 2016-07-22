@@ -54,6 +54,8 @@ export default class ProcessorCollection {
 
     this.processors.push(newProcessor);
 
+    this.updateParents();
+
     return newProcessor;
   }
 
@@ -62,6 +64,8 @@ export default class ProcessorCollection {
     const index = processors.indexOf(processor);
 
     processors.splice(index, 1);
+
+    this.updateParents();
   }
 
   moveUp(processor) {
@@ -73,6 +77,8 @@ export default class ProcessorCollection {
     const temp = processors[index - 1];
     processors[index - 1] = processors[index];
     processors[index] = temp;
+
+    this.updateParents();
   }
 
   moveDown(processor) {
@@ -84,6 +90,8 @@ export default class ProcessorCollection {
     const temp = processors[index + 1];
     processors[index + 1] = processors[index];
     processors[index] = temp;
+
+    this.updateParents();
   }
 
   updateParents() {
@@ -93,21 +101,9 @@ export default class ProcessorCollection {
     });
   }
 
-  updateInputs(rootInput) {
-    if (rootInput) {
-      this.input = rootInput;
-
-      if (this.valueField) {
-        this.input = _.set({}, this.valueField, _.get(this.input, this.valueField));
-      }
-    }
-
-    this.processors.forEach((processor, index) => {
-      if (index === 0) {
-        processor.setInput(this.input);
-      } else {
-        processor.setInput(processor.parent.output);
-      }
+  applySimulateResults(rootInput) {
+    _.forEach(this.processors, (processor) => {
+      processor.applySimulateResults(rootInput);
     });
   }
 
@@ -135,6 +131,7 @@ export default class ProcessorCollection {
 
 }
 
+
 ProcessorCollection.types = {
   MAIN: 'main processors',
   PROCESSOR_FAILURE: 'processor failure branch',
@@ -156,8 +153,11 @@ ProcessorCollection.generateId = function (typeId) {
     return undefined;
   }
 
-  const processorCounter = ProcessorCollection.processorCounters[typeId] += 1;
-  const processorId = `${typeId}_${processorCounter}`;
+  let processorId;
+  do {
+    const processorCounter = ProcessorCollection.processorCounters[typeId] += 1;
+    processorId = `${typeId}_${processorCounter}`;
+  } while (_.includes(ProcessorCollection.usedProcessorIds, processorId));
 
   return processorId;
 };

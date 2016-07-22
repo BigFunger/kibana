@@ -25,20 +25,13 @@ export class Foreach extends Processor {
     this.updateProcessorCollection();
   }
 
-  setInput(newInputObject) {
-    super.setInput(newInputObject);
-    this.processorCollection.updateInputs(this.inputObject);
-    this.updateProcessorCollection();
-  }
-
-
   setOutput(output, error) {
     if (this.new) return;
 
     super.setOutput(output, error);
 
-    if (this.processorCollection.processors.length > 0) {
-      this.processorCollection.processors[0].setOutput(output, error);
+    if (this.innerProcessor) {
+      this.innerProcessor.setOutput(output, error);
     }
   }
 
@@ -63,10 +56,24 @@ export class Foreach extends Processor {
     );
   }
 
-  get allProcessors() {
-    return _.assign(
-      super.allProcessors,
-      this.processorCollection.allProcessors);
+  get innerProcessor() {
+    return this.processorCollection.processors[0];
+  }
+
+  applySimulateResults(rootInput) {
+    super.applySimulateResults(rootInput);
+
+    if (this.innerProcessor) {
+      if (this.simulateResult) {
+        const innerSimulateResult = _.cloneDeep(this.simulateResult);
+        innerSimulateResult.output = _.get(innerSimulateResult.output, this.targetField);
+        this.innerProcessor.setSimulateResult(innerSimulateResult);
+      } else {
+        this.innerProcessor.setSimulateResult(undefined);
+      }
+    }
+    const collection = _.get(this.inputObject, this.targetField);
+    this.processorCollection.applySimulateResults(collection);
   }
 };
 

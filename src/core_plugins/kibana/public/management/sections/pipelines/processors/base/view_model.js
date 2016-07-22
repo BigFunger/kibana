@@ -49,11 +49,6 @@ export default class Processor {
     return (oldParent !== this.parent);
   }
 
-  setInput(newInputObject) {
-    this.inputObject = _.cloneDeep(newInputObject);
-    this.failureProcessorCollection.updateInputs(this.inputObject);
-  }
-
   setOutput(output, error) {
     if (this.new) return;
 
@@ -93,5 +88,28 @@ export default class Processor {
     return _.assign(
       _.set({}, this.processorId, this),
       this.failureProcessorCollection.allProcessors);
+  }
+
+  setSimulateResult(simulateResult) {
+    this.simulateResult = simulateResult;
+  }
+
+  applySimulateResults(rootInput) {
+    const output = _.get(this.simulateResult, 'output');
+    const error = _.get(this.simulateResult, 'error');
+
+    this.setOutput(output, error);
+
+    if (this.parent) {
+      this.inputObject = _.cloneDeep(this.parent.outputObject);
+    } else {
+      this.inputObject = _.cloneDeep(rootInput);
+    }
+
+    this.failureProcessorCollection.applySimulateResults(this.inputObject);
+  }
+
+  get failureProcessorId() {
+    return _.get(this.simulateResult, 'ingestMeta.on_failure_processor_tag');
   }
 }
