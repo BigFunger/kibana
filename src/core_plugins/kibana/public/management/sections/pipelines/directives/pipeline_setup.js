@@ -13,17 +13,12 @@ app.directive('pipelineSetup', function () {
   return {
     restrict: 'E',
     template: template,
-    // scope: {
-    //   pipelineModel: '='
-    // },
     controller: function ($scope, $route, debounce, Private, Notifier) {
       const ingest = Private(IngestProvider);
       const notify = new Notifier({ location: `Ingest Pipeline Setup` });
       $scope.collectionTypes = ProcessorCollection.types;
 
       $scope.pipeline = $route.current.locals.pipeline;
-
-      //$scope.pipeline = new Pipeline($scope.pipelineModel);
 
       //initiates the simulate call if the pipeline is dirty
       const simulatePipeline = debounce((event, message) => {
@@ -41,8 +36,6 @@ app.directive('pipelineSetup', function () {
 
       $scope.$watchCollection('pipeline.activeProcessorCollection.processors', (newVal, oldVal) => {
         const pipeline = $scope.pipeline;
-
-        pipeline.activeProcessorCollection.updateParents();
         pipeline.dirty = true;
       });
 
