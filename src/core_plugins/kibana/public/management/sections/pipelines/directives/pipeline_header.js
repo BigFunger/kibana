@@ -21,6 +21,12 @@ app.directive('pipelineHeader', function () {
         updateBreadcrumbs();
       });
 
+      $scope.$watch('pipeline.dirty', (isDirty) => {
+        if (!isDirty) {
+          updateBreadcrumbs();
+        }
+      });
+
       function getCrumb(processorCollection) {
         if (processorCollection.parentProcessor) {
           const processor = processorCollection.parentProcessor;
