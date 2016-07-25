@@ -1,7 +1,7 @@
 <div class="processor-ui-container-header">
   <button
-    aria-label="{{ collapsed ? 'Expand Processor' : 'Collapse Processor' }}"
-    tooltip="{{ collapsed ? 'Expand Processor' : 'Collapse Processor' }}"
+    aria-label="{{ collapsed ? 'Expand Section' : 'Collapse Section' }}"
+    tooltip="{{ collapsed ? 'Expand Section' : 'Collapse Section' }}"
     tooltip-append-to-body="true"
     ng-click="collapsed = !collapsed"
     type="button"
@@ -19,11 +19,12 @@
     </span>
   </div>
 </div>
+
 <div class="processor-ui-container-body">
   <div
     class="processor-ui-container-body-content"
     ng-hide="collapsed">
-<!--     <span>This is the action that will be taken if the index process fails and the failure is not handled in any other way.</span> -->
+    <div class="alert alert-info">This is the action that will be taken if the index process fails and the failure is not handled in any other way.</div>
     <failure-action
       failure-action="pipeline.failureAction"
       processor-collection="pipeline.failureProcessorCollection"
