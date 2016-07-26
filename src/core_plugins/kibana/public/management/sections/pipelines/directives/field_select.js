@@ -1,32 +1,31 @@
 import uiModules from 'ui/modules';
 import _ from 'lodash';
+import '../styles/_field_select.less';
 import template from '../views/field_select.html';
-import IngestProvider from 'ui/ingest';
 import 'ui-select';
 
 const app = uiModules.get('kibana');
 
-app.directive('fieldSelect', function () {
+app.directive('fieldSelect', function ($timeout) {
   return {
     restrict: 'E',
     template: template,
     scope: {
-      field: '=',
-      fields: '='
+      processor: '=',
+      field: '='
     },
     controller: function ($scope) {
-      $scope.selectedItem = { value: '' };
-      $scope.$watch('selectedItem.value', (newVal) => {
-        if (!newVal) return;
+      $scope.selected = { value: $scope.field };
 
+      $scope.$watch('processor.suggestedFields', () => {
+        $scope.fields = $scope.processor.suggestedFields;
+      });
+
+      $scope.$watch('selected.value', (newVal) => {
         $scope.field = newVal;
       });
 
-      $scope.fieldAdded = function (newField) {
-        $scope.fields.push(newField);
-
-        return newField;
-      };
+      $scope.union = _.flow(_.union, _.compact);
     }
   };
 });

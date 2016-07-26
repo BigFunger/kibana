@@ -8,6 +8,7 @@ import saveTemplate from '../partials/_pipeline_save.html';
 import '../styles/_pipeline_edit.less';
 import './pipeline_output';
 import './source_data';
+import './field_select';
 import './processor_ui_container';
 import './processor_select';
 import './processor_id';

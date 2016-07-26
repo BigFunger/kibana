@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import keysDeep from '../../lib/keys_deep';
 import ProcessorCollection from '../../lib/processor_collection';
 
 export default class Processor {
@@ -71,6 +72,11 @@ export default class Processor {
     }
   }
 
+  setInput(input) {
+    this.inputObject = input;
+    this.suggestedFields = keysDeep(this.inputObject);
+  }
+
   get model() {
     return {
       processorId: this.processorId,
@@ -101,9 +107,9 @@ export default class Processor {
     this.setOutput(output, error);
 
     if (this.parent) {
-      this.inputObject = _.cloneDeep(this.parent.outputObject);
+      this.setInput(_.cloneDeep(this.parent.outputObject));
     } else {
-      this.inputObject = _.cloneDeep(rootInput);
+      this.setInput(_.cloneDeep(rootInput));
     }
 
     this.failureProcessorCollection.applySimulateResults(this.inputObject);
