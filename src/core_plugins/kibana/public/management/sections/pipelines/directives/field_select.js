@@ -29,3 +29,16 @@ app.directive('fieldSelect', function ($timeout) {
     }
   };
 });
+
+app.directive('uiSelectTweaks', function () {
+  return {
+    restrict: 'A',
+    link: function ($scope, $el) {
+      $scope.$watch('$select.open', function (isOpen) {
+        if (isOpen) {
+          $scope.$select.search = $scope.$select.selected;
+        }
+      });
+    }
+  };
+});
