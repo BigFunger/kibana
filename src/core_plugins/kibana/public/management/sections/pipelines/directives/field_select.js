@@ -30,10 +30,14 @@ app.directive('fieldSelect', function ($timeout) {
   };
 });
 
-app.directive('uiSelectTweaks', function () {
+app.directive('fieldSelectTweaks', function ($timeout) {
   return {
     restrict: 'A',
     link: function ($scope, $el) {
+      $timeout(() => {
+        $scope.$select.setFocus();
+      });
+
       $scope.$watch('$select.open', function (isOpen) {
         if (isOpen) {
           $scope.$select.search = $scope.$select.selected;

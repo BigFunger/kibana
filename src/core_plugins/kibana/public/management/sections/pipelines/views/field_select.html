@@ -1,7 +1,7 @@
 <ui-select
   ng-model="selected.value"
   reset-search-input="false"
-  ui-select-tweaks>
+  field-select-tweaks>
   <ui-select-match>{{selected.value}}</ui-select-match>
   <ui-select-choices
     repeat="field as field in union([$select.search, $select.selected], fields) | filter: $select.search">
