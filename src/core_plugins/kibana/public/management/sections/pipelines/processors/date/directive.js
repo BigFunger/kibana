@@ -15,14 +15,6 @@ app.directive('processorUiDate', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
-      function consumeNewInputObject() {
-        refreshFieldData();
-      }
-
-      function refreshFieldData() {
-        $scope.fieldData = _.get(processor.inputObject, processor.sourceField);
-      }
-
       const updateFormats = debounce(() => {
         processor.formats = _($scope.formats)
         .filter('selected')
@@ -36,13 +28,7 @@ app.directive('processorUiDate', function () {
       $scope.updateFormats = updateFormats;
       $scope.formats = createMultiSelectModel(['ISO8601', 'UNIX', 'UNIX_MS', 'TAI64N', 'Custom'], processor.formats);
 
-      $scope.$watch('processor.inputObject', consumeNewInputObject);
-
-      $scope.$watch('processor.sourceField', () => {
-        refreshFieldData();
-        pipeline.setDirty();
-      });
-
+      $scope.$watch('processor.sourceField', () => { pipeline.setDirty(); });
       $scope.$watch('processor.customFormat', updateFormats);
       $scope.$watch('processor.targetField', () => { pipeline.setDirty(); });
       $scope.$watch('processor.timezone', () => { pipeline.setDirty(); });

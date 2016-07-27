@@ -13,21 +13,7 @@ app.directive('processorUiGsub', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
-      function consumeNewInputObject() {
-        refreshFieldData();
-      }
-
-      function refreshFieldData() {
-        $scope.fieldData = _.get(processor.inputObject, processor.sourceField);
-      }
-
-      $scope.$watch('processor.inputObject', consumeNewInputObject);
-
-      $scope.$watch('processor.sourceField', () => {
-        refreshFieldData();
-        pipeline.setDirty();
-      });
-
+      $scope.$watch('processor.sourceField', () => { pipeline.setDirty(); });
       $scope.$watch('processor.pattern', () => { pipeline.setDirty(); });
       $scope.$watch('processor.replacement', () => { pipeline.setDirty(); });
     }

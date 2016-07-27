@@ -1,12 +1,7 @@
 <div class="form-group">
   <label>Field:</label>
-  <input
-    type="text"
-    class="form-control"
-    ng-model="processor.sourceField"
-    set-focus />
+  <field-select
+    processor="processor"
+    field="processor.sourceField">
+  </field-select>
 </div>
-<!-- <div class="form-group">
-  <label>Field Data:</label>
-  <pre>{{ fieldData }}</pre>
-</div> -->

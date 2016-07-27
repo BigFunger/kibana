@@ -1,10 +1,9 @@
 <div class="form-group">
   <label>Field:</label>
-  <input
-    type="text"
-    class="form-control"
-    ng-model="processor.targetField"
-    set-focus />
+  <field-select
+    processor="processor"
+    field="processor.targetField">
+  </field-select>
 </div>
 <div class="form-group define-processors">
   <label>Processor:</label>

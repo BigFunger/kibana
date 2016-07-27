@@ -26,28 +26,9 @@ app.directive('processorUiGrok', function () {
         processor.patterns = splitPatterns($scope.patterns);
       }
 
-      function consumeNewInputObject() {
-        refreshFieldData();
-      }
-
-      function refreshFieldData() {
-        $scope.fieldData = _.get(processor.inputObject, processor.sourceField);
-      }
-
-      // $scope.patternDefinitionsChanged = () => {
-      //   console.log('patternDefinitionsChanged fired');
-      //   pipeline.setDirty();
-      // };
-
       $scope.patterns = joinPatterns(processor.patterns);
 
-      $scope.$watch('processor.inputObject', consumeNewInputObject);
-
-      $scope.$watch('processor.sourceField', () => {
-        refreshFieldData();
-        pipeline.setDirty();
-      });
-
+      $scope.$watch('processor.sourceField', () => { pipeline.setDirty(); });
       $scope.$watch('patterns', updatePatterns);
       $scope.$watchCollection('processor.patterns', () => { pipeline.setDirty(); });
       $scope.$watch('processor.traceMatch', () => { pipeline.setDirty(); });
