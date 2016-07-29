@@ -73,7 +73,7 @@ export default class Processor {
   }
 
   setInput(input) {
-    this.inputObject = input;
+    this.inputObject = _.cloneDeep(input);
     this.suggestedFields = keysDeep(this.inputObject);
   }
 
@@ -101,18 +101,18 @@ export default class Processor {
   }
 
   applySimulateResults(rootInput) {
+    this.failureProcessorCollection.applySimulateResults(this.inputObject);
+
     const output = _.get(this.simulateResult, 'output');
     const error = _.get(this.simulateResult, 'error');
 
     this.setOutput(output, error);
 
     if (this.parent) {
-      this.setInput(_.cloneDeep(this.parent.outputObject));
+      this.setInput(this.parent.output);
     } else {
-      this.setInput(_.cloneDeep(rootInput));
+      this.setInput(rootInput);
     }
-
-    this.failureProcessorCollection.applySimulateResults(this.inputObject);
   }
 
   get failureProcessorId() {
