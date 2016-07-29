@@ -61,13 +61,13 @@ export default class Processor {
 
   setInput(input) {
     const metaFields = [
-      '_ingest._index',
-      '_ingest._type',
-      '_ingest._id',
-      '_ingest._routing',
-      '_ingest._parent',
-      '_ingest._timestamp',
-      '_ingest._ttl'
+      '_index',
+      '_type',
+      '_id',
+      '_routing',
+      '_parent',
+      '_timestamp',
+      '_ttl'
     ];
 
     this.inputObject = _.cloneDeep(input);
