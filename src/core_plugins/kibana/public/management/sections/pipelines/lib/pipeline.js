@@ -104,9 +104,15 @@ export default class Pipeline {
 
     this.processorCollection.applySimulateResults(this.input);
 
+
+    //TODO: Refactor some of this into the processorCollection class?
     const failureProcessorId = _.get(this.failureProcessorCollection, 'processors[0].failureProcessorId');
-    const failureSourceInput = failureProcessorId ? allProcessors[failureProcessorId].inputObject : undefined;
+    const failureProcessor = allProcessors[failureProcessorId];
+    const failureSourceInput = failureProcessor ? failureProcessor.inputObject : undefined;
     this.failureProcessorCollection.applySimulateResults(failureSourceInput);
+    if (failureProcessor) {
+      failureProcessor.setOutput(this.failureProcessorCollection.output, failureProcessor.error);
+    }
 
     this.updateOutput(simulateResults);
   }

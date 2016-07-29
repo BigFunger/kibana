@@ -56,25 +56,26 @@ export default class Processor {
     this.outputObject = output;
     this.error = error;
 
-    if (this.outputObject && !this.error) {
-      this.state = 'valid';
-    } else if (!this.outputObject && !this.error) {
-      this.state = 'no result';
-    } else if (this.error && this.failureAction === 'ignore_error') {
-      this.state = 'error recover';
-    } else if (this.error && this.failureAction === 'on_error' &&
-        this.failureProcessorCollection.processors.length > 0) {
-      this.state = 'error recover';
-    } else if (this.error && this.error.compile) {
-      this.state = 'error compile';
-    } else {
-      this.state = 'error fail';
-    }
+    this.updateState();
   }
 
   setInput(input) {
     this.inputObject = _.cloneDeep(input);
     this.suggestedFields = keysDeep(this.inputObject);
+  }
+
+  updateState() {
+    if (this.output && !this.error) {
+      this.state = Processor.states.VALID;
+    } else if (!this.output && !this.error) {
+      this.state = Processor.states.NO_RESULT;
+    } else if (!this.output && this.error && this.error.compile) {
+      this.state = Processor.states.ERROR_COMPILE;
+    } else if (!this.output && this.error) {
+      this.state = Processor.states.ERROR_FAIL;
+    } else if (this.output && this.error) {
+      this.state = Processor.states.ERROR_RECOVER;
+    }
   }
 
   get model() {
@@ -119,3 +120,11 @@ export default class Processor {
     return _.get(this.simulateResult, 'ingestMeta.on_failure_processor_tag');
   }
 }
+
+Processor.states = {
+  VALID: 'valid',
+  NO_RESULT: 'no result',
+  ERROR_FAIL: 'error fail',
+  ERROR_COMPILE: 'error compile',
+  ERROR_RECOVER: 'error with recovery'
+};
