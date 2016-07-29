@@ -23,6 +23,7 @@ import './pipeline_setup';
 import './pipeline_header';
 import './pipeline_on_failure';
 import '../processors';
+import slugifyId from 'ui/utils/slugify_id';
 
 const app = modules.get('apps/management');
 
@@ -39,6 +40,7 @@ app.directive('pipelineEdit', function () {
         pipeline: $scope.pipeline,
         doSave: () => {
           const pipeline = $scope.pipeline;
+          pipeline.pipelineId = slugifyId(pipeline.pipelineId);
 
           return ingest.pipeline.save(pipeline.model)
           .then((result) => {
