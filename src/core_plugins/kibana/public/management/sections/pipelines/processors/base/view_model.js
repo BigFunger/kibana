@@ -60,8 +60,18 @@ export default class Processor {
   }
 
   setInput(input) {
+    const metaFields = [
+      '_ingest._index',
+      '_ingest._type',
+      '_ingest._id',
+      '_ingest._routing',
+      '_ingest._parent',
+      '_ingest._timestamp',
+      '_ingest._ttl'
+    ];
+
     this.inputObject = _.cloneDeep(input);
-    this.suggestedFields = keysDeep(this.inputObject);
+    this.suggestedFields = _.union(keysDeep(this.inputObject), metaFields);
   }
 
   updateState() {
