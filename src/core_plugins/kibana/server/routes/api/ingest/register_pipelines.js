@@ -4,11 +4,21 @@ import handleESError from '../../../lib/handle_es_error';
 
 export function registerPipelines(server) {
   function handleResponse(response) {
-    const result =  _.map(response.pipelines, (esPipeline) => {
-      return pipelineConverter.esToKibana(esPipeline);
+    const result = [];
+    _.forIn(response, (esPipelineDetails, pipelineId) => {
+      const esPipeline = _.set({}, pipelineId, esPipelineDetails);
+      result.push(pipelineConverter.esToKibana(esPipeline));
     });
 
     return result;
+  }
+
+  function handleError(error) {
+    if (error.status === 404) {
+      return [];
+    } else {
+      throw error;
+    }
   }
 
   server.route({
@@ -22,7 +32,7 @@ export function registerPipelines(server) {
         path: `/_ingest/pipeline/*`,
         method: 'GET'
       })
-      .then(handleResponse)
+      .then(handleResponse, handleError)
       .then(reply)
       .catch((error) => {
         reply(handleESError(error));

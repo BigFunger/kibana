@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import processorArrayConverter from '../processors/processor_array/converter';
-//import * as processorConverters from '../processors/converters';
 
 export default {
   kibanaToEs: function (pipelineApiDocument) {
@@ -17,15 +16,18 @@ export default {
     return result;
   },
   esToKibana: function (pipelineEsDocument) {
+    const pipelineId = _.keys(pipelineEsDocument)[0];
+    pipelineEsDocument = _.get(pipelineEsDocument, pipelineId);
+
     const result = {
-      pipeline_id: pipelineEsDocument.id,
-      description: pipelineEsDocument.config.description,
-      processors: processorArrayConverter.esToKibana(pipelineEsDocument.config.processors)
+      pipeline_id: pipelineId,
+      description: pipelineEsDocument.description,
+      processors: processorArrayConverter.esToKibana(pipelineEsDocument.processors)
     };
 
-    if (pipelineEsDocument.config.on_failure) {
+    if (pipelineEsDocument.on_failure) {
       result.failure_action = 'on_error';
-      result.failure_processors = processorArrayConverter.esToKibana(pipelineEsDocument.config.on_failure);
+      result.failure_processors = processorArrayConverter.esToKibana(pipelineEsDocument.on_failure);
     } else {
       result.failure_action = 'index_fail';
     }

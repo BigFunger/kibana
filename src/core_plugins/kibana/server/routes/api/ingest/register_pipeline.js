@@ -39,8 +39,7 @@ export function registerPipeline(server) {
   });
 
   function handlePipelineResponse(response, metaResponse) {
-    const esPipeline =  _.get(response, 'pipelines[0]');
-    const kibanaPipeline = pipelineConverter.esToKibana(esPipeline);
+    const kibanaPipeline = pipelineConverter.esToKibana(response);
 
     kibanaPipeline.raw_samples = metaResponse._source['raw-samples'];
     return kibanaPipeline;
