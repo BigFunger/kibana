@@ -15,16 +15,25 @@ app.directive('pipelineInput', function () {
     },
     controller: function ($scope) {
       $scope.$watch('pipeline.rawSamples', (newValue) => {
-        const splitRawSamples = newValue.split('\n');
+        const splitRawSamples = ('' + newValue).split('\n');
 
         $scope.samples = _.map(splitRawSamples, (sample) => {
           try {
-            return JSON.parse(sample);
+            const json = JSON.parse(sample);
+            if (_.isObject(json)) {
+              return json;
+            } else {
+              return defaultObject(sample);
+            }
           }
           catch (error) {
-            return { message: sample };
+            return defaultObject(sample);
           }
         });
+
+        function defaultObject(sample) {
+          return { message: sample };
+        }
       });
     }
   };
