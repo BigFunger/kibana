@@ -5,51 +5,11 @@ import simulateConverter from '../../../lib/ingest/simulate/converter';
 import { keysToCamelCaseShallow, keysToSnakeCaseShallow } from '../../../../common/lib/case_conversion';
 
 export function handleResponse(resp) {
-  const processorResults = _.get(resp, 'docs[0].processor_results');
-  const results = processorResults.map((processorResult) => {
-    let processorError;
-    const errorMessage =
-      _.get(processorResult, 'error.root_cause[0].reason') ||
-      _.get(processorResult, 'error.root_cause[0].type') ||
-      _.get(processorResult, 'ignored_error.error.root_cause[0].reason') ||
-      _.get(processorResult, 'ignored_error.error.root_cause[0].type');
-
-    if (errorMessage) {
-      processorError = {
-        compile: false,
-        message: errorMessage
-      };
-    }
-
-    return {
-      processorId: _.get(processorResult, 'tag'),
-      output: _.get(processorResult, 'doc._source'),
-      ingestMeta: _.get(processorResult, 'doc._ingest'),
-      error: processorError
-    };
-  });
-
-  return results;
+  return simulateConverter.esResponseToKibana(resp);
 };
 
 export function handleError(error) {
-  const processorId = _.get(error, 'body.error.root_cause[0].header.processor_tag');
-  if (!processorId) throw error;
-
-  const errorMessage = _.get(error, 'body.error.root_cause[0].reason');
-  const processorError = {
-    compile: true,
-    message: errorMessage
-  };
-
-  const results = [
-    {
-      processorId: processorId,
-      error: processorError
-    }
-  ];
-
-  return results;
+  return simulateConverter.esErrorToKibana(error);
 }
 
 export function registerSimulate(server) {
