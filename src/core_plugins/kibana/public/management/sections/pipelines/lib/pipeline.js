@@ -128,7 +128,7 @@ export default class Pipeline {
 }
 
 function getObjectMeta(lastResult) {
-  if (!lastResult.ingestMeta) {
+  if (!_.has(lastResult, 'ingestMeta')) {
     return undefined;
   }
 
