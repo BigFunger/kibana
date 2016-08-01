@@ -20,28 +20,28 @@
         options="processor.failureOptions">
       </failure-action>
       <div
-        ng-show="processor.state === 'error fail'"
+        ng-show="processor.state === processorStates.ERROR_FAIL"
         class="alert alert-danger">
         {{processor.error.message}}
       </div>
       <div
-        ng-show="processor.state === 'error recover'"
+        ng-show="processor.state === processorStates.ERROR_RECOVER"
         class="alert alert-warning">
         {{processor.error.message}}
       </div>
       <div
-        ng-show="processor.state === 'error compile'"
+        ng-show="processor.state === processorStates.ERROR_COMPILE"
         class="alert alert-danger">
         <div>Compile Error</div>
         {{processor.error.message}}
       </div>
       <div
-        ng-show="processor.state === 'no result'"
+        ng-show="processor.state === processorStates.NO_RESULT"
         class="alert alert-info">
         No results were returned for this processor. May be part of a failure path that was not triggered.
       </div>
       <processor-output
-        ng-show="processor.state === 'valid'"
+        ng-show="processor.state === processorStates.VALID"
         processor="processor">
       </processor-output>
     </div>

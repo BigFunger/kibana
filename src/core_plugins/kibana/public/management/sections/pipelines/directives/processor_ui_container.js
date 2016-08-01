@@ -4,6 +4,7 @@ import _ from 'lodash';
 import '../styles/_processor_ui_container.less';
 import './processor_output';
 import './processor_ui_container_header';
+import Processor from '../processors/base/view_model';
 import template from '../views/processor_ui_container.html';
 
 const app = uiModules.get('kibana');
@@ -18,9 +19,6 @@ app.directive('processorUiContainer', function ($compile) {
     },
     template: template,
     link: function ($scope, $el) {
-      //TODO: I THINK I can get away with this here, because if a new pipeline is
-      //created, these processors will be destroyed. A processor should never have
-      //its pipeline changed.
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
       const $container = $el.find('.processor-ui-content');
@@ -29,6 +27,8 @@ app.directive('processorUiContainer', function ($compile) {
       const newScope = $scope.$new();
       newScope.pipeline = pipeline;
       newScope.processor = processor;
+
+      $scope.processorStates = Processor.states;
 
       const template = `<processor-ui-${typeId}></processor-ui-${typeId}>`;
       const $innerEl = angular.element(template);
