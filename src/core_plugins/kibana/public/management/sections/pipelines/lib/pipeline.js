@@ -85,6 +85,8 @@ export default class Pipeline {
     this.output = output;
     this.error = lastResult && !output;
 
+    this.outputMeta = getObjectMeta(lastResult);
+
     this.dirty = false;
   }
 
@@ -106,6 +108,7 @@ export default class Pipeline {
 
 
     //TODO: Refactor some of this into the processorCollection class?
+    //Not sure how much of this is needed, now that we don't recover from a global failure.
     const failureProcessorId = _.get(this.failureProcessorCollection, 'processors[0].failureProcessorId');
     const failureProcessor = allProcessors[failureProcessorId];
     const failureSourceInput = failureProcessor ? failureProcessor.inputObject : undefined;
@@ -122,4 +125,25 @@ export default class Pipeline {
       this.processorCollection.allProcessors,
       this.failureProcessorCollection.allProcessors);
   }
+}
+
+function getObjectMeta(lastResult) {
+  if (!lastResult.ingestMeta) {
+    return undefined;
+  }
+
+  const defaultMeta = {
+    '_index': '_index',
+    '_id': '_id',
+    '_type': '_type'
+  };
+
+  const result = {};
+  _.forIn(lastResult.ingestMeta, (value, key) => {
+    if (defaultMeta[key] !== value) {
+      _.set(result, key, value);
+    }
+  });
+
+  return result;
 }

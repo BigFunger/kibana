@@ -127,7 +127,7 @@ export default class Processor {
   }
 
   get failureProcessorId() {
-    return _.get(this.simulateResult, 'ingestMeta.on_failure_processor_tag');
+    return _.get(this.simulateResult, 'ingestMeta._ingest.on_failure_processor_tag');
   }
 }
 

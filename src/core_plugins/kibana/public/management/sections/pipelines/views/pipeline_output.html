@@ -15,6 +15,7 @@
     disabled="pipeline.hasCompileError">
   </source-data>
 </div>
+<pre ng-hide="pipeline.error" class="outputMeta">{{ pipeline.outputMeta | json }}</pre>
 <pre ng-hide="pipeline.error" class="output">{{ pipeline.output | json }}</pre>
 <div
   ng-show="pipeline.error"
