@@ -1,5 +1,6 @@
 import uiModules from 'ui/modules';
 import template from './view.html';
+import './styles.less';
 
 const app = uiModules.get('kibana');
 

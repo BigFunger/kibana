@@ -11,7 +11,12 @@
 </div>
 <div class="form-group">
   <label>Inline Script:</label>
-  <input type="text" class="form-control" ng-trim="false" ng-model="processor.inlineScript">
+  <textarea
+    ng-model="processor.inlineScript"
+    class="form-control"
+    ng-model-options="{ updateOn: 'blur' }">
+  </textarea>
+  <div class="info">NOTE: It is possible to write an invalid script that could cause Elasticsearch to crash. To help avoid this, this field will not cause the pipeline to simulate until it loses focus.</div>
 </div>
 <div class="form-group">
   <label>Filename:</label>
