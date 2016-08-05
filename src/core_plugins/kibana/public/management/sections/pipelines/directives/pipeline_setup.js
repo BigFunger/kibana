@@ -5,7 +5,8 @@ import angular from 'angular';
 import IngestProvider from 'ui/ingest';
 import '../styles/_pipeline_setup.less';
 import template from '../views/pipeline_setup.html';
-import ProcessorCollection from '../lib/processor_collection';
+import processorRegistry from 'ui/registry/ingest_processors';
+import ProcessorCollection from 'ui/ingest/lib/processor_collection';
 
 const app = uiModules.get('kibana');
 

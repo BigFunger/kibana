@@ -1,10 +1,11 @@
 import _ from 'lodash';
-import Processor from '../base/view_model';
-import ProcessorCollection from '../../lib/processor_collection';
+import Processor from 'ui/ingest/processor/view_model';
+import ProcessorCollection from 'ui/ingest/lib/processor_collection';
 
-export class Foreach extends Processor {
-  constructor(processorId, model) {
+export default class Foreach extends Processor {
+  constructor(processorRegistry, processorId, model) {
     super(
+      processorRegistry,
       processorId,
       'foreach',
       'For Each',
@@ -17,6 +18,7 @@ export class Foreach extends Processor {
     );
 
     this.processorCollection = new ProcessorCollection(
+      processorRegistry,
       'For Each',
       _.get(model, 'processors'),
       ProcessorCollection.types.FOREACH,
@@ -77,4 +79,4 @@ export class Foreach extends Processor {
   }
 };
 
-Foreach.id = 'foreach';
+//Foreach.id = 'foreach';

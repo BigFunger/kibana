@@ -4,7 +4,7 @@ import _ from 'lodash';
 import '../styles/_processor_ui_container.less';
 import './processor_output';
 import './processor_ui_container_header';
-import Processor from '../processors/base/view_model';
+import Processor from 'ui/ingest/processor/view_model';
 import template from '../views/processor_ui_container.html';
 
 const app = uiModules.get('kibana');

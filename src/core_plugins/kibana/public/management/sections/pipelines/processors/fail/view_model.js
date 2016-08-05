@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import Processor from '../base/view_model';
+import Processor from 'ui/ingest/processor/view_model';
 
-export class Fail extends Processor {
-  constructor(processorId, model) {
+export default class Fail extends Processor {
+  constructor(processorRegistry, processorId, model) {
     super(
+      processorRegistry,
       processorId,
       'fail',
       'Fail',
@@ -31,4 +32,4 @@ export class Fail extends Processor {
   }
 };
 
-Fail.id = 'fail';
+//Fail.id = 'fail';

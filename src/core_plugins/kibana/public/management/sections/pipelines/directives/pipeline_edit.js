@@ -17,7 +17,6 @@ import './field_select';
 import './pipeline_details';
 import './failure_action';
 import './pipeline_input';
-import './pipeline_crud';
 import './set_focus';
 import './pipeline_setup';
 import './pipeline_header';

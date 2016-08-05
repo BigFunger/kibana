@@ -1,8 +1,8 @@
 import uiModules from 'ui/modules';
 import '../styles/_processor_ui_container_header.less';
 import processorUiContainerHeaderTemplate from '../views/processor_ui_container_header.html';
-import ProcessorCollection from '../lib/processor_collection';
-import Processor from '../processors/base/view_model';
+import ProcessorCollection from 'ui/ingest/lib/processor_collection';
+import Processor from 'ui/ingest/processor/view_model';
 
 const app = uiModules.get('kibana');
 

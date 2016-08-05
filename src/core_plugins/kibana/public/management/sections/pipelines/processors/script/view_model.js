@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import Processor from '../base/view_model';
+import Processor from 'ui/ingest/processor/view_model';
 
-export class Script extends Processor {
-  constructor(processorId, model) {
+export default class Script extends Processor {
+  constructor(processorRegistry, processorId, model) {
     super(
+      processorRegistry,
       processorId,
       'script',
       'Script',
@@ -39,4 +40,4 @@ export class Script extends Processor {
   }
 };
 
-Script.id = 'script';
+//Script.id = 'script';

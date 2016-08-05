@@ -26,7 +26,8 @@ module.exports = function (kibana) {
           'fieldFormats',
           'navbarExtensions',
           'managementSections',
-          'docViews'
+          'docViews',
+          'ingestProcessors'
         ],
 
         injectVars: function (server, options) {

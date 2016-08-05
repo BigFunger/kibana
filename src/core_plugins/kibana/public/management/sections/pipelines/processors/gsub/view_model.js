@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import Processor from '../base/view_model';
+import Processor from 'ui/ingest/processor/view_model';
 
-export class Gsub extends Processor {
-  constructor(processorId, model) {
+export default class Gsub extends Processor {
+  constructor(processorRegistry, processorId, model) {
     super(
+      processorRegistry,
       processorId,
       'gsub',
       'Gsub',
@@ -35,4 +36,4 @@ export class Gsub extends Processor {
   }
 };
 
-Gsub.id = 'gsub';
+//Gsub.id = 'gsub';

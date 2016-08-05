@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import Processor from '../base/view_model';
+import Processor from 'ui/ingest/processor/view_model';
 
-export class Append extends Processor {
-  constructor(processorId, model) {
+export default class Append extends Processor {
+  constructor(processorRegistry, processorId, model) {
     super(
+      processorRegistry,
       processorId,
       'append',
       'Append',
@@ -36,4 +37,4 @@ containing the provided values if the field doesn’t exist.`,
   }
 };
 
-Append.id = 'append';
+//Append.id = 'append';

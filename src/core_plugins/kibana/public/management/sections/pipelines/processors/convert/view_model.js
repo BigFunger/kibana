@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import Processor from '../base/view_model';
+import Processor from 'ui/ingest/processor/view_model';
 
-export class Convert extends Processor {
-  constructor(processorId, model) {
+export default class Convert extends Processor {
+  constructor(processorRegistry, processorId, model) {
     super(
+      processorRegistry,
       processorId,
       'convert',
       'Convert',
@@ -39,4 +40,4 @@ converted.`,
   }
 };
 
-Convert.id = 'convert';
+//Convert.id = 'convert';

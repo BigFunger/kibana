@@ -1,10 +1,11 @@
 import _ from 'lodash';
-import keysDeep from '../../lib/keys_deep';
-import Processor from '../base/view_model';
+import keysDeep from 'ui/ingest/lib/keys_deep';
+import Processor from 'ui/ingest/processor/view_model';
 
-export class Grok extends Processor {
-  constructor(processorId, model) {
+export default class Grok extends Processor {
+  constructor(processorRegistry, processorId, model) {
     super(
+      processorRegistry,
       processorId,
       'grok',
       'Grok',
@@ -46,4 +47,4 @@ expression that supports aliased expressions that can be reused.`,
   }
 };
 
-Grok.id = 'grok';
+//Grok.id = 'grok';

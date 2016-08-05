@@ -1,9 +1,8 @@
 import _ from 'lodash';
-import * as ProcessorViewModels from '../processors/view_models';
 
 export default class ProcessorCollection {
 
-  constructor(title, processors, type, parentProcessor) {
+  constructor(processorRegistry, title, processors, type, parentProcessor) {
     this.title = title;
     this.type = type;
     this.valueField;
@@ -11,10 +10,10 @@ export default class ProcessorCollection {
     this.input = {};
     this.parentProcessor = parentProcessor;
 
+    this.processorRegistry = processorRegistry;
     this.ProcessorTypes = {};
-    _.forIn(ProcessorViewModels, (ViewModel) => {
-      this.ProcessorTypes[ViewModel.id] = ViewModel;
-    });
+
+    this.ProcessorTypes = processorRegistry.byId;
 
     const collection = this;
     _.forEach(processors, (processorModel) => {
@@ -35,8 +34,8 @@ export default class ProcessorCollection {
     const processorId = _.get(processorModel, 'processorId') || ProcessorCollection.generateId(typeId);
     ProcessorCollection.useId(processorId);
 
-    const ProcessorType = this.ProcessorTypes[typeId];
-    const newProcessor = new ProcessorType(processorId, processorModel);
+    const ProcessorType = this.ProcessorTypes[typeId].ViewModel;
+    const newProcessor = new ProcessorType(this.processorRegistry, processorId, processorModel);
 
     if (processorModel) {
       newProcessor.new = false;
@@ -140,11 +139,11 @@ ProcessorCollection.types = {
 };
 
 ProcessorCollection.usedProcessorIds = [];
-ProcessorCollection.resetIdCounters = function () {
+ProcessorCollection.resetIdCounters = function (processorRegistry) {
   ProcessorCollection.usedProcessorIds = [];
   ProcessorCollection.processorCounters = {};
-  _.forEach(ProcessorViewModels, (ViewModel) => {
-    ProcessorCollection.processorCounters[ViewModel.id] = 0;
+  _.forIn(processorRegistry.byId, (registryItem, id) => {
+    ProcessorCollection.processorCounters[id] = 0;
   });
 };
 

@@ -2,29 +2,31 @@ import uiModules from 'ui/modules';
 import _ from 'lodash';
 import '../styles/_processor_select.less';
 import template from '../views/processor_select.html';
-import * as ProcessorTypes from '../processors/view_models';
 import IngestProvider from 'ui/ingest';
 import 'ui-select';
+import processorRegistryProvider from 'ui/registry/ingest_processors';
 
 const app = uiModules.get('kibana');
 
-function buildProcessorTypeList(enabledProcessorTypeIds) {
-  return _(ProcessorTypes)
-    .map(Type => {
-      const instance = new Type();
-      return {
-        typeId: instance.typeId,
-        title: instance.title,
-        helpText: instance.helpText
-      };
-    })
+function buildProcessorTypeList(processorRegistry, enabledProcessorTypeIds) {
+  const result = [];
+  const filtered = _.pick(processorRegistry.byId, enabledProcessorTypeIds);
+  _.forIn(filtered, (registryItem) => {
+    const instance = new registryItem.ViewModel(processorRegistry);
+    result.push({
+      typeId: instance.typeId,
+      title: instance.title,
+      helpText: instance.helpText
+    });
+  });
+
+  return _(result)
     .compact()
-    .filter((processorType) => enabledProcessorTypeIds.includes(processorType.typeId))
     .sortBy('title')
     .value();
 }
 
-app.directive('processorSelect', function ($timeout) {
+app.directive('processorSelect', function ($timeout, Private) {
   return {
     restrict: 'E',
     template: template,
@@ -40,10 +42,12 @@ app.directive('processorSelect', function ($timeout) {
       const ingest = Private(IngestProvider);
       const notify = new Notifier({ location: `Ingest Pipeline Setup` });
 
+      const processorRegistry = Private(processorRegistryProvider);
+
       //determines which processors are available on the cluster
       ingest.getProcessors()
       .then((enabledProcessorTypeIds) => {
-        $scope.processorTypes = buildProcessorTypeList(enabledProcessorTypeIds);
+        $scope.processorTypes = buildProcessorTypeList(processorRegistry, enabledProcessorTypeIds);
       })
       .catch(notify.error);
 

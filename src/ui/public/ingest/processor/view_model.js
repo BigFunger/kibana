@@ -1,13 +1,14 @@
 import _ from 'lodash';
-import keysDeep from '../../lib/keys_deep';
-import ProcessorCollection from '../../lib/processor_collection';
+import keysDeep from 'ui/ingest/lib/keys_deep';
+import ProcessorCollection from 'ui/ingest/lib/processor_collection';
 
 export default class Processor {
-  constructor(processorId, typeId, title, helpText, mainField, defaultModel, model) {
+  constructor(processorRegistry, processorId, typeId, title, helpText, mainField, defaultModel, model) {
     if (!typeId || !title) {
       throw new Error('Cannot instantiate the base Processor class.');
     }
 
+    this.processorRegistry = processorRegistry;
     this.processorId = processorId;
     this.title = title;
     this.typeId = typeId;
@@ -30,6 +31,7 @@ export default class Processor {
     );
 
     this.failureProcessorCollection = new ProcessorCollection(
+      processorRegistry,
       title,
       _.get(model, 'failureProcessors'),
       ProcessorCollection.types.PROCESSOR_FAILURE,

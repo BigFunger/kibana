@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import Processor from '../base/view_model';
+import Processor from 'ui/ingest/processor/view_model';
 
-export class Set extends Processor {
-  constructor(processorId, model) {
+export default class Set extends Processor {
+  constructor(processorRegistry, processorId, model) {
     super(
+      processorRegistry,
       processorId,
       'set',
       'Set',
@@ -34,4 +35,4 @@ already exists, its value will be replaced with the provided one.`,
   }
 };
 
-Set.id = 'set';
+//Set.id = 'set';

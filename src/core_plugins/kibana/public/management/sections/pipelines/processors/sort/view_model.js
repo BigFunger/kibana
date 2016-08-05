@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import Processor from '../base/view_model';
+import Processor from 'ui/ingest/processor/view_model';
 
-export class Sort extends Processor {
-  constructor(processorId, model) {
+export default class Sort extends Processor {
+  constructor(processorRegistry, processorId, model) {
     super(
+      processorRegistry,
       processorId,
       'sort',
       'Sort',
@@ -39,4 +40,4 @@ arrays of strings + numbers will be sorted lexicographically.`,
   }
 };
 
-Sort.id = 'sort';
+//Sort.id = 'sort';

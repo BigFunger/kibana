@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import Processor from '../base/view_model';
+import Processor from 'ui/ingest/processor/view_model';
 
-export class Date extends Processor {
-  constructor(processorId, model) {
+export default class Date extends Processor {
+  constructor(processorRegistry, processorId, model) {
     super(
+      processorRegistry,
       processorId,
       'date',
       'Date',
@@ -42,4 +43,4 @@ export class Date extends Processor {
   }
 };
 
-Date.id = 'date';
+//Date.id = 'date';

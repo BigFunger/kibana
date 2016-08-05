@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import ProcessorCollection from './processor_collection';
+import ProcessorCollection from 'ui/ingest/lib/processor_collection';
 
 export default class Pipeline {
 
-  constructor(model) {
-    ProcessorCollection.resetIdCounters();
+  constructor(processorRegistry, model) {
+    ProcessorCollection.resetIdCounters(processorRegistry);
 
     const defaultModel = {
       pipelineId: '',
@@ -20,16 +20,19 @@ export default class Pipeline {
     );
 
     this.processorCollection = new ProcessorCollection(
+      processorRegistry,
       'Main Pipeline',
       _.get(model, 'processors'),
       ProcessorCollection.types.MAIN
     );
     this.failureProcessorCollection = new ProcessorCollection(
+      processorRegistry,
       'Global Failure',
       _.get(model, 'failureProcessors'),
       ProcessorCollection.types.GLOBAL_FAILURE
     );
 
+    this.processorRegistry = processorRegistry;
     this.processorCollections = [];
     this.activeProcessorCollection = this.processorCollection;
     this.input = {};

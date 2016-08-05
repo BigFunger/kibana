@@ -2,7 +2,7 @@ import uiModules from 'ui/modules';
 import _ from 'lodash';
 import '../styles/_pipeline_header.less';
 import template from '../views/pipeline_header.html';
-import ProcessorCollection from '../lib/processor_collection';
+import ProcessorCollection from 'ui/ingest/lib/processor_collection';
 
 const app = uiModules.get('kibana');
 

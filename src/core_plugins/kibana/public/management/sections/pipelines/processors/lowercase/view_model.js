@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import Processor from '../base/view_model';
+import Processor from 'ui/ingest/processor/view_model';
 
-export class Lowercase extends Processor {
-  constructor(processorId, model) {
+export default class Lowercase extends Processor {
+  constructor(processorRegistry, processorId, model) {
     super(
+      processorRegistry,
       processorId,
       'lowercase',
       'Lowercase',
@@ -31,4 +32,4 @@ export class Lowercase extends Processor {
   }
 };
 
-Lowercase.id = 'lowercase';
+//Lowercase.id = 'lowercase';
