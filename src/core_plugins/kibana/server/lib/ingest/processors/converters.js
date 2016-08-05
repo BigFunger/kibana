@@ -1,6 +1,7 @@
 export append from '../processors/append/converter';
 export convert from '../processors/convert/converter';
 export date from '../processors/date/converter';
+export date_index_name from '../processors/date_index_name/converter';
 export fail from '../processors/fail/converter';
 export foreach from '../processors/foreach/converter';
 export geoip from '../processors/geoip/converter';

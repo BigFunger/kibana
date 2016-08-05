@@ -1,6 +1,7 @@
 import './append';
 import './convert';
 import './date';
+import './date_index_name';
 import './fail';
 import './foreach';
 import './grok';

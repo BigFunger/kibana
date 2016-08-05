@@ -1,6 +1,7 @@
 export { append } from './append/schema';
 export { convert } from './convert/schema';
 export { date } from './date/schema';
+export { date_index_name } from './date_index_name/schema';
 export { fail } from './fail/schema';
 export { foreach } from './foreach/schema';
 export { geoip } from './geoip/schema';
