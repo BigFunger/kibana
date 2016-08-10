@@ -1,18 +1,21 @@
 import _ from 'lodash';
 import handleESError from '../../../lib/handle_es_error';
 import simulateSchema from '../../../lib/ingest/simulate/schema';
-import simulateConverter from '../../../lib/ingest/simulate/converter';
+import simulateConverterProvider from '../../../lib/ingest/simulate/converter';
 import { keysToCamelCaseShallow, keysToSnakeCaseShallow } from '../../../../common/lib/case_conversion';
 
-export function handleResponse(resp) {
-  return simulateConverter.esResponseToKibana(resp);
-};
-
-export function handleError(error) {
-  return simulateConverter.esErrorToKibana(error);
-}
 
 export function registerSimulate(server) {
+  const simulateConverter = simulateConverterProvider(server);
+
+  function handleResponse(resp) {
+    return simulateConverter.esResponseToKibana(resp);
+  };
+
+  function handleError(error) {
+    return simulateConverter.esErrorToKibana(error);
+  }
+
   server.route({
     path: '/api/kibana/ingest/simulate',
     method: 'POST',

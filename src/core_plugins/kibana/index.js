@@ -1,4 +1,5 @@
 import ingest from './server/routes/api/ingest';
+import ingestManager from './server/lib/ingest/ingest_manager';
 import search from './server/routes/api/search';
 import settings from './server/routes/api/settings';
 
@@ -82,6 +83,7 @@ module.exports = function (kibana) {
     },
 
     init: function (server, options) {
+      ingestManager(server);
       ingest(server);
       search(server);
       settings(server);

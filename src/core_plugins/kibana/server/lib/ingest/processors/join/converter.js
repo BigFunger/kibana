@@ -1,24 +1,25 @@
 import _ from 'lodash';
-import baseConverter from '../base/converter';
 
-export default {
-  kibanaToEs: function (processorApiDocument) {
-    const result = baseConverter.kibanaToEs(processorApiDocument, 'join');
-    _.assign(result.join, {
-      field: processorApiDocument.source_field,
-      separator: processorApiDocument.separator
-    });
+export default function (baseConverter) {
+  return {
+    kibanaToEs: function (processorApiDocument) {
+      const result = baseConverter.kibanaToEs(processorApiDocument, 'join');
+      _.assign(result.join, {
+        field: processorApiDocument.source_field,
+        separator: processorApiDocument.separator
+      });
 
-    return result;
-  },
-  esToKibana: function (processorEsDocument) {
-    const result = baseConverter.esToKibana(processorEsDocument, 'join');
+      return result;
+    },
+    esToKibana: function (processorEsDocument) {
+      const result = baseConverter.esToKibana(processorEsDocument, 'join');
 
-    _.assign(result, {
-      source_field: processorEsDocument.join.field,
-      separator: processorEsDocument.join.separator
-    });
+      _.assign(result, {
+        source_field: processorEsDocument.join.field,
+        separator: processorEsDocument.join.separator
+      });
 
-    return result;
-  }
-};
+      return result;
+    }
+  };
+}

@@ -1,24 +1,25 @@
 import _ from 'lodash';
-import baseConverter from '../base/converter';
 
-export default {
-  kibanaToEs: function (processorApiDocument) {
-    const result = baseConverter.kibanaToEs(processorApiDocument, 'sort');
-    _.assign(result.sort, {
-      field: processorApiDocument.target_field,
-      order: processorApiDocument.sort_order
-    });
+export default function (baseConverter) {
+  return {
+    kibanaToEs: function (processorApiDocument) {
+      const result = baseConverter.kibanaToEs(processorApiDocument, 'sort');
+      _.assign(result.sort, {
+        field: processorApiDocument.target_field,
+        order: processorApiDocument.sort_order
+      });
 
-    return result;
-  },
-  esToKibana: function (processorEsDocument) {
-    const result = baseConverter.esToKibana(processorEsDocument, 'sort');
+      return result;
+    },
+    esToKibana: function (processorEsDocument) {
+      const result = baseConverter.esToKibana(processorEsDocument, 'sort');
 
-    _.assign(result, {
-      target_field: processorEsDocument.sort.field,
-      sort_order: processorEsDocument.sort.order
-    });
+      _.assign(result, {
+        target_field: processorEsDocument.sort.field,
+        sort_order: processorEsDocument.sort.order
+      });
 
-    return result;
-  }
-};
+      return result;
+    }
+  };
+}

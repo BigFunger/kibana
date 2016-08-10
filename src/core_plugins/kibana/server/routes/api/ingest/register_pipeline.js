@@ -1,9 +1,13 @@
 import _ from 'lodash';
 import pipelineSchema from '../../../lib/ingest/pipeline/schema';
-import pipelineConverter from '../../../lib/ingest/pipeline/converter';
+import pipelineConverterProvider from '../../../lib/ingest/pipeline/converter';
 import handleESError from '../../../lib/handle_es_error';
 
 export function registerPipeline(server) {
+  const kibana = server.plugins.kibana;
+  const ingestManager = kibana.ingest;
+  const pipelineConverter = pipelineConverterProvider(server);
+
   server.route({
     path: '/api/kibana/ingest/pipeline',
     method: 'PUT',

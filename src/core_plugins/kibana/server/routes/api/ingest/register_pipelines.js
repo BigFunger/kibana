@@ -3,11 +3,17 @@ import pipelineConverter from '../../../lib/ingest/pipeline/converter';
 import handleESError from '../../../lib/handle_es_error';
 
 export function registerPipelines(server) {
+  const kibana = server.plugins.kibana;
+  const ingestManager = kibana.ingest;
+
   function handleResponse(response) {
+    console.log('register_pipelines.handleResponse', response);
+    console.log(ingestManager);
+
     const result = [];
     _.forIn(response, (esPipelineDetails, pipelineId) => {
       const esPipeline = _.set({}, pipelineId, esPipelineDetails);
-      result.push(pipelineConverter.esToKibana(esPipeline));
+      result.push(pipelineConverter.esToKibana(esPipeline, ingestManager));
     });
 
     return result;
