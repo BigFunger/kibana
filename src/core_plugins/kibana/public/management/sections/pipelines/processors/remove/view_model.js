@@ -31,5 +31,3 @@ export default class Remove extends Processor {
     );
   }
 };
-
-//Remove.id = 'remove';

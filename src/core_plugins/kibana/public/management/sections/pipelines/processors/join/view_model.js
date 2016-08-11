@@ -35,5 +35,3 @@ separator character between each element. `,
     );
   }
 };
-
-//Join.id = 'join';

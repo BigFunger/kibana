@@ -46,5 +46,3 @@ expression that supports aliased expressions that can be reused.`,
     );
   }
 };
-
-//Grok.id = 'grok';

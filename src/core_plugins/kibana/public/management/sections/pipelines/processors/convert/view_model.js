@@ -39,5 +39,3 @@ converted.`,
     );
   }
 };
-
-//Convert.id = 'convert';

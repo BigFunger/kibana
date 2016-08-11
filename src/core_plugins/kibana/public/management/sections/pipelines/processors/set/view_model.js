@@ -34,5 +34,3 @@ already exists, its value will be replaced with the provided one.`,
     );
   }
 };
-
-//Set.id = 'set';

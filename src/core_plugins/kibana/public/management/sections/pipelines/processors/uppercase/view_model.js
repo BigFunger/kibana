@@ -31,5 +31,3 @@ export default class Uppercase extends Processor {
     );
   }
 };
-
-//Uppercase.id = 'uppercase';

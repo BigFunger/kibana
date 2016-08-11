@@ -35,5 +35,3 @@ export default class Gsub extends Processor {
     );
   }
 };
-
-//Gsub.id = 'gsub';

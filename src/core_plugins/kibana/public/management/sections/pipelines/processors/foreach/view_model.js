@@ -78,5 +78,3 @@ export default class Foreach extends Processor {
     this.processorCollection.applySimulateResults(collection);
   }
 };
-
-//Foreach.id = 'foreach';

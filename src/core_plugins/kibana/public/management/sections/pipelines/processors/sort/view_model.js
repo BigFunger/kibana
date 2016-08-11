@@ -39,5 +39,3 @@ arrays of strings + numbers will be sorted lexicographically.`,
     );
   }
 };
-
-//Sort.id = 'sort';

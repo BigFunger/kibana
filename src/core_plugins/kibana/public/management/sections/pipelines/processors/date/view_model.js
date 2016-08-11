@@ -42,5 +42,3 @@ export default class Date extends Processor {
     );
   }
 };
-
-//Date.id = 'date';

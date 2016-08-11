@@ -36,5 +36,3 @@ containing the provided values if the field doesn’t exist.`,
     );
   }
 };
-
-//Append.id = 'append';

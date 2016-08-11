@@ -39,5 +39,3 @@ export default class Script extends Processor {
     );
   }
 };
-
-//Script.id = 'script';

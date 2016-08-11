@@ -31,5 +31,3 @@ export default class Fail extends Processor {
     );
   }
 };
-
-//Fail.id = 'fail';

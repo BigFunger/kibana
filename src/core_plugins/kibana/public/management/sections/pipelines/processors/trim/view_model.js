@@ -31,5 +31,3 @@ export default class Trim extends Processor {
     );
   }
 };
-
-//Trim.id = 'trim';

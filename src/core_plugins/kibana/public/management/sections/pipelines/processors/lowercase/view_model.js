@@ -31,5 +31,3 @@ export default class Lowercase extends Processor {
     );
   }
 };
-
-//Lowercase.id = 'lowercase';

@@ -34,5 +34,3 @@ export default class Split extends Processor {
     );
   }
 };
-
-//Split.id = 'split';

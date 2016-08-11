@@ -39,5 +39,3 @@ based on data from the Maxmind database.`,
     );
   }
 };
-
-//GeoIp.id = 'geoip';
