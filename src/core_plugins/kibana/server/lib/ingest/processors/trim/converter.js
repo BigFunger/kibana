@@ -1,6 +1,8 @@
 import _ from 'lodash';
 
-export default function (baseConverter) {
+export default function (server) {
+  const baseConverter = server.plugins.kibana.ingest.processors.baseConverterProvider(server);
+
   return {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'trim');

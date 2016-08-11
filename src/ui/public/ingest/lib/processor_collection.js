@@ -43,7 +43,7 @@ export default class ProcessorCollection {
     } else {
       if (this.type === ProcessorCollection.types.FOREACH) {
         if (newProcessor.mainField) {
-          _.set(newProcessor, newProcessor.mainField, '_value');
+          _.set(newProcessor, newProcessor.mainField, '_ingest._value');
 
           //since we're defaulting the mainField, this should be included in the results.
           newProcessor.new = false;

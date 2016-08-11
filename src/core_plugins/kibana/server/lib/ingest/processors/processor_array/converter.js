@@ -1,8 +1,7 @@
 import _ from 'lodash';
 
 export default function (server) {
-  const kibana = server.plugins.kibana;
-  const ingestManager = kibana.ingest;
+  const ingestManager = server.plugins.kibana.ingest;
 
   return {
     kibanaToEs: function (processorApiDocument) {

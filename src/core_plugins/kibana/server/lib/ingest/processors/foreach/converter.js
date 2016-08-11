@@ -1,7 +1,10 @@
 import _ from 'lodash';
-import processorArrayConverter from '../processor_array/converter';
+import processorArrayConverterProvider from '../processor_array/converter';
 
-export default function (baseConverter) {
+export default function (server) {
+  const baseConverter = server.plugins.kibana.ingest.processors.baseConverterProvider(server);
+  const processorArrayConverter = processorArrayConverterProvider(server);
+
   return {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'foreach');

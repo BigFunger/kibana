@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import baseSchema from './processors/base/schema';
-import baseConverter from './processors/base/converter';
+import baseConverterProvider from './processors/base/converter';
 import registerCoreProcessors from './register_core_processors';
 
 export default function ingestManager(server) {
@@ -22,8 +22,8 @@ export default function ingestManager(server) {
 
     //TODO: validation of options object
 
-    _.set(schemas, typeId, processorOptions.schemaProvider(baseSchema));
-    _.set(converters, typeId, processorOptions.converterProvider(baseConverter));
+    _.set(schemas, typeId, processorOptions.schemaProvider(server));
+    _.set(converters, typeId, processorOptions.converterProvider(server));
   };
 
   //defines the kibana.ingest property
@@ -31,7 +31,9 @@ export default function ingestManager(server) {
     processors: {
       register: registerProcessor,
       schemas: schemas,
-      converters: converters
+      converters: converters,
+      baseSchema: baseSchema,
+      baseConverterProvider: baseConverterProvider
     }
   });
 

@@ -1,19 +1,15 @@
 import _ from 'lodash';
-import pipelineConverter from '../../../lib/ingest/pipeline/converter';
+import pipelineConverterProvider from '../../../lib/ingest/pipeline/converter';
 import handleESError from '../../../lib/handle_es_error';
 
 export function registerPipelines(server) {
-  const kibana = server.plugins.kibana;
-  const ingestManager = kibana.ingest;
+  const pipelineConverter = pipelineConverterProvider(server);
 
   function handleResponse(response) {
-    console.log('register_pipelines.handleResponse', response);
-    console.log(ingestManager);
-
     const result = [];
     _.forIn(response, (esPipelineDetails, pipelineId) => {
       const esPipeline = _.set({}, pipelineId, esPipelineDetails);
-      result.push(pipelineConverter.esToKibana(esPipeline, ingestManager));
+      result.push(pipelineConverter.esToKibana(esPipeline));
     });
 
     return result;
