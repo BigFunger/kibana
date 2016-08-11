@@ -21,6 +21,8 @@ export default class Processor {
     this.new = true;
     this.state = 'not initialized';
     this.mainField = mainField;
+    this.inputControlsState = { enableShowChanges: false };
+    this.outputControlsState = { };
 
     defaultModel.failureAction = 'index_fail';
 

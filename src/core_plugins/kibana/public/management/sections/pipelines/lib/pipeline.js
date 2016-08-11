@@ -40,6 +40,7 @@ export default class Pipeline {
     this.dirty = false;
     this.hasCompileError = false;
     this.globalFailureProcessorIds = [];
+    this.outputControlsState = { enableShowChanges: false, enableExpand: false };
 
 
     this.failureOptions = {

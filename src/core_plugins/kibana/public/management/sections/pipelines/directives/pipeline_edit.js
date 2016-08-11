@@ -21,6 +21,7 @@ import './set_focus';
 import './pipeline_setup';
 import './pipeline_header';
 import './pipeline_on_failure';
+import './input_output_controls';
 import '../processors';
 import slugifyId from 'ui/utils/slugify_id';
 

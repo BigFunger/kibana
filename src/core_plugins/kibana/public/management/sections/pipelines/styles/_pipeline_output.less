@@ -7,13 +7,18 @@ pipeline-output {
   display: flex;
   flex-direction: column;
 
-  .header-line {
+  .header {
     display: flex;
 
     label {
-      width: 100%;
+      flex: 1 1 auto;
+    }
+
+    input-output-controls {
+      flex: 0 0 auto;
     }
   }
+
 
   pre.output {
     min-height: 450px;

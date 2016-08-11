@@ -10,9 +10,6 @@ app.directive('processorInput', function () {
     template: template,
     scope: {
       processor: '='
-    },
-    controller: function ($scope) {
-      $scope.size = 2;
     }
   };
 });
