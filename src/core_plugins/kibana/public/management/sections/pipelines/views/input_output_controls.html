@@ -5,7 +5,8 @@
   ng-click="options.showMeta = !options.showMeta"
   type="button"
   class="btn btn-xs btn-secondary"
-  ng-show="!options.showMeta">
+  ng-show="!options.showMeta"
+  tabindex="-1">
   <i aria-hidden="true" class="fa fa-file-o"></i>
 </button>
 <button
@@ -15,7 +16,8 @@
   ng-click="options.showMeta = !options.showMeta"
   type="button"
   class="btn btn-xs btn-secondary"
-  ng-show="options.showMeta">
+  ng-show="options.showMeta"
+  tabindex="-1">
   <i aria-hidden="true" class="fa fa-file"></i>
 </button>
 
@@ -26,7 +28,8 @@
   ng-click="options.showChanges = !options.showChanges"
   type="button"
   class="btn btn-xs btn-secondary"
-  ng-show="options.showChanges && options.enableShowChanges">
+  ng-show="options.showChanges && options.enableShowChanges"
+  tabindex="-1">
   <i aria-hidden="true" class="fa fa-eye"></i>
 </button>
 
@@ -37,7 +40,8 @@
   ng-click="options.showChanges = !options.showChanges"
   type="button"
   class="btn btn-xs btn-secondary"
-  ng-show="!options.showChanges && options.enableShowChanges">
+  ng-show="!options.showChanges && options.enableShowChanges"
+  tabindex="-1">
   <i aria-hidden="true" class="fa fa-eye-slash"></i>
 </button>
 
@@ -48,7 +52,8 @@
   ng-click="options.expandLevel = options.expandLevel - 1"
   type="button"
   class="btn btn-xs btn-secondary"
-  ng-show="options.expandLevel > options.minExpandLevel && options.enableExpand">
+  ng-show="options.expandLevel > options.minExpandLevel && options.enableExpand"
+  tabindex="-1">
   <i aria-hidden="true" class="fa fa-compress"></i>
 </button>
 
@@ -59,6 +64,7 @@
   ng-click="options.expandLevel = options.expandLevel + 1"
   type="button"
   class="btn btn-xs btn-secondary"
-  ng-show="options.expandLevel < options.maxExpandLevel && options.enableExpand">
+  ng-show="options.expandLevel < options.maxExpandLevel && options.enableExpand"
+  tabindex="-1">
   <i aria-hidden="true" class="fa fa-expand"></i>
 </button>

@@ -8,7 +8,7 @@ export default class DateIndexName extends Processor {
       processorId,
       'date_index_name',
       'Date Index Name',
-      `Sets the _index meta field with a date math index name expression based on the provided
+      `Assigns the _index meta field with a date math index name expression based on the provided
 index name prefix, date or timestamp field in the documents being
 processed and the provided date rounding.`,
       'sourceField',
