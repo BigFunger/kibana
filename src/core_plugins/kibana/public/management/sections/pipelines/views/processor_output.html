@@ -1,26 +1,8 @@
 <div class="form-group">
-
   <div class="header">
     <label>Processor Output:</label>
     <input-output-controls options="processor.outputControlsState"></input-output-controls>
   </div>
-<!--   <a
-    style="float: right"
-    ng-click="collapsed = true"
-    ng-hide="collapsed">collapse</a>
-  <a
-    style="float: right"
-    ng-click="collapsed = false"
-    ng-show="collapsed">expand</a>
-  <span style="float: right">&nbsp;/&nbsp;</span>
-  <a
-    style="float: right"
-    ng-click="showAll = false"
-    ng-show="showAll">only show changes</a>
-  <a
-    style="float: right"
-    ng-click="showAll = true"
-    ng-hide="showAll">show all</a> -->
   <div
     class="visual"
     ng-class="{'hide-unchanged': processor.outputControlsState.showChanges, 'full': processor.outputControlsState.expandLevel === 2, 'small': processor.outputControlsState.expandLevel === 1}"></div>
