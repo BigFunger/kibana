@@ -54,8 +54,11 @@ export default class Processor {
     return (oldParent !== this.parent);
   }
 
-  setOutput(output, error) {
+  updateOutput() {
     if (this.new) return;
+
+    const output = _.get(this.simulateResult, 'output');
+    const error = _.get(this.simulateResult, 'error');
 
     this.outputObject = output;
     this.error = error;
@@ -116,10 +119,7 @@ export default class Processor {
   }
 
   applySimulateResults(rootInput) {
-    const output = _.get(this.simulateResult, 'output');
-    const error = _.get(this.simulateResult, 'error');
-
-    this.setOutput(output, error);
+    this.updateOutput();
 
     if (this.parent) {
       this.setInput(this.parent.output);

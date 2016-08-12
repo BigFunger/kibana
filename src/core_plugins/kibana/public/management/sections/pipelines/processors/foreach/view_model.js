@@ -30,10 +30,10 @@ export default class Foreach extends Processor {
   setOutput(output, error) {
     if (this.new) return;
 
-    super.setOutput(output, error);
+    super.updateOutput();
 
     if (this.innerProcessor) {
-      this.innerProcessor.setOutput(output, error);
+      this.innerProcessor.updateOutput();
     }
   }
 
