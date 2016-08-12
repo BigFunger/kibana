@@ -116,8 +116,6 @@ export default class Processor {
   }
 
   applySimulateResults(rootInput) {
-    this.failureProcessorCollection.applySimulateResults(this.inputObject);
-
     const output = _.get(this.simulateResult, 'output');
     const error = _.get(this.simulateResult, 'error');
 
@@ -128,6 +126,8 @@ export default class Processor {
     } else {
       this.setInput(rootInput);
     }
+
+    this.failureProcessorCollection.applySimulateResults(this.inputObject);
   }
 
   get failureProcessorId() {
