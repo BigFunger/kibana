@@ -6,7 +6,7 @@ import template from '../views/processor_output.html';
 const htmlFormat = jsondiffpatch.formatters.html.format;
 const app = uiModules.get('kibana');
 
-app.directive('processorOutput', function () {
+app.directive('processorOutput', function (debounce) {
   return {
     restrict: 'E',
     template: template,
@@ -17,7 +17,7 @@ app.directive('processorOutput', function () {
       const div = $el.find('.visual')[0];
       const processor = $scope.processor;
 
-      $scope.diffpatch = jsondiffpatch.create({
+      const diffpatch = jsondiffpatch.create({
         arrays: {
           detectMove: false
         },
@@ -26,22 +26,28 @@ app.directive('processorOutput', function () {
         }
       });
 
-      $scope.updateUi = function () {
-        let delta = $scope.diffpatch.diff(processor.inputObject, processor.outputObject);
-        if (!delta || processor.error || processor.new) delta = {};
-
-        div.innerHTML = htmlFormat(delta, processor.inputObject);
-      };
-    },
-    controller: function ($scope, debounce) {
       $scope.collapsed = false;
 
-      const updateOutput = debounce(function () {
-        $scope.updateUi();
+      const updateOutput = debounce(() => {
+        const showMeta = processor.outputControlsState.showMeta;
+
+        let oldValue = processor.inputObject;
+        let newValue = processor.outputObject;
+
+        if (showMeta) {
+          oldValue = { '_index': '_index', '_type': '_type' };
+          newValue = { '_index': 'index_failures', '_type': '_type' };
+        }
+
+        let delta = diffpatch.diff(oldValue, newValue);
+        if (!delta || processor.error || processor.new) delta = {};
+
+        div.innerHTML = htmlFormat(delta, oldValue);
       }, 200);
 
       $scope.$watch('processor.outputObject', updateOutput);
       $scope.$watch('processor.inputObject', updateOutput);
+      $scope.$watch('processor.outputControlsState.showMeta', updateOutput);
     }
   };
 });
