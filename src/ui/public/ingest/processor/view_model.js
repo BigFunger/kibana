@@ -60,13 +60,18 @@ export default class Processor {
     const output = _.get(this.simulateResult, 'output');
     const error = _.get(this.simulateResult, 'error');
 
-    this.outputObject = output;
+    this.outputObject = {
+      'doc': _.get(this.simulateResult, 'output') || {},
+      'meta': _.get(this.simulateResult, 'ingestMeta') || {}
+    };
+
     this.error = error;
 
     this.updateState();
   }
 
   setInput(input) {
+    //TODO: Do I want to pull this from outputObject.meta?
     const metaFields = [
       '_index',
       '_type',
@@ -78,7 +83,7 @@ export default class Processor {
     ];
 
     this.inputObject = _.cloneDeep(input);
-    this.suggestedFields = _.union(keysDeep(this.inputObject), metaFields);
+    this.suggestedFields = _.union(keysDeep(_.get(this.inputObject, 'doc')), metaFields);
   }
 
   updateState() {

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import uiModules from 'ui/modules';
 import jsondiffpatch from '@bigfunger/jsondiffpatch';
 import '../styles/_processor_output.less';
@@ -30,14 +31,8 @@ app.directive('processorOutput', function (debounce) {
 
       const updateOutput = debounce(() => {
         const showMeta = processor.outputControlsState.showMeta;
-
-        let oldValue = processor.inputObject;
-        let newValue = processor.outputObject;
-
-        if (showMeta) {
-          oldValue = { '_index': '_index', '_type': '_type' };
-          newValue = { '_index': 'index_failures', '_type': '_type' };
-        }
+        const oldValue = _.get(processor.inputObject, showMeta ? 'meta' : 'doc');
+        const newValue = _.get(processor.outputObject, showMeta ? 'meta' : 'doc');
 
         let delta = diffpatch.diff(oldValue, newValue);
         if (!delta || processor.error || processor.new) delta = {};

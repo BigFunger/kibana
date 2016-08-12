@@ -13,10 +13,10 @@
 </div>
 <pre
   ng-show="pipeline.outputControlsState.showMeta && !pipeline.error"
-  class="outputMeta">{{ pipeline.outputMeta | json }}</pre>
+  class="outputMeta">{{ pipeline.output.meta | json }}</pre>
 <pre
   ng-show="!pipeline.outputControlsState.showMeta && !pipeline.error"
-  class="output">{{ pipeline.output | json }}</pre>
+  class="output">{{ pipeline.output.doc | json }}</pre>
 <div
   ng-show="pipeline.error"
   class="alert alert-danger">

@@ -81,15 +81,13 @@ export default class Pipeline {
     }
   }
 
-  updateOutput(simulateResults) {
+  updateOutput(allProcessors, simulateResults) {
+    allProcessors = allProcessors || {};
     const lastResult = _.last(simulateResults);
-    const output = _.get(lastResult, 'output');
-    const error = _.get(lastResult, 'error');
+    const lastProcessor = allProcessors[_.get(lastResult, 'processorId')];
 
-    this.output = output;
-    this.error = lastResult && !output;
-
-    this.outputMeta = getObjectMeta(lastResult);
+    this.output = _.get(lastProcessor, 'outputObject');
+    this.error = !!_.get(lastProcessor, 'error');
 
     this.dirty = false;
   }
@@ -108,7 +106,7 @@ export default class Pipeline {
       processor.setSimulateResult(allResults[processor.processorId]);
     });
 
-    this.processorCollection.applySimulateResults(this.input);
+    this.processorCollection.applySimulateResults({ doc: this.input, meta: {} });
 
 
     //TODO: Refactor some of this into the processorCollection class?
@@ -121,7 +119,7 @@ export default class Pipeline {
       failureProcessor.setOutput(this.failureProcessorCollection.output, failureProcessor.error);
     }
 
-    this.updateOutput(simulateResults);
+    this.updateOutput(allProcessors, simulateResults);
   }
 
   get allProcessors() {
