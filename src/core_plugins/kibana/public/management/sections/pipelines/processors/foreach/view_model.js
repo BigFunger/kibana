@@ -74,7 +74,7 @@ export default class Foreach extends Processor {
         this.innerProcessor.setSimulateResult(undefined);
       }
     }
-    const collection = _.get(this.inputObject, this.targetField);
+    const collection = { doc: _.get(this.inputObject.doc, this.targetField), meta: this.inputObject.meta };
     this.processorCollection.applySimulateResults(collection);
   }
 };
