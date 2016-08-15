@@ -2,15 +2,8 @@
   <div
     ng-hide="expandContext < 1"
     class="left-panel">
-    <label>
-      Pipeline Details
-    </label>
-    <div class="pipeline-details panel">
-      <pipeline-details pipeline="pipeline"></pipeline-details>
-    </div>
-
-    <pipeline-header pipeline="pipeline">
-    </pipeline-header>
+    <pipeline-details pipeline="pipeline"></pipeline-details>
+    <pipeline-header pipeline="pipeline"></pipeline-header>
     <div class="pipeline panel">
       <ul
         class="pipeline-container"
