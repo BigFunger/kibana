@@ -87,7 +87,7 @@ export default class Pipeline {
     const lastProcessor = allProcessors[_.get(lastResult, 'processorId')];
 
     this.output = _.get(lastProcessor, 'outputObject');
-    this.error = !!_.get(lastProcessor, 'error');
+    this.error = _.get(lastProcessor, 'causeIndexFail');
 
     this.dirty = false;
   }

@@ -58,16 +58,19 @@ export default class Processor {
     if (this.new) return;
 
     const output = _.get(this.simulateResult, 'output');
+    const meta = _.get(this.simulateResult, 'ingestMeta');
     const error = _.get(this.simulateResult, 'error');
 
-    this.outputObject = {
-      'doc': _.get(this.simulateResult, 'output'),
-      'meta': _.get(this.simulateResult, 'ingestMeta')
-    };
+    let newOutputObject = undefined;
+    if (output) {
+      newOutputObject = {
+        'doc': output,
+        'meta': meta
+      };
+    }
+    this.outputObject = newOutputObject;
 
     this.error = error;
-
-    this.updateState();
   }
 
   setInput(input) {
@@ -87,17 +90,23 @@ export default class Processor {
   }
 
   updateState() {
-    if (this.output.doc && !this.error) {
+    const output = this.output;
+
+    if (output && !this.error) {
       this.state = Processor.states.VALID;
-    } else if (!this.output.doc && !this.error) {
+    } else if (!output && !this.error) {
       this.state = Processor.states.NO_RESULT;
-    } else if (!this.output.doc && this.error && this.error.compile) {
+    } else if (!output && this.error && this.error.compile) {
       this.state = Processor.states.ERROR_COMPILE;
-    } else if (!this.output.doc && this.error) {
+    } else if (!output && this.error) {
       this.state = Processor.states.ERROR_FAIL;
-    } else if (this.output.doc && this.error) {
+    } else if (output && this.error) {
       this.state = Processor.states.ERROR_RECOVER;
     }
+  }
+
+  get causeIndexFail() {
+    return (this.state !== Processor.states.VALID && this.state !== Processor.states.ERROR_RECOVER);
   }
 
   get model() {
@@ -133,6 +142,8 @@ export default class Processor {
     }
 
     this.failureProcessorCollection.applySimulateResults(this.inputObject);
+
+    this.updateState();
   }
 
   get failureProcessorId() {
