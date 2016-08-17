@@ -61,8 +61,8 @@ export default class Processor {
     const error = _.get(this.simulateResult, 'error');
 
     this.outputObject = {
-      'doc': _.get(this.simulateResult, 'output') || {},
-      'meta': _.get(this.simulateResult, 'ingestMeta') || {}
+      'doc': _.get(this.simulateResult, 'output'),
+      'meta': _.get(this.simulateResult, 'ingestMeta')
     };
 
     this.error = error;
@@ -87,15 +87,15 @@ export default class Processor {
   }
 
   updateState() {
-    if (this.output && !this.error) {
+    if (this.output.doc && !this.error) {
       this.state = Processor.states.VALID;
-    } else if (!this.output && !this.error) {
+    } else if (!this.output.doc && !this.error) {
       this.state = Processor.states.NO_RESULT;
-    } else if (!this.output && this.error && this.error.compile) {
+    } else if (!this.output.doc && this.error && this.error.compile) {
       this.state = Processor.states.ERROR_COMPILE;
-    } else if (!this.output && this.error) {
+    } else if (!this.output.doc && this.error) {
       this.state = Processor.states.ERROR_FAIL;
-    } else if (this.output && this.error) {
+    } else if (this.output.doc && this.error) {
       this.state = Processor.states.ERROR_RECOVER;
     }
   }
