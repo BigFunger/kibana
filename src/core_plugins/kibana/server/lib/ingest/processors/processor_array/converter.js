@@ -6,7 +6,11 @@ export default function (server) {
   return {
     kibanaToEs: function (processorApiDocument) {
       const result = _.map(processorApiDocument, (processor) => {
-        const processorConverter = ingestManager.processors.converters[processor.type_id];
+        let processorConverter = ingestManager.processors.converters[processor.type_id];
+        if (!processorConverter) {
+          processorConverter = ingestManager.processors.converters.unknown;
+        }
+
         return processorConverter.kibanaToEs(processor);
       });
 
@@ -15,7 +19,11 @@ export default function (server) {
     esToKibana: function (processorEsDocument) {
       const result = _.map(processorEsDocument, (processor) => {
         const typeId = _.keys(processor)[0];
-        const processorConverter = ingestManager.processors.converters[typeId];
+        let processorConverter = ingestManager.processors.converters[typeId];
+        if (!processorConverter) {
+          processorConverter = ingestManager.processors.converters.unknown;
+        }
+
         return processorConverter.esToKibana(processor, typeId);
       });
 

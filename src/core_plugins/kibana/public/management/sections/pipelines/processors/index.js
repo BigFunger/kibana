@@ -15,4 +15,5 @@ import './set';
 import './sort';
 import './split';
 import './trim';
+import './unknown';
 import './uppercase';

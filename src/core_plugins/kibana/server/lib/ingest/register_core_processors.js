@@ -15,6 +15,7 @@ import registerSet from './processors/set';
 import registerSort from './processors/sort';
 import registerSplit from './processors/split';
 import registerTrim from './processors/trim';
+import registerUnknown from './processors/unknown';
 import registerUppercase from './processors/uppercase';
 
 export default function registerCoreProcessors(server) {
@@ -35,5 +36,6 @@ export default function registerCoreProcessors(server) {
   registerSort(server);
   registerSplit(server);
   registerTrim(server);
+  registerUnknown(server);
   registerUppercase(server);
 }

@@ -10,6 +10,7 @@
     <div
       class="processor-ui-container-body-content"
       ng-hide="processor.collapsed">
+      <div class="alert alert-warning unknown-warning" ng-show="processor.typeId === 'unknown'">This processor is a type that is unknown by Kibana. This interface will allow you to edit and view this processor as raw JSON. It is strongly recommended that you install the plugin that corresponds to this processor type. Warning: Entering JSON that ingest does not understand can break Kibana.</div>
       <processor-input processor="processor"></processor-input>
       <processor-id processor="processor"></processor-id>
       <div class="processor-ui-content"></div>
