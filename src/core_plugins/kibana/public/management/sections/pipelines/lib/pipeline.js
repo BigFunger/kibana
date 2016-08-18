@@ -108,16 +108,10 @@ export default class Pipeline {
 
     this.processorCollection.applySimulateResults({ doc: this.input, meta: {} });
 
-
-    //TODO: Refactor some of this into the processorCollection class?
-    //Not sure how much of this is needed, now that we don't recover from a global failure.
     const failureProcessorId = _.get(this.failureProcessorCollection, 'processors[0].failureProcessorId');
     const failureProcessor = allProcessors[failureProcessorId];
     const failureSourceInput = failureProcessor ? failureProcessor.inputObject : undefined;
     this.failureProcessorCollection.applySimulateResults(failureSourceInput);
-    if (failureProcessor) {
-      failureProcessor.setOutput(this.failureProcessorCollection.output, failureProcessor.error);
-    }
 
     this.updateOutput(allProcessors, simulateResults);
   }
