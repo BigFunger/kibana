@@ -45,6 +45,9 @@ export default class Pipeline {
     this.globalFailureProcessorIds = [];
     this.outputControlsState = { enableShowChanges: false, enableExpand: false };
 
+    //TODO: I don't think this belongs here... just quick and dirty prototyping
+    this.showJumpToProcessor = false;
+
 
     this.failureOptions = {
       index_fail: 'Do not index document',
@@ -83,6 +86,37 @@ export default class Pipeline {
     while (this.processorCollections.length > index) {
       this.activeProcessorCollection = this.processorCollections.pop();
     }
+  }
+
+  jumpToProcessor(targetProcessor) {
+    const allProcessors = this.allProcessors;
+    const allProcessorCollections = this.allProcessorCollections;
+
+    _.forEach(allProcessors, (processor) => {
+      processor.collapsed = processor !== targetProcessor;
+    });
+
+    _.forEach(allProcessorCollections, (processorCollection) => {
+      if (_.contains(processorCollection.processors, targetProcessor)) {
+        this.activeProcessorCollection = processorCollection;
+      }
+    });
+  }
+
+  jumpToRoot() {
+    const allProcessors = this.allProcessors;
+    _.forEach(allProcessors, (processor) => {
+      processor.collapsed = true;
+    });
+    this.activeProcessorCollection = this.processorCollection;
+  }
+
+  jumpToGlobalFailureRoot() {
+    const allProcessors = this.allProcessors;
+    _.forEach(allProcessors, (processor) => {
+      processor.collapsed = true;
+    });
+    this.activeProcessorCollection = this.failureProcessorCollection;
   }
 
   updateOutput(allProcessors, simulateResults) {
@@ -135,6 +169,13 @@ export default class Pipeline {
     return _.assign(
       this.processorCollection.allProcessors,
       this.failureProcessorCollection.allProcessors);
+  }
+
+
+  get allProcessorCollections() {
+    return [].concat(
+      this.processorCollection.allProcessorCollections,
+      this.failureProcessorCollection.allProcessorCollections);
   }
 }
 

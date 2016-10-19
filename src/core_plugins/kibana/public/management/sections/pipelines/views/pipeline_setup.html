@@ -3,49 +3,66 @@
   mode="mode"
   ng-show="mode!==modes.PIPELINE">
 </pipeline-inputs>
+<pipeline-canvas pipeline="pipeline" ng-show="mode===modes.CANVAS"></pipeline-canvas>
 <div class="main-panels" ng-show="mode===modes.PIPELINE">
   <div
     ng-hide="expandContext < 1"
     class="left-panel">
-    <pipeline-details pipeline="pipeline"></pipeline-details>
-    <pipeline-header pipeline="pipeline"></pipeline-header>
-    <div class="pipeline panel">
-      <div
-        class="pipeline-container"
-        draggable-container="pipeline.activeProcessorCollection.processors"
-        ng-show="pipeline.activeProcessorCollection.processors.length > 0">
+    <pipeline-setup-navbar
+      pipeline="pipeline">
+    </pipeline-setup-navbar>
+    <pipeline-details
+      pipeline="pipeline"
+      ng-show="sidebar.section == 'details'">
+    </pipeline-details>
+    <!-- TODO: This needs to move within the correct 'section' -->
+    <jump-to-processor pipeline="pipeline" ng-show="pipeline.showJumpToProcessor"></jump-to-processor>
+    <pipeline-branch-header
+      pipeline="pipeline"
+      ng-hide="pipeline.activeProcessorCollection === pipeline.processorCollection">
+    </pipeline-branch-header>
+    <div ng-show="sidebar.section == 'processors'">
+<!--       <pipeline-header
+        pipeline="pipeline">
+      </pipeline-header> -->
+      <div class="pipeline panel">
         <div
-          draggable-item="processor"
-          ng-repeat="processor in pipeline.activeProcessorCollection.processors track by processor.processorId">
-          <processor-ui-container
-            pipeline="pipeline"
-            processor-collection="pipeline.activeProcessorCollection"
-            processor="processor">
-          </processor-ui-container>
+          class="pipeline-container"
+          draggable-container="pipeline.activeProcessorCollection.processors"
+          ng-show="pipeline.activeProcessorCollection.processors.length > 0">
+          <div
+            draggable-item="processor"
+            ng-repeat="processor in pipeline.activeProcessorCollection.processors track by processor.processorId">
+            <processor-ui-container
+              pipeline="pipeline"
+              processor-collection="pipeline.activeProcessorCollection"
+              processor="processor">
+            </processor-ui-container>
+          </div>
         </div>
-      </div>
-      <div
-        class="pipeline-container"
-        ng-show="pipeline.activeProcessorCollection.processors.length > 0">
-        <div ng-hide="pipeline.processorCollections.length > 0">
-          <pipeline-on-failure pipeline="pipeline"></pipeline-on-failure>
-        </div>
-      </div>
-      <div class="add-processor">
-        <div
-          class="form-group"
-          ng-hide="pipeline.activeProcessorCollection.processors.length > 0 ||
-            pipeline.processorCollections.length > 0">
-          <label>
-            Your pipeline is currently empty. Add a processor to get started!
-          </label>
-        </div>
+<!--         <div
+          class="pipeline-container"
+          ng-show="pipeline.activeProcessorCollection.processors.length > 0">
+          <div ng-hide="pipeline.processorCollections.length > 0">
+            <pipeline-on-failure pipeline="pipeline"></pipeline-on-failure>
+          </div>
+        </div> -->
+        <div class="add-processor">
+          <div
+            class="form-group"
+            ng-hide="pipeline.activeProcessorCollection.processors.length > 0 ||
+              pipeline.processorCollections.length > 0">
+            <label>
+              Your pipeline is currently empty. Add a processor to get started!
+            </label>
+          </div>
 
-        <div
-          class="add-processor-dropdown"
-          ng-hide="pipeline.activeProcessorCollection.processors.length > 0 &&
-            pipeline.activeProcessorCollection.type === collectionTypes.FOREACH">
-          <processor-select processor-type-id="processorTypeId"></processor-select>
+          <div
+            class="add-processor-dropdown"
+            ng-hide="pipeline.activeProcessorCollection.processors.length > 0 &&
+              pipeline.activeProcessorCollection.type === collectionTypes.FOREACH">
+            <processor-select processor-type-id="processorTypeId"></processor-select>
+          </div>
         </div>
       </div>
     </div>
@@ -79,3 +96,6 @@
     <pipeline-output pipeline="pipeline" samples="samples"></pipeline-output>
   </div>
 </div>
+<!-- <button ng-click="mode=modes.CANVAS">Show Canvas</button>
+<button ng-click="mode=modes.PIPELINE">Show Pipeline</button>
+ -->

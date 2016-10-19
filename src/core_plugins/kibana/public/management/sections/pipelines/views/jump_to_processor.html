@@ -1,0 +1,31 @@
+<div>
+  <h4>Jump to Processor</h4>
+  <ul
+    class="root-branch">
+    <li>
+      <a ng-click="jumpToRoot();">Pipeline (Root)</a>
+      <jump-to-processor-branch
+        pipeline="pipeline"
+        processor-collection="pipeline.processorCollection">
+      </jump-to-processor-branch>
+    </li>
+  </ul>
+  <ul
+    class="root-branch"
+    ng-show="pipeline.failureProcessorCollection.processors.length > 0">
+    <li>
+      <a ng-click="jumpToGlobalFailureRoot();">Global On-Error (Root)</a>
+      <jump-to-processor-branch
+        pipeline="pipeline"
+        processor-collection="pipeline.failureProcessorCollection">
+      </jump-to-processor-branch>
+    </li>
+  </ul>
+  <div class="buttons">
+    <button
+      class="btn btn-primary"
+      ng-click="cancel()">
+      Cancel
+    </button>
+  </div>
+</div>

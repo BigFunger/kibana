@@ -1,0 +1,36 @@
+<div>
+  <h4 ng-if="type === 'global failure branch'">Global On-Error Processors</h4>
+  <h4 ng-if="type === 'processor failure branch'">On-Error Processors</h4>
+  <div
+    ng-if="processor"
+    class="parent-processor">
+    <label>Parent Processor:</label>
+    <div class="parent-processor-title">
+      <span class="processor-title">
+        {{ processor.title }}
+      </span>
+      <span class="processor-description">
+        - {{ processor.description }}
+      </span>
+    </div>
+  </div>
+  <div class="buttons">
+    <button
+      ng-if="type === 'global failure branch'"
+      class="btn btn-primary"
+      ng-click="returnToMainPipeline()">
+      Return to Main Pipeline
+    </button>
+    <button
+      ng-if="processor"
+      class="btn btn-primary"
+      ng-click="returnToParentProcessor()">
+      Return to Parent Processor
+    </button>
+<!--     <button
+      class="btn btn-primary"
+      ng-click="jumpToProcessor()">
+      Jump to Processor
+    </button> -->
+  </div>
+</div>

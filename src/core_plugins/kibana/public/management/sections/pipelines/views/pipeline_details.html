@@ -4,3 +4,10 @@
   class="form-control"
   ng-model="pipeline.description"
   input-focus />
+
+<failure-action
+  failure-action="processor.failureAction"
+  processor-collection="processor.failureProcessorCollection"
+  pipeline="pipeline"
+  options="processor.failureOptions">
+</failure-action>

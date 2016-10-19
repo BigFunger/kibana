@@ -28,6 +28,12 @@ export default class ProcessorCollection {
     }, {});
   }
 
+  get allProcessorCollections() {
+    return _.reduce(this.processors, (result, processor) => {
+      return result.concat(processor.allProcessorCollections);
+    }, [this]);
+  }
+
   add(typeId, processorModel) {
     typeId = _.get(processorModel, 'typeId') || typeId;
 

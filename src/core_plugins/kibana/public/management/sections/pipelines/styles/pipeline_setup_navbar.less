@@ -1,0 +1,55 @@
+@import (reference) "~ui/styles/variables";
+@import (reference) "~ui/styles/mixins";
+@import (reference) "~ui/styles/theme";
+
+pipeline-setup-navbar {
+
+  .navbar {
+    border-radius: 0px;
+  }
+
+  .navbar-nav {
+
+    .link {
+
+      &.selected {
+        border-bottom: 2px solid @kibanaGray3;
+        color: @kibanaGray1;
+        background-color: #f6f6f6;
+
+        &:before {
+          display: none;
+        }
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
+
+    }
+
+    .jump-to-processor {
+      margin-right: 5px;
+    }
+
+    .apply-changes {
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    .cancel-changes {
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
+
+    // &.navbar-right {
+    //   margin-top: 7px;
+    // }
+
+  }
+
+  .navbar-btn-link {
+
+  }
+
+}

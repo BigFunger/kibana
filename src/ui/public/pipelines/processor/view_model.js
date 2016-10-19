@@ -141,6 +141,10 @@ export default class Processor {
       this.failureProcessorCollection.allProcessors);
   }
 
+  get allProcessorCollections() {
+    return this.failureProcessorCollection.allProcessorCollections;
+  }
+
   setSimulateResult(simulateResult) {
     this.simulateResult = simulateResult;
   }
