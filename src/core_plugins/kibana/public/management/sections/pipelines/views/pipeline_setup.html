@@ -11,15 +11,15 @@
     <pipeline-setup-navbar
       pipeline="pipeline">
     </pipeline-setup-navbar>
+    <!-- TODO: This needs to move within the correct 'section'. right now it is shown in both 'Processors' and 'Pipeline Options' sections -->
+    <jump-to-processor pipeline="pipeline" ng-show="pipeline.showJumpToProcessor"></jump-to-processor>
     <pipeline-details
       pipeline="pipeline"
       ng-show="sidebar.section == 'details'">
     </pipeline-details>
-    <!-- TODO: This needs to move within the correct 'section' -->
-    <jump-to-processor pipeline="pipeline" ng-show="pipeline.showJumpToProcessor"></jump-to-processor>
     <pipeline-branch-header
       pipeline="pipeline"
-      ng-hide="pipeline.activeProcessorCollection === pipeline.processorCollection">
+      ng-hide="pipeline.activeProcessorCollection === pipeline.processorCollection || sidebar.section !== 'processors'">
     </pipeline-branch-header>
     <div ng-show="sidebar.section == 'processors'">
 <!--       <pipeline-header

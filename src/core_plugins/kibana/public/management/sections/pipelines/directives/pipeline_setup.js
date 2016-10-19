@@ -62,6 +62,10 @@ app.directive('pipelineSetup', function () {
         pipeline.dirty = true;
       });
 
+      $scope.$watch('pipeline.activeProcessorCollection', () => {
+        $scope.sidebar.section = 'processors';
+      });
+
       $scope.$watch('pipeline.input', (newVal) => {
         const pipeline = $scope.pipeline;
         pipeline.dirty = true;

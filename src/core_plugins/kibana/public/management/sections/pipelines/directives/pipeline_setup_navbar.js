@@ -14,7 +14,7 @@ app.directive('pipelineSetupNavbar', function () {
       this.section = 'processors';
 
       this.jumpToProcessor = () => {
-        $scope.pipeline.showJumpToProcessor = true;
+        $scope.pipeline.showJumpToProcessor = !$scope.pipeline.showJumpToProcessor;
       };
     }
   };
