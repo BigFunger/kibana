@@ -16,10 +16,12 @@
 </div>
 <pre
   ng-show="pipeline.outputControlsState.showMeta && !pipeline.error"
-  class="output">{{ pipeline.output.meta | json }}</pre>
+  class="output"
+  ng-class="{'stale': pipeline.dirty}">{{ pipeline.output.meta | json }}</pre>
 <pre
   ng-show="!pipeline.outputControlsState.showMeta && !pipeline.error"
-  class="output">{{ pipeline.output.doc | json }}</pre>
+  class="output"
+  ng-class="{'stale': pipeline.dirty}">{{ pipeline.output.doc | json }}</pre>
 <div
   ng-show="pipeline.error"
   class="alert alert-danger">

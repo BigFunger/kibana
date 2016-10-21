@@ -35,12 +35,23 @@ pipeline-setup-navbar {
     .apply-changes {
       border-top-right-radius: 0px;
       border-bottom-right-radius: 0px;
+
+      &[disabled] {
+        opacity: 0.65;
+        cursor: default;
+      }
     }
 
     .cancel-changes {
       border-top-left-radius: 0px;
       border-bottom-left-radius: 0px;
+
+      &[disabled] {
+        opacity: 0.65;
+        cursor: default;
+      }
     }
+
 
     // &.navbar-right {
     //   margin-top: 7px;

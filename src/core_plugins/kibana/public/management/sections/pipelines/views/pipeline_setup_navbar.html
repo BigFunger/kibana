@@ -43,17 +43,18 @@
         <button
           class="btn btn-primary navbar-btn jump-to-processor"
           ng-click="sidebar.jumpToProcessor()">
-          <i class="fa fa-search"></i>
+          <i class="fa fa-sitemap"></i>
         </button>
       </li>
       <li
-        tooltip="Apply changes"
+        tooltip="Simulate Pipeline"
         tooltip-placement="bottom"
         tooltip-popup-delay="400"
         tooltip-append-to-body="1">
         <button
           class="btn btn-primary navbar-btn apply-changes"
-          type="submit">
+          ng-disabled="!pipeline.dirty"
+          ng-click="sidebar.simulate()">
           <i class="fa fa-play"></i>
         </button>
       </li>
@@ -63,7 +64,8 @@
         tooltip-popup-delay="400"
         tooltip-append-to-body="1">
         <button
-          class="btn btn-default navbar-btn cancel-changes">
+          class="btn btn-default navbar-btn cancel-changes"
+          ng-disabled="!pipeline.dirty">
           <i class="fa fa-close"></i>
         </button>
       </li>

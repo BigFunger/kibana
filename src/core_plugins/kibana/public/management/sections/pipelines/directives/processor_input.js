@@ -9,7 +9,8 @@ app.directive('processorInput', function () {
     restrict: 'E',
     template: template,
     scope: {
-      processor: '='
+      processor: '=',
+      pipeline: '='
     }
   };
 });

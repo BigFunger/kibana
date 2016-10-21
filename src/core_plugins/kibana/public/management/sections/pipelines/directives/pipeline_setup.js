@@ -35,22 +35,22 @@ app.directive('pipelineSetup', function () {
       $scope.pipeline = $route.current.locals.pipeline;
 
       //initiates the simulate call if the pipeline is dirty
-      const simulatePipeline = debounce((event, message) => {
-        const pipeline = $scope.pipeline;
+      // const simulatePipeline = debounce((event, message) => {
+      //   const pipeline = $scope.pipeline;
 
-        if (pipeline.processorCollection.processors.length === 0) {
-          pipeline.updateOutput();
-          return;
-        }
-        if (pipeline.sampleCollection.samples.length === 0) {
-          pipeline.updateOutput();
-          return;
-        }
+      //   if (pipeline.processorCollection.processors.length === 0) {
+      //     pipeline.updateOutput();
+      //     return;
+      //   }
+      //   if (pipeline.sampleCollection.samples.length === 0) {
+      //     pipeline.updateOutput();
+      //     return;
+      //   }
 
-        return pipelines.pipeline.simulate(pipeline.model, pipeline.input)
-        .then((results) => { pipeline.applySimulateResults(results); })
-        .catch(notify.error);
-      }, 200);
+      //   return pipelines.pipeline.simulate(pipeline.model, pipeline.input)
+      //   .then((results) => { pipeline.applySimulateResults(results); })
+      //   .catch(notify.error);
+      // }, 200);
 
       $scope.$watchCollection('pipeline.sampleCollection.samples', () => {
         const pipeline = $scope.pipeline;
@@ -68,6 +68,7 @@ app.directive('pipelineSetup', function () {
 
       $scope.$watch('pipeline.input', (newVal) => {
         const pipeline = $scope.pipeline;
+        pipeline.processorCollection.input = { doc: pipeline.input, meta: {} }; //2016-10-20
         pipeline.dirty = true;
       });
 
@@ -80,7 +81,7 @@ app.directive('pipelineSetup', function () {
         $scope.processorTypeId = null;
       });
 
-      $scope.$watch('pipeline.dirty', simulatePipeline);
+      //$scope.$watch('pipeline.dirty', simulatePipeline);
 
       $scope.$watch('pipeline', (newPipeline) => {
         const pipeline = $scope.pipeline;

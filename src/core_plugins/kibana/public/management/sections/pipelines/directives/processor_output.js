@@ -12,7 +12,8 @@ app.directive('processorOutput', function (debounce) {
     restrict: 'E',
     template: template,
     scope: {
-      processor: '='
+      processor: '=',
+      pipeline: '='
     },
     link: function ($scope, $el) {
       const div = $el.find('.visual')[0];

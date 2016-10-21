@@ -4,7 +4,7 @@
     <input-output-controls options="processor.inputControlsState"></input-output-controls>
   </div>
   <div ng-hide="processor.inputControlsState.showMeta">
-    <pre ng-class="{ 'full': processor.inputControlsState.expandLevel === 2, 'small': processor.inputControlsState.expandLevel === 1 }">{{ processor.inputObject.doc | json }}</pre>
+    <pre ng-class="{ 'full': processor.inputControlsState.expandLevel === 2, 'small': processor.inputControlsState.expandLevel === 1, 'stale': pipeline.dirty }">{{ processor.inputObject.doc | json }}</pre>
   </div>
   <div ng-show="processor.inputControlsState.showMeta">
     <pre ng-class="{ 'full': processor.inputControlsState.expandLevel === 2, 'small': processor.inputControlsState.expandLevel === 1 }">{{ processor.inputObject.meta | json }}</pre>

@@ -1,13 +1,17 @@
-<label>Pipeline Description</label>
-<input
-  type="text"
-  class="form-control"
-  ng-model="pipeline.description"
-  input-focus />
+<div class="form-group">
+  <label>Pipeline Description</label>
+  <input
+    type="text"
+    class="form-control"
+    ng-model="pipeline.description"
+    input-focus />
+</div>
 
-<failure-action
-  failure-action="pipeline.failureAction"
-  processor-collection="pipeline.failureProcessorCollection"
-  pipeline="pipeline"
-  options="pipeline.failureOptions">
-</failure-action>
+<div class="form-group">
+  <failure-action
+    failure-action="pipeline.failureAction"
+    processor-collection="pipeline.failureProcessorCollection"
+    pipeline="pipeline"
+    options="pipeline.failureOptions">
+  </failure-action>
+</div>

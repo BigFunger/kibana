@@ -4,6 +4,6 @@
     <input-output-controls options="processor.outputControlsState"></input-output-controls>
   </div>
   <div
-    class="visual"
-    ng-class="{'hide-unchanged': processor.outputControlsState.showChanges, 'full': processor.outputControlsState.expandLevel === 2, 'small': processor.outputControlsState.expandLevel === 1}"></div>
+    class="visual output"
+    ng-class="{'hide-unchanged': processor.outputControlsState.showChanges, 'full': processor.outputControlsState.expandLevel === 2, 'small': processor.outputControlsState.expandLevel === 1, 'stale': pipeline.dirty}"></div>
 </div>

@@ -122,7 +122,7 @@ export default class Pipeline {
   updateOutput(allProcessors, simulateResults) {
     allProcessors = allProcessors || {};
 
-    if (_.isEmpty(allProcessors)) {
+    if (_.isEmpty(this.processorCollection.processors)) {
       this.output = { doc: this.input, meta: {} };
       this.error = false;
     } else {

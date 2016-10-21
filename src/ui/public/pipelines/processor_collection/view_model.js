@@ -44,7 +44,7 @@ export default class ProcessorCollection {
     const newProcessor = new ProcessorType(this.processorRegistry, processorId, processorModel);
 
     if (processorModel) {
-      newProcessor.new = false;
+      //2016-10-20 newProcessor.new = false;
       newProcessor.collapsed = true;
     } else {
       if (this.type === ProcessorCollection.types.FOREACH) {
@@ -52,9 +52,17 @@ export default class ProcessorCollection {
           _.set(newProcessor, newProcessor.mainField, '_ingest._value');
 
           //since we're defaulting the mainField, this should be included in the results.
-          newProcessor.new = false;
+          //2016-10-20 newProcessor.new = false;
         }
       }
+    }
+
+    //2016-10-20
+    if (this.processors.length === 0) {
+      newProcessor.setInput(this.input);
+    } else {
+      const lastProcessor = _.last(this.processors);
+      newProcessor.setInput(lastProcessor.output);
     }
 
     this.processors.push(newProcessor);
@@ -96,13 +104,13 @@ export default class ProcessorCollection {
     let newFlag = false;
 
     _.forEach(this.processors, (processor) => {
-      if (processor.new) {
-        newFlag = true;
-      }
+      // if (processor.new) {
+      //   newFlag = true;
+      // }
 
-      if (!newFlag) {
-        result.push(processor.model);
-      }
+      // if (!newFlag) {
+      result.push(processor.model);
+      // }
     });
 
     return result;

@@ -18,7 +18,7 @@ export default class Processor {
     this.inputObject = undefined;
     this.outputObject = undefined;
     this.error = undefined;
-    this.new = true;
+    //this.new = true;
     this.state = 'not initialized';
     this.mainField = mainField;
     this.inputControlsState = { enableShowChanges: false };
@@ -55,7 +55,7 @@ export default class Processor {
   }
 
   updateOutput() {
-    if (this.new) return;
+    //if (this.new) return;
 
     const output = _.get(this.simulateResult, 'output');
     const meta = _.get(this.simulateResult, 'ingestMeta');
