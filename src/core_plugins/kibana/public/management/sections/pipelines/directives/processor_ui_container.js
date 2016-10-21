@@ -8,7 +8,7 @@ import template from '../views/processor_ui_container.html';
 
 const app = uiModules.get('kibana');
 
-app.directive('processorUiContainer', function ($compile) {
+app.directive('processorUiContainer', function ($compile, $timeout) {
   return {
     restrict: 'E',
     scope: {
@@ -18,27 +18,28 @@ app.directive('processorUiContainer', function ($compile) {
     },
     template: template,
     link: function ($scope, $el) {
-      const processor = $scope.processor;
+      $timeout(() => {
+        $el.find('.ui-select-focusser')[0].focus();
+      });
+
       const pipeline = $scope.pipeline;
       const $container = $el.find('.processor-ui-content');
-      const typeId = processor.typeId;
+      const processorStates = $scope.processorStates = Processor.states;
 
-      const newScope = $scope.$new();
-      newScope.pipeline = pipeline;
-      newScope.processor = processor;
+      $scope.$watch('processorTypeId', (typeId) => {
+        //const processor = $scope.processor;
 
-      $scope.processorStates = Processor.states;
+        const newScope = $scope.$new();
+        newScope.pipeline = pipeline;
+        newScope.processor = $scope.processor;
+        //newScope.processor = processor;
 
-      const template = `<processor-ui-${typeId}></processor-ui-${typeId}>`;
-      const $innerEl = angular.element(template);
-      const postLink = $compile($innerEl);
-      $container.append($innerEl);
-      postLink(newScope);
-
-      $scope.$watch('processorForm.$pristine', (pristine) => {
-        if (!pristine) {
-          processor.new = false;
-        }
+        const template = `<processor-ui-${typeId}></processor-ui-${typeId}>`;
+        const $innerEl = angular.element(template);
+        const postLink = $compile($innerEl);
+        $container.empty();
+        $container.append($innerEl);
+        postLink(newScope);
       });
     }
   };

@@ -32,6 +32,7 @@ app.directive('pipelineSetup', function () {
 
       //initiates the simulate call if the pipeline is dirty
       const simulatePipeline = debounce((event, message) => {
+        return;
         const pipeline = $scope.pipeline;
 
         if (pipeline.processorCollection.processors.length === 0) {
@@ -60,17 +61,23 @@ app.directive('pipelineSetup', function () {
 
       $scope.$watch('pipeline.input', (newVal) => {
         const pipeline = $scope.pipeline;
+        pipeline.processorCollection.input = pipeline.input;
         pipeline.dirty = true;
       });
 
-      $scope.$watch('processorTypeId', processorTypeId => {
-        if (!processorTypeId) return;
+      // $scope.$watch('processorTypeId', processorTypeId => {
+      //   if (!processorTypeId) return;
 
+      //   const pipeline = $scope.pipeline;
+
+      //   pipeline.activeProcessorCollection.add(processorTypeId);
+      //   $scope.processorTypeId = null;
+      // });
+
+      $scope.addProcessor = () => {
         const pipeline = $scope.pipeline;
-
-        pipeline.activeProcessorCollection.add(processorTypeId);
-        $scope.processorTypeId = null;
-      });
+        pipeline.activeProcessorCollection.add();
+      };
 
       $scope.$watch('pipeline.dirty', simulatePipeline);
 

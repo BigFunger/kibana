@@ -34,11 +34,6 @@ app.directive('processorSelect', function ($timeout, Private) {
     scope: {
       processorTypeId: '='
     },
-    link: function ($scope, $element) {
-      $timeout(() => {
-        $element.find('.ui-select-focusser')[0].focus();
-      });
-    },
     controller: function ($scope, Private, Notifier) {
       const pipelines = Private(PipelinesProvider);
       const notify = new Notifier({ location: `Ingest Pipeline Setup` });

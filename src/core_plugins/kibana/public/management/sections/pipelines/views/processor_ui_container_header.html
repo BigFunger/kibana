@@ -10,11 +10,15 @@
   </button>
 
   <div class="processor-ui-container-header-title">
-    <span class="processor-title">
+    <span class="processor-title" ng-hide="processor.typeId">
+      New Processor
+    </span>
+
+    <span class="processor-title" ng-show="processor.typeId">
       {{processor.title}}
     </span>
 
-    <span class="processor-description">
+    <span class="processor-description" ng-show="processor.typeId">
       - {{ processor.description }}
     </span>
 

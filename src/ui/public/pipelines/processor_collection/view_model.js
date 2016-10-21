@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import Processor from '../processor/new_view_model';
 
 export default class ProcessorCollection {
 
@@ -28,28 +29,8 @@ export default class ProcessorCollection {
     }, {});
   }
 
-  add(typeId, processorModel) {
-    typeId = _.get(processorModel, 'typeId') || typeId;
-
-    const processorId = _.get(processorModel, 'processorId') || ProcessorCollection.generateId(typeId);
-    ProcessorCollection.useId(processorId);
-
-    const ProcessorType = this.ProcessorTypes[typeId].ViewModel;
-    const newProcessor = new ProcessorType(this.processorRegistry, processorId, processorModel);
-
-    if (processorModel) {
-      newProcessor.new = false;
-      newProcessor.collapsed = true;
-    } else {
-      if (this.type === ProcessorCollection.types.FOREACH) {
-        if (newProcessor.mainField) {
-          _.set(newProcessor, newProcessor.mainField, '_ingest._value');
-
-          //since we're defaulting the mainField, this should be included in the results.
-          newProcessor.new = false;
-        }
-      }
-    }
+  add(processorModel) {
+    const newProcessor = new Processor();
 
     this.processors.push(newProcessor);
 
