@@ -19,6 +19,7 @@ app.directive('inputOutputControls', function () {
         expandLevel: 1,
         minExpandLevel: 1,
         maxExpandLevel: 2,
+        enableShowMeta: true,
         enableShowChanges: true,
         enableExpand: true
       };

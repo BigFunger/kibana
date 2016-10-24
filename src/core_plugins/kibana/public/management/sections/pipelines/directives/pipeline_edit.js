@@ -13,7 +13,7 @@ import './processor_id';
 import './processor_input';
 import './pipeline_details';
 import './failure_action';
-import './pipeline_input';
+// import './pipeline_input';
 import './pipeline_setup';
 import './pipeline_header';
 import './pipeline_on_failure';

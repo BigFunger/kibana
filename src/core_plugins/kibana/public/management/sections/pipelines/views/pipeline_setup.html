@@ -1,10 +1,4 @@
-<pipeline-inputs
-  pipeline="pipeline"
-  mode="mode"
-  ng-show="mode!==modes.PIPELINE">
-</pipeline-inputs>
-<pipeline-canvas pipeline="pipeline" ng-show="mode===modes.CANVAS"></pipeline-canvas>
-<div class="main-panels" ng-show="mode===modes.PIPELINE">
+<div class="main-panels">
   <div
     ng-hide="expandContext < 1"
     class="left-panel">
@@ -12,7 +6,10 @@
       pipeline="pipeline">
     </pipeline-setup-navbar>
     <!-- TODO: This needs to move within the correct 'section'. right now it is shown in both 'Processors' and 'Pipeline Options' sections -->
-    <jump-to-processor pipeline="pipeline" ng-show="pipeline.showJumpToProcessor"></jump-to-processor>
+    <jump-to-processor
+      pipeline="pipeline"
+      ng-show="pipeline.showJumpToProcessor">
+    </jump-to-processor>
     <pipeline-details
       pipeline="pipeline"
       ng-show="sidebar.section == 'details'">
@@ -91,7 +88,7 @@
   <div
     ng-hide="expandContext > 1"
     class="right-panel">
-    <pipeline-input pipeline="pipeline" mode="mode"></pipeline-input>
+    <pipeline-input-wrapper pipeline="pipeline" mode="mode"></pipeline-input-wrapper>
     <pipeline-output pipeline="pipeline" samples="samples"></pipeline-output>
   </div>
 </div>

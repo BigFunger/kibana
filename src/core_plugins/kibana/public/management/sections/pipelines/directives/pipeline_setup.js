@@ -7,11 +7,12 @@ import '../../indices/styles/_add_data_wizard.less'; //TODO: Need to find a bett
 import template from '../views/pipeline_setup.html';
 import processorRegistry from 'ui/registry/pipelines_processors';
 import ProcessorCollection from 'ui/pipelines/processor_collection/view_model';
-import './pipeline_inputs';
+// import './pipeline_inputs';
 import './pipeline_setup_navbar';
 import './canvas';
 import './pipeline_branch_header';
 import './jump_to_processor';
+import './input';
 import modes from '../lib/constants/pipeline_modes';
 
 const app = uiModules.get('kibana');

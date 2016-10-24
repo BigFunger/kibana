@@ -5,7 +5,7 @@
   ng-click="options.showMeta = !options.showMeta"
   type="button"
   class="btn btn-xs btn-secondary"
-  ng-show="!options.showMeta"
+  ng-show="!options.showMeta && options.enableShowMeta"
   tabindex="-1">
   <i aria-hidden="true" class="fa fa-file-o"></i>
 </button>
@@ -16,7 +16,7 @@
   ng-click="options.showMeta = !options.showMeta"
   type="button"
   class="btn btn-xs btn-secondary"
-  ng-show="options.showMeta"
+  ng-show="options.showMeta && options.enableShowMeta"
   tabindex="-1">
   <i aria-hidden="true" class="fa fa-file"></i>
 </button>

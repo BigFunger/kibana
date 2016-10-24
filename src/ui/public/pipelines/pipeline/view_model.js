@@ -43,6 +43,7 @@ export default class Pipeline {
     this.dirty = false;
     this.hasCompileError = false;
     this.globalFailureProcessorIds = [];
+    this.inputControlsState = {  enableShowMeta: false, enableShowChanges: false, enableExpand: true };
     this.outputControlsState = { enableShowChanges: false, enableExpand: false };
 
     //TODO: I don't think this belongs here... just quick and dirty prototyping
