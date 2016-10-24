@@ -62,6 +62,22 @@ export class SampleCollection {
     return this.samples[this.index];
   }
 
+  getSuggestedDescription() {
+    let counter = this.samples.length;
+    let description;
+
+    const predicate = (sample) => {
+      return sample.description === description;
+    };
+
+    do {
+      counter += 1;
+      description = `Input ${counter}`;
+    } while (_.find(this.samples, predicate));
+
+    return description;
+  }
+
   add(sample) {
     this.samples.push(sample);
     if (this.index === -1) {

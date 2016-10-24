@@ -43,15 +43,26 @@ app.directive('pipelineInput', function () {
         $scope.inputEdit.sample = $scope.sampleCollection.getCurrentSample();
         $scope.inputWrapper.mode = 'edit';
       };
+
       $scope.addInput = () => {
-        $scope.inputEdit.sample = new Sample();
+        // debugger;
+        const sample = new Sample();
+        sample.description = sampleCollection.getSuggestedDescription();
+
+        $scope.inputEdit.sample = sample;
         $scope.inputWrapper.mode = 'edit';
       };
+
       $scope.cloneInput = () => {
+        // debugger;
         const currentSample = $scope.sampleCollection.getCurrentSample();
-        $scope.inputEdit.sample = new Sample(currentSample);
+        const sample = new Sample(currentSample);
+        sample.description = sampleCollection.getSuggestedDescription();
+
+        $scope.inputEdit.sample = sample;
         $scope.inputWrapper.mode = 'edit';
       };
+
       $scope.deleteInput = () => {
         const sample = $scope.sampleCollection.getCurrentSample();
         sampleCollection.remove(sample);

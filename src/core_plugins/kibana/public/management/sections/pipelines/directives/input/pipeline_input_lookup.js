@@ -29,6 +29,11 @@ app.directive('pipelineInputLookup', function ($timeout) {
         $scope.inputWrapper.mode = 'menu';
       };
 
+      this.loadSample = (sample) => {
+        sampleCollection.setCurrent(sample);
+        $scope.inputWrapper.mode = 'menu';
+      };
+
       $scope.$watch('inputWrapper.mode', (mode) => {
         if (mode === 'lookup') {
           this.index = sampleCollection.index;

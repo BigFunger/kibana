@@ -3,7 +3,7 @@
   name="inputLookupForm"
   ng-submit="inputLookup.save()">
   <ul class="inputs">
-    <li ng-repeat="sample in pipeline.sampleCollection.samples">
+    <li ng-repeat="sample in pipeline.sampleCollection.samples" ng-dblclick="inputLookup.loadSample(sample)">
       <label>
         <input type="radio" ng-model="inputLookup.index" value="{{$index}}">
         <span
