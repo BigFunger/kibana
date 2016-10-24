@@ -117,7 +117,7 @@ pipeline-input-lookup {
       content: @icon;
     }
 
-    font-size: 1.5em;
+    font-size: 1em;
     color: @color;
   }
 
@@ -135,17 +135,12 @@ pipeline-input-lookup {
     }
   }
 
-  .sample {
-    max-width: 700px;
-    .ellipsis();
+  ul {
+    list-style: none;
+    padding-left: 0px;
   }
 
-  .current-sample {
-    &:before {
-      font-family: 'FontAwesome';
-      content: @fa-var-circle;
-      font-size: 1.5em;
-      color: @kibanaGray4;
-    }
+  label {
+    font-weight: normal;
   }
 }

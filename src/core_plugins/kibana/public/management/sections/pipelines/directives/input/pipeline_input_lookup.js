@@ -24,46 +24,15 @@ app.directive('pipelineInputLookup', function ($timeout) {
         $scope.inputWrapper.mode = 'menu';
       };
 
-      this.selectSample = () => {
-
+      this.save = () => {
+        sampleCollection.index = _.parseInt(this.index, 10);
+        $scope.inputWrapper.mode = 'menu';
       };
 
-      const buildRows = () => {
-        $scope.rows = _.map(sampleCollection.samples, (sample, index) => {
-          const rowScope = _.assign($scope.$new(), {
-            index: index,
-            sample: sample,
-            buildRows: buildRows,
-            selectSample: this.selectSample
-          });
-
-          return [
-            {
-              markup: selectedTemplate,
-              scope: rowScope
-            },
-            {
-              markup: statusTemplate,
-              scope: rowScope,
-              value: sample.state
-            },
-            {
-              markup: sampleTemplate,
-              scope: rowScope,
-              value: sample.description || sample.doc
-            }
-          ];
-        });
-      };
-
-      $scope.columns = [
-        {title: '', sortable: false},
-        {title: 'Status'},
-        {title: 'Sample'}
-      ];
-
-      $scope.$watchCollection('sampleCollection.samples', () => {
-        buildRows();
+      $scope.$watch('inputWrapper.mode', (mode) => {
+        if (mode === 'lookup') {
+          this.index = sampleCollection.index;
+        }
       });
     }
   };

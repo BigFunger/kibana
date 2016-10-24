@@ -53,7 +53,8 @@ app.directive('pipelineInput', function () {
         $scope.inputWrapper.mode = 'edit';
       };
       $scope.deleteInput = () => {
-
+        const sample = $scope.sampleCollection.getCurrentSample();
+        sampleCollection.remove(sample);
       };
     }
   };

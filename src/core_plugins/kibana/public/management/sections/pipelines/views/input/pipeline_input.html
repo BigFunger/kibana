@@ -2,16 +2,6 @@
   <label>Pipeline Input</label>
   <div class="controls">
     <button
-      aria-label="Jump to Input"
-      tooltip="Jump to Input"
-      tooltip-append-to-body="true"
-      ng-click="jumpToSample()"
-      type="button"
-      class="btn btn-xs btn-primary"
-      ng-disabled="pipeline.sampleCollection.samples.length <= 1">
-      <i aria-hidden="true" class="fa fa-bars"></i>
-    </button>
-    <button
       aria-label="Previous Input"
       tooltip="Previous Input"
       tooltip-append-to-body="true"
@@ -20,6 +10,16 @@
       class="btn btn-xs btn-primary"
       ng-disabled="pipeline.sampleCollection.samples.length <= 1">
       <i aria-hidden="true" class="fa fa-caret-left"></i>
+    </button>
+    <button
+      aria-label="Jump to Input"
+      tooltip="Jump to Input"
+      tooltip-append-to-body="true"
+      ng-click="jumpToSample()"
+      type="button"
+      class="btn btn-xs btn-primary"
+      ng-disabled="pipeline.sampleCollection.samples.length <= 1">
+      <i aria-hidden="true" class="fa fa-bars"></i>
     </button>
     <button
       aria-label="Next Input"
@@ -72,7 +72,8 @@
       tooltip-append-to-body="true"
       ng-disabled="sampleCollection.samples.length <= 1"
       class="btn btn-xs btn-danger"
-      ng-click="deleteInput()">
+      confirm-click="deleteInput()"
+      confirmation="Are you sure you want to delete this input? This action is irreversible.">
       <i aria-hidden="true" class="fa fa-trash"></i>
     </button>
   </div>

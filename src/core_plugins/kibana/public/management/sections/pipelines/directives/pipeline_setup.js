@@ -67,6 +67,11 @@ app.directive('pipelineSetup', function () {
         $scope.sidebar.section = 'processors';
       });
 
+      $scope.$watch('pipeline.sampleCollection.index', () => {
+        const pipeline = $scope.pipeline;
+        pipeline.dirty = true;
+      });
+
       $scope.$watch('pipeline.input', (newVal) => {
         const pipeline = $scope.pipeline;
         pipeline.processorCollection.input = { doc: pipeline.input, meta: {} }; //2016-10-20
