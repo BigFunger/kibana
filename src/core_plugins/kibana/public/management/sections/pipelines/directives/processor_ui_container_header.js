@@ -6,6 +6,8 @@ import Processor from 'ui/pipelines/processor/view_model';
 import 'ui/draggable/draggable_container';
 import 'ui/draggable/draggable_handle';
 import 'ui/draggable/draggable_item';
+import processorStates from 'ui/pipelines/constants/processor_states';
+import processorCollectionTypes from 'ui/pipelines/constants/processor_collection_types';
 
 const app = uiModules.get('kibana');
 
@@ -19,10 +21,10 @@ app.directive('processorUiContainerHeader', function () {
     },
     template: processorUiContainerHeaderTemplate,
     controller: function ($scope) {
-      const processorShell = $scope.processorShell;
+      $scope.collectionTypes = processorCollectionTypes;
+      $scope.processorStates = processorStates;
 
-      $scope.collectionTypes = ProcessorCollection.types;
-      $scope.processorStates = Processor.states;
+      const processorShell = $scope.processorShell;
 
       $scope.$on('drag-start', e => {
         $scope.wasCollapsed = processorShell.collapsed;

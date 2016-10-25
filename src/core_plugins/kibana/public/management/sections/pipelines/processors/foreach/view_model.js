@@ -1,6 +1,7 @@
 import { assign, cloneDeep, get, map } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 import ProcessorCollection from 'ui/pipelines/processor_collection/view_model';
+import processorCollectionTypes from 'ui/pipelines/constants/processor_collection_types';
 
 export default class Foreach extends Processor {
   constructor(processorRegistry, processorId, model) {
@@ -21,7 +22,7 @@ export default class Foreach extends Processor {
       processorRegistry,
       'For Each',
       get(model, 'processors'),
-      ProcessorCollection.types.FOREACH,
+      processorCollectionTypes.FOREACH,
       this
     );
     this.updateProcessorCollection();

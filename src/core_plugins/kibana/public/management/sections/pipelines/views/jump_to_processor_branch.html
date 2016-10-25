@@ -1,11 +1,11 @@
 <ul>
-  <li ng-repeat="processor in processorCollection.processors">
+  <li ng-repeat="processorShell in processorCollection.processors">
     <a
-      aria-label="{{processor.title}} - {{processor.description}}"
-      tooltip="{{processor.title}} - {{processor.description}}"
+      aria-label="{{processorShell.processor.title}} - {{processorShell.processor.description}}"
+      tooltip="{{processorShell.processor.title}} - {{processorShell.processor.description}}"
       tooltip-append-to-body="true"
-      ng-click="jumpToProcessor(processor);">
-      {{processor.title}} ({{processor.processorId}})
+      ng-click="jumpToProcessor(processorShell);">
+      {{processorShell.processor.title}} ({{processorShell.processorId}})
     </a>
     <jump-to-processor-branch
       pipeline="pipeline"

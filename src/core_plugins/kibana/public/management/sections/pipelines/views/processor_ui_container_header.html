@@ -19,11 +19,11 @@
     class="processor-ui-container-header-title"
     ng-show="processorShell.typeId">
     <span class="processor-title">
-      {{processorShell.title}}
+      {{processorShell.processor.title}}
     </span>
 
     <span class="processor-description">
-      - {{ processorShell.description }}
+      - {{ processorShell.processor.description }}
     </span>
 
     <span ng-if="processorShell.state === processorStates.ERROR_COMPILE" class="processor-description danger">

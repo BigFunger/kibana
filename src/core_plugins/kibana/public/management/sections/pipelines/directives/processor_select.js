@@ -11,7 +11,7 @@ const app = uiModules.get('kibana');
 function buildProcessorTypeList(processorRegistry) {
   const result = [];
   _.forIn(processorRegistry.byId, (registryItem) => {
-    const instance = new registryItem.ViewModel(processorRegistry);
+    const instance = new registryItem.ViewModel();
     if (instance.typeId !== 'unknown') {
       result.push({
         typeId: instance.typeId,

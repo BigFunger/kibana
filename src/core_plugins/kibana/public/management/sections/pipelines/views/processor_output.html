@@ -1,33 +1,33 @@
 <div
-  ng-show="processor.state === processorStates.ERROR_FAIL"
+  ng-show="processorShell.state === processorStates.ERROR_FAIL"
   class="alert alert-danger">
-  {{processor.error.message}}
+  {{processorShell.error.message}}
 </div>
 <div
-  ng-show="processor.state === processorStates.ERROR_RECOVER"
+  ng-show="processorShell.state === processorStates.ERROR_RECOVER"
   class="alert alert-warning">
-  {{processor.error.message}}
+  {{processorShell.error.message}}
 </div>
 <div
-  ng-show="processor.state === processorStates.ERROR_COMPILE"
+  ng-show="processorShell.state === processorStates.ERROR_COMPILE"
   class="alert alert-danger">
   <div>Compile Error</div>
-  {{processor.error.message}}
+  {{processorShell.error.message}}
 </div>
 <div
-  ng-show="processor.state === processorStates.NO_RESULT"
+  ng-show="processorShell.state === processorStates.NO_RESULT"
   class="alert alert-info">
   No results were returned for this processor. May be part of a failure path that was not triggered.
 </div>
 <div
   class="form-group"
-  ng-show="processor.state === processorStates.VALID">
+  ng-show="processorShell.state === processorStates.VALID">
   <div class="header">
-    <label>Processor Output<span ng-if="processor.outputControlsState.showMeta"> (metadata)</span>:</label>
-    <input-output-controls options="processor.outputControlsState"></input-output-controls>
+    <label>Processor Output<span ng-if="processorShell.outputControlsState.showMeta"> (metadata)</span>:</label>
+    <input-output-controls options="processorShell.outputControlsState"></input-output-controls>
   </div>
   <div
     class="visual output"
-    ng-class="{'hide-unchanged': processor.outputControlsState.showChanges, 'full': processor.outputControlsState.expandLevel === 2, 'small': processor.outputControlsState.expandLevel === 1, 'stale': pipeline.dirty}">
+    ng-class="{'hide-unchanged': processorShell.outputControlsState.showChanges, 'full': processorShell.outputControlsState.expandLevel === 2, 'small': processorShell.outputControlsState.expandLevel === 1, 'stale': pipeline.dirty}">
   </div>
 </div>

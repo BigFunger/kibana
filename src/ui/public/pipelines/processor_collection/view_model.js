@@ -42,7 +42,7 @@ export default class ProcessorCollection {
       processorShell.setInput(this.input);
     } else {
       const lastProcessor = _.last(this.processors);
-      processorShell.setInput(lastProcessor.output);
+      processorShell.setInput(lastProcessor.outputObject);
     }
 
     this.processors.push(processorShell);
@@ -68,28 +68,22 @@ export default class ProcessorCollection {
   }
 
   applySimulateResults(rootInput) {
-    _.forEach(this.processors, (processor) => {
-      processor.applySimulateResults(rootInput);
+    _.forEach(this.processors, (processorShell) => {
+      processorShell.applySimulateResults(rootInput);
     });
   }
 
   get output() {
-    const lastValidProcessor = _.findLast(this.processors, (processor) => !!processor.output);
-    return lastValidProcessor ? lastValidProcessor.output : undefined;
+    const lastValidProcessor = _.findLast(this.processors, (processor) => !!processor.outputObject);
+    return lastValidProcessor ? lastValidProcessor.outputObject : undefined;
   }
 
   get model() {
     const result = [];
     let newFlag = false;
 
-    _.forEach(this.processors, (processor) => {
-      // if (processor.new) {
-      //   newFlag = true;
-      // }
-
-      // if (!newFlag) {
-      result.push(processor.model);
-      // }
+    _.forEach(this.processors, (processorShell) => {
+      result.push(processorShell.model);
     });
 
     return result;
@@ -97,13 +91,6 @@ export default class ProcessorCollection {
 
 }
 
-
-ProcessorCollection.types = {
-  MAIN: 'main processors',
-  PROCESSOR_FAILURE: 'processor failure branch',
-  GLOBAL_FAILURE: 'global failure branch',
-  FOREACH: 'foreach branch'
-};
 
 ProcessorCollection.usedProcessorIds = [];
 ProcessorCollection.resetIdCounters = function (processorRegistry) {

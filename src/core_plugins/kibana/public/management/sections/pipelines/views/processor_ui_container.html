@@ -26,18 +26,18 @@
         class="processor-ui-content"
         ng-show="processorShell.typeId">
       </div>
-<!--       <failure-action
-        failure-action="processor.failureAction"
-        processor-collection="processor.failureProcessorCollection"
+      <failure-action
+        failure-action="processorShell.failureAction"
+        processor-collection="processorShell.failureProcessorCollection"
         pipeline="pipeline"
-        options="processor.failureOptions"
-        ng-show="processor.typeId">
+        options="processorShell.failureOptions"
+        ng-show="processorShell.typeId">
       </failure-action>
       <processor-output
-        processor="processor"
+        processor-shell="processorShell"
         pipeline="pipeline"
-        ng-show="processor.typeId">
-      </processor-output> -->
+        ng-show="processorShell.typeId">
+      </processor-output>
     </div>
 
     <div class="overlay"></div>

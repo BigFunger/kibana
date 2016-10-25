@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import ProcessorCollection from 'ui/pipelines/processor_collection/view_model';
 import { SampleCollection } from 'ui/pipelines/sample_collection/view_model';
+import processorCollectionTypes from 'ui/pipelines/constants/processor_collection_types';
 
 export default class Pipeline {
   constructor(processorRegistry, model) {
@@ -22,13 +23,13 @@ export default class Pipeline {
       processorRegistry,
       'Main Pipeline',
       _.get(model, 'processors'),
-      ProcessorCollection.types.MAIN
+      processorCollectionTypes.MAIN
     );
     this.failureProcessorCollection = new ProcessorCollection(
       processorRegistry,
       'Global Failure',
       _.get(model, 'failureProcessors'),
-      ProcessorCollection.types.GLOBAL_FAILURE
+      processorCollectionTypes.GLOBAL_FAILURE
     );
     this.sampleCollection = new SampleCollection({
       samples: _.get(model, 'samples'),
@@ -157,8 +158,8 @@ export default class Pipeline {
       allResults[result.processorId] = result;
     });
 
-    _.forEach(allProcessors, (processor) => {
-      processor.setSimulateResult(allResults[processor.processorId]);
+    _.forEach(allProcessors, (processorShell) => {
+      processorShell.setSimulateResult(allResults[processorShell.processorId]);
     });
 
     //TODO: Do I want to get rid of the `input` property, and instead completely

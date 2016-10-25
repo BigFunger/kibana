@@ -17,8 +17,8 @@ app.directive('fieldSelect', function ($timeout) {
     controller: function ($scope) {
       $scope.selected = { value: $scope.field };
 
-      $scope.$watch('processor.suggestedFields', () => {
-        $scope.fields = ($scope.processor.suggestedFields || []).sort();
+      $scope.$watch('processor.processorShell.suggestedFields', (suggestedFields) => {
+        $scope.fields = (suggestedFields || []).sort();
       });
 
       $scope.$watch('selected.value', (newVal) => {
