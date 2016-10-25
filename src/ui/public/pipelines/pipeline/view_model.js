@@ -112,6 +112,13 @@ export default class Pipeline {
     this.activeProcessorCollection = this.processorCollection;
   }
 
+  collapseAllProcessors() {
+    const allProcessors = this.allProcessors;
+    _.forEach(allProcessors, (processor) => {
+      processor.collapsed = true;
+    });
+  }
+
   jumpToGlobalFailureRoot() {
     const allProcessors = this.allProcessors;
     _.forEach(allProcessors, (processor) => {

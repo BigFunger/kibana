@@ -83,6 +83,7 @@ app.directive('pipelineSetup', function () {
 
         const pipeline = $scope.pipeline;
 
+        pipeline.collapseAllProcessors();
         pipeline.activeProcessorCollection.add(processorTypeId);
         $scope.processorTypeId = null;
       });
