@@ -18,7 +18,6 @@ export default class Processor {
     this.inputObject = undefined;
     this.outputObject = undefined;
     this.error = undefined;
-    //this.new = true;
     this.state = 'not initialized';
     this.mainField = mainField;
     this.inputControlsState = { enableShowChanges: false };
@@ -34,7 +33,7 @@ export default class Processor {
 
     this.failureProcessorCollection = new ProcessorCollection(
       processorRegistry,
-      title,
+      'Failure Branch',
       _.get(model, 'failureProcessors'),
       ProcessorCollection.types.PROCESSOR_FAILURE,
       this
@@ -55,8 +54,6 @@ export default class Processor {
   }
 
   updateOutput() {
-    //if (this.new) return;
-
     const output = _.get(this.simulateResult, 'output');
     const meta = _.get(this.simulateResult, 'ingestMeta');
     const error = _.get(this.simulateResult, 'error');
@@ -103,19 +100,19 @@ export default class Processor {
   }
 
   updateState() {
-    const output = this.output;
+    // const output = this.output;
 
-    if (output && !this.error) {
-      this.state = Processor.states.VALID;
-    } else if (!output && !this.error) {
-      this.state = Processor.states.NO_RESULT;
-    } else if (!output && this.error && this.error.compile) {
-      this.state = Processor.states.ERROR_COMPILE;
-    } else if (!output && this.error) {
-      this.state = Processor.states.ERROR_FAIL;
-    } else if (output && this.error) {
-      this.state = Processor.states.ERROR_RECOVER;
-    }
+    // if (output && !this.error) {
+    //   this.state = Processor.states.VALID;
+    // } else if (!output && !this.error) {
+    //   this.state = Processor.states.NO_RESULT;
+    // } else if (!output && this.error && this.error.compile) {
+    //   this.state = Processor.states.ERROR_COMPILE;
+    // } else if (!output && this.error) {
+    //   this.state = Processor.states.ERROR_FAIL;
+    // } else if (output && this.error) {
+    //   this.state = Processor.states.ERROR_RECOVER;
+    // }
   }
 
   get causeIndexFail() {
@@ -136,8 +133,7 @@ export default class Processor {
   }
 
   get allProcessors() {
-    return _.assign(
-      _.set({}, this.processorId, this),
+    return _.assign({},
       this.failureProcessorCollection.allProcessors);
   }
 
@@ -167,11 +163,3 @@ export default class Processor {
     return _.get(this.simulateResult, 'ingestMeta._ingest.on_failure_processor_tag');
   }
 }
-
-Processor.states = {
-  VALID: 'valid',
-  NO_RESULT: 'no result',
-  ERROR_FAIL: 'error fail',
-  ERROR_COMPILE: 'error compile',
-  ERROR_RECOVER: 'error with recovery'
-};

@@ -13,6 +13,7 @@ import './canvas';
 import './pipeline_branch_header';
 import './jump_to_processor';
 import './input';
+import './pipeline_branch';
 import modes from '../lib/constants/pipeline_modes';
 
 const app = uiModules.get('kibana');
@@ -35,23 +36,12 @@ app.directive('pipelineSetup', function () {
 
       $scope.pipeline = $route.current.locals.pipeline;
 
-      //initiates the simulate call if the pipeline is dirty
-      // const simulatePipeline = debounce((event, message) => {
-      //   const pipeline = $scope.pipeline;
+      $scope.addProcessor = () => {
+        const pipeline = $scope.pipeline;
 
-      //   if (pipeline.processorCollection.processors.length === 0) {
-      //     pipeline.updateOutput();
-      //     return;
-      //   }
-      //   if (pipeline.sampleCollection.samples.length === 0) {
-      //     pipeline.updateOutput();
-      //     return;
-      //   }
-
-      //   return pipelines.pipeline.simulate(pipeline.model, pipeline.input)
-      //   .then((results) => { pipeline.applySimulateResults(results); })
-      //   .catch(notify.error);
-      // }, 200);
+        pipeline.collapseAllProcessors();
+        pipeline.activeProcessorCollection.add();
+      };
 
       $scope.$watchCollection('pipeline.sampleCollection.samples', () => {
         const pipeline = $scope.pipeline;
@@ -78,15 +68,15 @@ app.directive('pipelineSetup', function () {
         pipeline.dirty = true;
       });
 
-      $scope.$watch('processorTypeId', processorTypeId => {
-        if (!processorTypeId) return;
+      // $scope.$watch('processorTypeId', processorTypeId => {
+      //   if (!processorTypeId) return;
 
-        const pipeline = $scope.pipeline;
+      //   const pipeline = $scope.pipeline;
 
-        pipeline.collapseAllProcessors();
-        pipeline.activeProcessorCollection.add(processorTypeId);
-        $scope.processorTypeId = null;
-      });
+      //   pipeline.collapseAllProcessors();
+      //   pipeline.activeProcessorCollection.add(processorTypeId);
+      //   $scope.processorTypeId = null;
+      // });
 
       //$scope.$watch('pipeline.dirty', simulatePipeline);
 

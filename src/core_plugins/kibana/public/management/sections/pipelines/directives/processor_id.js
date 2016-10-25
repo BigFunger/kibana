@@ -9,19 +9,19 @@ app.directive('processorId', function () {
     restrict: 'E',
     template: template,
     scope: {
-      processor: '='
+      processorShell: '='
     },
     controller: function ($scope) {
-      const processor = $scope.processor;
-      $scope.oldProcessorId = processor.processorId;
+      // const processor = $scope.processor;
+      // $scope.oldProcessorId = processor.processorId;
 
       $scope.changeProcessorId = () => {
-        const newVal = processor.processorId;
-        const oldVal = $scope.oldProcessorId;
+        // const newVal = processor.processorId;
+        // const oldVal = $scope.oldProcessorId;
 
-        const cleanedProcessorId = ProcessorCollection.updateId(oldVal, newVal);
-        processor.processorId = cleanedProcessorId;
-        $scope.oldProcessorId = cleanedProcessorId;
+        // const cleanedProcessorId = ProcessorCollection.updateId(oldVal, newVal);
+        // processor.processorId = cleanedProcessorId;
+        // $scope.oldProcessorId = cleanedProcessorId;
       };
     }
   };

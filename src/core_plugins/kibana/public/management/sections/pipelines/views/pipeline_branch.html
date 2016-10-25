@@ -1,0 +1,14 @@
+<div
+  class="pipeline-container"
+  draggable-container="pipeline.activeProcessorCollection.processors"
+  ng-show="pipeline.activeProcessorCollection.processors.length > 0">
+  <div
+    draggable-item="processor"
+    ng-repeat="processorShell in pipeline.activeProcessorCollection.processors track by processorShell.processorId">
+    <processor-ui-container
+      pipeline="pipeline"
+      processor-collection="pipeline.activeProcessorCollection"
+      processor-shell="processorShell">
+    </processor-ui-container>
+  </div>
+</div>

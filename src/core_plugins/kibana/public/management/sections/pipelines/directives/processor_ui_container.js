@@ -14,31 +14,29 @@ app.directive('processorUiContainer', function ($compile) {
     scope: {
       pipeline: '=',
       processorCollection: '=',
-      processor: '='
+      processorShell: '='
     },
     template: template,
     link: function ($scope, $el) {
-      const processor = $scope.processor;
       const pipeline = $scope.pipeline;
+      const processorShell = $scope.processorShell;
       const $container = $el.find('.processor-ui-content');
-      const typeId = processor.typeId;
 
-      const newScope = $scope.$new();
-      newScope.pipeline = pipeline;
-      newScope.processor = processor;
+      $scope.$watch('processorTypeId', (typeId) => {
+        if (!typeId) return;
 
-      $scope.processorStates = Processor.states;
+        processorShell.setTypeId(typeId);
 
-      const template = `<processor-ui-${typeId}></processor-ui-${typeId}>`;
-      const $innerEl = angular.element(template);
-      const postLink = $compile($innerEl);
-      $container.append($innerEl);
-      postLink(newScope);
+        const newScope = $scope.$new();
+        newScope.pipeline = pipeline;
+        newScope.processor = processorShell.processor;
 
-      $scope.$watch('processorForm.$pristine', (pristine) => {
-        if (!pristine) {
-          processor.new = false;
-        }
+        const template = `<processor-ui-${typeId}></processor-ui-${typeId}>`;
+        const $innerEl = angular.element(template);
+        const postLink = $compile($innerEl);
+        $container.empty();
+        $container.append($innerEl);
+        postLink(newScope);
       });
     }
   };

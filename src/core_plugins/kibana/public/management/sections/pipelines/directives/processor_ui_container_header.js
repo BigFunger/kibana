@@ -14,21 +14,23 @@ app.directive('processorUiContainerHeader', function () {
     restrict: 'E',
     scope: {
       processorCollection: '=',
-      processor: '=',
+      processorShell: '=',
       pipeline: '='
     },
     template: processorUiContainerHeaderTemplate,
     controller: function ($scope) {
+      const processorShell = $scope.processorShell;
+
       $scope.collectionTypes = ProcessorCollection.types;
       $scope.processorStates = Processor.states;
 
       $scope.$on('drag-start', e => {
-        $scope.wasCollapsed = $scope.processor.collapsed;
-        $scope.processor.collapsed = true;
+        $scope.wasCollapsed = processorShell.collapsed;
+        processorShell.collapsed = true;
       });
 
       $scope.$on('drag-end', e => {
-        $scope.processor.collapsed = $scope.wasCollapsed;
+        processorShell.collapsed = $scope.wasCollapsed;
         $scope.processorCollection.updateParents();
       });
     }

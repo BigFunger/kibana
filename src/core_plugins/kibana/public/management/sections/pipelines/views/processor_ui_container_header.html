@@ -1,33 +1,41 @@
 <div class="processor-ui-container-header">
   <button
-    aria-label="{{ processor.collapsed ? 'Expand Section' : 'Collapse Section' }}"
-    tooltip="{{ processor.collapsed ? 'Expand Section' : 'Collapse Section' }}"
+    aria-label="{{ processorShell.collapsed ? 'Expand Section' : 'Collapse Section' }}"
+    tooltip="{{ processorShell.collapsed ? 'Expand Section' : 'Collapse Section' }}"
     tooltip-append-to-body="true"
-    ng-click="processor.collapsed = !processor.collapsed"
+    ng-click="processorShell.collapsed = !processorShell.collapsed"
     type="button"
     class="btn btn-primary btn-xs processor-ui-container-header-toggle">
-    <i aria-hidden="true" ng-class="{ 'fa-caret-down': !processor.collapsed, 'fa-caret-right': processor.collapsed }" class="fa"></i>
+    <i aria-hidden="true" ng-class="{ 'fa-caret-down': !processorShell.collapsed, 'fa-caret-right': processorShell.collapsed }" class="fa"></i>
   </button>
 
-  <div class="processor-ui-container-header-title">
+  <div
+    class="processor-ui-container-header-title"
+    ng-hide="processorShell.typeId">
+    <span class="processor-title">New Processor</span>
+  </div>
+
+  <div
+    class="processor-ui-container-header-title"
+    ng-show="processorShell.typeId">
     <span class="processor-title">
-      {{processor.title}}
+      {{processorShell.title}}
     </span>
 
     <span class="processor-description">
-      - {{ processor.description }}
+      - {{ processorShell.description }}
     </span>
 
-    <span ng-if="processor.state === processorStates.ERROR_COMPILE" class="processor-description danger">
+    <span ng-if="processorShell.state === processorStates.ERROR_COMPILE" class="processor-description danger">
       - Compile Error
     </span>
-    <span ng-if="processor.state === processorStates.ERROR_FAIL" class="processor-description danger">
+    <span ng-if="processorShell.state === processorStates.ERROR_FAIL" class="processor-description danger">
       - Error
     </span>
-    <span ng-if="processor.state === processorStates.ERROR_RECOVER" class="processor-description warning">
+    <span ng-if="processorShell.state === processorStates.ERROR_RECOVER" class="processor-description warning">
       - Error with recovery
     </span>
-    <span ng-if="processor.state === processorStates.NO_RESULT" class="processor-description info">
+    <span ng-if="processorShell.state === processorStates.NO_RESULT" class="processor-description info">
       - No Results
     </span>
   </div>
@@ -51,10 +59,10 @@
       aria-label="Remove Processor"
       tooltip="Remove Processor"
       tooltip-append-to-body="true"
-      ng-click="processorCollection.remove(processor)"
+      ng-click="processorCollection.remove(processorShell)"
       type="button"
       class="btn btn-xs btn-danger"
-      ng-disabled="pipeline.hasCompileError && !processor.error">
+      ng-disabled="pipeline.hasCompileError && !processorShell.error">
       <i aria-hidden="true" class="fa fa-times"></i>
     </button>
   </div>
@@ -66,10 +74,10 @@
       aria-label="Remove Processor"
       tooltip="Remove Processor"
       tooltip-append-to-body="true"
-      ng-click="processorCollection.remove(processor)"
+      ng-click="processorCollection.remove(processorShell)"
       type="button"
       class="btn btn-xs btn-danger"
-      ng-disabled="pipeline.hasCompileError && !processor.error">
+      ng-disabled="pipeline.hasCompileError && !processorShell.error">
       <i aria-hidden="true" class="fa fa-times"></i>
     </button>
   </div>

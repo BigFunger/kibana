@@ -175,8 +175,10 @@ export default class Pipeline {
 
   get allProcessors() {
     return _.assign(
+      {},
       this.processorCollection.allProcessors,
-      this.failureProcessorCollection.allProcessors);
+      // this.failureProcessorCollection.allProcessors
+    );
   }
 
 

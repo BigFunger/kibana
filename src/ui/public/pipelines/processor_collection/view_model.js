@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import ProcessorShell from '../processor_shell/view_model';
 
 export default class ProcessorCollection {
 
@@ -34,42 +35,20 @@ export default class ProcessorCollection {
     }, [this]);
   }
 
-  add(typeId, processorModel) {
-    typeId = _.get(processorModel, 'typeId') || typeId;
+  add(processorModel) {
+    const processorShell = new ProcessorShell(this.processorRegistry, processorModel);
 
-    const processorId = _.get(processorModel, 'processorId') || ProcessorCollection.generateId(typeId);
-    ProcessorCollection.useId(processorId);
-
-    const ProcessorType = this.ProcessorTypes[typeId].ViewModel;
-    const newProcessor = new ProcessorType(this.processorRegistry, processorId, processorModel);
-
-    if (processorModel) {
-      //2016-10-20 newProcessor.new = false;
-      newProcessor.collapsed = true;
-    } else {
-      if (this.type === ProcessorCollection.types.FOREACH) {
-        if (newProcessor.mainField) {
-          _.set(newProcessor, newProcessor.mainField, '_ingest._value');
-
-          //since we're defaulting the mainField, this should be included in the results.
-          //2016-10-20 newProcessor.new = false;
-        }
-      }
-    }
-
-    //2016-10-20
     if (this.processors.length === 0) {
-      newProcessor.setInput(this.input);
+      processorShell.setInput(this.input);
     } else {
       const lastProcessor = _.last(this.processors);
-      newProcessor.setInput(lastProcessor.output);
+      processorShell.setInput(lastProcessor.output);
     }
 
-    this.processors.push(newProcessor);
-
+    this.processors.push(processorShell);
     this.updateParents();
 
-    return newProcessor;
+    return processorShell;
   }
 
   remove(processor) {
