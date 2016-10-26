@@ -8,9 +8,9 @@ export default class Lowercase extends Processor {
       'lowercase',
       'Lowercase',
       `Converts a string to its lowercase equivalent.`,
-      'sourceField',
+      'field',
       {
-        sourceField: '',
+        field: '',
         ignoreMissing: false
       },
       model
@@ -18,7 +18,7 @@ export default class Lowercase extends Processor {
   }
 
   get description() {
-    const source = this.sourceField || '?';
+    const source = this.field || '?';
     return `[${source}]`;
   }
 
@@ -26,8 +26,9 @@ export default class Lowercase extends Processor {
     return assign(
       super.model,
       {
-        sourceField: this.sourceField || '',
-        ignoreMissing: this.ignoreMissing      }
+        field: this.field || '',
+        ignoreMissing: this.ignoreMissing
+      }
     );
   }
 };

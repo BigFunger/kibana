@@ -8,9 +8,9 @@ export default class Uppercase extends Processor {
       'uppercase',
       'Uppercase',
       `Converts a string to its uppercase equivalent.`,
-      'sourceField',
+      'field',
       {
-        sourceField: '',
+        field: '',
         ignoreMissing: false
       },
       model
@@ -18,7 +18,7 @@ export default class Uppercase extends Processor {
   }
 
   get description() {
-    const source = this.sourceField || '?';
+    const source = this.field || '?';
     return `[${source}]`;
   }
 
@@ -26,7 +26,7 @@ export default class Uppercase extends Processor {
     return assign(
       super.model,
       {
-        sourceField: this.sourceField || '',
+        field: this.field || '',
         ignoreMissing: this.ignoreMissing
       }
     );

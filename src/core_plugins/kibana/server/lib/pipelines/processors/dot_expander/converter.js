@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'dot_expander');
       assign(result.dot_expander, {
-        field: processorApiDocument.source_field
+        field: processorApiDocument.field
       });
 
       if (!isEmpty(processorApiDocument.path)) {
@@ -22,7 +22,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'dot_expander');
 
       assign(result, {
-        source_field: processorEsDocument.dot_expander.field
+        field: processorEsDocument.dot_expander.field
       });
 
       if (!isEmpty(processorEsDocument.dot_expander.path)) {

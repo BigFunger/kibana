@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'grok');
       assign(result.grok, {
-        field: processorApiDocument.source_field,
+        field: processorApiDocument.field,
         patterns: processorApiDocument.patterns
       });
 
@@ -44,7 +44,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'grok');
 
       assign(result, {
-        source_field: processorEsDocument.grok.field,
+        field: processorEsDocument.grok.field,
         patterns: processorEsDocument.grok.patterns
       });
 

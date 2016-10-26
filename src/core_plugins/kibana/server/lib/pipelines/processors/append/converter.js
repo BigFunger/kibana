@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'append');
       assign(result.append, {
-        field: processorApiDocument.target_field,
+        field: processorApiDocument.field,
         value: processorApiDocument.values
       });
 
@@ -17,7 +17,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'append');
 
       assign(result, {
-        target_field: processorEsDocument.append.field,
+        field: processorEsDocument.append.field,
         values: processorEsDocument.append.value
       });
 

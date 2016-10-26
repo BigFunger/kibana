@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'uppercase');
       assign(result.uppercase, {
-        field: processorApiDocument.source_field
+        field: processorApiDocument.field
       });
 
       if (!isEmpty(processorApiDocument.ignore_missing)) {
@@ -22,7 +22,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'uppercase');
 
       assign(result, {
-        source_field: processorEsDocument.uppercase.field
+        field: processorEsDocument.uppercase.field
       });
 
       if (!isEmpty(processorEsDocument.uppercase.ignore_missing)) {

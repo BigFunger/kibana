@@ -5,7 +5,7 @@ export default function (server) {
 
   return baseSchema.keys({
     type_id: Joi.string().only('lowercase').required(),
-    source_field: Joi.string().allow(''),
+    field: Joi.string().allow(''),
     ignore_missing: Joi.bool().required()
   });
 }

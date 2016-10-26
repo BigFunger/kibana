@@ -5,7 +5,7 @@ export default function (server) {
 
   return baseSchema.keys({
     type_id: Joi.string().only('set').required(),
-    target_field: Joi.string().allow(''),
+    field: Joi.string().allow(''),
     value: Joi.string().allow(''),
     override: Joi.bool().required()
   });

@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'rename');
       assign(result.rename, {
-        field: processorApiDocument.source_field,
+        field: processorApiDocument.field,
         target_field: processorApiDocument.target_field
       });
 
@@ -23,7 +23,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'rename');
 
       assign(result, {
-        source_field: processorEsDocument.rename.field,
+        field: processorEsDocument.rename.field,
         target_field: processorEsDocument.rename.target_field
       });
 

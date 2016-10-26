@@ -3,9 +3,8 @@ import keysDeep from 'ui/pipelines/lib/keys_deep';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Grok extends Processor {
-  constructor(processorRegistry, processorId, model) {
+  constructor(processorId, model) {
     super(
-      processorRegistry,
       processorId,
       'grok',
       'Grok',
@@ -13,9 +12,9 @@ export default class Grok extends Processor {
 You choose which field to extract matched fields from, as well as the
 grok pattern you expect will match. A grok pattern is like a regular
 expression that supports aliased expressions that can be reused.`,
-      'sourceField',
+      'field',
       {
-        sourceField: '',
+        field: '',
         patterns: [],
         traceMatch: false,
         patternDefinitions: [],
@@ -30,7 +29,7 @@ expression that supports aliased expressions that can be reused.`,
     const outputKeys = keysDeep(get(this, 'outputObject.doc'));
     const addedKeys = difference(outputKeys, inputKeys);
     const added = addedKeys.sort().map(field => `[${field}]`).join(', ');
-    const source = this.sourceField || '?';
+    const source = this.field || '?';
 
     return `[${source}] -> ${added}`;
   }
@@ -39,7 +38,7 @@ expression that supports aliased expressions that can be reused.`,
     return assign(
       super.model,
       {
-        sourceField: this.sourceField || '',
+        field: this.field || '',
         patterns: this.patterns || [],
         traceMatch: this.traceMatch,
         patternDefinitions: this.patternDefinitions || [],

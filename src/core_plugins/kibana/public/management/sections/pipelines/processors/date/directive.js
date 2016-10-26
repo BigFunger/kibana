@@ -14,7 +14,7 @@ app.directive('processorUiDate', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
-      $scope.$watch('processor.sourceField', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.field', () => { pipeline.setDirty(); });
       $scope.$watch('processor.formats', () => { pipeline.setDirty(); });
       $scope.$watch('processor.targetField', () => { pipeline.setDirty(); });
       $scope.$watch('processor.timezone', () => { pipeline.setDirty(); });

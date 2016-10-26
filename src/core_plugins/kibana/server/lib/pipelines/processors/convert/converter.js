@@ -15,7 +15,7 @@ export default function (server) {
 
       const result = baseConverter.kibanaToEs(processorApiDocument, 'convert');
       assign(result.convert, {
-        field: processorApiDocument.source_field,
+        field: processorApiDocument.field,
         type: types[processorApiDocument.type]
       });
 
@@ -49,7 +49,7 @@ export default function (server) {
       };
 
       assign(result, {
-        source_field: processorEsDocument.convert.field,
+        field: processorEsDocument.convert.field,
         type: types[processorEsDocument.convert.type]
       });
 

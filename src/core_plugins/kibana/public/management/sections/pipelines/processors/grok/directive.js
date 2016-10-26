@@ -16,7 +16,7 @@ app.directive('processorUiGrok', function () {
       const pipeline = $scope.pipeline;
 
       $scope.docLinks = docLinks;
-      $scope.$watch('processor.sourceField', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.field', () => { pipeline.setDirty(); });
       $scope.$watchCollection('processor.patterns', () => { pipeline.setDirty(); });
       $scope.$watch('processor.traceMatch', () => { pipeline.setDirty(); });
       $scope.$watchCollection('processor.patternDefinitions', () => { pipeline.setDirty(); }, true);

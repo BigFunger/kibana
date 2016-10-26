@@ -14,7 +14,7 @@ app.directive('processorUiConvert', function () {
 
       $scope.types = ['auto', 'number', 'string', 'boolean'];
 
-      $scope.$watch('processor.sourceField', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.field', () => { pipeline.setDirty(); });
       $scope.$watch('processor.type', () => { pipeline.setDirty(); });
       $scope.$watch('processor.targetField', () => { pipeline.setDirty(); });
       $scope.$watch('processor.ignoreMissing', () => { pipeline.setDirty(); });

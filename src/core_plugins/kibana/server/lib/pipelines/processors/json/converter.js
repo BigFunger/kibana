@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'json');
       assign(result.json, {
-        field: processorApiDocument.source_field
+        field: processorApiDocument.field
       });
 
       if (!isEmpty(processorApiDocument.target_field)) {
@@ -22,7 +22,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'json');
 
       assign(result, {
-        source_field: processorEsDocument.json.field
+        field: processorEsDocument.json.field
       });
 
       if (!isEmpty(processorEsDocument.json.target_field)) {

@@ -5,6 +5,6 @@ export default function (server) {
 
   return baseSchema.keys({
     type_id: Joi.string().only('remove').required(),
-    source_field: Joi.string().allow('')
+    field: Joi.string().allow('')
   });
 }

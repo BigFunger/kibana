@@ -75,6 +75,11 @@ export default class Pipeline {
     this.dirty = true;
   }
 
+  addProcessor() {
+    this.collapseAllProcessors();
+    this.activeProcessorCollection.add();
+  }
+
   ///TODO: Rename this function
   pushProcessorCollection(processorCollection) {
     if (this.activeProcessorCollection === processorCollection) return;

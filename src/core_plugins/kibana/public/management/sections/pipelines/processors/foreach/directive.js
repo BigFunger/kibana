@@ -13,7 +13,7 @@ app.directive('processorUiForeach', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
-      $scope.$watch('processor.targetField', () => {
+      $scope.$watch('processor.field', () => {
         $scope.processor.updateProcessorCollection();
         pipeline.setDirty();
       });

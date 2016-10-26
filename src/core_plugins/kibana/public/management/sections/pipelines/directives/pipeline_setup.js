@@ -38,9 +38,7 @@ app.directive('pipelineSetup', function () {
 
       $scope.addProcessor = () => {
         const pipeline = $scope.pipeline;
-
-        pipeline.collapseAllProcessors();
-        pipeline.activeProcessorCollection.add();
+        pipeline.addProcessor();
       };
 
       $scope.$watchCollection('pipeline.sampleCollection.samples', () => {

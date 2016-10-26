@@ -2,16 +2,15 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Split extends Processor {
-  constructor(processorRegistry, processorId, model) {
+  constructor(processorId, model) {
     super(
-      processorRegistry,
       processorId,
       'split',
       'Split',
       `Splits a field into an array using a separator character.`,
-      'sourceField',
+      'field',
       {
-        sourceField: '',
+        field: '',
         separator: ''
       },
       model
@@ -19,7 +18,7 @@ export default class Split extends Processor {
   }
 
   get description() {
-    const source = this.sourceField || '?';
+    const source = this.field || '?';
     const separator = this.separator || '?';
     return `[${source}] on '${separator}'`;
   }
@@ -28,7 +27,7 @@ export default class Split extends Processor {
     return assign(
       super.model,
       {
-        sourceField: this.sourceField || '',
+        field: this.field || '',
         separator: this.separator || ''
       }
     );

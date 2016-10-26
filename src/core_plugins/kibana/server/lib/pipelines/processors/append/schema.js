@@ -5,7 +5,7 @@ export default function (server) {
 
   return baseSchema.keys({
     type_id: Joi.string().only('append').required(),
-    target_field: Joi.string().allow(''),
+    field: Joi.string().allow(''),
     values: Joi.array().items(Joi.string().allow(''))
   });
 }

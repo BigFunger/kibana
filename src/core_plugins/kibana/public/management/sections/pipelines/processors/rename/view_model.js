@@ -2,16 +2,15 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Rename extends Processor {
-  constructor(processorRegistry, processorId, model) {
+  constructor(processorId, model) {
     super(
-      processorRegistry,
       processorId,
       'rename',
       'Rename',
       `Renames an existing field.`,
-      'sourceField',
+      'field',
       {
-        sourceField: '',
+        field: '',
         targetField: '',
         ignoreMissing: false
       },
@@ -20,7 +19,7 @@ export default class Rename extends Processor {
   }
 
   get description() {
-    const source = this.sourceField || '?';
+    const source = this.field || '?';
     const target = this.targetField || '?';
     return `[${source}] -> [${target}]`;
   }
@@ -29,9 +28,10 @@ export default class Rename extends Processor {
     return assign(
       super.model,
       {
-        sourceField: this.sourceField || '',
+        field: this.field || '',
         targetField: this.targetField || '',
-        ignoreMissing: this.ignoreMissing      }
+        ignoreMissing: this.ignoreMissing
+      }
     );
   }
 };

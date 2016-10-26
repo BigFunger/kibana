@@ -2,16 +2,15 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Uppercase extends Processor {
-  constructor(processorRegistry, processorId, model) {
+  constructor(processorId, model) {
     super(
-      processorRegistry,
       processorId,
       'dot_expander',
       'Dot Expander',
       `Expands a field with dots into an object field.`,
-      'sourceField',
+      'field',
       {
-        sourceField: '',
+        field: '',
         path: ''
       },
       model
@@ -19,7 +18,7 @@ export default class Uppercase extends Processor {
   }
 
   get description() {
-    const source = this.sourceField || '?';
+    const source = this.field || '?';
     return `[${source}]`;
   }
 
@@ -27,7 +26,7 @@ export default class Uppercase extends Processor {
     return assign(
       super.model,
       {
-        sourceField: this.sourceField || '',
+        field: this.field || '',
         path: this.path
       }
     );

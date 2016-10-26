@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'sort');
       assign(result.sort, {
-        field: processorApiDocument.target_field
+        field: processorApiDocument.field
       });
 
       if (!isEmpty(processorApiDocument.sort_order)) {
@@ -22,7 +22,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'sort');
 
       assign(result, {
-        target_field: processorEsDocument.sort.field
+        field: processorEsDocument.sort.field
       });
 
       if (!isEmpty(processorEsDocument.sort.order)) {

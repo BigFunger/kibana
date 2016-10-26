@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'date');
       assign(result.date, {
-        field: processorApiDocument.source_field,
+        field: processorApiDocument.field,
         formats: processorApiDocument.formats
       });
 
@@ -35,7 +35,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'date');
 
       assign(result, {
-        source_field: processorEsDocument.date.field,
+        field: processorEsDocument.date.field,
         formats: processorEsDocument.date.formats
       });
 

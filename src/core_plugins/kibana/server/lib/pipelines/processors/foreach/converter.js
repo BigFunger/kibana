@@ -10,7 +10,7 @@ export default function (server) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'foreach');
       const processors = processorArrayConverter.kibanaToEs(processorApiDocument.processors);
       assign(result.foreach, {
-        field: processorApiDocument.target_field,
+        field: processorApiDocument.field,
         processor: first(processors) || {}
       });
 
@@ -20,7 +20,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'foreach');
 
       assign(result, {
-        target_field: processorEsDocument.foreach.field,
+        field: processorEsDocument.foreach.field,
         processors: processorArrayConverter.esToKibana([processorEsDocument.foreach.processor])
       });
 

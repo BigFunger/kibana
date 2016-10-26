@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'split');
       assign(result.split, {
-        field: processorApiDocument.source_field,
+        field: processorApiDocument.field,
         separator: processorApiDocument.separator
       });
 
@@ -17,7 +17,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'split');
 
       assign(result, {
-        source_field: processorEsDocument.split.field,
+        field: processorEsDocument.split.field,
         separator: processorEsDocument.split.separator
       });
 

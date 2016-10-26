@@ -2,18 +2,17 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Convert extends Processor {
-  constructor(processorRegistry, processorId, model) {
+  constructor(processorId, model) {
     super(
-      processorRegistry,
       processorId,
       'convert',
       'Convert',
       `Converts an existing field’s value to a different type, such as converting
 a string to an integer. If the field value is an array, all members will be
 converted.`,
-      'sourceField',
+      'field',
       {
-        sourceField: '',
+        field: '',
         targetField: '',
         type: 'auto',
         ignoreMissing: false
@@ -23,7 +22,7 @@ converted.`,
   }
 
   get description() {
-    const source = this.sourceField || '?';
+    const source = this.field || '?';
     const type = this.type || '?';
     const target = this.targetField ? ` -> [${this.targetField}]` : '';
     return `[${source}] to ${type}${target}`;
@@ -33,10 +32,11 @@ converted.`,
     return assign(
       super.model,
       {
-        sourceField: this.sourceField || '',
+        field: this.field || '',
         targetField: this.targetField || '',
         type: this.type || 'auto',
-        ignoreMissing: this.ignoreMissing      }
+        ignoreMissing: this.ignoreMissing
+      }
     );
   }
 };

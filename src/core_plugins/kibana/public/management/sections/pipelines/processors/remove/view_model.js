@@ -2,23 +2,22 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Remove extends Processor {
-  constructor(processorRegistry, processorId, model) {
+  constructor(processorId, model) {
     super(
-      processorRegistry,
       processorId,
       'remove',
       'Remove',
       `Removes an existing field.`,
-      'sourceField',
+      'field',
       {
-        sourceField: ''
+        field: ''
       },
       model
     );
   }
 
   get description() {
-    const source = this.sourceField || '?';
+    const source = this.field || '?';
     return `[${source}]`;
   }
 
@@ -26,7 +25,7 @@ export default class Remove extends Processor {
     return assign(
       super.model,
       {
-        sourceField: this.sourceField || ''
+        field: this.field || ''
       }
     );
   }

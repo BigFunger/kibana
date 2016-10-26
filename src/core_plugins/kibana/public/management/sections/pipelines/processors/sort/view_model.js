@@ -2,18 +2,17 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Sort extends Processor {
-  constructor(processorRegistry, processorId, model) {
+  constructor(processorId, model) {
     super(
-      processorRegistry,
       processorId,
       'sort',
       'Sort',
       `Sorts the elements of an array ascending or descending. Homogeneous arrays
 of numbers will be sorted numerically, while arrays of strings or heterogeneous
 arrays of strings + numbers will be sorted lexicographically.`,
-      'targetField',
+      'field',
       {
-        targetField: '',
+        field: '',
         sortOrder: 'asc'
       },
       model
@@ -25,7 +24,7 @@ arrays of strings + numbers will be sorted lexicographically.`,
       asc: 'Ascending',
       desc: 'Descending'
     };
-    const target = this.targetField || '?';
+    const target = this.field || '?';
     return `[${target}] ${sortOrders[this.sortOrder]}`;
   }
 
@@ -33,7 +32,7 @@ arrays of strings + numbers will be sorted lexicographically.`,
     return assign(
       super.model,
       {
-        targetField: this.targetField || '',
+        field: this.field || '',
         sortOrder: this.sortOrder || ''
       }
     );

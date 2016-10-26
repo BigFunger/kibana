@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'lowercase');
       assign(result.lowercase, {
-        field: processorApiDocument.source_field
+        field: processorApiDocument.field
       });
 
       if (!isEmpty(processorApiDocument.ignore_missing)) {
@@ -22,7 +22,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'lowercase');
 
       assign(result, {
-        source_field: processorEsDocument.lowercase.field
+        field: processorEsDocument.lowercase.field
       });
 
       if (!isEmpty(processorEsDocument.lowercase.ignore_missing)) {

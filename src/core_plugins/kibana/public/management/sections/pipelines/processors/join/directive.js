@@ -12,7 +12,7 @@ app.directive('processorUiJoin', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
-      $scope.$watch('processor.sourceField', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.field', () => { pipeline.setDirty(); });
       $scope.$watch('processor.separator', () => { pipeline.setDirty(); });
     }
   };

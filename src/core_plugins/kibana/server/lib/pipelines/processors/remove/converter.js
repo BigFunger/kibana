@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'remove');
       assign(result.remove, {
-        field: processorApiDocument.source_field
+        field: processorApiDocument.field
       });
 
       return result;
@@ -16,7 +16,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'remove');
 
       assign(result, {
-        source_field: processorEsDocument.remove.field
+        field: processorEsDocument.remove.field
       });
 
       return result;

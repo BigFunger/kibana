@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'gsub');
       assign(result.gsub, {
-        field: processorApiDocument.source_field,
+        field: processorApiDocument.field,
         pattern: processorApiDocument.pattern,
         replacement: processorApiDocument.replacement
       });
@@ -18,7 +18,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'gsub');
 
       assign(result, {
-        source_field: processorEsDocument.gsub.field,
+        field: processorEsDocument.gsub.field,
         pattern: processorEsDocument.gsub.pattern,
         replacement: processorEsDocument.gsub.replacement
       });

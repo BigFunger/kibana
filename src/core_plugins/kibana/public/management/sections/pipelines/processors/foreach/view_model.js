@@ -4,27 +4,26 @@ import ProcessorCollection from 'ui/pipelines/processor_collection/view_model';
 import processorCollectionTypes from 'ui/pipelines/constants/processor_collection_types';
 
 export default class Foreach extends Processor {
-  constructor(processorRegistry, processorId, model) {
+  constructor(processorId, model) {
     super(
-      processorRegistry,
       processorId,
       'foreach',
       'For Each',
       `Processes elements in an array of unknown length.`,
-      'targetField',
+      'field',
       {
-        targetField: ''
+        field: ''
       },
       model
     );
 
-    this.processorCollection = new ProcessorCollection(
-      processorRegistry,
-      'For Each',
-      get(model, 'processors'),
-      processorCollectionTypes.FOREACH,
-      this
-    );
+    // this.processorCollection = new ProcessorCollection(
+    //   processorRegistry,
+    //   'For Each',
+    //   get(model, 'processors'),
+    //   processorCollectionTypes.FOREACH,
+    //   this
+    // );
     this.updateProcessorCollection();
   }
 
@@ -39,11 +38,11 @@ export default class Foreach extends Processor {
   }
 
   updateProcessorCollection() {
-    this.processorCollection.valueField = this.targetField;
+    this.processorCollection.valueField = this.field;
   }
 
   get description() {
-    const target = this.targetField || '?';
+    const target = this.field || '?';
 
     const processor = get(this.processorCollection, 'processors[0].title') || '?';
     return `[${processor}] on [${target}]`;
@@ -53,7 +52,7 @@ export default class Foreach extends Processor {
     return assign(
       super.model,
       {
-        targetField: this.targetField || '',
+        field: this.field || '',
         processors: map(this.processorCollection.processors, processor => processor.model)
       }
     );

@@ -23,7 +23,7 @@ app.directive('processorUiDateIndexName', function () {
         { value: 's', label: 'Second' }
       ];
 
-      $scope.$watch('processor.sourceField', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.field', () => { pipeline.setDirty(); });
       $scope.$watch('processor.indexNamePrefix', () => { pipeline.setDirty(); });
       $scope.$watch('processor.dateRounding', () => { pipeline.setDirty(); });
       $scope.$watch('processor.dateFormats', () => { pipeline.setDirty(); });

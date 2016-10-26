@@ -2,16 +2,15 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Gsub extends Processor {
-  constructor(processorRegistry, processorId, model) {
+  constructor(processorId, model) {
     super(
-      processorRegistry,
       processorId,
       'gsub',
       'Gsub',
       `Converts a string field by applying a regular expression and a replacement.`,
-      'sourceField',
+      'field',
       {
-        sourceField: '',
+        field: '',
         pattern: '',
         replacement: ''
       },
@@ -20,7 +19,7 @@ export default class Gsub extends Processor {
   }
 
   get description() {
-    const source = this.sourceField || '?';
+    const source = this.field || '?';
     return `[${source}] - /${this.pattern}/ -> '${this.replacement}'`;
   }
 
@@ -28,7 +27,7 @@ export default class Gsub extends Processor {
     return assign(
       super.model,
       {
-        sourceField: this.sourceField || '',
+        field: this.field || '',
         pattern: this.pattern || '',
         replacement: this.replacement || ''
       }

@@ -13,7 +13,7 @@ app.directive('processorUiAppend', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
-      $scope.$watch('processor.targetField', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.field', () => { pipeline.setDirty(); });
       $scope.$watchCollection('processor.values', () => { pipeline.setDirty(); });
     }
   };

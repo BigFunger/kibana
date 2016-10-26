@@ -2,16 +2,15 @@ import { assign, isEmpty } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Date extends Processor {
-  constructor(processorRegistry, processorId, model) {
+  constructor(processorId, model) {
     super(
-      processorRegistry,
       processorId,
       'date',
       'Date',
       `Parses dates from fields.`,
-      'sourceField',
+      'field',
       {
-        sourceField: '',
+        field: '',
         targetField: '@timestamp',
         formats: [],
         timezone: 'Etc/UTC',
@@ -22,7 +21,7 @@ export default class Date extends Processor {
   }
 
   get description() {
-    const source = this.sourceField || '?';
+    const source = this.field || '?';
     const target = this.targetField || '?';
     if (isEmpty(target)) {
       return `[${source}]`;
@@ -35,7 +34,7 @@ export default class Date extends Processor {
     return assign(
       super.model,
       {
-        sourceField: this.sourceField || '',
+        field: this.field || '',
         targetField: this.targetField || '',
         formats: this.formats || [],
         timezone: this.timezone || '',

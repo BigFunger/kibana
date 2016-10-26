@@ -17,7 +17,7 @@ app.directive('processorUiSort', function () {
         desc: 'Descending'
       };
 
-      $scope.$watch('processor.targetField', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.field', () => { pipeline.setDirty(); });
       $scope.$watch('processor.sortOrder', () => { pipeline.setDirty(); });
     }
   };

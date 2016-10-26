@@ -2,16 +2,15 @@ import { assign, isEmpty } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Json extends Processor {
-  constructor(processorRegistry, processorId, model) {
+  constructor(processorId, model) {
     super(
-      processorRegistry,
       processorId,
       'json',
       'JSON',
       `Converts a JSON string into a structured JSON object.`,
-      'sourceField',
+      'field',
       {
-        sourceField: '',
+        field: '',
         targetField: ''
       },
       model
@@ -19,7 +18,7 @@ export default class Json extends Processor {
   }
 
   get description() {
-    const source = this.sourceField || '?';
+    const source = this.field || '?';
     const target = this.targetField || '?';
     if (isEmpty(target)) {
       return `[${source}]`;
@@ -32,7 +31,7 @@ export default class Json extends Processor {
     return assign(
       super.model,
       {
-        sourceField: this.sourceField || '',
+        field: this.field || '',
         targetField: this.targetField || ''
       }
     );

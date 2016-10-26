@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'date_index_name');
       assign(result.date_index_name, {
-        field: processorApiDocument.source_field,
+        field: processorApiDocument.field,
         date_rounding: processorApiDocument.date_rounding
       });
 
@@ -48,7 +48,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'date_index_name');
 
       assign(result, {
-        source_field: processorEsDocument.date_index_name.field,
+        field: processorEsDocument.date_index_name.field,
         date_rounding: processorEsDocument.date_index_name.date_rounding
       });
 

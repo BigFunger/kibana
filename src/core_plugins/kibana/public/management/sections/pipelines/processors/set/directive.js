@@ -12,7 +12,7 @@ app.directive('processorUiSet', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
-      $scope.$watch('processor.targetField', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.field', () => { pipeline.setDirty(); });
       $scope.$watch('processor.value', () => { pipeline.setDirty(); });
       $scope.$watch('processor.override', () => { pipeline.setDirty(); });
     }

@@ -2,9 +2,8 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Append extends Processor {
-  constructor(processorRegistry, processorId, model) {
+  constructor(processorId, model) {
     super(
-      processorRegistry,
       processorId,
       'append',
       'Append',
@@ -12,9 +11,9 @@ export default class Append extends Processor {
 and it is an array. Converts a scalar to an array and appends one or more
 values to it if the field exists and it is a scalar. Creates an array
 containing the provided values if the field doesn’t exist.`,
-      'targetField',
+      'field',
       {
-        targetField: '',
+        field: '',
         values: []
       },
       model
@@ -22,7 +21,7 @@ containing the provided values if the field doesn’t exist.`,
   }
 
   get description() {
-    const target = this.targetField || '?';
+    const target = this.field || '?';
     return `[${target}]`;
   }
 
@@ -30,7 +29,7 @@ containing the provided values if the field doesn’t exist.`,
     return assign(
       super.model,
       {
-        targetField: this.targetField || '',
+        field: this.field || '',
         values: this.values || []
       }
     );

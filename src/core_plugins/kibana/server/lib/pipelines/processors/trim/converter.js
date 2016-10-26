@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'trim');
       assign(result.trim, {
-        field: processorApiDocument.source_field
+        field: processorApiDocument.field
       });
 
       if (!isEmpty(processorApiDocument.ignore_missing)) {
@@ -22,7 +22,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'trim');
 
       assign(result, {
-        source_field: processorEsDocument.trim.field
+        field: processorEsDocument.trim.field
       });
 
       if (!isEmpty(processorEsDocument.trim.ignore_missing)) {

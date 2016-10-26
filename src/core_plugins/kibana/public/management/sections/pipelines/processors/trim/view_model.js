@@ -2,16 +2,15 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Trim extends Processor {
-  constructor(processorRegistry, processorId, model) {
+  constructor(processorId, model) {
     super(
-      processorRegistry,
       processorId,
       'trim',
       'Trim',
       `Trims whitespace from field.`,
-      'sourceField',
+      'field',
       {
-        sourceField: '',
+        field: '',
         ignoreMissing: false
       },
       model
@@ -19,7 +18,7 @@ export default class Trim extends Processor {
   }
 
   get description() {
-    const source = this.sourceField || '?';
+    const source = this.field || '?';
     return `[${source}]`;
   }
 
@@ -27,8 +26,9 @@ export default class Trim extends Processor {
     return assign(
       super.model,
       {
-        sourceField: this.sourceField || '',
-        ignoreMissing: this.ignoreMissing      }
+        field: this.field || '',
+        ignoreMissing: this.ignoreMissing
+      }
     );
   }
 };

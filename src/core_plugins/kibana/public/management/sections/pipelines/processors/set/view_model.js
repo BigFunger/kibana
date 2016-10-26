@@ -9,9 +9,9 @@ export default class Set extends Processor {
       'Set',
       `Sets one field and associates it with the specified value. If the field
 already exists, its value will be replaced with the provided one.`,
-      'targetField',
+      'field',
       {
-        targetField: '',
+        field: '',
         value: '',
         override: true
       },
@@ -20,7 +20,7 @@ already exists, its value will be replaced with the provided one.`,
   }
 
   get description() {
-    const target = this.targetField || '?';
+    const target = this.field || '?';
     return `[${target}]`;
   }
 
@@ -28,7 +28,7 @@ already exists, its value will be replaced with the provided one.`,
     return assign(
       super.model,
       {
-        targetField: this.targetField || '',
+        field: this.field || '',
         value: this.value || '',
         override: this.override
       }

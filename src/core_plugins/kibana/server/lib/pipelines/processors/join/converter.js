@@ -7,7 +7,7 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'join');
       assign(result.join, {
-        field: processorApiDocument.source_field,
+        field: processorApiDocument.field,
         separator: processorApiDocument.separator
       });
 
@@ -17,7 +17,7 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'join');
 
       assign(result, {
-        source_field: processorEsDocument.join.field,
+        field: processorEsDocument.join.field,
         separator: processorEsDocument.join.separator
       });
 
