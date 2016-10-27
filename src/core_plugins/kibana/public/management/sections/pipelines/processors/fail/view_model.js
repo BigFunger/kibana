@@ -2,9 +2,8 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Fail extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'fail',
       'Fail',
       `Raises an exception.`,

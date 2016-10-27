@@ -1,4 +1,4 @@
-import { assign, forEach, set, isEmpty, keys } from 'lodash';
+import { assign, forEach, set, isEmpty, keys, has } from 'lodash';
 
 export default function (server) {
   const baseConverter = server.plugins.kibana.pipelines.processors.baseConverter;
@@ -8,7 +8,9 @@ export default function (server) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'grok');
       assign(result.grok, {
         field: processorApiDocument.field,
-        patterns: processorApiDocument.patterns
+        patterns: processorApiDocument.patterns,
+        trace_match: processorApiDocument.trace_match,
+        ignore_missing: processorApiDocument.ignore_missing
       });
 
       if (processorApiDocument.pattern_definitions.length > 0) {
@@ -26,18 +28,6 @@ export default function (server) {
         }
       }
 
-      if (!isEmpty(processorApiDocument.trace_match)) {
-        assign(result.grok, {
-          trace_match: processorApiDocument.trace_match
-        });
-      }
-
-      if (!isEmpty(processorApiDocument.ignore_missing)) {
-        assign(result.grok, {
-          ignore_missing: processorApiDocument.ignore_missing
-        });
-      }
-
       return result;
     },
     esToKibana: function (processorEsDocument) {
@@ -45,7 +35,9 @@ export default function (server) {
 
       assign(result, {
         field: processorEsDocument.grok.field,
-        patterns: processorEsDocument.grok.patterns
+        patterns: processorEsDocument.grok.patterns,
+        trace_match: processorEsDocument.grok.trace_match,
+        ignore_missing: processorEsDocument.grok.ignore_missing
       });
 
       if (!isEmpty(processorEsDocument.grok.pattern_definitions)) {
@@ -60,16 +52,12 @@ export default function (server) {
         });
       }
 
-      if (!isEmpty(processorEsDocument.grok.trace_match)) {
-        assign(result, {
-          trace_match: processorEsDocument.grok.trace_match
-        });
+      if (!has(processorEsDocument.grok, 'ignore_missing')) {
+        result.ignore_missing = false;
       }
 
-      if (!isEmpty(processorEsDocument.grok.ignore_missing)) {
-        assign(result, {
-          ignore_missing: processorEsDocument.grok.ignore_missing
-        });
+      if (!has(processorEsDocument.grok, 'trace_match')) {
+        result.trace_match = false;
       }
 
       return result;

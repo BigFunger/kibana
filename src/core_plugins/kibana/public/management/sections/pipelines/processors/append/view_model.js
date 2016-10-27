@@ -2,9 +2,8 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Append extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'append',
       'Append',
       `Appends one or more values to an existing array if the field already exists

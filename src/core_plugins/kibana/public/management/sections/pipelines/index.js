@@ -1,6 +1,6 @@
 import management from 'ui/management';
 import './edit';
-import './menu';
+//import './menu';
 
 management.getSection('elasticsearch').register('pipelines', {
   display: 'Pipelines',

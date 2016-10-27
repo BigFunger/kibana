@@ -2,9 +2,8 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Sort extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'sort',
       'Sort',
       `Sorts the elements of an array ascending or descending. Homogeneous arrays

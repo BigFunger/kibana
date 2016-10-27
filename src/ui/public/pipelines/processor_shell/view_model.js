@@ -11,15 +11,11 @@ export default class ProcessorShell {
     const processorId = `processor_${ProcessorShell.counter}`;
 
     this.processorRegistry = processorRegistry;
-    this.processorId = processorId;
     this.processor = undefined;
-    this.typeId = undefined;
     this.collapsed = false;
     this.parent = undefined;
     this.inputObject = undefined;
     this.outputObject = undefined;
-    this.state = processorStates.NOT_INITIALIZED;
-    this.failureAction = 'index_fail';
     this.processorTypes = processorRegistry.byId;
     this.inputControlsState = { enableShowChanges: false };
     this.outputControlsState = { };
@@ -37,6 +33,23 @@ export default class ProcessorShell {
       index_fail: 'Do not index document',
       on_error: 'Execute other processors'
     };
+
+    const defaultModel = {
+      processorId: processorId,
+      typeId: undefined,
+      state: processorStates.NOT_INITIALIZED,
+      failureAction: 'index_fail'
+    };
+
+    _.defaults(
+      this,
+      _.pick(model, _.keys(defaultModel)),
+      defaultModel
+    );
+
+    if (this.typeId) {
+      this.setTypeId(this.typeId, model);
+    }
   }
 
   setParent(newParent) {
@@ -53,17 +66,17 @@ export default class ProcessorShell {
     this.suggestedFields = keysDeep(_.get(this.inputObject, 'doc'));
   }
 
-  setTypeId(typeId) {
+  setTypeId(typeId, processorModel) {
     this.typeId = typeId;
     const ProcessorType = this.processorTypes[typeId].ViewModel;
 
-    this.processor = new ProcessorType(
-      this.processorId,
-      _.get(this.processor, 'model'));
+    processorModel = processorModel || _.get(this.processor, 'model');
+    this.processor = new ProcessorType(processorModel);
 
-    //TODO: Move this into the constructor chain
+    //TODO: Move this into the constructor chain? On second thought, I'm not sure I want to expose that...
     //ALSO, find out if this circular reference is a GC problem.
     this.processor.processorShell = this;
+    this.state = processorStates.NOT_INITIALIZED;
 
     //update the processorId if it has not been manually changed by the user?
   }
@@ -109,18 +122,64 @@ export default class ProcessorShell {
     }
     this.outputObject = newOutputObject;
 
-    this.error = error;
+    this.error = this.cleanError(error);
 
-    if (this.inputObject && this.outputObject) {
-      if (!_.isEqual(this.inputObject.meta, this.outputObject.meta)) {
-        this.inputControlsState.showMeta = true;
-        this.outputControlsState.showMeta = true;
+    // if (this.inputObject && this.outputObject) {
+    //   if (!_.isEqual(this.inputObject.meta, this.outputObject.meta)) {
+    //     this.inputControlsState.showMeta = true;
+    //     this.outputControlsState.showMeta = true;
+    //   }
+    //   if (!_.isEqual(this.inputObject.doc, this.outputObject.doc)) {
+    //     this.inputControlsState.showMeta = false;
+    //     this.outputControlsState.showMeta = false;
+    //   }
+    // }
+  }
+
+  cleanError(error) {
+    if (!error) return;
+
+    const conversions = [
+      {
+        pattern: /field \[(.*)\] of type \[(.*)\] cannot be cast to \[java\.util\.List\]/,
+        matchLength: 3,
+        substitution: (matches) => { return `field [${matches[1]}] does not contain an array value`; }
+      },
+      {
+        pattern: /field \[(.*)\] of type \[(.*)\] cannot be cast to \[java\.lang\.String\]/,
+        matchLength: 3,
+        substitution: (matches) => { return `field [${matches[1]}] does not contain a string value`; }
+      },
+      {
+        pattern: /field \[(.*)\] not present as part of path \[(.*)\]/,
+        matchLength: 3,
+        substitution: (matches) => { return `field [${matches[1]}] was not found`; }
+      },
+      {
+        pattern: /field \[(.*)\] doesn't exist/,
+        matchLength: 2,
+        substitution: (matches) => { return `field [${matches[1]}] was not found`; }
+      },
+      {
+        pattern: /compile error/,
+        matchLength: 1,
+        substitution: (matches) => { return `The specified script caused a compile error`; }
+      },
+      {
+        pattern: /runtime error/,
+        matchLength: 1,
+        substitution: (matches) => { return `The specified script caused a runtime error`; }
       }
-      if (!_.isEqual(this.inputObject.doc, this.outputObject.doc)) {
-        this.inputControlsState.showMeta = false;
-        this.outputControlsState.showMeta = false;
+    ];
+
+    _.forEach(conversions, (conversion) => {
+      const matches = conversion.pattern.exec(error.message);
+      if (matches && matches.length === conversion.matchLength) {
+        error.message = conversion.substitution(matches);
       }
-    }
+    });
+
+    return error;
   }
 
   updateState() {

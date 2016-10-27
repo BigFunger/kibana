@@ -3,9 +3,8 @@ import keysDeep from 'ui/pipelines/lib/keys_deep';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Grok extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'grok',
       'Grok',
       `Extracts structured fields out of a single text field within a document.
@@ -25,8 +24,8 @@ expression that supports aliased expressions that can be reused.`,
   }
 
   get description() {
-    const inputKeys = keysDeep(get(this, 'inputObject.doc'));
-    const outputKeys = keysDeep(get(this, 'outputObject.doc'));
+    const inputKeys = keysDeep(get(this, 'processorShell.inputObject.doc'));
+    const outputKeys = keysDeep(get(this, 'processorShell.outputObject.doc'));
     const addedKeys = difference(outputKeys, inputKeys);
     const added = addedKeys.sort().map(field => `[${field}]`).join(', ');
     const source = this.field || '?';

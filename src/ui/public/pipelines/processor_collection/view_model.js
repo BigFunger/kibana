@@ -18,7 +18,7 @@ export default class ProcessorCollection {
 
     const collection = this;
     _.forEach(processors, (processorModel) => {
-      collection.add(null, processorModel);
+      collection.add(processorModel);
     });
     this.updateParents();
   }

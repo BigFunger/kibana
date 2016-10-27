@@ -21,7 +21,9 @@ export default (server) => {
       const pipelineApiDocument = request.payload;
       const body = simulateConverter.kibanaToEs(pipelineApiDocument);
 
+      console.log();
       console.log(JSON.stringify(body));
+      console.log();
 
       return boundCallWithRequest('transport.request', {
         path: '/_ingest/pipeline/_simulate',
@@ -30,6 +32,10 @@ export default (server) => {
         body: body
       })
       .then(handleResponse, handleError)
+      .then((response) => {
+        console.log(JSON.stringify(response));
+        return response;
+      })
       .then(reply)
       .catch((error) => {
         reply(handleESError(error));

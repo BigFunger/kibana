@@ -2,9 +2,8 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Unknown extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'unknown',
       'Unknown',
       `Dummy`,

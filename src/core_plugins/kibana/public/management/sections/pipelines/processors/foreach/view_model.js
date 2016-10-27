@@ -4,9 +4,8 @@ import ProcessorCollection from 'ui/pipelines/processor_collection/view_model';
 import processorCollectionTypes from 'ui/pipelines/constants/processor_collection_types';
 
 export default class Foreach extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'foreach',
       'For Each',
       `Processes elements in an array of unknown length.`,

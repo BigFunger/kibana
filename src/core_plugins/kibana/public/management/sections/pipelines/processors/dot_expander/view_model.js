@@ -2,9 +2,8 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Uppercase extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'dot_expander',
       'Dot Expander',
       `Expands a field with dots into an object field.`,

@@ -2,9 +2,8 @@ import { assign, isEmpty } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Date extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'date',
       'Date',
       `Parses dates from fields.`,

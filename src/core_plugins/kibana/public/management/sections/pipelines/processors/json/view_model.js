@@ -1,10 +1,10 @@
-import { assign, isEmpty } from 'lodash';
+import { assign, difference, get } from 'lodash';
+import keysDeep from 'ui/pipelines/lib/keys_deep';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Json extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'json',
       'JSON',
       `Converts a JSON string into a structured JSON object.`,
@@ -18,13 +18,13 @@ export default class Json extends Processor {
   }
 
   get description() {
+    const inputKeys = keysDeep(get(this, 'processorShell.inputObject.doc'));
+    const outputKeys = keysDeep(get(this, 'processorShell.outputObject.doc'));
+    const addedKeys = difference(outputKeys, inputKeys);
+    const added = addedKeys.sort().map(field => `[${field}]`).join(', ');
     const source = this.field || '?';
-    const target = this.targetField || '?';
-    if (isEmpty(target)) {
-      return `[${source}]`;
-    } else {
-      return `[${source}] -> [${target}]`;
-    }
+
+    return `[${source}] -> ${added}`;
   }
 
   get model() {

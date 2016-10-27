@@ -2,9 +2,8 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Lowercase extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'lowercase',
       'Lowercase',
       `Converts a string to its lowercase equivalent.`,

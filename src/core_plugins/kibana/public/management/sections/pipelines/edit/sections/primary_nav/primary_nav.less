@@ -1,0 +1,18 @@
+@import (reference) "~ui/styles/variables";
+@import (reference) "~ui/styles/mixins";
+@import (reference) "~ui/styles/theme";
+
+primary-nav {
+  .navbar-nav {
+    font-size: 15pt;
+
+    .link {
+      border-bottom: 3px solid;
+      border-bottom-color: transparent;
+
+      &.active {
+        border-bottom-color: @kibanaGray2;
+      }
+    }
+  }
+}

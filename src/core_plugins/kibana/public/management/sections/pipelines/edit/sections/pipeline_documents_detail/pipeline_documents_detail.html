@@ -1,0 +1,26 @@
+<form
+  role="form"
+  name="editSampleForm"
+  ng-submit="saveEdit()">
+  <div class="form-group">
+    <label>Document Description</label>
+    <input
+      type="text"
+      class="form-control"
+      ng-model="documentDetail.editSample.description"
+      input-focus />
+  </div>
+  <div class="form-group">
+    <label>JSON Body</label>
+    <div
+      class="json-editor"
+      json-input
+      require-keys="true"
+      ui-ace="{
+        mode: 'json',
+        onLoad: aceLoaded
+      }"
+      ng-model="documentDetail.editSample.doc">
+    </div>
+  </div>
+</form>

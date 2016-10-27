@@ -2,9 +2,8 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Trim extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'trim',
       'Trim',
       `Trims whitespace from field.`,

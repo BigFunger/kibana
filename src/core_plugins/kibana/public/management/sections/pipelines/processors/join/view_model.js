@@ -2,9 +2,8 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Join extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'join',
       'Join',
       `Joins each element of an array into a single string using a

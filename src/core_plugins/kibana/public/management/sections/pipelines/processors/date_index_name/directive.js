@@ -26,7 +26,7 @@ app.directive('processorUiDateIndexName', function () {
       $scope.$watch('processor.field', () => { pipeline.setDirty(); });
       $scope.$watch('processor.indexNamePrefix', () => { pipeline.setDirty(); });
       $scope.$watch('processor.dateRounding', () => { pipeline.setDirty(); });
-      $scope.$watch('processor.dateFormats', () => { pipeline.setDirty(); });
+      $scope.$watch('processor.formats', () => { pipeline.setDirty(); });
       $scope.$watch('processor.timezone', () => { pipeline.setDirty(); });
       $scope.$watch('processor.locale', () => { pipeline.setDirty(); });
       $scope.$watch('processor.indexNameFormat', () => { pipeline.setDirty(); });

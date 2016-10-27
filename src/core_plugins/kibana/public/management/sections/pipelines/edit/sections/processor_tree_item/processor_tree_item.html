@@ -1,0 +1,41 @@
+<div
+  class="tree-item"
+  ng-click="pipelineProcessors.editProcessorShell = processorShell;">
+  <div class="item-icon">
+    <button
+      type="button"
+      tooltip="Expand"
+      tooltip-append-to-body="true"
+      class="btn btn-xs"
+      ng-show="!processorShell.expanded && processorShell.failureProcessorCollection.processors.length > 0"
+      ng-click="processorShell.expanded = true">
+      <i aria-hidden="true" class="fa fa-caret-right"></i>
+    </button>
+    <button
+      type="button"
+      tooltip="Collapse"
+      tooltip-append-to-body="true"
+      class="btn btn-xs"
+      ng-show="processorShell.expanded && processorShell.failureProcessorCollection.processors.length > 0"
+      ng-click="processorShell.expanded = false">
+      <i aria-hidden="true" class="fa fa-caret-down"></i>
+    </button>
+  </div>
+  <span>{{processorShell.processor.title}} ({{processorShell.processorId}})</span>
+  <div class="buttons">
+    <button
+      type="button"
+      tooltip="Delete"
+      tooltip-append-to-body="true"
+      class="btn btn-xs"
+      ng-click="pipelineDocuments.remove(sample)">
+      <i aria-hidden="true" class="fa fa-trash"></i>
+    </button>
+  </div>
+</div>
+<processor-tree
+  class="branch"
+  ng-show="processorShell.expanded && processorShell.failureProcessorCollection.processors.length > 0"
+  processor-collection="processorShell.failureProcessorCollection"
+  pipeline-processors="pipelineProcessors">
+</processor-tree>

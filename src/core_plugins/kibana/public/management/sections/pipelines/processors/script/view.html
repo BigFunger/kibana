@@ -6,10 +6,9 @@
   <label>Inline Script:</label>
   <textarea
     ng-model="processor.inlineScript"
-    class="form-control"
-    ng-model-options="{ updateOn: 'blur' }">
+    class="form-control">
   </textarea>
-  <div class="info">NOTE: It is possible to write an invalid script that could cause Elasticsearch to crash. To help avoid this, this field will not cause the pipeline to simulate until it loses focus.</div>
+  <div class="info">NOTE: It is possible to write an invalid script that could cause Elasticsearch to crash. Use caution!</div>
 </div>
 <div class="form-group">
   <label>Filename:</label>

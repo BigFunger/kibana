@@ -1,0 +1,16 @@
+<nav class="navbar navbar-default subnav">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li
+        ng-repeat="section in secondaryNav.sections"
+        ng-class="{ active: secondaryNav.section === section }">
+        <a
+          class="link"
+          ng-class="{ active: secondaryNav.section === section }"
+          ng-click="secondaryNav.section = section">
+          {{section.title}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

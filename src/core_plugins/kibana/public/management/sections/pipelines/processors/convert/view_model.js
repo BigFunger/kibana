@@ -2,9 +2,8 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Convert extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'convert',
       'Convert',
       `Converts an existing field’s value to a different type, such as converting

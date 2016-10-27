@@ -1,4 +1,4 @@
-import { assign, isEmpty } from 'lodash';
+import { assign, isEmpty, has } from 'lodash';
 
 export default function (server) {
   const baseConverter = server.plugins.kibana.pipelines.processors.baseConverter;
@@ -16,18 +16,13 @@ export default function (server) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'convert');
       assign(result.convert, {
         field: processorApiDocument.field,
-        type: types[processorApiDocument.type]
+        type: types[processorApiDocument.type],
+        ignore_missing: processorApiDocument.ignore_missing
       });
 
       if (!isEmpty(processorApiDocument.target_field)) {
         assign(result.convert, {
           target_field: processorApiDocument.target_field
-        });
-      }
-
-      if (!isEmpty(processorApiDocument.ignore_missing)) {
-        assign(result.convert, {
-          ignore_missing: processorApiDocument.ignore_missing
         });
       }
 
@@ -50,7 +45,8 @@ export default function (server) {
 
       assign(result, {
         field: processorEsDocument.convert.field,
-        type: types[processorEsDocument.convert.type]
+        type: types[processorEsDocument.convert.type],
+        ignore_missing: processorEsDocument.convert.ignore_missing
       });
 
       if (!isEmpty(processorEsDocument.convert.target_field)) {
@@ -59,10 +55,8 @@ export default function (server) {
         });
       }
 
-      if (!isEmpty(processorEsDocument.convert.ignore_missing)) {
-        assign(result, {
-          ignore_missing: processorEsDocument.convert.ignore_missing
-        });
+      if (!has(processorEsDocument.convert, 'ignore_missing')) {
+        result.ignore_missing = false;
       }
 
       return result;

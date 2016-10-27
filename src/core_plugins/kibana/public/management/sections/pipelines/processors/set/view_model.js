@@ -2,9 +2,8 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Set extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'set',
       'Set',
       `Sets one field and associates it with the specified value. If the field

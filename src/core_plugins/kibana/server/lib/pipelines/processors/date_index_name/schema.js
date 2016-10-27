@@ -8,7 +8,7 @@ export default function (server) {
     field: Joi.string().allow(''),
     date_rounding: Joi.string().allow(''),
     index_name_prefix: Joi.string().allow(''),
-    date_formats: Joi.array().items(Joi.string().allow('')),
+    formats: Joi.array().items(Joi.string().allow('')),
     timezone: Joi.string().allow(''),
     locale: Joi.string().allow(''),
     index_name_format: Joi.string().allow('')

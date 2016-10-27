@@ -1,4 +1,4 @@
-import { assign, isEmpty } from 'lodash';
+import { assign, isEmpty, compact } from 'lodash';
 
 export default function (server) {
   const baseConverter = server.plugins.kibana.pipelines.processors.baseConverter;
@@ -7,9 +7,15 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'date');
       assign(result.date, {
-        field: processorApiDocument.field,
-        formats: processorApiDocument.formats
+        field: processorApiDocument.field
       });
+
+      const formats = compact(processorApiDocument.formats);
+      if (!isEmpty(formats)) {
+        assign(result.date, {
+          formats: formats
+        });
+      }
 
       if (!isEmpty(processorApiDocument.target_field)) {
         assign(result.date, {

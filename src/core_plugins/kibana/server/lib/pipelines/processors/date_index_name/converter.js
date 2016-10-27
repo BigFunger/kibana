@@ -11,10 +11,10 @@ export default function (server) {
         date_rounding: processorApiDocument.date_rounding
       });
 
-      const formats = compact(processorApiDocument.date_formats);
+      const formats = compact(processorApiDocument.formats);
       if (!isEmpty(formats)) {
         assign(result.date_index_name, {
-          date_formats: processorApiDocument.formats
+          date_formats: formats
         });
       }
 
@@ -54,7 +54,7 @@ export default function (server) {
 
       if (!isEmpty(processorEsDocument.date_index_name.date_formats)) {
         assign(result, {
-          date_formats: processorEsDocument.date_index_name.date_formats
+          formats: processorEsDocument.date_index_name.date_formats
         });
       }
 

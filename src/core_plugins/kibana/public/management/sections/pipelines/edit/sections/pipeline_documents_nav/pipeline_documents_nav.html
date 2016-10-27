@@ -1,0 +1,36 @@
+<div class="nav-section-header">
+  <label>Sample Documents</label>
+  <div class="buttons">
+    <button
+      type="button"
+      tooltip="Add Document"
+      tooltip-append-to-body="true"
+      class="btn btn-xs btn-primary"
+      ng-click="pipelineDocuments.add()">
+      <i aria-hidden="true" class="fa fa-plus"></i>
+    </button>
+  </div>
+</div>
+<ul
+  class="selectable-list"
+  ng-show="pipeline.sampleCollection.samples.length > 0">
+  <li
+    ng-repeat="sample in pipeline.sampleCollection.samples"
+    ng-class="{ active: pipelineDocuments.editSample === sample }"
+    ng-click="pipelineDocuments.editSample = sample;">
+    <span>{{ sample.description }}</span>
+    <div class="buttons">
+      <button
+        type="button"
+        tooltip="Delete"
+        tooltip-append-to-body="true"
+        class="btn btn-xs btn-primary"
+        ng-click="pipelineDocuments.remove(sample)">
+        <i aria-hidden="true" class="fa fa-trash"></i>
+      </button>
+    </div>
+  </li>
+</ul>
+<p ng-show="pipeline.sampleCollection.samples.length === 0">
+Sample documents are used while building your pipeline. They should represent the expected structure of the data that you intend to index through your pipeline.
+</p>

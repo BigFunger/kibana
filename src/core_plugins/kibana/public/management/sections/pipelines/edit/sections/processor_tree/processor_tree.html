@@ -1,0 +1,15 @@
+<ul
+  class="selectable-list"
+  draggable-container="processorCollection.processors">
+  <li
+    ng-repeat="processorShell in processorCollection.processors"
+    draggable-item="processorShell">
+    <processor-tree-item
+      processor-collection="processorCollection"
+      processor-shell="processorShell"
+      pipeline-processors="pipelineProcessors"
+      draggable-handle
+      ng-class="{ active: pipelineProcessors.editProcessorShell === processorShell }">
+    </processor-tree-item>
+  </li>
+</ul>

@@ -2,9 +2,8 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Script extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'script',
       'Script',
       `Allows inline, stored, and file scripts to be executed within ingest pipelines.`,

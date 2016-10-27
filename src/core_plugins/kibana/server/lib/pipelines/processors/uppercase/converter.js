@@ -1,4 +1,4 @@
-import { assign, isEmpty } from 'lodash';
+import { assign, has } from 'lodash';
 
 export default function (server) {
   const baseConverter = server.plugins.kibana.pipelines.processors.baseConverter;
@@ -7,14 +7,9 @@ export default function (server) {
     kibanaToEs: function (processorApiDocument) {
       const result = baseConverter.kibanaToEs(processorApiDocument, 'uppercase');
       assign(result.uppercase, {
-        field: processorApiDocument.field
+        field: processorApiDocument.field,
+        ignore_missing: processorApiDocument.ignore_missing
       });
-
-      if (!isEmpty(processorApiDocument.ignore_missing)) {
-        assign(result.uppercase, {
-          ignore_missing: processorApiDocument.ignore_missing
-        });
-      }
 
       return result;
     },
@@ -22,13 +17,12 @@ export default function (server) {
       const result = baseConverter.esToKibana(processorEsDocument, 'uppercase');
 
       assign(result, {
-        field: processorEsDocument.uppercase.field
+        field: processorEsDocument.uppercase.field,
+        ignore_missing: processorEsDocument.uppercase.ignore_missing
       });
 
-      if (!isEmpty(processorEsDocument.uppercase.ignore_missing)) {
-        assign(result, {
-          ignore_missing: processorEsDocument.uppercase.ignore_missing
-        });
+      if (!has(processorEsDocument.uppercase, 'ignore_missing')) {
+        result.ignore_missing = false;
       }
 
       return result;

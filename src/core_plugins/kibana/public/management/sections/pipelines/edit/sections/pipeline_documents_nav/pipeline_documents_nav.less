@@ -1,0 +1,59 @@
+@import (reference) "~ui/styles/variables";
+@import (reference) "~ui/styles/mixins";
+@import (reference) "~ui/styles/theme";
+
+pipeline-documents-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+
+  width: 400px;
+  height: 650px;
+  border-right: 2px solid @kibanaGray5;
+  padding: 20px;
+
+  .nav-section-header {
+    display: flex;
+    flex: 0 1 auto;
+    width: 100%;
+    border-bottom: 2px solid @kibanaGray4;
+    margin-bottom: 2px;
+
+    label {
+      flex: 0 1 auto;
+      width: 100%;
+    }
+
+    .buttons {
+      flex: 0 0 auto;
+    }
+  }
+
+  ul.selectable-list {
+    list-style: none;
+    padding: 0px;
+
+    li {
+      padding: 4px;
+      padding-left: 10px;
+      border-radius: 6px;
+
+      .buttons {
+        float: right;
+        display: none;
+      }
+
+      &.active {
+        background-color: @kibanaGray5;
+
+        .buttons {
+          display: block;
+        }
+      }
+
+      &:hover {
+        background-color: @kibanaGray5;
+      }
+    }
+  }
+}

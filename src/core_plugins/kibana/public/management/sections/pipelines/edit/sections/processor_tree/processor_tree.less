@@ -1,0 +1,18 @@
+@import (reference) "~ui/styles/variables";
+@import (reference) "~ui/styles/mixins";
+@import (reference) "~ui/styles/theme";
+
+processor-tree {
+  display: block;
+
+  ul.selectable-list {
+    list-style: none;
+    padding: 0px;
+  }
+
+  &.branch {
+    ul.selectable-list {
+      padding-left: 10px;
+    }
+  }
+}

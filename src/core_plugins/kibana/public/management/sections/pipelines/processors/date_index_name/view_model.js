@@ -2,9 +2,8 @@ import { assign } from 'lodash';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class DateIndexName extends Processor {
-  constructor(processorId, model) {
+  constructor(model) {
     super(
-      processorId,
       'date_index_name',
       'Date Index Name',
       `Assigns the _index meta field with a date math index name expression based on the provided
@@ -15,7 +14,7 @@ processed and the provided date rounding.`,
         field: '',
         indexNamePrefix: '',
         dateRounding: '',
-        dateFormats: [],
+        formats: [],
         timezone: '',
         locale: '',
         indexNameFormat: ''
@@ -36,7 +35,7 @@ processed and the provided date rounding.`,
         field: this.field || '',
         indexNamePrefix: this.indexNamePrefix || '',
         dateRounding: this.dateRounding || '',
-        dateFormats: this.dateFormats || [],
+        formats: this.formats || [],
         timezone: this.timezone || '',
         locale: this.locale || '',
         indexNameFormat: this.indexNameFormat || ''

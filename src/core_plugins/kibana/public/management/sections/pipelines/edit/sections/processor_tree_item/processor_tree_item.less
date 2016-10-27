@@ -1,0 +1,44 @@
+@import (reference) "~ui/styles/variables";
+@import (reference) "~ui/styles/mixins";
+@import (reference) "~ui/styles/theme";
+
+processor-tree-item {
+  display: block;
+
+  .buttons {
+    float: right;
+    display: none;
+
+    button {
+      background-color: transparent;
+    }
+  }
+
+  .tree-item {
+    padding: 4px;
+    padding-left: 0px;
+    border-radius: 6px;
+
+    &.active {
+      background-color: @kibanaGray5;
+
+      .buttons {
+        display: block;
+      }
+    }
+
+    &:hover {
+      background-color: @kibanaGray5;
+    }
+
+    .item-icon {
+      float: left;
+      width:20px;
+      height:20px;
+
+      button {
+        background-color: transparent;
+      }
+    }
+  }
+}
