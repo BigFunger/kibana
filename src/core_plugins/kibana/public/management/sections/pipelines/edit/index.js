@@ -22,6 +22,7 @@ import './sections/processor_tree/processor_tree';
 import './sections/processor_tree_item/processor_tree_item';
 import './sections/processor_tree_header/processor_tree_header';
 import './sections/processor_detail/processor_detail';
+import './sections/document_selector/document_selector';
 
 import 'ui/draggable/draggable_container';
 import 'ui/draggable/draggable_handle';

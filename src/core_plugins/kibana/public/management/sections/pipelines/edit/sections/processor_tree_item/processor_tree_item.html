@@ -1,7 +1,8 @@
 <div
   class="tree-item"
-  ng-click="pipelineProcessors.editProcessorShell = processorShell;">
-  <div class="item-icon">
+  ng-click="pipelineProcessors.editProcessorShell = processorShell;"
+  draggable-handle>
+  <div class="collapse-icon">
     <button
       type="button"
       tooltip="Expand"
@@ -21,7 +22,14 @@
       <i aria-hidden="true" class="fa fa-caret-down"></i>
     </button>
   </div>
-  <span>{{processorShell.processor.title}} ({{processorShell.processorId}})</span>
+  <div class="status-icon">
+    <i
+      aria-hidden="true"
+      class="fa fa-warning"
+      ng-show="processorShell.error">
+    </i>
+  </div>
+  <div class="title">{{processorShell.processor.title}} ({{processorShell.processorId}})</div>
   <div class="buttons">
     <button
       type="button"

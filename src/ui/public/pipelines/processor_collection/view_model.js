@@ -30,8 +30,8 @@ export default class ProcessorCollection {
   }
 
   get allProcessorCollections() {
-    return _.reduce(this.processors, (result, processor) => {
-      return result.concat(processor.allProcessorCollections);
+    return _.reduce(this.processors, (result, processorShell) => {
+      return result.concat(processorShell.allProcessorCollections);
     }, [this]);
   }
 

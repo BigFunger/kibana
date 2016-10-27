@@ -10,12 +10,23 @@ app.directive('processorTreeHeader', function () {
     restrict: 'E',
     template: template,
     scope: {
+      pipelineProcessors: '=',
       processorCollection: '=',
       title: '@'
     },
     controller: function ($scope) {
       $scope.addProcessor = () => {
-        alert('add a processor');
+        const currentProcessor = $scope.pipelineProcessors.editProcessorShell;
+        const allProcessorCollections = $scope.processorCollection.allProcessorCollections;
+
+        let targetProcessorCollection = $scope.processorCollection;
+        _.forEach(allProcessorCollections, (processorCollection) => {
+          if (_.contains(processorCollection.processors, currentProcessor)) {
+            targetProcessorCollection = processorCollection;
+          }
+        });
+
+        targetProcessorCollection.add();
       };
     }
   };

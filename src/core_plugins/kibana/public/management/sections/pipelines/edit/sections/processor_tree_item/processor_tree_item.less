@@ -5,39 +5,55 @@
 processor-tree-item {
   display: block;
 
-  .buttons {
-    float: right;
-    display: none;
-
-    button {
-      background-color: transparent;
-    }
-  }
-
   .tree-item {
+    display: flex;
     padding: 4px;
     padding-left: 0px;
     border-radius: 6px;
+    height: 30px;
 
-    &.active {
-      background-color: @kibanaGray5;
-
-      .buttons {
-        display: block;
-      }
+    button {
+      background-color: transparent;
+      color: @kibanaGray2;
     }
 
     &:hover {
       background-color: @kibanaGray5;
     }
 
-    .item-icon {
-      float: left;
+    .collapse-icon {
+      flex: 0 0 auto;
       width:20px;
       height:20px;
+    }
 
-      button {
-        background-color: transparent;
+    .status-icon {
+      flex: 1 1 auto;
+
+      i {
+        margin-right: 3px;
+        color: red;
+        opacity: .5;
+      }
+    }
+
+    .title {
+      flex: 1 1 auto;
+      width: 100%;
+    }
+
+    .buttons {
+      display: none;
+      flex: 0 0 auto;
+    }
+  }
+
+  &.active {
+    & > .tree-item {
+      background-color: @kibanaGray5;
+
+      .buttons {
+        display: block;
       }
     }
   }

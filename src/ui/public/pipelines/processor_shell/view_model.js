@@ -89,6 +89,10 @@ export default class ProcessorShell {
     return result;
   }
 
+  get allProcessorCollections() {
+    return this.failureProcessorCollection.allProcessorCollections;
+  }
+
   setSimulateResult(simulateResult) {
     this.simulateResult = simulateResult;
   }

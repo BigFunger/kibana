@@ -17,12 +17,17 @@ app.directive('pipelineProcessors', function () {
       this.simulate = () => {
         const pipeline = $scope.pipeline;
 
-        pipeline.input = pipeline.sampleCollection.samples[0].doc;
+        //pipeline.input = pipeline.sampleCollection.samples[0].doc;
+        //pipeline.input = $scope.documentSelector.document.doc;
 
-        return pipelines.pipeline.simulate(pipeline.model, pipeline.input)
+        return pipelines.pipeline.simulate(pipeline.model)
         .then((results) => { pipeline.applySimulateResults(results); })
         .catch(notify.error);
       };
+
+      $scope.$watch('pipeline.sampleCollection.index', () => {
+        this.simulate();
+      });
     }
   };
 });

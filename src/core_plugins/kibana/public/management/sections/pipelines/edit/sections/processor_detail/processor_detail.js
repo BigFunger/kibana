@@ -9,6 +9,9 @@ app.directive('processorDetail', function () {
   return {
     restrict: 'E',
     template: template,
+    scope: {
+      processorShell: '='
+    },
     controller: function ($scope) {
     }
   };

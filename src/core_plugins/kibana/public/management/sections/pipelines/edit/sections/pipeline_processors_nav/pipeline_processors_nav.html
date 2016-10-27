@@ -1,6 +1,8 @@
+<document-selector></document-selector>
 <processor-tree-header
   title="Processors"
-  processor-collection="pipeline.processorCollection">
+  processor-collection="pipeline.processorCollection"
+  pipeline-processors="pipelineProcessors">
 </processor-tree-header>
 <p ng-show="pipeline.processorCollection.processors.length === 0">Processors are the building blocks of a Pipeline. Each Processor that you add to your pipeline will allow you to modify the document at index time. Get started by adding a Processor.</p>
 <processor-tree
@@ -11,7 +13,8 @@
 
 <processor-tree-header
   title="Root Error Processors"
-  processor-collection="pipeline.failureProcessorCollection">
+  processor-collection="pipeline.failureProcessorCollection"
+  pipeline-processors="pipelineProcessors">
 </processor-tree-header>
 <p ng-show="pipeline.failureProcessorCollection.processors.length === 0">Root errors occur if a processor fails on the input it receives and doesn't have a error handler defined.</p>
 <processor-tree

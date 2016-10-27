@@ -19,7 +19,9 @@ app.directive('secondaryNav', function () {
         }
       };
 
-      this.section = this.sections.processorDetails;
+      $scope.$watch('pipelineProcessors.editProcessorShell', () => {
+        this.section = this.sections.processorDetails;
+      });
     }
   };
 });

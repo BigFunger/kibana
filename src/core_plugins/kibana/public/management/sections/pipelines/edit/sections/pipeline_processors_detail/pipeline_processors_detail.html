@@ -1,3 +1,6 @@
 <secondary-nav></secondary-nav>
 <pipeline-output ng-show="secondaryNav.section === secondaryNav.sections.pipelineOutput"></pipeline-output>
-<processor-detail ng-show="secondaryNav.section === secondaryNav.sections.processorDetails"></processor-detail>
+<processor-detail
+  ng-show="secondaryNav.section === secondaryNav.sections.processorDetails"
+  processor-shell="pipelineProcessors.editProcessorShell">
+</processor-detail>
