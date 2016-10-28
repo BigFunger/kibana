@@ -29,7 +29,11 @@
       ng-show="processorShell.error">
     </i>
   </div>
-  <div class="title">{{processorShell.processor.title}} ({{processorShell.processorId}})</div>
+<!--   <div class="title">{{processorShell.processor.title}} ({{processorShell.processorId}})</div> -->
+  <div class="title">
+    <span class="processor-type">{{processorShell.title}}</span>
+    <span class="processor-description">{{processorShell.description}}</span>
+  </div>
   <div class="buttons">
     <button
       type="button"

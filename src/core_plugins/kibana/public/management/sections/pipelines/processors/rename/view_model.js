@@ -20,7 +20,6 @@ export default class Rename extends Processor {
   get description() {
     const chunks = [];
 
-    chunks.push('Rename');
     if (this.field) chunks.push(` '${this.field}'`);
     if (this.targetField) chunks.push(` to '${this.targetField}'`);
 

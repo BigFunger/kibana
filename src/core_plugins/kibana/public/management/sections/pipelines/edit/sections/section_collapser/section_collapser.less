@@ -15,10 +15,15 @@ section-collapser {
     margin-bottom: 0px;
   }
 
-  button.btn {
-    width: 15px;
-    background-color: transparent;
-    color: @kibanaGray2;
-    border: transparent;
+  button {
+    &.btn,
+    &.btn:active,
+    &.btn:focus,
+    &.btn:hover {
+      width: 15px;
+      background-color: transparent;
+      border-color: transparent;
+      color: @kibanaGray2;
+    }
   }
 }

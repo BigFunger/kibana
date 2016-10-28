@@ -1,4 +1,5 @@
-import { assign, isEmpty } from 'lodash';
+import { assign, isEmpty, get, difference, last } from 'lodash';
+import keysDeep from 'ui/pipelines/lib/keys_deep';
 import Processor from 'ui/pipelines/processor/view_model';
 
 export default class Date extends Processor {
@@ -10,7 +11,7 @@ export default class Date extends Processor {
       'field',
       {
         field: '',
-        targetField: '@timestamp',
+        targetField: '',
         formats: [],
         timezone: 'Etc/UTC',
         locale: 'ENGLISH'
@@ -20,13 +21,19 @@ export default class Date extends Processor {
   }
 
   get description() {
-    const source = this.field || '?';
-    const target = this.targetField || '?';
-    if (isEmpty(target)) {
-      return `[${source}]`;
+    const inputKeys = keysDeep(get(this, 'processorShell.inputObject.doc'));
+    const outputKeys = keysDeep(get(this, 'processorShell.outputObject.doc'));
+    const addedKeys = difference(outputKeys, inputKeys);
+    const chunks = [];
+
+    if (this.field) chunks.push(` parse on '${this.field}'`);
+    if (this.field && this.targetField) {
+      chunks.push(` as '${this.targetField}'`);
     } else {
-      return `[${source}] -> [${target}]`;
+      if (addedKeys.length > 0) chunks.push(` as '${last(addedKeys)}'`);
     }
+
+    return chunks.join('');
   }
 
   get model() {

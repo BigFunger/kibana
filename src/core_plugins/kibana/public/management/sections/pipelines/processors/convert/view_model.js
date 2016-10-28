@@ -21,10 +21,13 @@ converted.`,
   }
 
   get description() {
-    const source = this.field || '?';
-    const type = this.type || '?';
-    const target = this.targetField ? ` -> [${this.targetField}]` : '';
-    return `[${source}] to ${type}${target}`;
+    const chunks = [];
+
+    if (this.field) chunks.push(` '${this.field}'`);
+    if (this.field && this.type) chunks.push(` into ${this.type}`);
+    if (this.targetField) chunks.push(` as '${this.targetField}'`);
+
+    return chunks.join('');
   }
 
   get model() {

@@ -20,8 +20,13 @@ containing the provided values if the field doesn’t exist.`,
   }
 
   get description() {
-    const target = this.field || '?';
-    return `[${target}]`;
+    const chunks = [];
+
+    chunks.push(`${this.values.length} value`);
+    if (this.values.length !== 1) chunks.push('s');
+    if (this.field) chunks.push(` into '${this.field}'`);
+
+    return chunks.join('');
   }
 
   get model() {

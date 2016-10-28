@@ -101,6 +101,14 @@ export default class ProcessorShell {
     }
   }
 
+  get title() {
+    if (this.processor) {
+      return this.processor.title;
+    } else {
+      return 'New Processor';
+    }
+  }
+
   setSimulateResult(simulateResult) {
     this.simulateResult = simulateResult;
   }

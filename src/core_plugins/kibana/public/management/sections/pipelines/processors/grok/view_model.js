@@ -29,7 +29,6 @@ expression that supports aliased expressions that can be reused.`,
     const addedKeys = difference(outputKeys, inputKeys);
     const chunks = [];
 
-    chunks.push('Grok');
     if (this.field) chunks.push(` '${this.field}'`);
     if (addedKeys.length === 1) chunks.push(` into '${addedKeys.length[0]}'`);
     if (addedKeys.length > 1) chunks.push(` into ${addedKeys.length} fields`);

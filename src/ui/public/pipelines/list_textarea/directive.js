@@ -31,7 +31,7 @@ app.directive('listTextarea', function () {
 
         let list = splitValues(valuesString);
         list = compact(list);
-        list = map(list, value => trim(value));
+        //list = map(list, value => trim(value));
 
         $scope.list = list;
         $scope.values = joinValues($scope.list);

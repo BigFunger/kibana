@@ -19,8 +19,10 @@ already exists, its value will be replaced with the provided one.`,
   }
 
   get description() {
-    const target = this.field || '?';
-    return `[${target}]`;
+    const chunks = [];
+
+    if (this.field) chunks.push(` value of '${this.field}'`);
+    return chunks.join('');
   }
 
   get model() {
