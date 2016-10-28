@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import modules from 'ui/modules';
 import template from './pipeline_processors.html';
 import './pipeline_processors.less';
@@ -14,11 +15,11 @@ app.directive('pipelineProcessors', function () {
       const pipelines = Private(PipelinesProvider);
       const notify = new Notifier({ location: `Pipeline Setup` });
 
+      this.editProcessorShell = _.first($scope.pipeline.processorCollection.processors);
+
       this.simulate = () => {
         const pipeline = $scope.pipeline;
-
-        //pipeline.input = pipeline.sampleCollection.samples[0].doc;
-        //pipeline.input = $scope.documentSelector.document.doc;
+        if (!pipeline.sampleCollection.getCurrentSample()) return;
 
         return pipelines.pipeline.simulate(pipeline.model)
         .then((results) => { pipeline.applySimulateResults(results); })

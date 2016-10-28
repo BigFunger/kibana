@@ -12,6 +12,7 @@ app.directive('pipelineDocuments', function () {
     controllerAs: 'pipelineDocuments',
     controller: function ($scope) {
       const sampleCollection = $scope.pipeline.sampleCollection;
+      this.editSample = sampleCollection.getCurrentSample();
 
       this.add = () => {
         const sample = new Sample({ description: 'New Sample', doc: {} });

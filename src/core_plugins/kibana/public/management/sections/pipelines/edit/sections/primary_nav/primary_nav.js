@@ -12,6 +12,8 @@ app.directive('primaryNav', function () {
     template: template,
     controllerAs: 'primaryNav',
     controller: function ($scope) {
+      const pipeline = $scope.pipeline;
+
       this.sections = {
         documents: {
           title: 'Documents'

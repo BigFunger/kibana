@@ -48,7 +48,9 @@ export default class ProcessorShell {
     );
 
     if (this.typeId) {
-      this.setTypeId(this.typeId, model);
+      const initialTypeId = this.typeId;
+      this.typeId = undefined;
+      this.setTypeId(initialTypeId, model);
     }
   }
 
@@ -67,6 +69,8 @@ export default class ProcessorShell {
   }
 
   setTypeId(typeId, processorModel) {
+    if (typeId === this.typeId) return; //todo: is this the best place for this check?
+
     this.typeId = typeId;
     const ProcessorType = this.processorTypes[typeId].ViewModel;
 
@@ -97,7 +101,7 @@ export default class ProcessorShell {
     if (this.processor) {
       return this.processor.description;
     } else {
-      return 'New Processor';
+      return '';
     }
   }
 
@@ -114,15 +118,14 @@ export default class ProcessorShell {
   }
 
   applySimulateResults(rootInput) {
-    this.failureProcessorCollection.applySimulateResults(this.inputObject);
-    this.updateOutput();
-
     if (this.parent) {
       this.setInput(this.parent.outputObject);
     } else {
       this.setInput(rootInput);
     }
 
+    this.failureProcessorCollection.applySimulateResults(this.inputObject);
+    this.updateOutput();
     this.updateState();
   }
 
@@ -222,7 +225,12 @@ export default class ProcessorShell {
     const result = _.assign(
       {},
       _.get(this.processor, 'model'),
-      _.pick(this, ['processorId', 'typeId', 'failureAction', 'failureProcessors']));
+      {
+        processorId: this.processorId,
+        typeId: this.typeId,
+        failureAction: this.failureAction,
+        failureProcessors: this.failureProcessorCollection.model
+      });
 
     return result;
   }

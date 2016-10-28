@@ -28,6 +28,7 @@ import './sections/field_select/field_select';
 import './sections/processor_id/processor_id';
 import './sections/ui_select_tweaks/ui_select_tweaks';
 import './sections/section_collapser/section_collapser';
+import './sections/processor_output/processor_output';
 
 import 'ui/draggable/draggable_container';
 import 'ui/draggable/draggable_handle';
@@ -44,7 +45,9 @@ routes
 
       return pipelines.pipeline.load($route.current.params.id)
       .then((result) => {
-        return new Pipeline(processorRegistry, result);
+        const pipeline = new Pipeline(processorRegistry, result);
+        window.pipeline = pipeline;
+        return pipeline;
       })
      .catch(notify.error);
     }

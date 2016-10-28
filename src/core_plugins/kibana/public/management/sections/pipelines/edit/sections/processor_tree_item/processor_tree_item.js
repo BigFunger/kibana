@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import uiModules from 'ui/modules';
 import template from './processor_tree_item.html';
+import processorStates from 'ui/pipelines/constants/processor_states';
 import '../recursion_helper/recursion_helper';
 import './processor_tree_item.less';
 
@@ -21,6 +22,13 @@ app.directive('processorTreeItem', function (RecursionHelper) {
       return RecursionHelper.compile(element);
     },
     controller: function ($scope) {
+      $scope.processorStates = processorStates;
+
+      $scope.delete = () => {
+        $scope.processorCollection.remove($scope.processorShell);
+        $scope.pipelineProcessors.editProcessorShell = undefined;
+      };
+
       $scope.$on('drag-start', e => {
         $scope.wasCollapsed = $scope.processorShell.expanded;
         $scope.processorShell.expanded = false;

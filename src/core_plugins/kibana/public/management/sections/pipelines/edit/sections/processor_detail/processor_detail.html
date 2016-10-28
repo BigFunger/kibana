@@ -16,3 +16,17 @@
   class="processor-ui-content"
   ng-show="processorShell.typeId">
 </div>
+
+      <failure-action
+        failure-action="processorShell.failureAction"
+        processor-collection="processorShell.failureProcessorCollection"
+        pipeline="pipeline"
+        options="processorShell.failureOptions"
+        ng-show="processorShell.typeId">
+      </failure-action>
+
+<processor-output
+  processor-shell="processorShell"
+  pipeline="pipeline"
+  ng-if="processorShell.typeId">
+</processor-output>

@@ -1,21 +1,34 @@
-<select
-  class="form-control"
-  ng-model="pipeline.sampleCollection.index"
-  ng-options="pipeline.sampleCollection.samples.indexOf(sample) as sample.description for sample in pipeline.sampleCollection.samples">
-</select>
-<button
-  type="Previous Document"
-  tooltip="Previous Document"
-  tooltip-append-to-body="true"
-  class="btn previous"
-  ng-click="documentSelector.previousSample();">
-  <i aria-hidden="true" class="fa fa-chevron-left"></i>
-</button>
-<button
-  type="Next Document"
-  tooltip="Next Document"
-  tooltip-append-to-body="true"
-  class="btn next"
-  ng-click="documentSelector.nextSample();">
-  <i aria-hidden="true" class="fa fa-chevron-right"></i>
-</button>
+<div
+  class="help-message"
+  ng-hide="pipeline.sampleCollection.samples.length > 0">
+  <div class="header">
+    <label>Sample Documents</label>
+  </div>
+  <p>Sample documents are used while building your pipeline. In order to build a pipeline, you must first define as least one sample document.</p>
+</div>
+
+<div
+  class="controls"
+  ng-show="pipeline.sampleCollection.samples.length > 0">
+  <select
+    class="form-control"
+    ng-model="pipeline.sampleCollection.index"
+    ng-options="pipeline.sampleCollection.samples.indexOf(sample) as sample.description for sample in pipeline.sampleCollection.samples">
+  </select>
+  <button
+    type="Previous Document"
+    tooltip="Previous Document"
+    tooltip-append-to-body="true"
+    class="btn previous"
+    ng-click="documentSelector.previousSample();">
+    <i aria-hidden="true" class="fa fa-chevron-left"></i>
+  </button>
+  <button
+    type="Next Document"
+    tooltip="Next Document"
+    tooltip-append-to-body="true"
+    class="btn next"
+    ng-click="documentSelector.nextSample();">
+    <i aria-hidden="true" class="fa fa-chevron-right"></i>
+  </button>
+</div>

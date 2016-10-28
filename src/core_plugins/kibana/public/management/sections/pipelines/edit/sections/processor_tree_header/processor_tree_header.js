@@ -26,7 +26,8 @@ app.directive('processorTreeHeader', function () {
           }
         });
 
-        targetProcessorCollection.add();
+        const newProcessorShell = targetProcessorCollection.add();
+        $scope.pipelineProcessors.editProcessorShell = newProcessorShell;
       };
     }
   };

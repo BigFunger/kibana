@@ -169,7 +169,7 @@ export default class Pipeline {
 
     //TODO: Do I want to get rid of the `input` property, and instead completely
     //rely on the sampleCollection.getCurrentSample?
-    this.processorCollection.applySimulateResults({ doc: this.input, meta: {} });
+    this.processorCollection.applySimulateResults({ doc: this.sampleCollection.getCurrentSample().doc, meta: {} });
 
     const failureProcessorId = _.get(this.failureProcessorCollection, 'processors[0].failureProcessorId');
     const failureProcessor = allProcessors[failureProcessorId];
@@ -183,7 +183,7 @@ export default class Pipeline {
     return _.assign(
       {},
       this.processorCollection.allProcessors,
-      // this.failureProcessorCollection.allProcessors
+      this.failureProcessorCollection.allProcessors
     );
   }
 
