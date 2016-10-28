@@ -1,0 +1,22 @@
+@import (reference) "~ui/styles/variables";
+@import (reference) "~ui/styles/mixins";
+@import (reference) "~ui/styles/theme";
+
+processor-type-select {
+  display: block;
+
+  .ui-select-container {
+    .ui-select-choices-row {
+      .processor-help-text {
+        color: @settings-add-data-wizard-processor-select-choices-helptext-color;
+        font-size: 0.9em;
+      }
+
+      &.active {
+        .processor-help-text {
+          color: @settings-add-data-wizard-processor-select-choices-helptext-active-color;
+        }
+      }
+    }
+  }
+}

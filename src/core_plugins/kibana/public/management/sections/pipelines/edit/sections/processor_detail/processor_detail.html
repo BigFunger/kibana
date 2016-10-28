@@ -1,5 +1,17 @@
-{{processorShell.processor.title}}
-{{processorShell.processor.description}}
-
-<div>{{processorShell.error}}
+<div
+  class="alert alert-warning unknown-warning"
+  ng-show="processorShell.typeId === 'unknown'">
+  This processor is a type that is unknown by Kibana. This interface will allow you to edit and view this processor as raw JSON. It is strongly recommended that you install the plugin that corresponds to this processor type. Warning: Entering JSON that ingest does not understand can break Kibana.
+</div>
+<processor-type-select
+  processor-type-id="processorTypeId"
+  ng-show="processorShell">
+</processor-type-select>
+<processor-id
+  processor-shell="processorShell"
+  ng-show="processorShell.typeId">
+</processor-id>
+<div
+  class="processor-ui-content"
+  ng-show="processorShell.typeId">
 </div>
