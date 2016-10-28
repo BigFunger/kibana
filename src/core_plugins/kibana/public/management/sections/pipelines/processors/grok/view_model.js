@@ -27,10 +27,14 @@ expression that supports aliased expressions that can be reused.`,
     const inputKeys = keysDeep(get(this, 'processorShell.inputObject.doc'));
     const outputKeys = keysDeep(get(this, 'processorShell.outputObject.doc'));
     const addedKeys = difference(outputKeys, inputKeys);
-    const added = addedKeys.sort().map(field => `[${field}]`).join(', ');
-    const source = this.field || '?';
+    const chunks = [];
 
-    return `[${source}] -> ${added}`;
+    chunks.push('Grok');
+    if (this.field) chunks.push(` '${this.field}'`);
+    if (addedKeys.length === 1) chunks.push(` into '${addedKeys.length[0]}'`);
+    if (addedKeys.length > 1) chunks.push(` into ${addedKeys.length} fields`);
+
+    return chunks.join('');
   }
 
   get model() {

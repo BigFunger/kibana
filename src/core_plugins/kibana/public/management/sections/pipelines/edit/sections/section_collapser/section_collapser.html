@@ -1,0 +1,16 @@
+<div class="section-collapser-heading">
+  <button
+    ng-click="sectionCollapser.toggle()"
+    type="button"
+    class="btn btn-xs">
+    <i
+      class="fa fa-caret-down"
+      ng-hide="sectionCollapser.collapsed">
+    </i>
+    <i
+      class="fa fa-caret-right"
+      ng-show="sectionCollapser.collapsed">
+    </i>
+  </button>
+  <label ng-click="sectionCollapser.toggle()">{{sectionCollapser.title}}</label>
+</div>

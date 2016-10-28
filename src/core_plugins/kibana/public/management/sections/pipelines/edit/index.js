@@ -27,6 +27,7 @@ import './sections/processor_type_select/processor_type_select';
 import './sections/field_select/field_select';
 import './sections/processor_id/processor_id';
 import './sections/ui_select_tweaks/ui_select_tweaks';
+import './sections/section_collapser/section_collapser';
 
 import 'ui/draggable/draggable_container';
 import 'ui/draggable/draggable_handle';

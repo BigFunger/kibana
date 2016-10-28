@@ -1,0 +1,24 @@
+@import (reference) "~ui/styles/variables";
+@import (reference) "~ui/styles/mixins";
+@import (reference) "~ui/styles/theme";
+
+section-collapser {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  .section-collapser-heading {
+    border-bottom: 2px solid @kibanaGray5;
+  }
+
+  label {
+    margin-bottom: 0px;
+  }
+
+  button.btn {
+    width: 15px;
+    background-color: transparent;
+    color: @kibanaGray2;
+    border: transparent;
+  }
+}
