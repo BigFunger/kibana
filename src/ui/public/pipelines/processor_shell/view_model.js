@@ -93,6 +93,14 @@ export default class ProcessorShell {
     return this.failureProcessorCollection.allProcessorCollections;
   }
 
+  get description() {
+    if (this.processor) {
+      return this.processor.description;
+    } else {
+      return 'New Processor';
+    }
+  }
+
   setSimulateResult(simulateResult) {
     this.simulateResult = simulateResult;
   }

@@ -7,59 +7,59 @@ pipeline-edit {
     background-color: #fff;
     padding: 0;
   }
-}
 
-//*************************** ui-select-tweaks
-.ui-select-bootstrap > .ui-select-choices {
-  max-height: 350px;
-}
-
-// Temporary bug fix - https://github.com/angular-ui/ui-select/issues/1575
-.ui-select-search {
-  width: 100% !important;
-}
-
-.ui-select-container {
-  .btn-default {
-    color: #000;
+  //*************************** ui-select-tweaks
+  .ui-select-bootstrap > .ui-select-choices {
+    max-height: 350px;
   }
 
-  .form-control {
-    background-color: #ffffff;
-  }
-
-  .form-control:active {
-    background-color: #ffffff;
-  }
-
-  .dropdown-menu {
-    .box-shadow(0 2px 4px rgba(0,0,0,0.175));
-  }
-
-  .ui-select-choices-row {
-    &>a {
-      padding: 6px 12px;
-      white-space: normal;
-    }
-
-    border-bottom: solid 1px;
-    border-bottom-color: @settings-add-data-wizard-processor-select-choices-border;
-
-    label {
-      margin-bottom: 0;
-    }
-  }
-
-  .ui-select-placeholder {
-    color:  @settings-add-data-wizard-processor-select-placeholder-color;
-  }
-
+  // Temporary bug fix - https://github.com/angular-ui/ui-select/issues/1575
   .ui-select-search {
-    color: @settings-add-data-wizard-processor-select-active-color;
+    width: 100% !important;
+  }
 
-    &::placeholder {
-      color: @settings-add-data-wizard-processor-select-placeholder-active-color;
+  .ui-select-container {
+    .btn-default {
+      color: #000;
+    }
+
+    .form-control {
+      background-color: #ffffff;
+    }
+
+    .form-control:active {
+      background-color: #ffffff;
+    }
+
+    .dropdown-menu {
+      .box-shadow(0 2px 4px rgba(0,0,0,0.175));
+    }
+
+    .ui-select-choices-row {
+      &>a {
+        padding: 6px 12px;
+        white-space: normal;
+      }
+
+      border-bottom: solid 1px;
+      border-bottom-color: @settings-add-data-wizard-processor-select-choices-border;
+
+      label {
+        margin-bottom: 0;
+      }
+    }
+
+    .ui-select-placeholder {
+      color:  @settings-add-data-wizard-processor-select-placeholder-color;
+    }
+
+    .ui-select-search {
+      color: @settings-add-data-wizard-processor-select-active-color;
+
+      &::placeholder {
+        color: @settings-add-data-wizard-processor-select-placeholder-active-color;
+      }
     }
   }
+  //*************************** end ui-select-tweaks
 }
-//*************************** end ui-select-tweaks

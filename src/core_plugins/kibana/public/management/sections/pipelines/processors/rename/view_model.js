@@ -18,9 +18,13 @@ export default class Rename extends Processor {
   }
 
   get description() {
-    const source = this.field || '?';
-    const target = this.targetField || '?';
-    return `[${source}] -> [${target}]`;
+    const chunks = [];
+
+    chunks.push('Rename');
+    if (this.field) chunks.push(` '${this.field}'`);
+    if (this.targetField) chunks.push(` to '${this.targetField}'`);
+
+    return chunks.join('');
   }
 
   get model() {
