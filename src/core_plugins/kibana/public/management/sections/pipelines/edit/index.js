@@ -59,7 +59,9 @@ routes
     pipeline: function (Private) {
       const processorRegistry = Private(processorRegistryProvider);
 
-      return new Pipeline(processorRegistry);
+      const pipeline = new Pipeline(processorRegistry);
+      window.pipeline = pipeline;
+      return pipeline;
     }
   }
 });
