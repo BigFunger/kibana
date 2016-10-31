@@ -129,6 +129,10 @@ export default class ProcessorShell {
     this.updateState();
   }
 
+  get failureProcessorId() {
+    return _.get(this.simulateResult, 'ingestMeta._ingest.on_failure_processor_tag');
+  }
+
   updateOutput() {
     const output = _.get(this.simulateResult, 'output');
     const meta = _.get(this.simulateResult, 'ingestMeta');

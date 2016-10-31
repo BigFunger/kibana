@@ -11,8 +11,7 @@ export default function (server) {
         processors: processorArrayConverter.kibanaToEs(pipelineApiDocument.processors)
       };
 
-      if (pipelineApiDocument.failure_action === 'on_error' &&
-        pipelineApiDocument.failure_processors.length > 0) {
+      if (pipelineApiDocument.failure_processors.length > 0) {
         result.on_failure = processorArrayConverter.kibanaToEs(pipelineApiDocument.failure_processors);
       }
 
@@ -29,10 +28,7 @@ export default function (server) {
       };
 
       if (pipelineEsDocument.on_failure) {
-        result.failure_action = 'on_error';
         result.failure_processors = processorArrayConverter.esToKibana(pipelineEsDocument.on_failure);
-      } else {
-        result.failure_action = 'index_fail';
       }
 
       return result;

@@ -9,8 +9,7 @@ export default class Pipeline {
 
     const defaultModel = {
       pipelineId: '',
-      description: '',
-      failureAction: 'index_fail'
+      description: ''
     };
 
     _.defaults(
@@ -61,7 +60,6 @@ export default class Pipeline {
     const result = {
       pipelineId: this.pipelineId,
       description: this.description,
-      failureAction: this.failureAction,
       failureProcessors: this.failureProcessorCollection.model,
       processors: this.processorCollection.model,
       samples: this.sampleCollection.model,

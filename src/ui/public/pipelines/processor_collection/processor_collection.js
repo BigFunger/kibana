@@ -57,6 +57,10 @@ export default class ProcessorCollection {
 
     processors.splice(index, 1);
 
+    if (processors.length === 0 && this.parentProcessor) {
+      this.parentProcessor.failureAction = 'index_fail';
+    }
+
     this.updateParents();
   }
 
