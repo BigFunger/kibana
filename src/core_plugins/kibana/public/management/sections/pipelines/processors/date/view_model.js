@@ -1,6 +1,6 @@
 import { assign, isEmpty, get, difference, last } from 'lodash';
 import keysDeep from 'ui/pipelines/lib/keys_deep';
-import Processor from 'ui/pipelines/processor/view_model';
+import Processor from 'ui/pipelines/processor/processor';
 
 export default class Date extends Processor {
   constructor(model) {

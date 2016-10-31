@@ -1,7 +1,7 @@
 import modules from 'ui/modules';
 import template from './pipeline_documents.html';
 import './pipeline_documents.less';
-import { Sample } from 'ui/pipelines/sample_collection/view_model';
+import { Sample } from 'ui/pipelines/sample_collection/sample_collection';
 
 const app = modules.get('apps/management');
 

@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import ProcessorCollection from 'ui/pipelines/processor_collection/view_model';
-import { SampleCollection } from 'ui/pipelines/sample_collection/view_model';
+import ProcessorCollection from 'ui/pipelines/processor_collection/processor_collection';
+import { SampleCollection } from 'ui/pipelines/sample_collection/sample_collection';
 import processorCollectionTypes from 'ui/pipelines/constants/processor_collection_types';
 
 export default class Pipeline {

@@ -1,5 +1,5 @@
 import { assign, cloneDeep, get, map } from 'lodash';
-import Processor from 'ui/pipelines/processor/view_model';
+import Processor from 'ui/pipelines/processor/processor';
 import ProcessorCollection from 'ui/pipelines/processor_collection/view_model';
 import processorCollectionTypes from 'ui/pipelines/constants/processor_collection_types';
 

@@ -1,6 +1,6 @@
 import { assign, difference, get } from 'lodash';
 import keysDeep from 'ui/pipelines/lib/keys_deep';
-import Processor from 'ui/pipelines/processor/view_model';
+import Processor from 'ui/pipelines/processor/processor';
 
 export default class Json extends Processor {
   constructor(model) {

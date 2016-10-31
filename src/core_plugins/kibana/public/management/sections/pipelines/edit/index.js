@@ -1,7 +1,7 @@
 import management from 'ui/management';
 import routes from 'ui/routes';
 import PipelinesProvider from 'ui/pipelines';
-import Pipeline from 'ui/pipelines/pipeline/view_model';
+import Pipeline from 'ui/pipelines/pipeline/pipeline';
 import processorRegistryProvider from 'ui/registry/pipelines_processors';
 
 import '../processors';
@@ -29,6 +29,7 @@ import './sections/processor_id/processor_id';
 import './sections/ui_select_tweaks/ui_select_tweaks';
 import './sections/section_collapser/section_collapser';
 import './sections/processor_output/processor_output';
+import './sections/processor_failure_action/processor_failure_action';
 
 import 'ui/draggable/draggable_container';
 import 'ui/draggable/draggable_handle';

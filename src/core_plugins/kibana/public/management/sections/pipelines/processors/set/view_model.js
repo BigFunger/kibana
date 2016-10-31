@@ -1,5 +1,5 @@
 import { assign } from 'lodash';
-import Processor from 'ui/pipelines/processor/view_model';
+import Processor from 'ui/pipelines/processor/processor';
 
 export default class Set extends Processor {
   constructor(model) {

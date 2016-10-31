@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import keysDeep from 'ui/pipelines/lib/keys_deep';
-import ProcessorCollection from 'ui/pipelines/processor_collection/view_model';
+import ProcessorCollection from 'ui/pipelines/processor_collection/processor_collection';
 import processorStates from 'ui/pipelines/constants/processor_states';
 import processorCollectionTypes from 'ui/pipelines/constants/processor_collection_types';
 

@@ -40,7 +40,6 @@ app.directive('processorOutput', function (debounce) {
         let delta = diffpatch.diff(oldValue, newValue);
         if (!delta || processorShell.error) delta = {};
 
-        //debugger;
         div.innerHTML = htmlFormat(delta, oldValue);
       }, 200);
 

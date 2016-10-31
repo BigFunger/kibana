@@ -12,7 +12,8 @@ app.directive('processorDetail', function ($compile) {
     template: template,
     scope: {
       pipeline: '=',
-      processorShell: '='
+      processorShell: '=',
+      pipelineProcessors: '='
     },
     link: function ($scope, $el) {
       const pipeline = $scope.pipeline;

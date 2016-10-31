@@ -38,6 +38,15 @@ app.directive('processorTreeItem', function (RecursionHelper) {
         $scope.processorShell.expanded = $scope.wasCollapsed;
         $scope.processorCollection.updateParents();
       });
+
+      $scope.$watch('pipelineProcessors.editProcessorShell', (editProcessorShell) => {
+        const allProcessorCollections = $scope.processorShell.allProcessorCollections;
+        _.forEach(allProcessorCollections, (processorCollection) => {
+          if (_.contains(processorCollection.processors, editProcessorShell)) {
+            $scope.processorShell.expanded = true;
+          }
+        });
+      });
     }
   };
 });

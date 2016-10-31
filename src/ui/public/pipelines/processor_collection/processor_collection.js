@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import ProcessorShell from '../processor_shell/view_model';
+import ProcessorShell from '../processor_shell/processor_shell';
 
 export default class ProcessorCollection {
 

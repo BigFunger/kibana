@@ -1,6 +1,5 @@
 import uiModules from 'ui/modules';
 import template from './processor_id.html';
-import ProcessorCollection from 'ui/pipelines/processor_collection/view_model';
 import './processor_id.less';
 
 const app = uiModules.get('kibana');
