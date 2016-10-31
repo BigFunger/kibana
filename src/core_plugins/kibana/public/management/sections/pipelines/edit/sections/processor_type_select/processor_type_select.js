@@ -36,7 +36,6 @@ app.directive('processorTypeSelect', function ($timeout, Private) {
     },
     link: function ($scope, $element) {
       $timeout(() => {
-        $element.find('.ui-select-toggle').removeClass('btn btn-default');
         $element.find('.ui-select-focusser')[0].focus();
       });
     },

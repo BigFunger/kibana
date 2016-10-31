@@ -14,11 +14,6 @@ app.directive('fieldSelect', function ($timeout) {
       processor: '=',
       field: '='
     },
-    link: function ($scope, $el, attr) {
-      $timeout(() => {
-        $el.find('.ui-select-toggle').removeClass('btn btn-default');
-      });
-    },
     controller: function ($scope) {
       $scope.selected = { value: $scope.field };
 

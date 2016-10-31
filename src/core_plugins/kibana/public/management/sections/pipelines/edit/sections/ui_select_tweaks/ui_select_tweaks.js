@@ -7,7 +7,7 @@ app.directive('uiSelectTweaks', function ($timeout) {
     restrict: 'A',
     link: function ($scope, $el) {
       $timeout(() => {
-        $scope.$select.setFocus();
+        $el.find('.ui-select-toggle').removeClass('btn btn-default');
       });
 
       $scope.$watch('$select.open', function (isOpen) {
