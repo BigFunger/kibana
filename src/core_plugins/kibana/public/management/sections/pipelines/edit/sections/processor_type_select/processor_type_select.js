@@ -34,27 +34,52 @@ app.directive('processorTypeSelect', function ($timeout, Private) {
     scope: {
       processorTypeId: '='
     },
-    link: function ($scope, $element) {
-      $timeout(() => {
-        $element.find('.ui-select-focusser')[0].focus();
-      });
-    },
     controller: function ($scope, Private, Notifier) {
       const pipelines = Private(PipelinesProvider);
       const notify = new Notifier({ location: `Ingest Pipeline Setup` });
       const processorRegistry = Private(processorRegistryProvider);
 
       $scope.processorTypes = buildProcessorTypeList(processorRegistry);
+      const processorTypesById = _.reduce($scope.processorTypes, (result, processorType) => {
+        return _.set(result, processorType.typeId, processorType);
+      }, {});
+
       $scope.$watch('selectedItem.value', (newVal) => {
         if (!newVal) return;
 
         $scope.processorTypeId = newVal.typeId;
+        $scope.previousSelectedItem = $scope.selectedItem;
       });
 
-      $scope.$watch('processorTypeId', processorTypeId => {
+      $scope.$watch('processorTypeId', (processorTypeId) => {
         if (!processorTypeId) {
           $scope.selectedItem = { value: '' };
+        } else {
+          const processorType = processorTypesById[processorTypeId];
+          $scope.selectedItem = { value: processorType };
         }
+      });
+    }
+  };
+});
+
+app.directive('processorTypeSelectTweaks', function ($timeout) {
+  return {
+    restrict: 'A',
+    link: function ($scope, $el) {
+      const select = $scope.$select;
+
+      $timeout(() => {
+        const searchBox = $el.find('.ui-select-search');
+        searchBox.blur((event) => {
+          if (select.items.length === 0) {
+            //select.clear(event);
+            //$scope.$parent.resetValue();
+            //console.log(select.open);
+            select.open = false;
+          }
+        });
+        $el.find('.ui-select-toggle').removeClass('btn btn-default');
       });
     }
   };

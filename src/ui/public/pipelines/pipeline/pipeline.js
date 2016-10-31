@@ -39,7 +39,7 @@ export default class Pipeline {
     this.processorRegistry = processorRegistry;
     this.processorCollections = [];
     this.activeProcessorCollection = this.processorCollection;
-    this.input = {};
+    //this.input = {};
     this.output = undefined;
     this.dirty = false;
     this.hasCompileError = false;
@@ -137,7 +137,7 @@ export default class Pipeline {
     allProcessors = allProcessors || {};
 
     if (_.isEmpty(this.processorCollection.processors)) {
-      this.output = { doc: this.input, meta: {} };
+      this.output = { doc: this.sampleCollection.getCurrentSample().doc, meta: {} };
       this.error = false;
     } else {
       const lastResult = _.last(simulateResults);

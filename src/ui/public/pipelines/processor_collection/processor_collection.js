@@ -68,6 +68,7 @@ export default class ProcessorCollection {
   }
 
   applySimulateResults(rootInput) {
+    this.input = rootInput;
     _.forEach(this.processors, (processorShell) => {
       processorShell.applySimulateResults(rootInput);
     });

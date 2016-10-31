@@ -2,12 +2,13 @@
   <label>Processor Type:</label>
   <ui-select
     ng-model="selectedItem.value"
-    ui-select-tweaks>
+    processor-type-select-tweaks
+    on-select="selected();">
     <ui-select-match>
       <span ng-bind="$select.selected.title"></span>
     </ui-select-match>
     <ui-select-choices
-      repeat="processorType in (processorTypes | filter: $select.search) track by processorType.typeId">
+      repeat="processorType in (processorTypes | filter: $select.search)">
       <label ng-bind="processorType.title"></label>
       <div class="processor-help-text">
         <span ng-bind="processorType.helpText"></span>
