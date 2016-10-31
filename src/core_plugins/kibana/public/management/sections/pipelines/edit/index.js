@@ -28,6 +28,7 @@ import './sections/field_select/field_select';
 import './sections/processor_id/processor_id';
 import './sections/ui_select_tweaks/ui_select_tweaks';
 import './sections/section_collapser/section_collapser';
+import './sections/processor_input/processor_input';
 import './sections/processor_output/processor_output';
 import './sections/processor_failure_action/processor_failure_action';
 
