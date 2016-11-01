@@ -103,10 +103,14 @@ export class SampleCollection {
     const index = indexOf(this.samples, sample);
     _.pullAt(this.samples, index);
 
-    if (this.samples.length === 0) {
-      this.index = -1;
-    } else if (this.index === index) {
-      this.index = 0;
+    if (index === this.index) {
+      if (this.samples.length === 0) {
+        this.index = -1;
+      } else if (this.index === index) {
+        this.index = 0;
+      }
+    } else if (index < this.index) {
+      this.index -= 1;
     }
   }
 
