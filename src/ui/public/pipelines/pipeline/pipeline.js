@@ -43,11 +43,6 @@ export default class Pipeline {
       samples: _.get(model, 'samples'),
       index: _.get(model, 'sampleIndex')
     });
-
-    this.failureOptions = {
-      index_fail: 'Do not index document',
-      on_error: 'Execute other processors'
-    };
   }
 
   get model() {
@@ -97,7 +92,15 @@ export default class Pipeline {
   applySimulateResults(simulateResults) {
     this.sampleCollection.applySimulateResults(simulateResults);
 
-    const currentSampleResults = simulateResults[this.sampleCollection.index];
+    //TODO:
+    //This is ugly... typically, there is an array of simulate results for each document
+    //in the collection, and the indexes will coincide. When there is a compile error though,
+    //only one array of simulate results comes back.
+    let sampleIndex = this.sampleCollection.index;
+    if (simulateResults.length === 1 && _.get(simulateResults[0][0], 'error.compile') === true) {
+      sampleIndex = 0;
+    }
+    const currentSampleResults = simulateResults[sampleIndex];
     const allProcessors = this.allProcessors;
     const allResults = {};
 

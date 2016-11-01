@@ -9,13 +9,10 @@ export default class ProcessorShell {
   constructor(pipeline, model) {
     this.pipeline = pipeline;
     this.processor = undefined;
-    this.collapsed = false;
     this.parent = undefined;
     this.inputObject = undefined;
     this.outputObject = undefined;
     this.processorTypes = this.pipeline.processorRegistry.byId;
-    this.inputControlsState = { enableShowChanges: false };
-    this.outputControlsState = { };
 
     this.failureProcessorCollection = new ProcessorCollection(
       this.pipeline,
@@ -24,12 +21,6 @@ export default class ProcessorShell {
       processorCollectionTypes.PROCESSOR_FAILURE,
       this
     );
-
-    this.failureOptions = {
-      ignore_error: 'Ignore, and index document',
-      index_fail: 'Do not index document',
-      on_error: 'Execute other processors'
-    };
 
     const defaultModel = {
       processorId: pipeline.getNewProcessorId(),
@@ -59,14 +50,12 @@ export default class ProcessorShell {
   }
 
   setInput(input) {
-    const metaFields = [];
-
     this.inputObject = _.cloneDeep(input);
     this.suggestedFields = keysDeep(_.get(this.inputObject, 'doc'));
   }
 
   setTypeId(typeId, processorModel) {
-    if (typeId === this.typeId) return; //todo: is this the best place for this check?
+    if (typeId === this.typeId) return;
 
     this.typeId = typeId;
     this.processorId = this.pipeline.getNewProcessorId(this.typeId);
@@ -75,12 +64,8 @@ export default class ProcessorShell {
     processorModel = processorModel || _.get(this.processor, 'model');
     this.processor = new ProcessorType(processorModel);
 
-    //TODO: Move this into the constructor chain? On second thought, I'm not sure I want to expose that...
-    //ALSO, find out if this circular reference is a GC problem.
     this.processor.processorShell = this;
     this.state = processorStates.NOT_INITIALIZED;
-
-    //update the processorId if it has not been manually changed by the user?
   }
 
   get allProcessors() {
@@ -148,17 +133,6 @@ export default class ProcessorShell {
     this.outputObject = newOutputObject;
 
     this.error = this.cleanError(error);
-
-    // if (this.inputObject && this.outputObject) {
-    //   if (!_.isEqual(this.inputObject.meta, this.outputObject.meta)) {
-    //     this.inputControlsState.showMeta = true;
-    //     this.outputControlsState.showMeta = true;
-    //   }
-    //   if (!_.isEqual(this.inputObject.doc, this.outputObject.doc)) {
-    //     this.inputControlsState.showMeta = false;
-    //     this.outputControlsState.showMeta = false;
-    //   }
-    // }
   }
 
   //I think these should be defined within each processor.
