@@ -3,18 +3,14 @@ import ProcessorShell from '../processor_shell/processor_shell';
 
 export default class ProcessorCollection {
 
-  constructor(processorRegistry, title, processors, type, parentProcessor) {
+  constructor(pipeline, title, processors, type, parentProcessor) {
+    this.pipeline = pipeline;
     this.title = title;
     this.type = type;
     this.valueField;
     this.processors = [];
     this.input = {};
     this.parentProcessor = parentProcessor;
-
-    this.processorRegistry = processorRegistry;
-    this.ProcessorTypes = {};
-
-    this.ProcessorTypes = processorRegistry.byId;
 
     const collection = this;
     _.forEach(processors, (processorModel) => {
@@ -36,7 +32,8 @@ export default class ProcessorCollection {
   }
 
   add(processorModel) {
-    const processorShell = new ProcessorShell(this.processorRegistry, processorModel);
+    //debugger;
+    const processorShell = new ProcessorShell(this.pipeline, processorModel);
 
     if (this.processors.length === 0) {
       processorShell.setInput(this.input);
@@ -93,50 +90,4 @@ export default class ProcessorCollection {
 
     return result;
   }
-
 }
-
-
-ProcessorCollection.usedProcessorIds = [];
-ProcessorCollection.resetIdCounters = function (processorRegistry) {
-  ProcessorCollection.usedProcessorIds = [];
-  ProcessorCollection.processorCounters = {};
-  _.forIn(processorRegistry.byId, (registryItem, id) => {
-    ProcessorCollection.processorCounters[id] = 0;
-  });
-};
-
-ProcessorCollection.updateId = function (oldValue, requestedNewValue) {
-  function isValid(val) {
-    if (_.isEmpty(val)) return false;
-    if (_.contains(ProcessorCollection.usedProcessorIds, val)) return false;
-
-    return true;
-  }
-
-  if (!isValid(requestedNewValue)) {
-    return oldValue;
-  }
-
-  const index = _.indexOf(ProcessorCollection.usedProcessorIds, oldValue);
-  ProcessorCollection.usedProcessorIds[index] = requestedNewValue;
-  return requestedNewValue;
-};
-
-ProcessorCollection.generateId = function (typeId) {
-  if (!_.has(ProcessorCollection.processorCounters, typeId)) {
-    return undefined;
-  }
-
-  let processorId;
-  do {
-    const processorCounter = ProcessorCollection.processorCounters[typeId] += 1;
-    processorId = `${typeId}_${processorCounter}`;
-  } while (_.includes(ProcessorCollection.usedProcessorIds, processorId));
-
-  return processorId;
-};
-
-ProcessorCollection.useId = function (processorId) {
-  ProcessorCollection.usedProcessorIds.push(processorId);
-};

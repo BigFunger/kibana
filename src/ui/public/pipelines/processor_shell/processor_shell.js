@@ -6,22 +6,19 @@ import processorCollectionTypes from 'ui/pipelines/constants/processor_collectio
 
 export default class ProcessorShell {
 
-  constructor(processorRegistry, model) {
-    ProcessorShell.counter += 1;
-    const processorId = `processor_${ProcessorShell.counter}`;
-
-    this.processorRegistry = processorRegistry;
+  constructor(pipeline, model) {
+    this.pipeline = pipeline;
     this.processor = undefined;
     this.collapsed = false;
     this.parent = undefined;
     this.inputObject = undefined;
     this.outputObject = undefined;
-    this.processorTypes = processorRegistry.byId;
+    this.processorTypes = this.pipeline.processorRegistry.byId;
     this.inputControlsState = { enableShowChanges: false };
     this.outputControlsState = { };
 
     this.failureProcessorCollection = new ProcessorCollection(
-      processorRegistry,
+      this.pipeline,
       'Processor Failure Branch',
       _.get(model, 'failureProcessors'),
       processorCollectionTypes.PROCESSOR_FAILURE,
@@ -35,7 +32,7 @@ export default class ProcessorShell {
     };
 
     const defaultModel = {
-      processorId: processorId,
+      processorId: pipeline.getNewProcessorId(),
       typeId: undefined,
       state: processorStates.NOT_INITIALIZED,
       failureAction: 'index_fail'
@@ -72,6 +69,7 @@ export default class ProcessorShell {
     if (typeId === this.typeId) return; //todo: is this the best place for this check?
 
     this.typeId = typeId;
+    this.processorId = this.pipeline.getNewProcessorId(this.typeId);
     const ProcessorType = this.processorTypes[typeId].ViewModel;
 
     processorModel = processorModel || _.get(this.processor, 'model');

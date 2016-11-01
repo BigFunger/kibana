@@ -5,8 +5,6 @@ import processorCollectionTypes from 'ui/pipelines/constants/processor_collectio
 
 export default class Pipeline {
   constructor(processorRegistry, model) {
-    ProcessorCollection.resetIdCounters(processorRegistry);
-
     const defaultModel = {
       pipelineId: '',
       description: ''
@@ -19,17 +17,19 @@ export default class Pipeline {
     );
 
     this.processorCollection = new ProcessorCollection(
-      processorRegistry,
+      this,
       'Main Pipeline',
       _.get(model, 'processors'),
       processorCollectionTypes.MAIN
     );
+
     this.failureProcessorCollection = new ProcessorCollection(
-      processorRegistry,
+      this,
       'Global Failure',
       _.get(model, 'failureProcessors'),
       processorCollectionTypes.GLOBAL_FAILURE
     );
+
     this.sampleCollection = new SampleCollection({
       samples: _.get(model, 'samples'),
       index: _.get(model, 'sampleIndex')
@@ -38,17 +38,11 @@ export default class Pipeline {
     this.processorRegistry = processorRegistry;
     this.processorCollections = [];
     this.activeProcessorCollection = this.processorCollection;
-    //this.input = {};
     this.output = undefined;
     this.dirty = false;
     this.hasCompileError = false;
     this.globalFailureProcessorIds = [];
-    this.inputControlsState = {  enableShowMeta: false, enableShowChanges: false, enableExpand: true };
-    this.outputControlsState = { enableShowChanges: false, enableExpand: false };
-
-    //TODO: I don't think this belongs here... just quick and dirty prototyping
-    this.showJumpToProcessor = false;
-
+    this.processorCounters = {};
 
     this.failureOptions = {
       index_fail: 'Do not index document',
@@ -69,66 +63,16 @@ export default class Pipeline {
     return result;
   }
 
+  getNewProcessorId(typeId) {
+    typeId = typeId || 'new_processor';
+    const counter = (_.get(this.processorCounters, typeId) || 0) + 1;
+    _.set(this.processorCounters, typeId, counter);
+
+    return `${typeId}_${counter}`;
+  }
+
   setDirty() {
     this.dirty = true;
-  }
-
-  addProcessor() {
-    this.collapseAllProcessors();
-    this.activeProcessorCollection.add();
-  }
-
-  ///TODO: Rename this function
-  pushProcessorCollection(processorCollection) {
-    if (this.activeProcessorCollection === processorCollection) return;
-
-    this.processorCollections.push(this.activeProcessorCollection);
-    this.activeProcessorCollection = processorCollection;
-  }
-
-  ///TODO: Rename this function
-  jumpToProcessorCollection(index) {
-    while (this.processorCollections.length > index) {
-      this.activeProcessorCollection = this.processorCollections.pop();
-    }
-  }
-
-  jumpToProcessor(targetProcessor) {
-    const allProcessors = this.allProcessors;
-    const allProcessorCollections = this.allProcessorCollections;
-
-    _.forEach(allProcessors, (processor) => {
-      processor.collapsed = processor !== targetProcessor;
-    });
-
-    _.forEach(allProcessorCollections, (processorCollection) => {
-      if (_.contains(processorCollection.processors, targetProcessor)) {
-        this.activeProcessorCollection = processorCollection;
-      }
-    });
-  }
-
-  jumpToRoot() {
-    const allProcessors = this.allProcessors;
-    _.forEach(allProcessors, (processor) => {
-      processor.collapsed = true;
-    });
-    this.activeProcessorCollection = this.processorCollection;
-  }
-
-  collapseAllProcessors() {
-    const allProcessors = this.allProcessors;
-    _.forEach(allProcessors, (processor) => {
-      processor.collapsed = true;
-    });
-  }
-
-  jumpToGlobalFailureRoot() {
-    const allProcessors = this.allProcessors;
-    _.forEach(allProcessors, (processor) => {
-      processor.collapsed = true;
-    });
-    this.activeProcessorCollection = this.failureProcessorCollection;
   }
 
   updateOutput(allProcessors, simulateResults) {

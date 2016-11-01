@@ -17,7 +17,6 @@ export default class Foreach extends Processor {
     );
 
     // this.processorCollection = new ProcessorCollection(
-    //   processorRegistry,
     //   'For Each',
     //   get(model, 'processors'),
     //   processorCollectionTypes.FOREACH,
