@@ -102,10 +102,12 @@ export default function (server) {
       };
 
       const results = [
-        {
-          processor_id: processorId,
-          error: processorError
-        }
+        [
+          {
+            processor_id: processorId,
+            error: processorError
+          }
+        ]
       ];
 
       return results;

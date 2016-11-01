@@ -165,8 +165,6 @@ export default class Pipeline {
       processorShell.setSimulateResult(allResults[processorShell.processorId]);
     });
 
-    //TODO: Do I want to get rid of the `input` property, and instead completely
-    //rely on the sampleCollection.getCurrentSample?
     this.processorCollection.applySimulateResults({ doc: this.sampleCollection.getCurrentSample().doc, meta: {} });
 
     const failureProcessorId = _.get(this.failureProcessorCollection, 'processors[0].failureProcessorId');
