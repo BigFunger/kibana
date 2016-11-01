@@ -16,6 +16,15 @@ export default class Pipeline {
       defaultModel
     );
 
+    this.processorRegistry = processorRegistry;
+    this.processorCollections = [];
+    this.activeProcessorCollection = this.processorCollection;
+    this.output = undefined;
+    this.dirty = false;
+    this.hasCompileError = false;
+    this.globalFailureProcessorIds = [];
+    this.processorCounters = {};
+
     this.processorCollection = new ProcessorCollection(
       this,
       'Main Pipeline',
@@ -34,15 +43,6 @@ export default class Pipeline {
       samples: _.get(model, 'samples'),
       index: _.get(model, 'sampleIndex')
     });
-
-    this.processorRegistry = processorRegistry;
-    this.processorCollections = [];
-    this.activeProcessorCollection = this.processorCollection;
-    this.output = undefined;
-    this.dirty = false;
-    this.hasCompileError = false;
-    this.globalFailureProcessorIds = [];
-    this.processorCounters = {};
 
     this.failureOptions = {
       index_fail: 'Do not index document',
