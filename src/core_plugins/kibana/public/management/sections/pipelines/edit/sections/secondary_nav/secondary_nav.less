@@ -10,12 +10,6 @@ secondary-nav {
     display: flex;
     flex: 1 1 auto;
 
-    &.navbar-default {
-      background-color: transparent;
-      border-bottom: 2px solid;
-      border-bottom-color: @kibanaGray5;
-    }
-
     .container {
       width: 100%;
     }
@@ -26,12 +20,17 @@ secondary-nav {
       .link {
         border-bottom: 3px solid;
         border-bottom-color: transparent;
+      }
 
-        &.active {
-          border-bottom-color: #3daad1;
-        }
+      .link.active {
+        border-bottom-color: #3daad1;
       }
     }
   }
 
+  nav.navbar-default {
+    background-color: transparent;
+    border-bottom: 2px solid;
+    border-bottom-color: @kibanaGray5;
+  }
 }

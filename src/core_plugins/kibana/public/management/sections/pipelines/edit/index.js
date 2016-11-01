@@ -25,7 +25,6 @@ import './sections/processor_detail/processor_detail';
 import './sections/document_selector/document_selector';
 import './sections/processor_type_select/processor_type_select';
 import './sections/field_select/field_select';
-import './sections/processor_id/processor_id';
 import './sections/ui_select_tweaks/ui_select_tweaks';
 import './sections/section_collapser/section_collapser';
 import './sections/processor_input/processor_input';

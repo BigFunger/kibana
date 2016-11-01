@@ -17,10 +17,6 @@ processor-tree-item {
       color: @kibanaGray2;
     }
 
-    &:hover {
-      background-color: @kibanaGray5;
-    }
-
     .collapse-icon {
       flex: 0 0 auto;
       width: 20px;
@@ -72,13 +68,15 @@ processor-tree-item {
     }
   }
 
-  &.active {
-    & > .tree-item {
-      background-color: @kibanaGray5;
+  .tree-item:hover {
+    background-color: @kibanaGray5;
+  }
+}
 
-      .buttons {
-        display: block;
-      }
-    }
+processor-tree-item.active > .tree-item {
+  background-color: @kibanaGray5;
+
+  .buttons {
+    display: block;
   }
 }
