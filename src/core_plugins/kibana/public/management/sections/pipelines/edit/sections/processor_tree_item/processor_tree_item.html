@@ -25,10 +25,24 @@
   <div class="status-icon">
     <i
       aria-hidden="true"
+      class="fa fa-question not-initialized"
+      tooltip="This processor has not yet been simulated"
+      tooltip-append-to-body="true"
+      ng-show="processorShell.state === processorStates.NOT_INITIALIZED">
+    </i>
+    <i
+      aria-hidden="true"
       class="fa fa-warning error-fail"
-      tooltip="{{processorShell.error.message}}"
+      tooltip="Simulate returned an error for this processor"
       tooltip-append-to-body="true"
       ng-show="processorShell.state === processorStates.ERROR_FAIL">
+    </i>
+    <i
+      aria-hidden="true"
+      class="fa fa-warning error-compile"
+      tooltip="Simulate returned a compile error for this processor"
+      tooltip-append-to-body="true"
+      ng-show="processorShell.state === processorStates.ERROR_COMPILE">
     </i>
     <i
       aria-hidden="true"
@@ -39,16 +53,17 @@
     </i>
     <i
       aria-hidden="true"
-      class="fa fa-warning error-compile"
-      tooltip="{{processorShell.error.message}}"
+      class="fa fa-question no-result"
+      tooltip="Simulate returned no result for this processor"
       tooltip-append-to-body="true"
-      ng-show="processorShell.state === processorStates.ERROR_COMPILE">
+      ng-show="processorShell.state === processorStates.NO_RESULT">
     </i>
     <i
       aria-hidden="true"
-      class="fa fa-question no-result"
+      class="fa fa-check valid"
+      tooltip="Simulate successfully returned a result for this processor"
       tooltip-append-to-body="true"
-      ng-show="processorShell.state === processorStates.NO_RESULT">
+      ng-show="processorShell.state === processorStates.VALID">
     </i>
   </div>
 <!--   <div class="title">{{processorShell.processor.title}} ({{processorShell.processorId}})</div> -->

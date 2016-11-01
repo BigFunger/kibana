@@ -23,8 +23,8 @@ processor-tree-item {
 
     .collapse-icon {
       flex: 0 0 auto;
-      width:20px;
-      height:20px;
+      width: 20px;
+      height: 20px;
     }
 
     .status-icon {
@@ -33,6 +33,7 @@ processor-tree-item {
       i {
         margin-right: 3px;
         opacity: .5;
+        width: 15px;
       }
 
       i.error-fail,
@@ -42,8 +43,12 @@ processor-tree-item {
       i.error-recover {
         color: orange;
       }
-      i.no-result {
+      i.no-result,
+      i.not-initialized {
         color: #3caed2;
+      }
+      i.valid {
+        color: green;
       }
     }
 
