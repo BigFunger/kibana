@@ -13,22 +13,24 @@ export default function (server) {
         });
       }
 
-      if (!isEmpty(processorApiDocument.filename)) {
-        assign(result.script, {
-          file: processorApiDocument.filename
-        });
-      }
-
-      if (!isEmpty(processorApiDocument.script_id)) {
-        assign(result.script, {
-          id: processorApiDocument.script_id
-        });
-      }
-
-      if (!isEmpty(processorApiDocument.inline_script)) {
-        assign(result.script, {
-          inline: processorApiDocument.inline_script
-        });
+      if (processorApiDocument.script_type === 'inline') {
+        if (!isEmpty(processorApiDocument.inline_script)) {
+          assign(result.script, {
+            inline: processorApiDocument.inline_script
+          });
+        }
+      } else if (processorApiDocument.script_type === 'file') {
+        if (!isEmpty(processorApiDocument.filename)) {
+          assign(result.script, {
+            file: processorApiDocument.filename
+          });
+        }
+      } else if (processorApiDocument.script_type === 'script_id') {
+        if (!isEmpty(processorApiDocument.script_id)) {
+          assign(result.script, {
+            id: processorApiDocument.script_id
+          });
+        }
       }
 
       if (processorApiDocument.params.length > 0) {
@@ -38,8 +40,6 @@ export default function (server) {
             set(params, parameter.name, parameter.value);
           }
         });
-
-        console.log('params: ' + params);
 
         if (!isEmpty(params)) {
           assign(result.script, {
@@ -61,19 +61,22 @@ export default function (server) {
 
       if (!isEmpty(processorEsDocument.script.file)) {
         assign(result, {
-          filename: processorEsDocument.script.file
+          filename: processorEsDocument.script.file,
+          script_type: 'file'
         });
       }
 
       if (!isEmpty(processorEsDocument.script.id)) {
         assign(result, {
-          script_id: processorEsDocument.script.id
+          script_id: processorEsDocument.script.id,
+          script_type: 'script_id'
         });
       }
 
       if (!isEmpty(processorEsDocument.script.inline)) {
         assign(result, {
-          inline_script: processorEsDocument.script.inline
+          inline_script: processorEsDocument.script.inline,
+          script_type: 'inline'
         });
       }
 

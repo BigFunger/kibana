@@ -1,6 +1,7 @@
 import uiModules from 'ui/modules';
 import template from './view.html';
 import './grok_pattern_definitions';
+import './styles.less';
 import 'ui/pipelines/list_textarea';
 import { pipelines as docLinks } from 'ui/documentation_links/documentation_links';
 

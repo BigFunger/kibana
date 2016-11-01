@@ -19,12 +19,15 @@ arrays of strings + numbers will be sorted lexicographically.`,
   }
 
   get description() {
+    const chunks = [];
     const sortOrders = {
       asc: 'Ascending',
       desc: 'Descending'
     };
-    const target = this.field || '?';
-    return `[${target}] ${sortOrders[this.sortOrder]}`;
+
+    if (this.field) chunks.push(` '${this.field}'`);
+    chunks.push(` ${sortOrders[this.sortOrder]}`);
+    return chunks.join('');
   }
 
   get model() {

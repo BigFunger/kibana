@@ -14,6 +14,17 @@ app.directive('processorUiScript', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
+      $scope.scriptTypes = {
+        inline: 'Inline Script',
+        file: 'Script File',
+        script_id: 'Script Id'
+      };
+
+      $scope.aceLoaded = (editor) => {
+        this.editor = editor;
+        editor.$blockScrolling = Infinity;
+      };
+
       $scope.$watch('processor.language', () => { pipeline.setDirty(); });
       $scope.$watch('processor.filename', () => { pipeline.setDirty(); });
       $scope.$watch('processor.scriptId', () => { pipeline.setDirty(); });

@@ -18,13 +18,11 @@ export default class Json extends Processor {
   }
 
   get description() {
-    const inputKeys = keysDeep(get(this, 'processorShell.inputObject.doc'));
-    const outputKeys = keysDeep(get(this, 'processorShell.outputObject.doc'));
-    const addedKeys = difference(outputKeys, inputKeys);
-    const added = addedKeys.sort().map(field => `[${field}]`).join(', ');
-    const source = this.field || '?';
+    const chunks = [];
 
-    return `[${source}] -> ${added}`;
+    if (this.field) chunks.push(` parse '${this.field}'`);
+    if (this.targetField) chunks.push(` as '${this.targetField}'`);
+    return chunks.join('');
   }
 
   get model() {

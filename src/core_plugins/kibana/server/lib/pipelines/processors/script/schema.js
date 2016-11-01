@@ -9,6 +9,7 @@ export default function (server) {
     filename: Joi.string().allow(''),
     script_id: Joi.string().allow(''),
     inline_script: Joi.string().allow(''),
-    params: Joi.string().allow('')
+    params: Joi.string().allow(''),
+    script_type: Joi.string().allow('')
   });
 }

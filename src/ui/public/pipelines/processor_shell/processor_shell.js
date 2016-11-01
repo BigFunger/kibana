@@ -163,6 +163,7 @@ export default class ProcessorShell {
     // }
   }
 
+  //I think these should be defined within each processor.
   cleanError(error) {
     if (!error) return;
 
@@ -196,6 +197,21 @@ export default class ProcessorShell {
         pattern: /runtime error/,
         matchLength: 1,
         substitution: (matches) => { return `The specified script caused a runtime error`; }
+      },
+      {
+        pattern: /Need \[file\], \[id\], or \[inline\] parameter to refer to scripts/,
+        matchLength: 1,
+        substitution: (matches) => {
+          if (_.get(this, 'processor.scriptType') === 'inline') {
+            return `Please define the inline script`;
+          }
+          if (_.get(this, 'processor.scriptType') === 'file') {
+            return `Please provide the path to the external script`;
+          }
+          if (_.get(this, 'processor.scriptType') === 'script_id') {
+            return `Please specify the id of the external script`;
+          }
+        }
       }
     ];
 

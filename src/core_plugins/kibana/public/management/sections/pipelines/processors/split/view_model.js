@@ -17,9 +17,11 @@ export default class Split extends Processor {
   }
 
   get description() {
-    const source = this.field || '?';
-    const separator = this.separator || '?';
-    return `[${source}] on '${separator}'`;
+    const chunks = [];
+
+    if (this.field) chunks.push(` '${this.field}'`);
+    if (this.separator) chunks.push(` on '${this.separator}'`);
+    return chunks.join('');
   }
 
   get model() {

@@ -13,7 +13,8 @@ export default class Script extends Processor {
         filename: '',
         scriptId: '',
         inlineScript: '',
-        params: []
+        params: [],
+        scriptType: 'inline'
       },
       model
     );
@@ -31,7 +32,8 @@ export default class Script extends Processor {
         filename: this.filename || '',
         scriptId: this.scriptId || '',
         inlineScript: this.inlineScript || '',
-        params: this.params || []
+        params: this.params || [],
+        scriptType: this.scriptType || ''
       }
     );
   }

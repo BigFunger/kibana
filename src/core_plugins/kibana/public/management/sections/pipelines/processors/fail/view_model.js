@@ -16,8 +16,10 @@ export default class Fail extends Processor {
   }
 
   get description() {
-    const message = this.message;
-    return `[${message}]`;
+    const chunks = [];
+
+    if (this.message) chunks.push(` with '${this.message}'`);
+    return chunks.join('');
   }
 
   get model() {

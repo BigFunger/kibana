@@ -16,8 +16,10 @@ export default class Remove extends Processor {
   }
 
   get description() {
-    const source = this.field || '?';
-    return `[${source}]`;
+    const chunks = [];
+
+    if (this.field) chunks.push(` '${this.field}'`);
+    return chunks.join('');
   }
 
   get model() {

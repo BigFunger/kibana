@@ -24,8 +24,10 @@ processed and the provided date rounding.`,
   }
 
   get description() {
-    const target = this.field || '?';
-    return `[${target}]`;
+    const chunks = [];
+
+    if (this.field) chunks.push(` derived from '${this.field}'`);
+    return chunks.join('');
   }
 
   get model() {

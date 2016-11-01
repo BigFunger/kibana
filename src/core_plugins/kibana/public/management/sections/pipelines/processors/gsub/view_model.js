@@ -18,8 +18,12 @@ export default class Gsub extends Processor {
   }
 
   get description() {
-    const source = this.field || '?';
-    return `[${source}] - /${this.pattern}/ -> '${this.replacement}'`;
+    const chunks = [];
+
+    if (this.field) chunks.push(` on '${this.field}'`);
+    if (this.pattern) chunks.push(` to replace /${this.pattern}/`);
+    if (this.replacement) chunks.push(` with '${this.replacement}'`);
+    return chunks.join('');
   }
 
   get model() {

@@ -18,9 +18,11 @@ separator character between each element. `,
   }
 
   get description() {
-    const source = this.field || '?';
-    const separator = this.separator ? ` on '${this.separator}'` : '';
-    return `[${source}]${separator}`;
+    const chunks = [];
+
+    if (this.field) chunks.push(` '${this.field}'`);
+    if (this.separator) chunks.push(` on '${this.separator}'`);
+    return chunks.join('');
   }
 
   get model() {
