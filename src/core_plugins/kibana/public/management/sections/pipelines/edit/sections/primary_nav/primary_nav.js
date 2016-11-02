@@ -19,11 +19,18 @@ app.directive('primaryNav', function () {
           title: 'Documents'
         },
         processors: {
-          title: 'Processors'
+          title: 'Processors',
+          disabled: () => {
+            return $scope.pipeline.sampleCollection.samples.length === 0;
+          }
         }
       };
 
-      this.section = this.sections.documents;
+      if ($scope.pipeline.sampleCollection.samples.length > 0) {
+        this.section = this.sections.processors;
+      } else {
+        this.section = this.sections.documents;
+      }
     }
   };
 });
