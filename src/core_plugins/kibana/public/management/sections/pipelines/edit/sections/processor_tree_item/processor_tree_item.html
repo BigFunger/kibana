@@ -1,5 +1,6 @@
 <div
   class="tree-item"
+  ng-class="{ expanded: processorShell.expanded === true }"
   ng-click="pipelineProcessors.editProcessorShell = processorShell;"
   draggable-handle>
   <div class="collapse-icon">
@@ -53,7 +54,7 @@
     </i>
     <i
       aria-hidden="true"
-      class="fa fa-question no-result"
+      class="fa fa-mail-forward no-result"
       tooltip="Simulate returned no result for this processor"
       tooltip-append-to-body="true"
       ng-show="processorShell.state === processorStates.NO_RESULT">

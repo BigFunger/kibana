@@ -10,11 +10,35 @@ processor-tree {
     list-style: none;
     padding: 0px;
   }
+
+  .branch-header {
+    display: none;
+  }
 }
 
 processor-tree.branch {
-  .selectable-list {
-    padding-left: 10px;
-  }
   margin-bottom: 0px;
+  margin-left: 10px;
+
+  border-left: 2px solid @kibanaGray5;
+  border-top: 2px solid @kibanaGray5;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+
+  .branch-header {
+    padding: 3px;
+    padding-left: 15px;
+    display: block;
+    color: @kibanaGray4;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    font-style: italic;
+    font-size: 9pt;
+  }
+
+  .branch-footer {
+    width: 25px;
+    border-bottom: 2px solid @kibanaGray5;
+    border-bottom-left-radius: 6px;
+  }
 }
