@@ -15,7 +15,7 @@ app.directive('pipelineProcessors', function () {
       const pipelines = Private(PipelinesProvider);
       const notify = new Notifier({ location: `Pipeline Setup` });
 
-      this.editProcessorShell = _.first($scope.pipeline.processorCollection.processors);
+      this.selectedItem = _.first($scope.pipeline.processorCollection.processors);
 
       this.simulate = () => {
         const pipeline = $scope.pipeline;

@@ -10,13 +10,13 @@ app.directive('processorTreeHeader', function () {
     restrict: 'E',
     template: template,
     scope: {
-      pipelineProcessors: '=',
+      selectedItemController: '=',
       processorCollection: '=',
       title: '@'
     },
     controller: function ($scope) {
       $scope.addProcessor = () => {
-        const currentProcessor = $scope.pipelineProcessors.editProcessorShell;
+        const currentProcessor = $scope.selectedItemController.selectedItem;
         const allProcessorCollections = $scope.processorCollection.allProcessorCollections;
 
         let targetProcessorCollection = $scope.processorCollection;
@@ -27,7 +27,7 @@ app.directive('processorTreeHeader', function () {
         });
 
         const newProcessorShell = targetProcessorCollection.add();
-        $scope.pipelineProcessors.editProcessorShell = newProcessorShell;
+        $scope.selectedItemController.selectedItem = newProcessorShell;
       };
     }
   };

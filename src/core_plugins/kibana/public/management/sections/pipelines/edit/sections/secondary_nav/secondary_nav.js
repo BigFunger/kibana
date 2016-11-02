@@ -19,7 +19,7 @@ app.directive('secondaryNav', function () {
         }
       };
 
-      $scope.$watch('pipelineProcessors.editProcessorShell', () => {
+      $scope.$watch('pipelineProcessors.selectedItem', () => {
         this.section = this.sections.processorDetails;
       });
     }

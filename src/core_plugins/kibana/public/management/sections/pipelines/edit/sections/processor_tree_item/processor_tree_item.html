@@ -1,7 +1,7 @@
 <div
   class="tree-item"
   ng-class="{ expanded: processorShell.expanded === true }"
-  ng-click="pipelineProcessors.editProcessorShell = processorShell;"
+  ng-click="selectedItemController.selectedItem = processorShell;"
   draggable-handle>
   <div class="collapse-icon">
     <button
@@ -86,5 +86,5 @@
   class="branch"
   ng-show="processorShell.expanded && processorShell.failureProcessorCollection.processors.length > 0 && processorShell.failureAction === 'on_error'"
   processor-collection="processorShell.failureProcessorCollection"
-  pipeline-processors="pipelineProcessors">
+  selected-item-controller="selectedItemController">
 </processor-tree>

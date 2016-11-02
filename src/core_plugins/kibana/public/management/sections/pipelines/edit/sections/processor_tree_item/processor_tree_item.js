@@ -14,7 +14,7 @@ app.directive('processorTreeItem', function (RecursionHelper) {
     scope: {
       processorCollection: '=',
       processorShell: '=',
-      pipelineProcessors: '='
+      selectedItemController: '='
     },
     compile: function (element) {
       // Use the compile function from the RecursionHelper,
@@ -26,7 +26,7 @@ app.directive('processorTreeItem', function (RecursionHelper) {
 
       $scope.delete = () => {
         $scope.processorCollection.remove($scope.processorShell);
-        $scope.pipelineProcessors.editProcessorShell = undefined;
+        $scope.selectedItemController.selectedItem = undefined;
       };
 
       $scope.$on('drag-start', e => {
@@ -39,10 +39,10 @@ app.directive('processorTreeItem', function (RecursionHelper) {
         $scope.processorCollection.updateParents();
       });
 
-      $scope.$watch('pipelineProcessors.editProcessorShell', (editProcessorShell) => {
+      $scope.$watch('selectedItemController.selectedItem', (processorShell) => {
         const allProcessorCollections = $scope.processorShell.allProcessorCollections;
         _.forEach(allProcessorCollections, (processorCollection) => {
-          if (_.contains(processorCollection.processors, editProcessorShell)) {
+          if (_.contains(processorCollection.processors, processorShell)) {
             $scope.processorShell.expanded = true;
           }
         });

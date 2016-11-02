@@ -12,7 +12,7 @@ app.directive('processorTree', function (RecursionHelper) {
     template: template,
     scope: {
       processorCollection: '=',
-      pipelineProcessors: '='
+      selectedItemController: '='
     },
     compile: function (element) {
       // Use the compile function from the RecursionHelper,

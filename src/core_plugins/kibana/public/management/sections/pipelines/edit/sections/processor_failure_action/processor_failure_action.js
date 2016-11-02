@@ -22,14 +22,13 @@ app.directive('processorFailureAction', function () {
       $scope.$watch('processorShell.failureAction', (newValue, oldValue) => {
         if (!$scope.processorShell) return;
 
-        console.log($scope.processorShell.processorId, newValue, oldValue);
         const processorShell = $scope.processorShell;
         const processorCollection = processorShell.failureProcessorCollection;
 
         if (newValue === 'on_error') {
           if (processorCollection.processors.length === 0) {
             const newProcessorShell = processorShell.failureProcessorCollection.add();
-            $scope.pipelineProcessors.editProcessorShell = newProcessorShell;
+            $scope.pipelineProcessors.selectedItem = newProcessorShell;
           }
         }
       });
