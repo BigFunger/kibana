@@ -19,10 +19,7 @@ app.directive('primaryNav', function () {
           title: 'Documents'
         },
         processors: {
-          title: 'Processors',
-          disabled: () => {
-            return $scope.pipeline.sampleCollection.samples.length === 0;
-          }
+          title: 'Processors'
         }
       };
 

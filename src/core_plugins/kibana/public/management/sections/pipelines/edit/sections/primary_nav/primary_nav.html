@@ -5,15 +5,9 @@
         ng-repeat="section in primaryNav.sections"
         ng-class="{ active: primaryNav.section === section }">
         <a
-          class="link disabled"
-          ng-show="section.disabled()">
-          {{section.title}}
-        </a>
-        <a
           class="link"
           ng-class="{ active: primaryNav.section === section }"
-          ng-click="primaryNav.section = section"
-          ng-hide="section.disabled()">
+          ng-click="primaryNav.section = section">
           {{section.title}}
         </a>
       </li>

@@ -1,16 +1,20 @@
-<!-- <div
-  class="help-message"
+<div
+  class="header"
   ng-hide="pipeline.sampleCollection.samples.length > 0">
-  <div class="header">
-    <label>Sample Documents</label>
-  </div>
-  <p>Sample documents are used while building your pipeline. In order to build a pipeline, you must first define as least one sample document.</p>
+  <label>Sample Documents</label>
 </div>
 <div
-  class="controls"
-  ng-show="pipeline.sampleCollection.samples.length > 0"> -->
+  class="help-message"
+  ng-hide="pipeline.sampleCollection.samples.length > 0">
+  <p>Sample documents are used while building your pipeline and should represent the expected structure of the data that you intend to index through your pipeline. For the best experience building your pipeline, it is suggested that you define at least one sample document.</p>
+</div>
 
-<div class="controls">
+<label
+  ng-show="pipeline.sampleCollection.samples.length > 0">
+  Sample Documents
+</label>
+<div class="controls"
+  ng-show="pipeline.sampleCollection.samples.length > 0">
   <select
     class="form-control"
     ng-model="pipeline.sampleCollection.index"
