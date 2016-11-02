@@ -31,6 +31,9 @@ import './sections/processor_input/processor_input';
 import './sections/processor_output/processor_output';
 import './sections/processor_failure_action/processor_failure_action';
 
+import './sections/pipeline_pipeline/pipeline_pipeline';
+import './sections/pipeline_pipeline_nav';
+
 import 'ui/draggable/draggable_container';
 import 'ui/draggable/draggable_handle';
 import 'ui/draggable/draggable_item';

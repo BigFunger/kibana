@@ -8,7 +8,6 @@ app.directive('pipelineDocumentsNav', function () {
   return {
     restrict: 'E',
     template: template,
-    controllerAs: 'documentsNav',
     controller: function ($scope) {
     }
   };
