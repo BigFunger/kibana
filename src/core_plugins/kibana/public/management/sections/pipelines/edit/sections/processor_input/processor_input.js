@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import uiModules from 'ui/modules';
 import template from './processor_input.html';
 import './processor_input.less';
@@ -21,6 +22,17 @@ app.directive('processorInput', function () {
         }
       };
       $scope.currentInputOption = $scope.inputOptions.document;
+
+      $scope.$watch('processorShell.inputObject', (inputObject) => {
+        $scope.inputStatesDoc = {
+          oldValue:  _.get(inputObject, 'doc'),
+          newValue: _.get(inputObject, 'doc')
+        };
+        $scope.inputStatesMeta = {
+          oldValue:  _.get(inputObject, 'meta'),
+          newValue: _.get(inputObject, 'meta')
+        };
+      });
     }
   };
 });

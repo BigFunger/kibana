@@ -1,4 +1,4 @@
-import { get } from 'lodash';
+import _ from 'lodash';
 import uiModules from 'ui/modules';
 import jsondiffpatch from '@bigfunger/jsondiffpatch';
 import './processor_output.less';
@@ -28,43 +28,21 @@ app.directive('processorOutput', function (debounce) {
         }
       };
       $scope.currentOutputOption = $scope.outputOptions.document;
-    },
-    link: function ($scope, $el) {
-      const div = $el.find('.visual')[0];
 
+      $scope.onlyShowChanges = true;
 
+      $scope.$watch('processorShell.outputObject', () => {
+        const processorShell = $scope.processorShell;
 
-      // const diffpatch = jsondiffpatch.create({
-      //   arrays: {
-      //     detectMove: false
-      //   },
-      //   textDiff: {
-      //     minLength: 120
-      //   }
-      // });
-
-      // //TODO: Change this so that it calculates both the document and meta differences at the same time.
-      // const updateOutput = debounce(() => {
-      //   const processorShell = $scope.processorShell;
-      //   const showMeta = $scope.showMeta;
-      //   const oldValue = get(processorShell.inputObject, showMeta ? 'meta' : 'doc');
-      //   const newValue = get(processorShell.outputObject, showMeta ? 'meta' : 'doc');
-
-      //   let delta = diffpatch.diff(oldValue, newValue);
-      //   if (!delta || processorShell.error) delta = {};
-
-      //   div.innerHTML = htmlFormat(delta, oldValue);
-      // }, 200);
-
-      // $scope.$watch('processorShell.outputObject', updateOutput);
-      // $scope.$watch('processorShell.inputObject', updateOutput);
-      // $scope.$watch('showMeta', updateOutput);
-
-      // $scope.$watch('processorShell', () => {
-      //   $scope.showMeta = false;
-      //   $scope.showChanges = true;
-      //   updateOutput();
-      // });
+        $scope.docStates = {
+          oldValue: _.get(processorShell.inputObject, 'doc'),
+          newValue: _.get(processorShell.outputObject, 'doc')
+        };
+        $scope.metaStates = {
+          oldValue: _.get(processorShell.inputObject, 'meta'),
+          newValue: _.get(processorShell.outputObject, 'meta')
+        };
+      });
     }
   };
 });

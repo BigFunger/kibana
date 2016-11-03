@@ -1,0 +1,28 @@
+@import (reference) "~ui/styles/variables";
+@import (reference) "~ui/styles/mixins";
+@import (reference) "~ui/styles/theme";
+
+document-viewer {
+  display: block;
+  margin-bottom: 10px;
+
+  .visual {
+    padding: 9.5px;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    border: 1px solid #cccccc;
+    background-color: #ecf0f1;
+    border-radius: 4px;
+    overflow-x: auto;
+
+    pre {
+      background-color: transparent;
+      border: none;
+    }
+  }
+}
+
+document-viewer.hide-unchanged {
+  .jsondiffpatch-unchanged {
+    display: none;
+  }
+}

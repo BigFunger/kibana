@@ -5,34 +5,17 @@
 processor-output {
   display: block;
 
-  .visual {
-    padding: 9.5px;
-    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-    border: 1px solid #cccccc;
-    background-color: #ecf0f1;
-    border-radius: 4px;
-    overflow-x: auto;
-
-    pre {
-      background-color: transparent;
-      border: none;
-    }
-  }
-
-  .hide-unchanged {
-    .jsondiffpatch-unchanged {
-      display: none;
-    }
-  }
-
-  .header {
-    .options {
-      display: inline-block;
-      margin-left: 20px;
+  .output-section {
+    .header {
+      position: relative;
 
       label {
-        margin-left: 10px;
+        position: absolute;
+        top: 0px;
+        margin-top: 4px;
         font-weight: normal;
+        font-size: 9pt;
+        right: 0px;
       }
     }
   }

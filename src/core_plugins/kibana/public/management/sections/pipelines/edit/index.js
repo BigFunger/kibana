@@ -38,6 +38,8 @@ import './sections/pipeline_pipeline';
 import './sections/pipeline_pipeline_nav';
 import './sections/pipeline_pipeline_detail';
 
+import './sections/document_viewer';
+
 import 'ui/draggable/draggable_container';
 import 'ui/draggable/draggable_handle';
 import 'ui/draggable/draggable_item';

@@ -6,14 +6,23 @@
   section="inputSection"
   ng-class="{ expanded: !inputSection.collapsed }">
 </section-collapser>
-<tertiary-nav
-  class="simple"
-  ng-hide="inputSection.collapsed"
-  options="inputOptions"
-  selected-option="currentInputOption">
-</tertiary-nav>
-<pre ng-show="currentInputOption === inputOptions.document && !inputSection.collapsed">{{inputObject.doc | json}}</pre>
-<pre ng-show="currentInputOption === inputOptions.meta && !inputSection.collapsed">{{inputObject.meta | json}}</pre>
+<div
+  class="input-section"
+  ng-show="!inputSection.collapsed">
+  <tertiary-nav
+    class="simple"
+    options="inputOptions"
+    selected-option="currentInputOption">
+  </tertiary-nav>
+  <document-viewer
+    states="inputStatesDoc"
+    ng-show="currentInputOption === inputOptions.document">
+  </document-viewer>
+  <document-viewer
+    states="inputStatesMeta"
+    ng-show="currentInputOption === inputOptions.meta">
+  </document-viewer>
+</div>
 
 <section-collapser
   class="compact"
@@ -21,11 +30,28 @@
   section="outputSection"
   ng-class="{ expanded: !outputSection.collapsed }">
 </section-collapser>
-<tertiary-nav
-  class="simple"
-  ng-hide="outputSection.collapsed"
-  options="outputOptions"
-  selected-option="currentOutputOption">
-</tertiary-nav>
-<pre ng-show="currentOutputOption === outputOptions.document && !outputSection.collapsed">{{outputObject.doc | json}}</pre>
-<pre ng-show="currentOutputOption === outputOptions.meta && !outputSection.collapsed">{{outputObject.meta | json}}</pre>
+<div
+  class="output-section"
+  ng-show="!outputSection.collapsed">
+  <div class="header">
+    <tertiary-nav
+      class="simple"
+      options="outputOptions"
+      selected-option="currentOutputOption">
+    </tertiary-nav>
+    <label>
+      <input type="checkbox" ng-model="onlyShowChanges" />
+      Only show document changes
+    </label>
+  </div>
+  <document-viewer
+    states="outputStatesDoc"
+    ng-class="{ 'hide-unchanged': onlyShowChanges }"
+    ng-show="currentOutputOption === outputOptions.document">
+  </document-viewer>
+  <document-viewer
+    states="outputStatesMeta"
+    ng-class="{ 'hide-unchanged': onlyShowChanges }"
+    ng-show="currentOutputOption === outputOptions.meta">
+  </document-viewer>
+</div>
