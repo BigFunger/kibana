@@ -16,6 +16,7 @@ app.directive('pipelineProcessors', function () {
       const notify = new Notifier({ location: `Pipeline Setup` });
 
       this.selectedItem = _.first($scope.pipeline.processorCollection.processors);
+      this.allowEmptySelection = false;
 
       this.simulate = () => {
         const pipeline = $scope.pipeline;

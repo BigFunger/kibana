@@ -1,0 +1,31 @@
+<h3>{{ title }}</h3>
+
+<section-collapser
+  class="compact"
+  title="Input Document State"
+  section="inputSection"
+  ng-class="{ expanded: !inputSection.collapsed }">
+</section-collapser>
+<tertiary-nav
+  class="simple"
+  ng-hide="inputSection.collapsed"
+  options="inputOptions"
+  selected-option="currentInputOption">
+</tertiary-nav>
+<pre ng-show="currentInputOption === inputOptions.document && !inputSection.collapsed">{{inputObject.doc | json}}</pre>
+<pre ng-show="currentInputOption === inputOptions.meta && !inputSection.collapsed">{{inputObject.meta | json}}</pre>
+
+<section-collapser
+  class="compact"
+  title="Output Document State"
+  section="outputSection"
+  ng-class="{ expanded: !outputSection.collapsed }">
+</section-collapser>
+<tertiary-nav
+  class="simple"
+  ng-hide="outputSection.collapsed"
+  options="outputOptions"
+  selected-option="currentOutputOption">
+</tertiary-nav>
+<pre ng-show="currentOutputOption === outputOptions.document && !outputSection.collapsed">{{outputObject.doc | json}}</pre>
+<pre ng-show="currentOutputOption === outputOptions.meta && !outputSection.collapsed">{{outputObject.meta | json}}</pre>

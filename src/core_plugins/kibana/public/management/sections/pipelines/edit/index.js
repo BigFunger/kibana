@@ -10,6 +10,7 @@ import 'ui/directives/bread_crumbs';
 import './sections/pipeline_edit';
 import './sections/primary_nav';
 import './sections/secondary_nav';
+import './sections/tertiary_nav';
 import './sections/pipeline_documents_nav';
 import './sections/pipeline_documents_detail';
 import './sections/pipeline_documents';
@@ -31,8 +32,11 @@ import './sections/processor_input';
 import './sections/processor_output';
 import './sections/processor_failure_action';
 
+import './sections/pipeline_input';
+import './sections/pipeline_detail';
 import './sections/pipeline_pipeline';
 import './sections/pipeline_pipeline_nav';
+import './sections/pipeline_pipeline_detail';
 
 import 'ui/draggable/draggable_container';
 import 'ui/draggable/draggable_handle';
