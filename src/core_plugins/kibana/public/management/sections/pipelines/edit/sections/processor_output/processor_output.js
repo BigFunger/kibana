@@ -14,44 +14,57 @@ app.directive('processorOutput', function (debounce) {
     restrict: 'E',
     template: template,
     scope: {
-      processorShell: '=',
-      pipeline: '='
+      processorShell: '='
+    },
+    controller: function ($scope) {
+      $scope.processorStates = processorStates;
+
+      $scope.outputOptions = {
+        document: {
+          title: 'Document'
+        },
+        meta: {
+          title: 'Metadata'
+        }
+      };
+      $scope.currentOutputOption = $scope.outputOptions.document;
     },
     link: function ($scope, $el) {
       const div = $el.find('.visual')[0];
-      $scope.processorStates = processorStates;
 
-      const diffpatch = jsondiffpatch.create({
-        arrays: {
-          detectMove: false
-        },
-        textDiff: {
-          minLength: 120
-        }
-      });
 
-      //TODO: Change this so that it calculates both the document and meta differences at the same time.
-      const updateOutput = debounce(() => {
-        const processorShell = $scope.processorShell;
-        const showMeta = $scope.showMeta;
-        const oldValue = get(processorShell.inputObject, showMeta ? 'meta' : 'doc');
-        const newValue = get(processorShell.outputObject, showMeta ? 'meta' : 'doc');
 
-        let delta = diffpatch.diff(oldValue, newValue);
-        if (!delta || processorShell.error) delta = {};
+      // const diffpatch = jsondiffpatch.create({
+      //   arrays: {
+      //     detectMove: false
+      //   },
+      //   textDiff: {
+      //     minLength: 120
+      //   }
+      // });
 
-        div.innerHTML = htmlFormat(delta, oldValue);
-      }, 200);
+      // //TODO: Change this so that it calculates both the document and meta differences at the same time.
+      // const updateOutput = debounce(() => {
+      //   const processorShell = $scope.processorShell;
+      //   const showMeta = $scope.showMeta;
+      //   const oldValue = get(processorShell.inputObject, showMeta ? 'meta' : 'doc');
+      //   const newValue = get(processorShell.outputObject, showMeta ? 'meta' : 'doc');
 
-      $scope.$watch('processorShell.outputObject', updateOutput);
-      $scope.$watch('processorShell.inputObject', updateOutput);
-      $scope.$watch('showMeta', updateOutput);
+      //   let delta = diffpatch.diff(oldValue, newValue);
+      //   if (!delta || processorShell.error) delta = {};
 
-      $scope.$watch('processorShell', () => {
-        $scope.showMeta = false;
-        $scope.showChanges = true;
-        updateOutput();
-      });
+      //   div.innerHTML = htmlFormat(delta, oldValue);
+      // }, 200);
+
+      // $scope.$watch('processorShell.outputObject', updateOutput);
+      // $scope.$watch('processorShell.inputObject', updateOutput);
+      // $scope.$watch('showMeta', updateOutput);
+
+      // $scope.$watch('processorShell', () => {
+      //   $scope.showMeta = false;
+      //   $scope.showChanges = true;
+      //   updateOutput();
+      // });
     }
   };
 });

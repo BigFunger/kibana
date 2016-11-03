@@ -12,7 +12,15 @@ app.directive('processorInput', function () {
       processorShell: '='
     },
     controller: function ($scope) {
-      $scope.collapsed = true;
+      $scope.inputOptions = {
+        document: {
+          title: 'Document'
+        },
+        meta: {
+          title: 'Metadata'
+        }
+      };
+      $scope.currentInputOption = $scope.inputOptions.document;
     }
   };
 });

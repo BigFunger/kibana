@@ -8,15 +8,17 @@ app.directive('sectionCollapser', function ($compile) {
   return {
     restrict: 'E',
     template: template,
-    controllerAs: 'sectionCollapser',
-    link: function ($scope, $el, attrs) {
-      $scope.sectionCollapser.title = attrs.title || 'Advanced settings';
+    scope: {
+      title: '@',
+      section: '='
     },
     controller: function ($scope) {
-      this.collapsed = true;
+      $scope.title = $scope.title || 'Advanced Options';
+      $scope.section = $scope.section || {};
+      $scope.section.collapsed = !!$scope.section.collapsed;
 
-      this.toggle = () => {
-        this.collapsed = !this.collapsed;
+      $scope.toggle = () => {
+        $scope.section.collapsed = !$scope.section.collapsed;
       };
     }
   };

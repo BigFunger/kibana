@@ -5,6 +5,7 @@ export class Sample {
   constructor(model) {
     const defaultModel = {
       doc: {},
+      meta: {},
       state: Sample.states.VALID,
       description: ''
     };

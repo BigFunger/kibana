@@ -1,0 +1,52 @@
+@import (reference) "~ui/styles/variables";
+@import (reference) "~ui/styles/mixins";
+@import (reference) "~ui/styles/theme";
+
+tertiary-nav {
+  display: flex;
+  flex: 0 1 auto;
+
+  nav {
+    display: flex;
+    flex: 1 1 auto;
+
+    .container {
+      width: 100%;
+    }
+
+    .navbar-nav {
+      font-size: 9pt;
+
+      .link {
+        border-bottom: 3px solid;
+        border-bottom-color: transparent;
+      }
+
+      .link.active {
+        border-bottom-color: @kibanaGray3;
+      }
+    }
+  }
+
+  .navbar {
+    min-height: 0px;
+  }
+
+  .navbar-nav > li > a {
+    padding-top: 5px;
+    padding-bottom: 0px;
+    line-height: auto;
+  }
+
+  nav.navbar-default {
+    background-color: transparent;
+    border-bottom: 2px solid;
+    border-bottom-color: @kibanaGray5;
+  }
+}
+
+tertiary-nav.simple {
+  nav.navbar-default {
+    border-bottom: none;
+  }
+}

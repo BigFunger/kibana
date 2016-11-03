@@ -5,10 +5,14 @@
 section-collapser {
   display: block;
   margin-top: 15px;
-  margin-bottom: 15px;
 
   .section-collapser-heading {
     border-bottom: 2px solid @kibanaGray5;
+    margin-bottom: 15px;
+  }
+
+  .section-collapser-heading.expanded.compact {
+    margin-bottom: 0px;
   }
 
   label {
@@ -23,5 +27,11 @@ section-collapser {
     background-color: transparent;
     border-color: transparent;
     color: @kibanaGray2;
+  }
+}
+
+section-collapser.compact {
+  .section-collapser-heading.expanded {
+    margin-bottom: 0px;
   }
 }

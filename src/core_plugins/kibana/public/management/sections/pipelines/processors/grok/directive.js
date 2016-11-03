@@ -16,6 +16,10 @@ app.directive('processorUiGrok', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
+      $scope.advancedSection = {
+        collapsed: true
+      };
+
       $scope.docLinks = docLinks;
       $scope.$watch('processor.field', () => { pipeline.setDirty(); });
       $scope.$watchCollection('processor.patterns', () => { pipeline.setDirty(); });

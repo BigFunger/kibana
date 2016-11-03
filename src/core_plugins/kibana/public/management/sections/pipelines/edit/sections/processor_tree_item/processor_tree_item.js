@@ -29,6 +29,15 @@ app.directive('processorTreeItem', function (RecursionHelper) {
         $scope.selectedItemController.selectedItem = undefined;
       };
 
+      $scope.selectItem = (processorShell) => {
+        if ($scope.selectedItemController.selectedItem === processorShell
+          && $scope.selectedItemController.allowEmptySelection) {
+          $scope.selectedItemController.selectedItem = undefined;
+        } else {
+          $scope.selectedItemController.selectedItem = processorShell;
+        }
+      };
+
       $scope.$on('drag-start', e => {
         $scope.wasCollapsed = $scope.processorShell.expanded;
         $scope.processorShell.expanded = false;

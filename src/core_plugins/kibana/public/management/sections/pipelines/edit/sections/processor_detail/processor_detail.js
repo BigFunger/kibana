@@ -19,6 +19,10 @@ app.directive('processorDetail', function ($compile) {
       const pipeline = $scope.pipeline;
       const $container = $el.find('.processor-ui-content');
 
+      $scope.inputSection = {
+        collapsed: true
+      };
+
       function updateUi() {
         const processorShell = $scope.processorShell;
         $container.empty();

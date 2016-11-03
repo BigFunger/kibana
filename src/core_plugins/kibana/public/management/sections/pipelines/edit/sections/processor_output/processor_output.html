@@ -19,18 +19,36 @@
   class="alert alert-info">
   No results were returned for this processor. May be part of a failure path that was not triggered.
 </div>
+
+<div ng-show="processorShell.state === processorStates.VALID">
+  <tertiary-nav
+    class="output-section"
+    options="outputOptions"
+    selected-option="currentOutputOption">
+  </tertiary-nav>
+  <pre ng-show="currentOutputOption === outputOptions.document">{{processorShell.outputObject.doc | json}}</pre>
+  <pre ng-show="currentOutputOption === outputOptions.meta">{{processorShell.outputObject.meta | json}}</pre>
+</div>
+
+<!-- <div class="options">
+  <label><input type="checkbox" ng-model="showMeta" /> Show metadata</label>
+  <label><input type="checkbox" ng-model="showChanges" /> Only show changes caused by this processor</label>
+</div> -->
+<!-- <tertiary-nav selectedOption="blah"></tertiary-nav>
+{{blah}}
+<section-collapser
+  title="Output Document State"
+  ng-class="{ expanded: !sectionCollapser.collapsed }">
+</section-collapser>
 <div
   class="form-group"
   ng-show="processorShell.state === processorStates.VALID">
   <div class="header">
     <label>Document state:</label>
-    <div class="options">
-      <label><input type="checkbox" ng-model="showMeta" /> Show metadata</label>
-      <label><input type="checkbox" ng-model="showChanges" /> Only show changes caused by this processor</label>
-    </div>
   </div>
   <div
     class="visual output"
     ng-class="{'hide-unchanged': showChanges}">
   </div>
 </div>
+ -->

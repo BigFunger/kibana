@@ -20,6 +20,7 @@ app.directive('processorTree', function (RecursionHelper) {
       return RecursionHelper.compile(element);
     },
     controller: function ($scope) {
+      $scope.allowDeselect = !!$scope.allowDeselect;
     }
   };
 });

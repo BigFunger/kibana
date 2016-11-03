@@ -1,0 +1,16 @@
+<nav class="navbar navbar-default subnav">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li
+        ng-repeat="option in options"
+        ng-class="{ active: selected.value === option }">
+        <a
+          class="link"
+          ng-class="{ active: selected.value === option }"
+          ng-click="selected.value = option">
+          {{option.title}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

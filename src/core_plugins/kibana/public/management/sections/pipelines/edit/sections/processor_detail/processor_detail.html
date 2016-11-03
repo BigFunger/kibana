@@ -5,10 +5,17 @@
   ng-show="processorShell.typeId === 'unknown'">
   This processor is a type that is unknown by Kibana. This interface will allow you to edit and view this processor as raw JSON. It is strongly recommended that you install the plugin that corresponds to this processor type. Warning: Entering JSON that ingest does not understand can break Kibana.
 </div>
+
+<section-collapser
+  class="compact"
+  title="Input Document State"
+  section="inputSection">
+</section-collapser>
 <processor-input
   processor-shell="processorShell"
-  ng-show="processorShell">
+  ng-hide="inputSection.collapsed">
 </processor-input>
+
 <processor-type-select
   processor-type-id="processorTypeId"
   ng-show="processorShell">
@@ -22,8 +29,15 @@
   pipeline-processors="pipelineProcessors"
   ng-show="processorShell.typeId">
 </processor-failure-action>
+
+<section-collapser
+  class="compact"
+  title="Output Document State"
+  section="outputSection"
+  ng-show="processorShell.typeId">
+</section-collapser>
 <processor-output
   processor-shell="processorShell"
-  pipeline="pipeline"
-  ng-if="processorShell.typeId">
+  ng-if="processorShell.typeId"
+  ng-hide="outputSection.collapsed">
 </processor-output>

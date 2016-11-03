@@ -37,8 +37,11 @@
   <label>Script Id:</label>
   <input type="text" class="form-control" ng-trim="false" ng-model="processor.scriptId">
 </div>
-<section-collapser title="Advanced settings"></section-collapser>
-<div ng-hide="sectionCollapser.collapsed">
+<section-collapser
+  title="Advanced settings"
+  section="advancedSection">
+</section-collapser>
+<div ng-hide="advancedSection.collapsed">
   <div class="form-group">
     <label>Script Parameters:</label>
     <script-parameters

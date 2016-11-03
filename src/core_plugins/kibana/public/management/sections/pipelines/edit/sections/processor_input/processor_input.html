@@ -1,2 +1,7 @@
-<section-collapser title="Input Document State" ng-class="{ expanded: !sectionCollapser.collapsed }"></section-collapser>
-<pre ng-hide="sectionCollapser.collapsed">{{processorShell.inputObject.doc | json}}</pre>
+<tertiary-nav
+  class="simple"
+  options="inputOptions"
+  selected-option="currentInputOption">
+</tertiary-nav>
+<pre ng-show="currentInputOption === inputOptions.document">{{processorShell.inputObject.doc | json}}</pre>
+<pre ng-show="currentInputOption === inputOptions.meta">{{processorShell.inputObject.meta | json}}</pre>

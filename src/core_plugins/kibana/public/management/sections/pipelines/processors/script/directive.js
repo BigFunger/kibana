@@ -14,6 +14,10 @@ app.directive('processorUiScript', function () {
       const processor = $scope.processor;
       const pipeline = $scope.pipeline;
 
+      $scope.advancedSection = {
+        collapsed: true
+      };
+
       $scope.scriptTypes = {
         inline: 'Inline Script',
         file: 'Script File',
