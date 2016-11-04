@@ -14,9 +14,14 @@ document-viewer {
     border-radius: 4px;
     overflow-x: auto;
 
+    /**
+     * 1. Force long unbroken lines to wrap.
+     */
     pre {
       background-color: transparent;
       border: none;
+      white-space: pre-wrap; // 1
+      word-wrap: break-word; // 1
     }
   }
 }
