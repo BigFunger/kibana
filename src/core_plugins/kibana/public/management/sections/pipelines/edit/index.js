@@ -11,6 +11,7 @@ import './sections/pipeline_edit';
 import './sections/primary_nav';
 import './sections/secondary_nav';
 import './sections/tertiary_nav';
+
 import './sections/pipeline_documents_nav';
 import './sections/pipeline_documents_detail';
 import './sections/pipeline_documents';
@@ -18,6 +19,10 @@ import './sections/pipeline_documents';
 import './sections/pipeline_processors_nav';
 import './sections/pipeline_processors_detail';
 import './sections/pipeline_processors';
+
+import './sections/pipeline_pipeline';
+import './sections/pipeline_pipeline_detail';
+
 import './sections/pipeline_output';
 import './sections/processor_tree';
 import './sections/processor_tree_item';
@@ -34,9 +39,6 @@ import './sections/processor_failure_action';
 
 import './sections/pipeline_input';
 import './sections/pipeline_detail';
-import './sections/pipeline_pipeline';
-import './sections/pipeline_pipeline_nav';
-import './sections/pipeline_pipeline_detail';
 
 import './sections/document_viewer';
 

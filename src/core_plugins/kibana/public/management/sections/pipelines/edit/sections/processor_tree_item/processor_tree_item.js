@@ -30,12 +30,7 @@ app.directive('processorTreeItem', function (RecursionHelper) {
       };
 
       $scope.selectItem = (processorShell) => {
-        if ($scope.selectedItemController.selectedItem === processorShell
-          && $scope.selectedItemController.allowEmptySelection) {
-          $scope.selectedItemController.selectedItem = undefined;
-        } else {
-          $scope.selectedItemController.selectedItem = processorShell;
-        }
+        $scope.selectedItemController.selectedItem = processorShell;
       };
 
       $scope.$on('drag-start', e => {

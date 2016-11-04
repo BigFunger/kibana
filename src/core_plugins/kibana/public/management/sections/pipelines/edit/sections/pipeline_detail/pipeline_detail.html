@@ -1,4 +1,4 @@
-<h3>{{ title }}</h3>
+<document-selector></document-selector>
 
 <section-collapser
   class="compact"
@@ -39,19 +39,13 @@
       options="outputOptions"
       selected-option="currentOutputOption">
     </tertiary-nav>
-    <label>
-      <input type="checkbox" ng-model="onlyShowChanges" />
-      Only show document changes
-    </label>
   </div>
   <document-viewer
     states="outputStatesDoc"
-    ng-class="{ 'hide-unchanged': onlyShowChanges }"
     ng-show="currentOutputOption === outputOptions.document">
   </document-viewer>
   <document-viewer
     states="outputStatesMeta"
-    ng-class="{ 'hide-unchanged': onlyShowChanges }"
     ng-show="currentOutputOption === outputOptions.meta">
   </document-viewer>
 </div>

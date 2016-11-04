@@ -12,8 +12,6 @@ app.directive('pipelinePipeline', function () {
     template: template,
     controllerAs: 'pipelinePipeline',
     controller: function ($scope) {
-      this.allowEmptySelection = true;
-      this.allowReorder = false;
     }
   };
 });
