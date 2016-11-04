@@ -2,13 +2,13 @@
   <div class="container">
     <ul class="nav navbar-nav">
       <li
-        ng-repeat="section in secondaryNav.sections"
-        ng-class="{ active: secondaryNav.section === section }">
+        ng-repeat="option in options"
+        ng-class="{ active: selected.value === option }">
         <a
           class="link"
-          ng-class="{ active: secondaryNav.section === section }"
-          ng-click="secondaryNav.section = section">
-          {{section.title}}
+          ng-class="{ active: selected.value === option }"
+          ng-click="selected.value = option">
+          {{option.title}}
         </a>
       </li>
     </ul>

@@ -9,7 +9,7 @@ const htmlFormat = jsondiffpatch.formatters.html.format;
 
 const app = uiModules.get('kibana');
 
-app.directive('processorOutput', function (debounce) {
+app.directive('processorOutput', function () {
   return {
     restrict: 'E',
     template: template,

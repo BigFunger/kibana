@@ -8,19 +8,17 @@ app.directive('secondaryNav', function () {
   return {
     restrict: 'E',
     template: template,
-    controllerAs: 'secondaryNav',
+    scope: {
+      options: '=',
+      selectedOption: '='
+    },
     controller: function ($scope) {
-      this.sections = {
-        processorDetails: {
-          title: 'Processor Details'
-        },
-        pipelineOutput: {
-          title: 'Pipeline Output'
-        }
+      $scope.selected = {
+        value: $scope.selectedOption
       };
 
-      $scope.$watch('pipelineProcessors.selectedItem', () => {
-        this.section = this.sections.processorDetails;
+      $scope.$watch('selected.value', (newVal) => {
+        $scope.selectedOption = newVal;
       });
     }
   };

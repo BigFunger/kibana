@@ -9,6 +9,15 @@ app.directive('pipelineProcessorsDetail', function () {
     restrict: 'E',
     template: template,
     controller: function ($scope) {
+      $scope.sectionOptions = {
+        details: {
+          title: 'Details'
+        },
+        output: {
+          title: 'Output'
+        }
+      };
+      $scope.currentSectionOption = $scope.sectionOptions.details;
     }
   };
 });

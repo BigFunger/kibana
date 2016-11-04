@@ -1,5 +1,15 @@
+<secondary-nav
+  options="sectionOptions"
+  selected-option="currentSectionOption">
+</secondary-nav>
 <processor-detail
   processor-shell="pipelineProcessors.selectedItem"
   pipeline="pipeline"
-  pipeline-processors="pipelineProcessors">
+  pipeline-processors="pipelineProcessors"
+  ng-show="currentSectionOption === sectionOptions.details">
 </processor-detail>
+<processor-output-detail
+  processor-shell="pipelineProcessors.selectedItem"
+  pipeline="pipeline"
+  ng-show="currentSectionOption === sectionOptions.output">
+</processor-output-detail>
