@@ -16,8 +16,9 @@ app.directive('processorOutputDetail', function () {
     controller: function ($scope) {
       function updateInputs() {
         const processorShell = $scope.processorShell;
+        if (!processorShell) return;
 
-        $scope.title = `${processorShell.processor.title} ${processorShell.description}`;
+        $scope.title = `${_.get(processorShell, 'processor.title')} ${processorShell.description}`;
         $scope.inputObject = processorShell.inputObject;
         $scope.outputObject = processorShell.outputObject;
 
