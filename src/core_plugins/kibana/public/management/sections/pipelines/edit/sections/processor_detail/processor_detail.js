@@ -27,6 +27,8 @@ app.directive('processorDetail', function ($compile) {
         const processorShell = $scope.processorShell;
         $container.empty();
 
+        if (!processorShell) return;
+
         const newScope = $scope.$new();
         newScope.pipeline = pipeline;
         newScope.processor = processorShell.processor;
@@ -50,7 +52,12 @@ app.directive('processorDetail', function ($compile) {
       });
 
       $scope.$watch('processorShell', (processorShell) => {
+        const oldProcessorTypeId = $scope.processorTypeId;
+
         $scope.processorTypeId = _.get(processorShell, 'typeId');
+        if (oldProcessorTypeId === $scope.processorTypeId) {
+          updateUi();
+        }
       });
     }
   };
