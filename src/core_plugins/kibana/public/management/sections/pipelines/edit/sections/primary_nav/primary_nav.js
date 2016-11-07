@@ -31,6 +31,12 @@ app.directive('primaryNav', function () {
       } else {
         this.section = this.sections.documents;
       }
+
+      $scope.$watch('primaryNav.section', (newVal, oldVal) => {
+        if (newVal !== oldVal && oldVal === this.sections.documents) {
+          $scope.pipelineProcessors.simulate();
+        }
+      });
     }
   };
 });

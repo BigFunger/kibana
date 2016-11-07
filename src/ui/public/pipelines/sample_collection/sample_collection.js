@@ -49,10 +49,6 @@ export class SampleCollection {
       _.pick(model, _.keys(defaultModel)),
       defaultModel
     );
-
-    // if (this.samples.length === 0) {
-    //   this.add(new Sample({ description: 'Input 1' }));
-    // }
   }
 
   getCurrentSample() {
