@@ -6,7 +6,7 @@ import './processor_detail.less';
 
 const app = uiModules.get('kibana');
 
-app.directive('processorDetail', function ($compile) {
+app.directive('processorDetail', function ($compile, $timeout) {
   return {
     restrict: 'E',
     template: template,
@@ -21,6 +21,10 @@ app.directive('processorDetail', function ($compile) {
 
       $scope.inputSection = {
         collapsed: true
+      };
+
+      $scope.configSection = {
+        collapsed: false
       };
 
       function updateUi() {
@@ -58,6 +62,15 @@ app.directive('processorDetail', function ($compile) {
         if (oldProcessorTypeId === $scope.processorTypeId) {
           updateUi();
         }
+        if (!$scope.processorTypeId) {
+          $scope.configSection.collapsed = false;
+        }
+
+        $timeout(() => {
+          const $select = $el.find('.ui-select-focusser');
+          const $selectScope = $select.scope();
+          $selectScope.$select.setFocus();
+        });
       });
     }
   };

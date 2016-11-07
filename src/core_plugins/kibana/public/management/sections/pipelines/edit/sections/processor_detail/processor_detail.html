@@ -8,8 +8,8 @@
 </div>
 
 <section-collapser
-  class="compact"
-  title="Input Document State"
+  class="collapser-compact"
+  title="Input"
   section="inputSection">
 </section-collapser>
 <processor-input
@@ -17,23 +17,30 @@
   ng-hide="inputSection.collapsed">
 </processor-input>
 
-<processor-type-select
-  processor-type-id="processorTypeId"
-  ng-show="processorShell">
-</processor-type-select>
-<div
-  class="processor-ui-content"
-  ng-show="processorShell.typeId">
+<section-collapser
+  class="collapser-small"
+  title="Configuration"
+  section="configSection">
+</section-collapser>
+<div ng-hide="configSection.collapsed">
+  <processor-type-select
+    processor-type-id="processorTypeId"
+    ng-show="processorShell">
+  </processor-type-select>
+  <div
+    class="processor-ui-content"
+    ng-show="processorShell.typeId">
+  </div>
+  <processor-failure-action
+    processor-shell="processorShell"
+    pipeline-processors="pipelineProcessors"
+    ng-show="processorShell.typeId">
+  </processor-failure-action>
 </div>
-<processor-failure-action
-  processor-shell="processorShell"
-  pipeline-processors="pipelineProcessors"
-  ng-show="processorShell.typeId">
-</processor-failure-action>
 
 <section-collapser
-  class="compact"
-  title="Output Document State"
+  class="collapser-compact"
+  title="Output"
   section="outputSection"
   ng-show="processorShell.typeId">
 </section-collapser>

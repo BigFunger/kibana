@@ -35,7 +35,6 @@ import './sections/ui_select_tweaks';
 import './sections/section_collapser';
 import './sections/processor_input';
 import './sections/processor_output';
-import './sections/processor_output_detail';
 import './sections/processor_failure_action';
 
 import './sections/pipeline_input';

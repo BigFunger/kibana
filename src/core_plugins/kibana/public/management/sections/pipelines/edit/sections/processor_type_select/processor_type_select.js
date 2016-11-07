@@ -27,14 +27,14 @@ function buildProcessorTypeList(processorRegistry) {
     .value();
 }
 
-app.directive('processorTypeSelect', function ($timeout, Private) {
+app.directive('processorTypeSelect', function ($timeout, Private, Notifier) {
   return {
     restrict: 'E',
     template: template,
     scope: {
       processorTypeId: '='
     },
-    controller: function ($scope, Private, Notifier) {
+    link: function ($scope, $el, attr) {
       const pipelines = Private(PipelinesProvider);
       const notify = new Notifier({ location: `Ingest Pipeline Setup` });
       const processorRegistry = Private(processorRegistryProvider);
@@ -54,6 +54,10 @@ app.directive('processorTypeSelect', function ($timeout, Private) {
       $scope.$watch('processorTypeId', (processorTypeId) => {
         if (!processorTypeId) {
           $scope.selectedItem = { value: '' };
+
+          $timeout(() => {
+            $el.find('.ui-select-focusser')[0].focus();
+          });
         } else {
           const processorType = processorTypesById[processorTypeId];
           $scope.selectedItem = { value: processorType };
@@ -73,9 +77,6 @@ app.directive('processorTypeSelectTweaks', function ($timeout) {
         const searchBox = $el.find('.ui-select-search');
         searchBox.blur((event) => {
           if (select.items.length === 0) {
-            //select.clear(event);
-            //$scope.$parent.resetValue();
-            //console.log(select.open);
             select.open = false;
           }
         });
