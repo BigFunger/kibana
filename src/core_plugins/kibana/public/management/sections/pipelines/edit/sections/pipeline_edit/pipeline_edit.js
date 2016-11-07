@@ -35,16 +35,6 @@ app.directive('pipelineEdit', function () {
         key: 'save',
         template: saveTemplate,
         description: 'Save Pipeline'
-      },
-      {
-        key: 'options',
-        template: '<h1>OPTIONS!!!</h1>',
-        description: 'Do Something With Options'
-      },
-      {
-        key: 'rename',
-        template: '<h1>RENAME!!!</h1>',
-        description: 'Rename the pipeline for some reason.'
       }];
     }
   };
