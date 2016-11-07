@@ -2,7 +2,7 @@
 
 <section-collapser
   class="collapser-compact"
-  title="Input Document State"
+  title="Input"
   section="inputSection"
   ng-class="{ expanded: !inputSection.collapsed }">
 </section-collapser>
@@ -26,26 +26,34 @@
 
 <section-collapser
   class="collapser-compact"
-  title="Output Document State"
+  title="Output"
   section="outputSection"
   ng-class="{ expanded: !outputSection.collapsed }">
 </section-collapser>
 <div
   class="output-section"
   ng-show="!outputSection.collapsed">
-  <div class="header">
-    <tertiary-nav
-      class="simple"
-      options="outputOptions"
-      selected-option="currentOutputOption">
-    </tertiary-nav>
+  <div
+    ng-hide="pipeline.error">
+    <div class="header">
+      <tertiary-nav
+        class="simple"
+        options="outputOptions"
+        selected-option="currentOutputOption">
+      </tertiary-nav>
+    </div>
+    <document-viewer
+      states="outputStatesDoc"
+      ng-show="currentOutputOption === outputOptions.document">
+    </document-viewer>
+    <document-viewer
+      states="outputStatesMeta"
+      ng-show="currentOutputOption === outputOptions.meta">
+    </document-viewer>
   </div>
-  <document-viewer
-    states="outputStatesDoc"
-    ng-show="currentOutputOption === outputOptions.document">
-  </document-viewer>
-  <document-viewer
-    states="outputStatesMeta"
-    ng-show="currentOutputOption === outputOptions.meta">
-  </document-viewer>
+  <div
+    ng-show="pipeline.error"
+    class="alert alert-danger">
+    Current pipeline will not successfully index the sample document.
+  </div>
 </div>

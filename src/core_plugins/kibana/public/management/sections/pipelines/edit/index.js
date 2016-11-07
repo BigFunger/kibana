@@ -23,7 +23,6 @@ import './sections/pipeline_processors';
 import './sections/pipeline_pipeline';
 import './sections/pipeline_pipeline_detail';
 
-import './sections/pipeline_output';
 import './sections/processor_tree';
 import './sections/processor_tree_item';
 import './sections/processor_tree_header';

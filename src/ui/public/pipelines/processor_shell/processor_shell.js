@@ -213,6 +213,10 @@ export default class ProcessorShell {
     }
   }
 
+  get causeIndexFail() {
+    return (this.state !== processorStates.VALID && this.state !== processorStates.ERROR_RECOVER);
+  }
+
   get model() {
     const result = _.assign(
       {},
