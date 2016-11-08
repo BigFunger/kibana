@@ -1,51 +1,53 @@
-<h3 ng-show="processorShell.processor">
-  {{processorShell.processor.title}} {{processorShell.description}}
-</h3>
-<div
-  class="alert alert-warning unknown-warning"
-  ng-show="processorShell.typeId === 'unknown'">
-  This processor is a type that is unknown by Kibana. This interface will allow you to edit and view this processor as raw JSON. It is strongly recommended that you install the plugin that corresponds to this processor type. Warning: Entering JSON that ingest does not understand can break Kibana.
-</div>
-
-<section-collapser
-  class="collapser-compact"
-  title="Input"
-  section="inputSection">
-</section-collapser>
-<processor-input
-  processor-shell="processorShell"
-  ng-hide="inputSection.collapsed">
-</processor-input>
-
-<section-collapser
-  class="collapser-small"
-  title="Configuration"
-  section="configSection">
-</section-collapser>
-<div ng-hide="configSection.collapsed">
-  <processor-type-select
-    processor-type-id="processorTypeId"
-    ng-show="processorShell">
-  </processor-type-select>
+<form name="processorForm">
+  <h3 ng-show="processorShell.processor">
+    {{processorShell.processor.title}} {{processorShell.description}}
+  </h3>
   <div
-    class="processor-ui-content"
-    ng-show="processorShell.typeId">
+    class="alert alert-warning unknown-warning"
+    ng-show="processorShell.typeId === 'unknown'">
+    This processor is a type that is unknown by Kibana. This interface will allow you to edit and view this processor as raw JSON. It is strongly recommended that you install the plugin that corresponds to this processor type. Warning: Entering JSON that ingest does not understand can break Kibana.
   </div>
-  <processor-failure-action
-    processor-shell="processorShell"
-    pipeline-processors="pipelineProcessors"
-    ng-show="processorShell.typeId">
-  </processor-failure-action>
-</div>
 
-<section-collapser
-  class="collapser-compact"
-  title="Output"
-  section="outputSection"
-  ng-show="processorShell.typeId">
-</section-collapser>
-<processor-output
-  processor-shell="processorShell"
-  ng-if="processorShell.typeId"
-  ng-hide="outputSection.collapsed">
-</processor-output>
+  <section-collapser
+    class="collapser-compact"
+    title="Input"
+    section="inputSection">
+  </section-collapser>
+  <processor-input
+    processor-shell="processorShell"
+    ng-hide="inputSection.collapsed">
+  </processor-input>
+
+  <section-collapser
+    class="collapser-small"
+    title="Configuration"
+    section="configSection">
+  </section-collapser>
+  <div ng-hide="configSection.collapsed">
+    <processor-type-select
+      processor-type-id="processorTypeId"
+      ng-show="processorShell">
+    </processor-type-select>
+    <div
+      class="processor-ui-content"
+      ng-show="processorShell.typeId">
+    </div>
+    <processor-failure-action
+      processor-shell="processorShell"
+      pipeline-processors="pipelineProcessors"
+      ng-show="processorShell.typeId">
+    </processor-failure-action>
+  </div>
+
+  <section-collapser
+    class="collapser-compact"
+    title="Output"
+    section="outputSection"
+    ng-show="processorShell.typeId">
+  </section-collapser>
+  <processor-output
+    processor-shell="processorShell"
+    ng-if="processorShell.typeId"
+    ng-hide="outputSection.collapsed">
+  </processor-output>
+</form>

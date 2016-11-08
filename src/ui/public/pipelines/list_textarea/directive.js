@@ -10,7 +10,8 @@ app.directive('listTextarea', function () {
     template: template,
     scope: {
       list: '=',
-      splitOnComma: '@'
+      splitOnComma: '@',
+      name: '@'
     },
     controller: function ($scope) {
       $scope.splitOnComma = !!$scope.splitOnComma;

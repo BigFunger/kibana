@@ -1,4 +1,4 @@
-import { assign } from 'lodash';
+import { assign, get } from 'lodash';
 import Processor from 'ui/pipelines/processor/processor';
 
 export default class Script extends Processor {
@@ -18,6 +18,75 @@ export default class Script extends Processor {
       },
       model
     );
+
+    this.scriptTypes = {
+      inline: 'Inline Script',
+      file: 'Script File',
+      script_id: 'Script Id'
+    };
+  }
+
+  get errorConversions() {
+    return [
+      {
+        pattern: /\[lang\] required property is missing/,
+        matchLength: 1,
+        substitution: (matches) => {
+          return {
+            message: `Language is required`,
+            field: 'language'
+          };
+        },
+      },
+      {
+        pattern: /compile error/,
+        matchLength: 1,
+        substitution: (matches) => {
+          const result = { message: `The specified script caused a compile error` };
+          if (this.scriptType === 'inline') result.field = 'inlineScript';
+          if (this.scriptType === 'file') result.field = 'filename';
+          if (this.scriptType === 'script_id') result.field = 'scriptId';
+
+          return result;
+        }
+      },
+      {
+        pattern: /runtime error/,
+        matchLength: 1,
+        substitution: (matches) => {
+          const result = { message: `The specified script caused a runtime error` };
+          if (this.scriptType === 'inline') result.field = 'inlineScript';
+          if (this.scriptType === 'file') result.field = 'filename';
+          if (this.scriptType === 'script_id') result.field = 'scriptId';
+
+          return result;
+        }
+      },
+      {
+        pattern: /Need \[file\], \[id\], or \[inline\] parameter to refer to scripts/,
+        matchLength: 1,
+        substitution: (matches) => {
+          if (this.scriptType === 'inline') {
+            return {
+              message: `Inline Script is required`,
+              field: 'inlineScript'
+            };
+          }
+          if (this.scriptType === 'file') {
+            return {
+              message: `Please provide the path to the external script`,
+              field: 'filename'
+            };
+          }
+          if (this.scriptType === 'script_id') {
+            return {
+              message: `Please specify the id of the external script`,
+              field: 'scriptId'
+            };
+          }
+        }
+      }
+    ];
   }
 
   get description() {

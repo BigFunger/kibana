@@ -60,5 +60,21 @@ pipeline-edit {
       }
     }
   }
+
+  .ui-select-container.ng-invalid.ng-dirty,
+  .ui-select-container.ng-invalid.ng-touched,
+  {
+    .form-control {
+      border-color: #E74C3C !important;
+    }
+  }
   //*************************** end ui-select-tweaks
+
+  //*************************** ace editor tweaks
+  .ace_editor.ng-invalid.ng-dirty,
+  .ace_editor.ng-invalid.ng-touched {
+    border: 2px solid;
+    border-color: #E74C3C !important;
+  }
+  //*************************** end ace editor tweaks
 }

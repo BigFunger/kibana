@@ -36,6 +36,34 @@ expression that supports aliased expressions that can be reused.`,
     return chunks.join('');
   }
 
+  get errorConversions() {
+    return [
+      {
+        pattern: /path cannot be null nor empty/,
+        matchLength: 1,
+        substitution: (matches) => {
+          if (!this.field) {
+            return {
+              message: `Field is required`,
+              field: 'field'
+            };
+          }
+        }
+      },
+      {
+        pattern: /\[patterns\] List of patterns must not be empty/,
+        matchLength: 1,
+        substitution: (matches) => {
+          return {
+            message: `Please provide at least one Pattern`,
+            field: 'patterns'
+          };
+        }
+      }
+    ];
+  };
+
+
   get model() {
     return assign(
       super.model,

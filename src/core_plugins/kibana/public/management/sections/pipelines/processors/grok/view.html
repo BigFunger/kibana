@@ -2,7 +2,8 @@
   <label>Field:</label>
   <field-select
     processor="processor"
-    field="processor.field">
+    field="processor.field"
+    name="field">
   </field-select>
 </div>
 <div class="form-group">
@@ -15,7 +16,10 @@
     target="_blank">
     <i aria-hidden="true" class="fa fa-question-circle"></i>
   </a>
-  <list-textarea list="processor.patterns"></list-textarea>
+  <list-textarea
+    list="processor.patterns"
+    name="patterns">
+  </list-textarea>
 </div>
 <div class="form-group">
   <label>Ignore Missing Field:</label>

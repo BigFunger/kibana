@@ -1,6 +1,11 @@
 <div class="form-group">
   <label>Language:</label>
-  <input type="text" class="form-control" ng-trim="false" ng-model="processor.language">
+  <input
+    type="text"
+    class="form-control"
+    ng-trim="false"
+    ng-model="processor.language"
+    name="language" />
 </div>
 <div class="form-group">
   <label>Script Type:</label>
@@ -21,6 +26,7 @@
       mode: 'java',
       onLoad: aceLoaded
     }"
+    name="inlineScript"
     ng-model="processor.inlineScript">
   </div>
   <div class="info">NOTE: It is possible to write an invalid script that could cause Elasticsearch to crash. Use caution!</div>
@@ -29,13 +35,23 @@
   class="form-group"
   ng-show="processor.scriptType === 'file'">
   <label>Filename:</label>
-  <input type="text" class="form-control" ng-trim="false" ng-model="processor.filename">
+  <input
+    type="text"
+    class="form-control"
+    ng-trim="false"
+    ng-model="processor.filename"
+    name="filename" />
 </div>
 <div
   class="form-group"
   ng-show="processor.scriptType === 'script_id'">
   <label>Script Id:</label>
-  <input type="text" class="form-control" ng-trim="false" ng-model="processor.scriptId">
+  <input
+    type="text"
+    class="form-control"
+    ng-trim="false"
+    ng-model="processor.scriptId"
+    name="scriptId" />
 </div>
 <section-collapser
   title="Advanced settings"

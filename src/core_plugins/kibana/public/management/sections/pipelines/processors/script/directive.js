@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import uiModules from 'ui/modules';
 import template from './view.html';
 import './styles.less';
@@ -18,11 +19,7 @@ app.directive('processorUiScript', function () {
         collapsed: true
       };
 
-      $scope.scriptTypes = {
-        inline: 'Inline Script',
-        file: 'Script File',
-        script_id: 'Script Id'
-      };
+      $scope.scriptTypes = processor.scriptTypes;
 
       $scope.aceLoaded = (editor) => {
         this.editor = editor;

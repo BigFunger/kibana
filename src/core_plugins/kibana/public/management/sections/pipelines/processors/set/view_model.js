@@ -25,6 +25,23 @@ already exists, its value will be replaced with the provided one.`,
     return chunks.join('');
   }
 
+  get errorConversions() {
+    return [
+      {
+        pattern: /path cannot be null nor empty/,
+        matchLength: 1,
+        substitution: (matches) => {
+          if (!this.field) {
+            return {
+              message: `Target Field is required`,
+              field: 'field'
+            };
+          }
+        },
+      }
+    ];
+  };
+
   get model() {
     return assign(
       super.model,

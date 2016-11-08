@@ -12,7 +12,8 @@ app.directive('fieldSelect', function ($timeout) {
     template: template,
     scope: {
       processor: '=',
-      field: '='
+      field: '=',
+      name: '@'
     },
     controller: function ($scope) {
       $scope.selected = { value: $scope.field };

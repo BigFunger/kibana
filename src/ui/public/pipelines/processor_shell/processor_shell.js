@@ -139,58 +139,12 @@ export default class ProcessorShell {
   cleanError(error) {
     if (!error) return;
 
-    const conversions = [
-      {
-        pattern: /field \[(.*)\] of type \[(.*)\] cannot be cast to \[java\.util\.List\]/,
-        matchLength: 3,
-        substitution: (matches) => { return `field [${matches[1]}] does not contain an array value`; }
-      },
-      {
-        pattern: /field \[(.*)\] of type \[(.*)\] cannot be cast to \[java\.lang\.String\]/,
-        matchLength: 3,
-        substitution: (matches) => { return `field [${matches[1]}] does not contain a string value`; }
-      },
-      {
-        pattern: /field \[(.*)\] not present as part of path \[(.*)\]/,
-        matchLength: 3,
-        substitution: (matches) => { return `field [${matches[1]}] was not found`; }
-      },
-      {
-        pattern: /field \[(.*)\] doesn't exist/,
-        matchLength: 2,
-        substitution: (matches) => { return `field [${matches[1]}] was not found`; }
-      },
-      {
-        pattern: /compile error/,
-        matchLength: 1,
-        substitution: (matches) => { return `The specified script caused a compile error`; }
-      },
-      {
-        pattern: /runtime error/,
-        matchLength: 1,
-        substitution: (matches) => { return `The specified script caused a runtime error`; }
-      },
-      {
-        pattern: /Need \[file\], \[id\], or \[inline\] parameter to refer to scripts/,
-        matchLength: 1,
-        substitution: (matches) => {
-          if (_.get(this, 'processor.scriptType') === 'inline') {
-            return `Please define the inline script`;
-          }
-          if (_.get(this, 'processor.scriptType') === 'file') {
-            return `Please provide the path to the external script`;
-          }
-          if (_.get(this, 'processor.scriptType') === 'script_id') {
-            return `Please specify the id of the external script`;
-          }
-        }
-      }
-    ];
+    const conversions = this.processor.errorConversions || [];
 
     _.forEach(conversions, (conversion) => {
       const matches = conversion.pattern.exec(error.message);
       if (matches && matches.length === conversion.matchLength) {
-        error.message = conversion.substitution(matches);
+        _.assign(error, conversion.substitution(matches));
       }
     });
 

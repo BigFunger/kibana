@@ -36,6 +36,7 @@ app.directive('processorDetail', function ($compile, $timeout) {
         const newScope = $scope.$new();
         newScope.pipeline = pipeline;
         newScope.processor = processorShell.processor;
+        newScope.processorShell = processorShell;
         const typeId = processorShell.typeId;
 
         if (typeId) {
@@ -71,6 +72,23 @@ app.directive('processorDetail', function ($compile, $timeout) {
           const $selectScope = $select.scope();
           $selectScope.$select.setFocus();
         });
+      });
+
+      $scope.$watch('processorShell.error', (error) => {
+        _.forEach($scope.processorForm.$error, (fieldErrors) => {
+          _.forEach(fieldErrors, (errorField) => {
+            errorField.$setValidity('', true);
+            errorField.$setUntouched();
+            errorField.$setPristine();
+          });
+        });
+
+        if (error && error.field) {
+          const formField = $scope.processorForm[error.field];
+          formField.$setValidity('', false);
+          formField.$setTouched();
+          formField.$setDirty();
+        }
       });
     }
   };
