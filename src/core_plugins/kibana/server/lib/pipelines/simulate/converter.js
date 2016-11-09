@@ -1,4 +1,4 @@
-import { get, map } from 'lodash';
+import { find, get, map, keys } from 'lodash';
 import pipelineConverterProvider from '../pipeline/converter';
 import simulateDocsConverterProvider from '../simulate_docs/converter';
 
@@ -91,11 +91,20 @@ export default function (server) {
 
       return results;
     },
-    esErrorToKibana: function (simulateEsDocument) {
-      const processorId = get(simulateEsDocument, 'body.error.root_cause[0].header.processor_tag');
+    esErrorToKibana: function (simulateEsDocument, request) {
+      const errorMessage = get(simulateEsDocument, 'body.error.root_cause[0].reason');
+      let processorId = get(simulateEsDocument, 'body.error.root_cause[0].header.processor_tag');
+
+      if (errorMessage === 'No processor type exists with name [undefined]') {
+        const processors = get(request, 'pipeline.processors');
+        const processor = find(processors, (processor) => {
+          return keys(processor)[0] === 'undefined';
+        });
+        processorId = get(processor, 'undefined.tag');
+      }
+
       if (!processorId) throw simulateEsDocument;
 
-      const errorMessage = get(simulateEsDocument, 'body.error.root_cause[0].reason');
       const processorError = {
         compile: true,
         message: errorMessage

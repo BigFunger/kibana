@@ -135,11 +135,26 @@ export default class ProcessorShell {
     this.error = this.cleanError(error);
   }
 
-  //I think these should be defined within each processor.
   cleanError(error) {
     if (!error) return;
 
-    const conversions = this.processor.errorConversions || [];
+    let conversions = [
+      {
+        pattern: /No processor type exists with name \[undefined\]/,
+        matchLength: 1,
+        substitution: (matches) => {
+          if (!this.field) {
+            return {
+              message: `Please select a Processor Type`,
+              field: 'processorTypeId'
+            };
+          }
+        },
+      }
+    ];
+    if (this.processor) {
+      conversions = conversions.concat(this.processor.errorConversions || []);
+    }
 
     _.forEach(conversions, (conversion) => {
       const matches = conversion.pattern.exec(error.message);

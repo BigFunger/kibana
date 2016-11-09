@@ -6,7 +6,7 @@ import simulateConverterProvider from '../../../../lib/pipelines/simulate/conver
 export default (server) => {
   const simulateConverter = simulateConverterProvider(server);
   const handleResponse = simulateConverter.esResponseToKibana;
-  const handleError = simulateConverter.esErrorToKibana;
+  //const handleError = simulateConverter.esErrorToKibana;
 
   server.route({
     path: '/api/kibana/pipelines/simulate',
@@ -25,6 +25,10 @@ export default (server) => {
       console.log(JSON.stringify(body));
       console.log();
 
+      const handleError = function (response) {
+        return simulateConverter.esErrorToKibana(response, body);
+      };
+
       return boundCallWithRequest('transport.request', {
         path: '/_ingest/pipeline/_simulate',
         query: { verbose: true },
@@ -32,10 +36,6 @@ export default (server) => {
         body: body
       })
       .then(handleResponse, handleError)
-      .then((response) => {
-        console.log(JSON.stringify(response));
-        return response;
-      })
       .then(reply)
       .catch((error) => {
         reply(handleESError(error));

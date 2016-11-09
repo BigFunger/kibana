@@ -8,6 +8,15 @@ export default function (server) {
       const result = map(processorApiDocument, (processor) => {
         const typeId = processor.type_id;
 
+        if (!typeId) {
+          return {
+            undefined : {
+              tag: processorApiDocument[0].processor_id,
+              foo: 'bar'
+            }
+          };
+        }
+
         let processorConverter = pipelinesManager.processors.converters[typeId];
         if (!processorConverter) {
           const errorMessage = `Unknown processor type: [${typeId}]`;

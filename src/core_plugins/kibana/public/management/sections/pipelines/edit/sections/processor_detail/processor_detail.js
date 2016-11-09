@@ -54,6 +54,9 @@ app.directive('processorDetail', function ($compile, $timeout) {
         const processorShell = $scope.processorShell;
         processorShell.setTypeId(typeId);
         updateUi();
+
+        const formField = $scope.processorForm.processorTypeId;
+        formField.$setValidity('', true);
       });
 
       $scope.$watch('processorShell', (processorShell) => {
