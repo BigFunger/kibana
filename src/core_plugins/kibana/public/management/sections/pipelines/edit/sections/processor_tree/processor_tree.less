@@ -11,24 +11,27 @@ processor-tree {
     padding: 0px;
   }
 
-  .branch-header {
+  .branch-header,
+  .branch-footer {
     display: none;
   }
 }
 
 processor-tree.branch {
-  margin-bottom: 0px;
   margin-left: 10px;
+}
 
+processor-tree.on-error {
+  margin-bottom: 0px;
   border-left: 2px solid @kibanaGray5;
   border-top: 2px solid @kibanaGray5;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 
   .branch-header {
+    display: block;
     padding: 3px;
     padding-left: 15px;
-    display: block;
     color: @kibanaGray4;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
@@ -37,6 +40,7 @@ processor-tree.branch {
   }
 
   .branch-footer {
+    display: block;
     width: 25px;
     border-bottom: 2px solid @kibanaGray5;
     border-bottom-left-radius: 6px;

@@ -4,12 +4,16 @@
   processor-collection="pipeline.processorCollection"
   selected-item-controller="pipelineProcessors">
 </processor-tree-header>
-<p class="help-message" ng-show="pipeline.processorCollection.processors.length === 0">Processors are the building blocks of a Pipeline. Each Processor that you add to your pipeline will allow you to modify the document at index time. Get started by adding a Processor.</p>
-<processor-tree
+<!-- <p class="help-message" ng-show="pipeline.processorCollection.processors.length === 0">Processors are the building blocks of a Pipeline. Each Processor that you add to your pipeline will allow you to modify the document at index time. Get started by adding a Processor.</p> -->
+<processor-tree-root
+  pipeline="pipeline"
+  selected-item-controller="pipelineProcessors">
+</processor-tree-root>
+<!-- <processor-tree
   processor-collection="pipeline.processorCollection"
   selected-item-controller="pipelineProcessors"
   ng-hide="pipeline.processorCollection.processors.length === 0">
-</processor-tree>
+</processor-tree> -->
 
 <processor-tree-header
   title="Root Error Processors"

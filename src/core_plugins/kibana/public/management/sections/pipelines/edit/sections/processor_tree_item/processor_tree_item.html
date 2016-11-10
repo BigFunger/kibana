@@ -1,6 +1,6 @@
 <div
   class="tree-item"
-  ng-class="{ expanded: processorShell.expanded === true }"
+  ng-class="{ expanded: processorShell.expanded === true, active: selectedItemController.selectedItem === processorShell }"
   ng-click="selectItem(processorShell)"
   draggable-handle>
   <div class="collapse-icon">
@@ -83,7 +83,7 @@
   </div>
 </div>
 <processor-tree
-  class="branch"
+  class="branch on-error"
   ng-show="processorShell.expanded && processorShell.failureProcessorCollection.processors.length > 0 && processorShell.failureAction === 'on_error'"
   processor-collection="processorShell.failureProcessorCollection"
   selected-item-controller="selectedItemController">

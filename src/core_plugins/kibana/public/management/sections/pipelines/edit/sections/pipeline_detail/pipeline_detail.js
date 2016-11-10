@@ -11,7 +11,8 @@ app.directive('pipelineDetail', function ($compile) {
     restrict: 'E',
     template: template,
     scope: {
-      pipeline: '='
+      pipeline: '=',
+      pipelineProcessors: '='
     },
     controller: function ($scope) {
       function updateInputs() {
@@ -40,7 +41,7 @@ app.directive('pipelineDetail', function ($compile) {
 
       $scope.$watch('pipeline.output', e => { updateInputs(); });
 
-      $scope.inputSection = { collapsed: true };
+      //$scope.inputSection = { collapsed: false };
       $scope.inputOptions = {
         document: {
           title: 'Document'
@@ -51,7 +52,7 @@ app.directive('pipelineDetail', function ($compile) {
       };
       $scope.currentInputOption = $scope.inputOptions.document;
 
-      $scope.outputSection = { collapsed: false };
+      //$scope.outputSection = { collapsed: false };
       $scope.outputOptions = {
         document: {
           title: 'Document'

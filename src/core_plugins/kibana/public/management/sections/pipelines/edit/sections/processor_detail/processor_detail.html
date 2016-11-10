@@ -1,4 +1,7 @@
 <form name="processorForm">
+  <h3 ng-hide="processorShell.processor">
+    New Processor
+  </h3>
   <h3 ng-show="processorShell.processor">
     {{processorShell.processor.title}} {{processorShell.description}}
   </h3>
@@ -11,19 +14,19 @@
   <section-collapser
     class="collapser-compact"
     title="Input"
-    section="inputSection">
+    section="pipelineProcessors.inputSection">
   </section-collapser>
   <processor-input
     processor-shell="processorShell"
-    ng-hide="inputSection.collapsed">
+    ng-hide="pipelineProcessors.inputSection.collapsed">
   </processor-input>
 
   <section-collapser
     class="collapser-small"
     title="Configuration"
-    section="configSection">
+    section="pipelineProcessors.configSection">
   </section-collapser>
-  <div ng-hide="configSection.collapsed">
+  <div ng-hide="pipelineProcessors.configSection.collapsed">
     <processor-type-select
       processor-type-id="processorTypeId"
       ng-show="processorShell">
@@ -42,13 +45,13 @@
   <section-collapser
     class="collapser-compact"
     title="Output"
-    section="outputSection"
+    section="pipelineProcessors.outputSection"
     ng-show="processorShell.typeId && !processorShell.error">
   </section-collapser>
   <processor-output
     processor-shell="processorShell"
     ng-if="processorShell.typeId && !processorShell.error"
-    ng-hide="outputSection.collapsed">
+    ng-hide="pipelineProcessors.outputSection.collapsed">
   </processor-output>
   <processor-error
     processor-shell="processorShell">

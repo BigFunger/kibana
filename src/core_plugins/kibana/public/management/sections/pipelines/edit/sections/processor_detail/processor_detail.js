@@ -19,14 +19,6 @@ app.directive('processorDetail', function ($compile, $timeout) {
       const pipeline = $scope.pipeline;
       const $container = $el.find('.processor-ui-content');
 
-      $scope.inputSection = {
-        collapsed: true
-      };
-
-      $scope.configSection = {
-        collapsed: false
-      };
-
       function updateUi() {
         const processorShell = $scope.processorShell;
         $container.empty();
@@ -67,7 +59,7 @@ app.directive('processorDetail', function ($compile, $timeout) {
           updateUi();
         }
         if (!$scope.processorTypeId) {
-          $scope.configSection.collapsed = false;
+          $scope.pipelineProcessors.configSection.collapsed = false;
         }
 
         $timeout(() => {

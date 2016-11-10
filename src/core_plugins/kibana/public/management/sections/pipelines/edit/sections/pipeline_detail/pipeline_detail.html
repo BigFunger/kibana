@@ -1,14 +1,16 @@
-<document-selector></document-selector>
-
+<!-- <document-selector></document-selector> -->
+<h3>
+  Entire Pipeline
+</h3>
 <section-collapser
   class="collapser-compact"
   title="Input"
-  section="inputSection"
-  ng-class="{ expanded: !inputSection.collapsed }">
+  section="pipelineProcessors.inputSection"
+  ng-class="{ expanded: !pipelineProcessors.inputSection.collapsed }">
 </section-collapser>
 <div
   class="input-section"
-  ng-show="!inputSection.collapsed">
+  ng-show="!pipelineProcessors.inputSection.collapsed">
   <tertiary-nav
     class="simple"
     options="inputOptions"
@@ -27,12 +29,12 @@
 <section-collapser
   class="collapser-compact"
   title="Output"
-  section="outputSection"
-  ng-class="{ expanded: !outputSection.collapsed }">
+  section="pipelineProcessors.outputSection"
+  ng-class="{ expanded: !pipelineProcessors.outputSection.collapsed }">
 </section-collapser>
 <div
   class="output-section"
-  ng-show="!outputSection.collapsed">
+  ng-show="!pipelineProcessors.outputSection.collapsed">
   <div
     ng-hide="pipeline.error">
     <div class="header">

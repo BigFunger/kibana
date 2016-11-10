@@ -20,9 +20,6 @@ app.directive('primaryNav', function () {
         },
         processors: {
           title: 'Processors'
-        },
-        pipeline: {
-          title: 'Pipeline'
         }
       };
 

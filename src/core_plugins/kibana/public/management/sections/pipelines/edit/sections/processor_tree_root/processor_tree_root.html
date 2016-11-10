@@ -1,0 +1,58 @@
+<div
+  class="tree-item"
+  ng-class="{ expanded: pipeline.expanded === true, active: selectedItemController.selectedItem === pipeline }"
+  ng-click="selectItem(pipeline)">
+  <div
+    class="collapse-icon">
+    <button
+      type="button"
+      tooltip="Expand"
+      tooltip-append-to-body="true"
+      class="btn btn-xs"
+      ng-show="!pipeline.expanded && pipeline.processorCollection.processors.length > 0"
+      ng-click="pipeline.expanded = true">
+      <i aria-hidden="true" class="fa fa-caret-right"></i>
+    </button>
+    <button
+      type="button"
+      tooltip="Collapse"
+      tooltip-append-to-body="true"
+      class="btn btn-xs"
+      ng-show="pipeline.expanded && pipeline.processorCollection.processors.length > 0"
+      ng-click="pipeline.expanded = false">
+      <i aria-hidden="true" class="fa fa-caret-down"></i>
+    </button>
+  </div>
+  <div class="status-icon">
+    <i
+      aria-hidden="true"
+      class="fa fa-question not-initialized"
+      tooltip="This processor has not yet been simulated"
+      tooltip-append-to-body="true"
+      ng-show="!pipeline.error && !pipeline.output">
+    </i>
+    <i
+      aria-hidden="true"
+      class="fa fa-warning error-fail"
+      tooltip="The Pipeline did not successfully simulate this document"
+      tooltip-append-to-body="true"
+      ng-show="pipeline.error">
+    </i>
+    <i
+      aria-hidden="true"
+      class="fa fa-check valid"
+      tooltip="The Pipeline successfully simulated this document"
+      tooltip-append-to-body="true"
+      ng-show="!pipeline.error && pipeline.output">
+    </i>
+  </div>
+  <div class="title">
+    <span class="processor-type">Entire Pipeline</span>
+  </div>
+</div>
+<processor-tree
+  class="branch"
+  ng-show="pipeline.expanded"
+  processor-collection="pipeline.processorCollection"
+  selected-item-controller="selectedItemController">
+</processor-tree>

@@ -2,5 +2,11 @@
   processor-shell="pipelineProcessors.selectedItem"
   pipeline="pipeline"
   pipeline-processors="pipelineProcessors"
+  ng-if="pipelineProcessors.selectedType === 'processor'"
   ng-show="pipelineProcessors.selectedItem">
 </processor-detail>
+<pipeline-detail
+  pipeline="pipeline"
+  pipeline-processors="pipelineProcessors"
+  ng-show="pipelineProcessors.selectedType === 'pipeline'">
+</pipeline-detail>

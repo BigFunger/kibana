@@ -24,6 +24,7 @@ import './sections/pipeline_pipeline';
 import './sections/pipeline_pipeline_detail';
 
 import './sections/processor_tree';
+import './sections/processor_tree_root';
 import './sections/processor_tree_item';
 import './sections/processor_tree_header';
 import './sections/processor_detail';
