@@ -11,8 +11,7 @@ export default function (server) {
         if (!typeId) {
           return {
             undefined : {
-              tag: processorApiDocument[0].processor_id,
-              foo: 'bar'
+              tag: processor.processor_id
             }
           };
         }
