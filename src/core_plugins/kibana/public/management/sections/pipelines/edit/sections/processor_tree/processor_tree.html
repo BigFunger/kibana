@@ -1,15 +1,15 @@
 <div class="branch-header">On Data Error</div>
 <div
   class="selectable-list"
-  draggable-container="processorCollection.processors">
+  draggable-container="processorTree.processors">
   <div
-    ng-repeat="processorShell in processorCollection.processors"
+    ng-repeat="processorShell in processorTree.processors"
     draggable-item="processorShell">
     <processor-tree-item
-      processor-collection="processorCollection"
+      processor-collection="processorTree.processorCollection"
       processor-shell="processorShell"
-      selected-item-controller="selectedItemController"
-      ng-class="{ active: selectedItemController.selectedItem === processorShell }">
+      root-processor-tree="processorTree.rootProcessorTree"
+      ng-class="{ active: processorTree.rootProcessorTree.selected === processorShell }">
     </processor-tree-item>
   </div>
 </div>

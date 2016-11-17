@@ -11,7 +11,18 @@ app.directive('processorTree', function () {
     template: template,
     scope: {
       processorCollection: '=',
-      selectedItemController: '='
+      selected: '=',
+      rootProcessorTree: '='
+    },
+    controllerAs: 'processorTree',
+    bindToController: true,
+    controller: function () {
+      this.processors = this.processorCollection.processors;
+      this.rootProcessorTree = this.rootProcessorTree || this;
+
+      this.selectItem = function (processorShell) {
+        this.selected = processorShell;
+      };
     }
   };
 });

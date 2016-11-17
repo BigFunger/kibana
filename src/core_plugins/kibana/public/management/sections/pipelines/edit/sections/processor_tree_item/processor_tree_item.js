@@ -14,40 +14,44 @@ app.directive('processorTreeItem', function (RecursionHelper) {
     scope: {
       processorCollection: '=',
       processorShell: '=',
-      selectedItemController: '='
+      rootProcessorTree: '='
     },
+    controllerAs: 'processorTreeItem',
+    bindToController: true,
     compile: function (element) {
       // Use the compile function from the RecursionHelper,
       // And return the linking function(s) which it returns
       return RecursionHelper.compile(element);
     },
     controller: function ($scope) {
-      $scope.processorStates = processorStates;
+      this.processorStates = processorStates;
+      this.childProcessorCollection = this.processorShell.failureProcessorCollection;
+      this.expanded = false;
 
-      $scope.delete = () => {
-        $scope.processorCollection.remove($scope.processorShell);
-        $scope.selectedItemController.selectedItem = undefined;
+      this.delete = () => {
+        this.processorCollection.remove(this.processorShell);
+        this.rootProcessorTree.selectItem();
       };
 
-      $scope.selectItem = (processorShell) => {
-        $scope.selectedItemController.selectedItem = processorShell;
+      this.selectItem = () => {
+        this.rootProcessorTree.selectItem(this.processorShell);
       };
 
       $scope.$on('drag-start', e => {
-        $scope.wasCollapsed = $scope.processorShell.expanded;
-        $scope.processorShell.expanded = false;
+        this.wasExpanded = this.expanded;
+        this.expanded = false;
       });
 
       $scope.$on('drag-end', e => {
-        $scope.processorShell.expanded = $scope.wasCollapsed;
-        $scope.processorCollection.updateParents();
+        this.expanded = this.wasExpanded;
+        this.processorCollection.updateParents();
       });
 
-      $scope.$watch('selectedItemController.selectedItem', (processorShell) => {
-        const allProcessorCollections = $scope.processorShell.allProcessorCollections;
+      $scope.$watch('processorTreeItem.rootProcessorTree.selected', (processorShell) => {
+        const allProcessorCollections = this.processorShell.allProcessorCollections;
         _.forEach(allProcessorCollections, (processorCollection) => {
           if (_.contains(processorCollection.processors, processorShell)) {
-            $scope.processorShell.expanded = true;
+            this.expanded = true;
           }
         });
       });

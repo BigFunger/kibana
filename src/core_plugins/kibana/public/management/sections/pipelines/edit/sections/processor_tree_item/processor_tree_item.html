@@ -1,7 +1,7 @@
 <div
   class="tree-item"
-  ng-class="{ expanded: processorShell.expanded === true }"
-  ng-click="selectItem(processorShell)"
+  ng-class="{ expanded: processorTreeItem.expanded === true }"
+  ng-click="processorTreeItem.selectItem()"
   draggable-handle>
   <div class="collapse-icon">
     <button
@@ -9,8 +9,8 @@
       tooltip="Expand"
       tooltip-append-to-body="true"
       class="btn btn-xs"
-      ng-show="!processorShell.expanded && processorShell.failureProcessorCollection.processors.length > 0 && processorShell.failureAction === 'on_error'"
-      ng-click="processorShell.expanded = true">
+      ng-show="!processorTreeItem.expanded && processorTreeItem.childProcessorCollection.processors.length > 0 && processorTreeItem.processorShell.failureAction === 'on_error'"
+      ng-click="processorTreeItem.expanded = true">
       <i aria-hidden="true" class="fa fa-caret-right"></i>
     </button>
     <button
@@ -18,8 +18,8 @@
       tooltip="Collapse"
       tooltip-append-to-body="true"
       class="btn btn-xs"
-      ng-show="processorShell.expanded && processorShell.failureProcessorCollection.processors.length > 0 && processorShell.failureAction === 'on_error'"
-      ng-click="processorShell.expanded = false">
+      ng-show="processorTreeItem.expanded && processorTreeItem.childProcessorCollection.processors.length > 0 && processorTreeItem.processorShell.failureAction === 'on_error'"
+      ng-click="processorTreeItem.expanded = false">
       <i aria-hidden="true" class="fa fa-caret-down"></i>
     </button>
   </div>
@@ -29,47 +29,47 @@
       class="fa fa-question not-initialized"
       tooltip="This processor has not yet been simulated"
       tooltip-append-to-body="true"
-      ng-show="processorShell.state === processorStates.NOT_INITIALIZED">
+      ng-show="processorTreeItem.processorShell.state === processorTreeItem.processorStates.NOT_INITIALIZED">
     </i>
     <i
       aria-hidden="true"
       class="fa fa-warning error-fail"
       tooltip="Simulate returned an error for this processor"
       tooltip-append-to-body="true"
-      ng-show="processorShell.state === processorStates.ERROR_FAIL">
+      ng-show="processorTreeItem.processorShell.state === processorTreeItem.processorStates.ERROR_FAIL">
     </i>
     <i
       aria-hidden="true"
       class="fa fa-warning error-compile"
       tooltip="Simulate returned a compile error for this processor"
       tooltip-append-to-body="true"
-      ng-show="processorShell.state === processorStates.ERROR_COMPILE">
+      ng-show="processorTreeItem.processorShell.state === processorTreeItem.processorStates.ERROR_COMPILE">
     </i>
     <i
       aria-hidden="true"
       class="fa fa-warning error-recover"
-      tooltip="{{processorShell.error.message}}"
+      tooltip="Simulate returned an error for this processor"
       tooltip-append-to-body="true"
-      ng-show="processorShell.state === processorStates.ERROR_RECOVER">
+      ng-show="processorTreeItem.processorShell.state === processorTreeItem.processorStates.ERROR_RECOVER">
     </i>
     <i
       aria-hidden="true"
       class="fa fa-mail-forward no-result"
       tooltip="Simulate returned no result for this processor"
       tooltip-append-to-body="true"
-      ng-show="processorShell.state === processorStates.NO_RESULT">
+      ng-show="processorTreeItem.processorShell.state === processorTreeItem.processorStates.NO_RESULT">
     </i>
     <i
       aria-hidden="true"
       class="fa fa-check valid"
       tooltip="Simulate successfully returned a result for this processor"
       tooltip-append-to-body="true"
-      ng-show="processorShell.state === processorStates.VALID">
+      ng-show="processorTreeItem.processorShell.state === processorTreeItem.processorStates.VALID">
     </i>
   </div>
   <div class="title">
-    <span class="processor-type">{{processorShell.title}}</span>
-    <span class="processor-description">{{processorShell.description}}</span>
+    <span class="processor-type">{{processorTreeItem.processorShell.title}}</span>
+    <span class="processor-description">{{processorTreeItem.processorShell.description}}</span>
   </div>
   <div class="buttons">
     <button
@@ -77,14 +77,14 @@
       tooltip="Delete"
       tooltip-append-to-body="true"
       class="btn btn-xs"
-      ng-click="delete()">
+      ng-click="processorTreeItem.delete()">
       <i aria-hidden="true" class="fa fa-trash"></i>
     </button>
   </div>
 </div>
 <processor-tree
   class="branch"
-  ng-show="processorShell.expanded && processorShell.failureProcessorCollection.processors.length > 0 && processorShell.failureAction === 'on_error'"
-  processor-collection="processorShell.failureProcessorCollection"
-  selected-item-controller="selectedItemController">
+  ng-show="processorTreeItem.expanded && processorTreeItem.childProcessorCollection.processors.length > 0 && processorTreeItem.processorShell.failureAction === 'on_error'"
+  processor-collection="processorTreeItem.processorShell.failureProcessorCollection"
+  root-processor-tree="processorTreeItem.rootProcessorTree">
 </processor-tree>
