@@ -6,13 +6,14 @@ import processorCollectionTypes from 'ui/pipelines/constants/processor_collectio
 
 export default class ProcessorShell {
 
-  constructor(pipeline, model) {
+  constructor(pipeline, parentProcessorCollection, model) {
     this.pipeline = pipeline;
     this.processor = undefined;
     this.parent = undefined;
     this.inputObject = undefined;
     this.outputObject = undefined;
     this.processorTypes = this.pipeline.processorRegistry.byId;
+    this.parentProcessorCollection = parentProcessorCollection;
 
     this.failureProcessorCollection = new ProcessorCollection(
       this.pipeline,

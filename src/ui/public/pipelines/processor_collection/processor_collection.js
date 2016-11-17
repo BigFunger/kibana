@@ -32,8 +32,7 @@ export default class ProcessorCollection {
   }
 
   add(processorModel) {
-    //debugger;
-    const processorShell = new ProcessorShell(this.pipeline, processorModel);
+    const processorShell = new ProcessorShell(this.pipeline, this, processorModel);
 
     if (this.processors.length === 0) {
       processorShell.setInput(this.input);
