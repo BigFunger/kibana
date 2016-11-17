@@ -23,13 +23,14 @@ app.directive('processorTreeItem', function (RecursionHelper) {
       return RecursionHelper.compile(element);
     },
     controller: function ($scope) {
+      if (this.processorShell.constructor.name !== 'ProcessorShell') return;
+
       this.processorStates = processorStates;
-      this.childProcessorCollection = this.processorShell.failureProcessorCollection;
-      this.expanded = false;
+      this.childItems = this.processorShell.failureProcessorCollection.processors;
 
       this.delete = () => {
+        this.rootProcessorTree.selectItem(this.processorShell.pipeline);
         this.processorShell.parentProcessorCollection.remove(this.processorShell);
-        this.rootProcessorTree.selectItem();
       };
 
       this.selectItem = () => {

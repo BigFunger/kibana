@@ -66,7 +66,7 @@ app.directive('processorDetail', function ($compile, $timeout) {
         if (oldProcessorTypeId === $scope.processorTypeId) {
           updateUi();
         }
-        if (!$scope.processorTypeId) {
+        if (processorShell && !$scope.processorTypeId) {
           $scope.configSection.collapsed = false;
         }
 

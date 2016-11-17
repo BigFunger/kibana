@@ -1,6 +1,10 @@
 <processor-detail
-  processor-shell="pipelineProcessors.selectedItem"
+  processor-shell="pipelineProcessors.selectedProcessorShell"
   pipeline="pipeline"
   pipeline-processors="pipelineProcessors"
-  ng-show="pipelineProcessors.selectedItem">
+  ng-hide="pipelineProcessors.selectedItem === pipelineProcessors.pipeline">
 </processor-detail>
+<pipeline-detail
+  pipeline="pipelineProcessors.pipeline"
+  ng-show="pipelineProcessors.selectedItem === pipelineProcessors.pipeline">
+</pipeline-detail>

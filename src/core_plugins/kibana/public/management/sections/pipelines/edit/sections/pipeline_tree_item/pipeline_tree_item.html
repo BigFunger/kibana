@@ -1,0 +1,50 @@
+<div
+  class="tree-item"
+  ng-class="{ expanded: pipelineTreeItem.expanded === true }"
+  ng-click="pipelineTreeItem.selectItem()">
+  <div class="collapse-icon">
+    <button
+      type="button"
+      tooltip="Expand"
+      tooltip-append-to-body="true"
+      class="btn btn-xs"
+      ng-show="!pipelineTreeItem.expanded && pipelineTreeItem.childItems.length > 0"
+      ng-click="pipelineTreeItem.expanded = true">
+      <i aria-hidden="true" class="fa fa-caret-right"></i>
+    </button>
+    <button
+      type="button"
+      tooltip="Collapse"
+      tooltip-append-to-body="true"
+      class="btn btn-xs"
+      ng-show="pipelineTreeItem.expanded && pipelineTreeItem.childItems.length > 0"
+      ng-click="pipelineTreeItem.expanded = false">
+      <i aria-hidden="true" class="fa fa-caret-down"></i>
+    </button>
+  </div>
+  <div class="status-icon">
+    <i
+      aria-hidden="true"
+      class="fa fa-warning error-fail"
+      tooltip="Simulate did not successfully process the selected document"
+      tooltip-append-to-body="true"
+      ng-show="pipelineTreeItem.pipeline.error">
+    </i>
+    <i
+      aria-hidden="true"
+      class="fa fa-check valid"
+      tooltip="Simulate successfully processed the selected document"
+      tooltip-append-to-body="true"
+      ng-show="!pipelineTreeItem.pipeline.error">
+    </i>
+  </div>
+  <div class="title">
+    <span class="processor-type">Pipeline</span>
+  </div>
+</div>
+<processor-tree
+  class="branch"
+  ng-show="pipelineTreeItem.expanded && pipelineTreeItem.childItems.length > 0"
+  items="pipelineTreeItem.childItems"
+  root-processor-tree="pipelineTreeItem.rootProcessorTree">
+</processor-tree>

@@ -14,11 +14,22 @@ processor-tree {
   .branch-header {
     display: none;
   }
+
+  // .tree-item.expanded {
+  //   border-bottom-right-radius: 0px;
+  // }
+
+  .tree-item:hover {
+    background-color: @kibanaGray5;
+  }
 }
 
 processor-tree.branch {
-  margin-bottom: 0px;
   margin-left: 10px;
+}
+
+processor-tree.on-error.branch {
+  margin-bottom: 0px;
 
   border-left: 2px solid @kibanaGray5;
   border-top: 2px solid @kibanaGray5;
@@ -40,5 +51,70 @@ processor-tree.branch {
     width: 25px;
     border-bottom: 2px solid @kibanaGray5;
     border-bottom-left-radius: 6px;
+  }
+}
+
+.tree-item {
+  display: flex;
+  padding: 4px;
+  padding-left: 0px;
+  border-radius: 6px;
+  height: 30px;
+
+  button {
+    background-color: transparent;
+    color: @kibanaGray2;
+  }
+
+  .collapse-icon {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+  }
+
+  .status-icon {
+    flex: 1 1 auto;
+
+    i {
+      margin-right: 3px;
+      opacity: .5;
+      width: 15px;
+    }
+
+    i.error-fail,
+    i.error-compile {
+      color: red;
+    }
+    i.error-recover {
+      color: orange;
+    }
+    i.no-result {
+      color: @kibanaGray4;
+    }
+    i.not-initialized {
+      color: #3caed2;
+    }
+    i.valid {
+      color: green;
+    }
+  }
+
+  .title {
+    flex: 1 1 auto;
+    width: 100%;
+    .ellipsis();
+
+    .processor-type {
+      font-size: 12pt;
+    }
+
+    .processor-description {
+      color: @kibanaGray2;
+    }
+  }
+
+  .buttons {
+    display: none;
+    flex: 0 0 auto;
   }
 }

@@ -9,7 +9,7 @@
       tooltip="Expand"
       tooltip-append-to-body="true"
       class="btn btn-xs"
-      ng-show="!processorTreeItem.expanded && processorTreeItem.childProcessorCollection.processors.length > 0 && processorTreeItem.processorShell.failureAction === 'on_error'"
+      ng-show="!processorTreeItem.expanded && processorTreeItem.childItems.length > 0 && processorTreeItem.processorShell.failureAction === 'on_error'"
       ng-click="processorTreeItem.expanded = true">
       <i aria-hidden="true" class="fa fa-caret-right"></i>
     </button>
@@ -18,7 +18,7 @@
       tooltip="Collapse"
       tooltip-append-to-body="true"
       class="btn btn-xs"
-      ng-show="processorTreeItem.expanded && processorTreeItem.childProcessorCollection.processors.length > 0 && processorTreeItem.processorShell.failureAction === 'on_error'"
+      ng-show="processorTreeItem.expanded && processorTreeItem.childItems.length > 0 && processorTreeItem.processorShell.failureAction === 'on_error'"
       ng-click="processorTreeItem.expanded = false">
       <i aria-hidden="true" class="fa fa-caret-down"></i>
     </button>
@@ -83,8 +83,8 @@
   </div>
 </div>
 <processor-tree
-  class="branch"
-  ng-show="processorTreeItem.expanded && processorTreeItem.childProcessorCollection.processors.length > 0 && processorTreeItem.processorShell.failureAction === 'on_error'"
-  items="processorTreeItem.processorShell.failureProcessorCollection.processors"
+  class="on-error branch"
+  ng-show="processorTreeItem.expanded && processorTreeItem.childItems.length > 0 && processorTreeItem.processorShell.failureAction === 'on_error'"
+  items="processorTreeItem.childItems"
   root-processor-tree="processorTreeItem.rootProcessorTree">
 </processor-tree>

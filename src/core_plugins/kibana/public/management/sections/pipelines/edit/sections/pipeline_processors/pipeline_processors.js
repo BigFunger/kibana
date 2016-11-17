@@ -15,6 +15,7 @@ app.directive('pipelineProcessors', function () {
       const pipelines = Private(PipelinesProvider);
       const notify = new Notifier({ location: `Pipeline Setup` });
 
+      this.pipeline = $scope.pipeline;
       this.selectedItem = _.first($scope.pipeline.processorCollection.processors);
 
       this.simulate = () => {
@@ -28,6 +29,14 @@ app.directive('pipelineProcessors', function () {
 
       $scope.$watch('pipeline.sampleCollection.index', () => {
         this.simulate();
+      });
+
+      $scope.$watch('pipelineProcessors.selectedItem', (selectedItem) => {
+        if (selectedItem.constructor.name === 'ProcessorShell') {
+          this.selectedProcessorShell = selectedItem;
+        } else {
+          this.selectedProcessorShell = undefined;
+        }
       });
     }
   };

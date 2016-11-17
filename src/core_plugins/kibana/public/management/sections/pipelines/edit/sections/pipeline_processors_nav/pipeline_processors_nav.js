@@ -9,6 +9,7 @@ app.directive('pipelineProcessorsNav', function () {
     restrict: 'E',
     template: template,
     controller: function ($scope) {
+      $scope.pipelineTreeItems = [ $scope.pipeline ];
     }
   };
 });

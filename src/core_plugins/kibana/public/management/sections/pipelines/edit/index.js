@@ -25,6 +25,7 @@ import './sections/pipeline_pipeline_detail';
 
 import './sections/processor_tree';
 import './sections/processor_tree_item';
+import './sections/pipeline_tree_item';
 import './sections/processor_tree_header';
 import './sections/processor_detail';
 import './sections/document_selector';
