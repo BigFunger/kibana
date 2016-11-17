@@ -6,7 +6,6 @@
     ng-repeat="processorShell in processorTree.processors"
     draggable-item="processorShell">
     <processor-tree-item
-      processor-collection="processorTree.processorCollection"
       processor-shell="processorShell"
       root-processor-tree="processorTree.rootProcessorTree"
       ng-class="{ active: processorTree.rootProcessorTree.selected === processorShell }">

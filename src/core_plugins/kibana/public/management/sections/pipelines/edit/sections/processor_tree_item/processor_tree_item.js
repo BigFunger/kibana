@@ -12,7 +12,6 @@ app.directive('processorTreeItem', function (RecursionHelper) {
     restrict: 'E',
     template: template,
     scope: {
-      processorCollection: '=',
       processorShell: '=',
       rootProcessorTree: '='
     },
@@ -29,7 +28,7 @@ app.directive('processorTreeItem', function (RecursionHelper) {
       this.expanded = false;
 
       this.delete = () => {
-        this.processorCollection.remove(this.processorShell);
+        this.processorShell.parentProcessorCollection.remove(this.processorShell);
         this.rootProcessorTree.selectItem();
       };
 
@@ -48,6 +47,8 @@ app.directive('processorTreeItem', function (RecursionHelper) {
       });
 
       $scope.$watch('processorTreeItem.rootProcessorTree.selected', (processorShell) => {
+        //if the newly selected processorShell exists anywhere in this processorShell's
+        //decendents, then this processorTreeItem should expand
         const allProcessorCollections = this.processorShell.allProcessorCollections;
         _.forEach(allProcessorCollections, (processorCollection) => {
           if (_.contains(processorCollection.processors, processorShell)) {
