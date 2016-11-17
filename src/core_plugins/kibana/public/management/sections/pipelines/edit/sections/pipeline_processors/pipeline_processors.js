@@ -32,7 +32,7 @@ app.directive('pipelineProcessors', function () {
       });
 
       $scope.$watch('pipelineProcessors.selectedItem', (selectedItem) => {
-        if (selectedItem.constructor.name === 'ProcessorShell') {
+        if (selectedItem && selectedItem.constructor.name === 'ProcessorShell') {
           this.selectedProcessorShell = selectedItem;
         } else {
           this.selectedProcessorShell = undefined;

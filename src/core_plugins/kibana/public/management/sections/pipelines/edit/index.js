@@ -20,9 +20,6 @@ import './sections/pipeline_processors_nav';
 import './sections/pipeline_processors_detail';
 import './sections/pipeline_processors';
 
-import './sections/pipeline_pipeline';
-import './sections/pipeline_pipeline_detail';
-
 import './sections/processor_tree';
 import './sections/processor_tree_item';
 import './sections/pipeline_tree_item';
