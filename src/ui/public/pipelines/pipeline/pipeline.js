@@ -17,12 +17,8 @@ export default class Pipeline {
     );
 
     this.processorRegistry = processorRegistry;
-    this.processorCollections = [];
-    this.activeProcessorCollection = this.processorCollection;
     this.output = undefined;
     this.dirty = false;
-    this.hasCompileError = false;
-    this.globalFailureProcessorIds = [];
     this.processorCounters = {};
 
     this.processorCollection = new ProcessorCollection(
