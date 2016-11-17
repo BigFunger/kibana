@@ -10,18 +10,17 @@ app.directive('processorTree', function () {
     restrict: 'E',
     template: template,
     scope: {
-      processorCollection: '=',
+      items: '=',
       selected: '=',
       rootProcessorTree: '='
     },
     controllerAs: 'processorTree',
     bindToController: true,
     controller: function () {
-      this.processors = this.processorCollection.processors;
       this.rootProcessorTree = this.rootProcessorTree || this;
 
-      this.selectItem = function (processorShell) {
-        this.selected = processorShell;
+      this.selectItem = function (item) {
+        this.selected = item;
       };
     }
   };

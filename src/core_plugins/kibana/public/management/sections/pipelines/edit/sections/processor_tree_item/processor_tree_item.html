@@ -85,6 +85,6 @@
 <processor-tree
   class="branch"
   ng-show="processorTreeItem.expanded && processorTreeItem.childProcessorCollection.processors.length > 0 && processorTreeItem.processorShell.failureAction === 'on_error'"
-  processor-collection="processorTreeItem.processorShell.failureProcessorCollection"
+  items="processorTreeItem.processorShell.failureProcessorCollection.processors"
   root-processor-tree="processorTreeItem.rootProcessorTree">
 </processor-tree>

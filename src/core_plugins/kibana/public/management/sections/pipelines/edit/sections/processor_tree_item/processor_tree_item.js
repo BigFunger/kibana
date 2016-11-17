@@ -43,7 +43,7 @@ app.directive('processorTreeItem', function (RecursionHelper) {
 
       $scope.$on('drag-end', e => {
         this.expanded = this.wasExpanded;
-        this.processorCollection.updateParents();
+        this.processorShell.parentProcessorCollection.updateParents();
       });
 
       $scope.$watch('processorTreeItem.rootProcessorTree.selected', (processorShell) => {
