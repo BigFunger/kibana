@@ -43,14 +43,15 @@
     class="collapser-compact"
     title="Output"
     section="outputSection"
-    ng-show="processorShell.typeId && !processorShell.error">
+    ng-show="processorShell.typeId">
   </section-collapser>
   <processor-output
     processor-shell="processorShell"
-    ng-if="processorShell.typeId && !processorShell.error"
-    ng-hide="outputSection.collapsed">
+    ng-if="processorShell.typeId"
+    ng-show="!outputSection.collapsed && processorShell.state === processorStates.VALID">
   </processor-output>
   <processor-error
-    processor-shell="processorShell">
+    processor-shell="processorShell"
+    ng-show="!outputSection.collapsed">
   </processor-error>
 </form>

@@ -1,20 +1,21 @@
 import _ from 'lodash';
 import uiModules from 'ui/modules';
-import template from './processor_input.html';
-import './processor_input.less';
+import template from './pipeline_input.html';
+import './pipeline_input.less';
 
 const app = uiModules.get('kibana');
 
-app.directive('processorInput', function () {
+app.directive('pipelineInput', function () {
   return {
     restrict: 'E',
     template: template,
     scope: {
-      processorShell: '='
+      pipeline: '='
     },
-
+    controllerAs: 'pipelineInput',
+    bindToController: true,
     controller: function ($scope) {
-      $scope.inputOptions = {
+      this.options = {
         document: {
           title: 'Document'
         },
@@ -22,14 +23,16 @@ app.directive('processorInput', function () {
           title: 'Metadata'
         }
       };
-      $scope.currentInputOption = $scope.inputOptions.document;
+      this.currentOption = this.options.document;
 
-      $scope.$watch('processorShell.inputObject', (inputObject) => {
-        $scope.inputStatesDoc = {
+      $scope.$watch('pipelineInput.pipeline.output', () => {
+        const inputObject = this.pipeline.sampleCollection.getCurrentSample();
+
+        this.docStates = {
           oldValue:  _.get(inputObject, 'doc'),
           newValue: _.get(inputObject, 'doc')
         };
-        $scope.inputStatesMeta = {
+        this.metaStates = {
           oldValue:  _.get(inputObject, 'meta'),
           newValue: _.get(inputObject, 'meta')
         };

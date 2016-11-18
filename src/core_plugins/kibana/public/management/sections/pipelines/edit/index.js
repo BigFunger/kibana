@@ -22,7 +22,6 @@ import './sections/pipeline_processors';
 
 import './sections/processor_tree';
 import './sections/processor_tree_item';
-import './sections/pipeline_tree_item';
 import './sections/processor_tree_header';
 import './sections/processor_detail';
 import './sections/document_selector';
@@ -35,7 +34,11 @@ import './sections/processor_output';
 import './sections/processor_error';
 import './sections/processor_failure_action';
 
+import './sections/pipeline_tree_item';
 import './sections/pipeline_detail';
+import './sections/pipeline_input';
+import './sections/pipeline_output';
+import './sections/pipeline_error';
 
 import './sections/document_viewer';
 

@@ -3,7 +3,6 @@ import uiModules from 'ui/modules';
 import jsondiffpatch from '@bigfunger/jsondiffpatch';
 import './processor_output.less';
 import template from './processor_output.html';
-import processorStates from 'ui/pipelines/constants/processor_states';
 
 const htmlFormat = jsondiffpatch.formatters.html.format;
 
@@ -17,7 +16,6 @@ app.directive('processorOutput', function () {
       processorShell: '='
     },
     controller: function ($scope) {
-      $scope.processorStates = processorStates;
 
       $scope.outputOptions = {
         document: {

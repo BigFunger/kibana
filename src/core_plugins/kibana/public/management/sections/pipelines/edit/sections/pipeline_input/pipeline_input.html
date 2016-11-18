@@ -1,0 +1,13 @@
+<tertiary-nav
+  class="simple"
+  options="pipelineInput.options"
+  selected-option="pipelineInput.currentOption">
+</tertiary-nav>
+<document-viewer
+  states="pipelineInput.docStates"
+  ng-show="pipelineInput.currentOption === pipelineInput.options.document">
+</document-viewer>
+<document-viewer
+  states="pipelineInput.metaStates"
+  ng-show="pipelineInput.currentOption === pipelineInput.options.meta">
+</document-viewer>

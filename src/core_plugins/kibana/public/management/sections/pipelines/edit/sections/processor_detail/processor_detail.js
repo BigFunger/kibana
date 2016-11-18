@@ -3,6 +3,7 @@ import angular from 'angular';
 import uiModules from 'ui/modules';
 import template from './processor_detail.html';
 import './processor_detail.less';
+import processorStates from 'ui/pipelines/constants/processor_states';
 
 const app = uiModules.get('kibana');
 
@@ -18,6 +19,8 @@ app.directive('processorDetail', function ($compile, $timeout) {
     link: function ($scope, $el) {
       const pipeline = $scope.pipeline;
       const $container = $el.find('.processor-ui-content');
+
+      $scope.processorStates = processorStates;
 
       $scope.inputSection = {
         collapsed: true
