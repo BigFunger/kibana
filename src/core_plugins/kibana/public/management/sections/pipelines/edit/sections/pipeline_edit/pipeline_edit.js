@@ -36,6 +36,27 @@ app.directive('pipelineEdit', function () {
         template: saveTemplate,
         description: 'Save Pipeline'
       }];
+
+      $scope.primaryNavSections = {
+        documents: {
+          title: 'Documents'
+        },
+        processors: {
+          title: 'Processors'
+        }
+      };
+
+      if ($scope.pipeline.sampleCollection.samples.length > 0) {
+        $scope.primaryNavSection = $scope.primaryNavSections.processors;
+      } else {
+        $scope.primaryNavSection = $scope.primaryNavSections.documents;
+      }
+
+      $scope.$watch('primaryNavSection', (newVal, oldVal) => {
+        if (newVal !== oldVal && oldVal === $scope.primaryNavSections.documents) {
+          $scope.pipelineProcessors.simulate();
+        }
+      });
     }
   };
 });

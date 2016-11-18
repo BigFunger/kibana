@@ -7,6 +7,6 @@
     </span>
   </div>
 </kbn-top-nav>
-<primary-nav></primary-nav>
-<pipeline-documents ng-show="primaryNav.section === primaryNav.sections.documents"></pipeline-documents>
-<pipeline-processors ng-show="primaryNav.section === primaryNav.sections.processors"></pipeline-processors>
+<primary-nav sections="primaryNavSections" section="primaryNavSection"></primary-nav>
+<pipeline-documents ng-show="primaryNavSection === primaryNavSections.documents"></pipeline-documents>
+<pipeline-processors ng-show="primaryNavSection === primaryNavSections.processors"></pipeline-processors>
