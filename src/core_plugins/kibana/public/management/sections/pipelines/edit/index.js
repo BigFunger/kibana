@@ -35,7 +35,6 @@ import './sections/processor_output';
 import './sections/processor_error';
 import './sections/processor_failure_action';
 
-import './sections/pipeline_input';
 import './sections/pipeline_detail';
 
 import './sections/document_viewer';
