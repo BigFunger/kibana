@@ -3,25 +3,28 @@
 <section-collapser
   class="collapser-compact"
   title="Input"
-  section="inputSection"
-  ng-class="{ expanded: !inputSection.collapsed }">
+  collapsed="pipelineProcessors.detailState.input.collapsed"
+  ng-class="{ expanded: !pipelineProcessors.detailState.input.collapsed }">
 </section-collapser>
 <pipeline-input
   pipeline="pipeline"
-  ng-show="!inputSection.collapsed">
+  pipeline-processors="pipelineProcessors"
+  ng-hide="pipelineProcessors.detailState.input.collapsed">
 </pipeline-input>
 
 <section-collapser
   class="collapser-compact"
   title="Output"
-  section="outputSection"
-  ng-class="{ expanded: !outputSection.collapsed }">
+  collapsed="pipelineProcessors.detailState.output.collapsed"
+  ng-class="{ expanded: !pipelineProcessors.detailState.output.collapsed }">
 </section-collapser>
-<pipeline-output
-  pipeline="pipeline"
-  ng-show="!outputSection.collapsed && !pipeline.error">
-</pipeline-output>
-<pipeline-error
-  pipeline="pipeline"
-  ng-show="!outputSection.collapsed && pipeline.error">
-</pipeline-error>
+<div ng-hide="pipelineProcessors.detailState.output.collapsed">
+  <pipeline-output
+    pipeline="pipeline"
+    ng-hide="pipeline.error">
+  </pipeline-output>
+  <pipeline-error
+    pipeline="pipeline"
+    ng-show="pipeline.error">
+  </pipeline-error>
+</div>

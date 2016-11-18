@@ -1,13 +1,14 @@
 <tertiary-nav
   class="simple"
-  options="pipelineInput.options"
-  selected-option="pipelineInput.currentOption">
+  options="pipelineProcessors.docModes"
+  option="pipelineProcessors.detailState.input.docMode">
 </tertiary-nav>
 <document-viewer
   states="pipelineInput.docStates"
-  ng-show="pipelineInput.currentOption === pipelineInput.options.document">
+  ng-show="pipelineProcessors.detailState.input.docMode === pipelineProcessors.docModes.document">
 </document-viewer>
 <document-viewer
   states="pipelineInput.metaStates"
-  ng-show="pipelineInput.currentOption === pipelineInput.options.meta">
+  ng-show="pipelineProcessors.detailState.input.docMode === pipelineProcessors.docModes.meta">
 </document-viewer>
+

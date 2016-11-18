@@ -9,21 +9,9 @@ app.directive('pipelineInput', function () {
   return {
     restrict: 'E',
     template: template,
-    scope: {
-      pipeline: '='
-    },
     controllerAs: 'pipelineInput',
-    bindToController: true,
     controller: function ($scope) {
-      this.options = {
-        document: {
-          title: 'Document'
-        },
-        meta: {
-          title: 'Metadata'
-        }
-      };
-      this.currentOption = this.options.document;
+      this.pipeline = $scope.pipeline;
 
       $scope.$watch('pipelineInput.pipeline.output', () => {
         const inputObject = this.pipeline.sampleCollection.getCurrentSample();

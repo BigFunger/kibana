@@ -11,7 +11,8 @@ app.directive('pipelineDetail', function ($compile) {
     restrict: 'E',
     template: template,
     scope: {
-      pipeline: '='
+      pipeline: '=',
+      pipelineProcessors: '='
     },
     controller: function ($scope) {
       function updateInputs() {

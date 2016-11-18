@@ -22,14 +22,6 @@ app.directive('processorDetail', function ($compile, $timeout) {
 
       $scope.processorStates = processorStates;
 
-      $scope.inputSection = {
-        collapsed: true
-      };
-
-      $scope.configSection = {
-        collapsed: false
-      };
-
       function updateUi() {
         const processorShell = $scope.processorShell;
         $container.empty();

@@ -9,21 +9,9 @@ app.directive('pipelineOutput', function () {
   return {
     restrict: 'E',
     template: template,
-    scope: {
-      pipeline: '='
-    },
     controllerAs: 'pipelineOutput',
-    bindToController: true,
     controller: function ($scope) {
-      this.options = {
-        document: {
-          title: 'Document'
-        },
-        meta: {
-          title: 'Metadata'
-        }
-      };
-      this.currentOption = this.options.document;
+      this.pipeline = $scope.pipeline;
 
       $scope.$watch('pipelineOutput.pipeline.output', () => {
         const outputObject = this.pipeline.output;

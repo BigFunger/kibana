@@ -11,19 +11,19 @@
   <section-collapser
     class="collapser-compact"
     title="Input"
-    section="inputSection">
+    collapsed="pipelineProcessors.detailState.input.collapsed">
   </section-collapser>
   <processor-input
     processor-shell="processorShell"
-    ng-hide="inputSection.collapsed">
+    ng-hide="pipelineProcessors.detailState.input.collapsed">
   </processor-input>
 
   <section-collapser
     class="collapser-small"
     title="Configuration"
-    section="configSection">
+    collapsed="pipelineProcessors.detailState.configuration.collapsed">
   </section-collapser>
-  <div ng-hide="configSection.collapsed">
+  <div ng-hide="pipelineProcessors.detailState.configuration.collapsed">
     <processor-type-select
       processor-type-id="processorTypeId"
       ng-show="processorShell">
@@ -42,16 +42,17 @@
   <section-collapser
     class="collapser-compact"
     title="Output"
-    section="outputSection"
+    collapsed="pipelineProcessors.detailState.output.collapsed"
     ng-show="processorShell.typeId">
   </section-collapser>
-  <processor-output
-    processor-shell="processorShell"
-    ng-if="processorShell.typeId"
-    ng-show="!outputSection.collapsed && processorShell.state === processorStates.VALID">
-  </processor-output>
-  <processor-error
-    processor-shell="processorShell"
-    ng-show="!outputSection.collapsed">
-  </processor-error>
+  <div ng-hide="pipelineProcessors.detailState.output.collapsed">
+    <processor-output
+      processor-shell="processorShell"
+      ng-if="processorShell.typeId"
+      ng-show="processorShell.state === processorStates.VALID">
+    </processor-output>
+    <processor-error
+      processor-shell="processorShell">
+    </processor-error>
+  </div>
 </form>

@@ -1,8 +1,8 @@
 <div class="header">
   <tertiary-nav
     class="simple"
-    options="processorOutput.options"
-    selected-option="processorOutput.currentOption">
+    options="pipelineProcessors.docModes"
+    option="pipelineProcessors.detailState.output.docMode">
   </tertiary-nav>
   <label>
     <input type="checkbox" ng-model="processorOutput.onlyShowChanges" />
@@ -12,10 +12,10 @@
 <document-viewer
   states="processorOutput.docStates"
   ng-class="{ 'hide-unchanged': processorOutput.onlyShowChanges }"
-  ng-show="processorOutput.currentOption === processorOutput.options.document">
+  ng-show="pipelineProcessors.detailState.output.docMode === pipelineProcessors.docModes.document">
 </document-viewer>
 <document-viewer
   states="processorOutput.metaStates"
   ng-class="{ 'hide-unchanged': processorOutput.onlyShowChanges }"
-  ng-show="processorOutput.currentOption === processorOutput.options.meta">
+  ng-show="pipelineProcessors.detailState.output.docMode === pipelineProcessors.docModes.meta">
 </document-viewer>

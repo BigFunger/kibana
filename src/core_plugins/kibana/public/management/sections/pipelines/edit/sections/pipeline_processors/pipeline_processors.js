@@ -38,6 +38,28 @@ app.directive('pipelineProcessors', function () {
           this.selectedProcessorShell = undefined;
         }
       });
+
+      this.docModes = {
+        document: {
+          title: 'Document'
+        },
+        meta: {
+          title: 'Metadata'
+        }
+      };
+      this.detailState = {
+        input: {
+          collapsed: false,
+          docMode: this.docModes.document
+        },
+        configuration: {
+          collapsed: false
+        },
+        output: {
+          collapsed: false,
+          docMode: this.docModes.document
+        }
+      };
     }
   };
 });

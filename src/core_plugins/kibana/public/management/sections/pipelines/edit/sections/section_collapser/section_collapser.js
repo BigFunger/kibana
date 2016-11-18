@@ -10,15 +10,16 @@ app.directive('sectionCollapser', function ($compile) {
     template: template,
     scope: {
       title: '@',
-      section: '='
+      collapsed: '='
     },
+    controllerAs: 'sectionCollapser',
+    bindToController: true,
     controller: function ($scope) {
-      $scope.title = $scope.title || 'Advanced Options';
-      $scope.section = $scope.section || {};
-      $scope.section.collapsed = !!$scope.section.collapsed;
+      this.title = this.title || 'Advanced Options';
+      this.collapsed = !!this.collapsed;
 
-      $scope.toggle = () => {
-        $scope.section.collapsed = !$scope.section.collapsed;
+      this.toggle = () => {
+        this.collapsed = !this.collapsed;
       };
     }
   };

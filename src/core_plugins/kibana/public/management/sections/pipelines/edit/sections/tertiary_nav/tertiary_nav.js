@@ -10,16 +10,12 @@ app.directive('tertiaryNav', function () {
     template: template,
     scope: {
       options: '=',
-      selectedOption: '='
+      option: '='
     },
+    controllerAs: 'tertiaryNav',
+    bindToController: true,
     controller: function ($scope) {
-      $scope.selected = {
-        value: $scope.selectedOption
-      };
-
-      $scope.$watch('selected.value', (newVal) => {
-        $scope.selectedOption = newVal;
-      });
+      this.option = this.option || this.options[0];
     }
   };
 });

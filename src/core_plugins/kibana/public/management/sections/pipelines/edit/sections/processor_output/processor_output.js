@@ -9,33 +9,18 @@ app.directive('processorOutput', function () {
   return {
     restrict: 'E',
     template: template,
-    scope: {
-      processorShell: '='
-    },
     controllerAs: 'processorOutput',
-    bindToController: true,
     controller: function ($scope) {
-      this.options = {
-        document: {
-          title: 'Document'
-        },
-        meta: {
-          title: 'Metadata'
-        }
-      };
-      this.currentOption = this.options.document;
       this.onlyShowChanges = true;
 
-      $scope.$watch('processorOutput.processorShell.outputObject', () => {
-        const processorShell = this.processorShell;
-
+      $scope.$watch('processorShell.outputObject', () => {
         this.docStates = {
-          oldValue: _.get(processorShell.inputObject, 'doc'),
-          newValue: _.get(processorShell.outputObject, 'doc')
+          oldValue: _.get($scope.processorShell, 'inputObject.doc'),
+          newValue: _.get($scope.processorShell, 'outputObject.doc')
         };
         this.metaStates = {
-          oldValue: _.get(processorShell.inputObject, 'meta'),
-          newValue: _.get(processorShell.outputObject, 'meta')
+          oldValue: _.get($scope.processorShell, 'inputObject.meta'),
+          newValue: _.get($scope.processorShell, 'outputObject.meta')
         };
       });
     }
