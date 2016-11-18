@@ -10,16 +10,18 @@ app.directive('processorTreeHeader', function () {
     restrict: 'E',
     template: template,
     scope: {
-      selectedItemController: '=',
+      selectedItem: '=',
       processorCollection: '=',
       title: '@'
     },
+    controllerAs: 'processorTreeHeader',
+    bindToController: true,
     controller: function ($scope) {
       $scope.addProcessor = () => {
-        const currentProcessor = $scope.selectedItemController.selectedItem;
-        const allProcessorCollections = $scope.processorCollection.allProcessorCollections;
+        const currentProcessor = this.selectedItem;
+        const allProcessorCollections = this.processorCollection.allProcessorCollections;
 
-        let targetProcessorCollection = $scope.processorCollection;
+        let targetProcessorCollection = this.processorCollection;
         _.forEach(allProcessorCollections, (processorCollection) => {
           if (_.contains(processorCollection.processors, currentProcessor)) {
             targetProcessorCollection = processorCollection;
@@ -27,7 +29,7 @@ app.directive('processorTreeHeader', function () {
         });
 
         const newProcessorShell = targetProcessorCollection.add();
-        $scope.selectedItemController.selectedItem = newProcessorShell;
+        this.selectedItem = newProcessorShell;
       };
     }
   };
