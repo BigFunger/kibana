@@ -15,7 +15,7 @@ app.directive('pipelineDocuments', function () {
       this.editSample = sampleCollection.getCurrentSample();
 
       this.add = () => {
-        const sample = new Sample({ description: '', doc: {} });
+        const sample = new Sample({ description: sampleCollection.getSuggestedDescription(), doc: {} });
         sampleCollection.add(sample);
         this.editSample = sample;
       };

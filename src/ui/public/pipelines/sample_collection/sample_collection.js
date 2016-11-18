@@ -69,7 +69,7 @@ export class SampleCollection {
 
     do {
       counter += 1;
-      description = `Input ${counter}`;
+      description = `Sample Document ${counter}`;
     } while (_.find(this.samples, predicate));
 
     return description;

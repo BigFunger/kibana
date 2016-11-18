@@ -15,7 +15,7 @@ app.directive('pipelineDocumentsDetail', function ($timeout) {
         $scope.documentDetail.editSample = sample;
 
         $timeout(() => {
-          $el.find('.description')[0].focus();
+          $scope.documentDetail.editor.focus();
         });
       });
     },
