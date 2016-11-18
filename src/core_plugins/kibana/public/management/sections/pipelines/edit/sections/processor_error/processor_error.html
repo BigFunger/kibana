@@ -1,21 +1,21 @@
 <div
-  ng-show="processorShell.state === processorStates.ERROR_FAIL"
+  ng-show="processorError.processorShell.state === processorError.processorStates.ERROR_FAIL"
   class="alert alert-danger">
-  {{processorShell.error.message}}
+  {{processorError.processorShell.error.message}}
 </div>
 <div
-  ng-show="processorShell.state === processorStates.ERROR_RECOVER"
+  ng-show="processorError.processorShell.state === processorError.processorStates.ERROR_RECOVER"
   class="alert alert-warning">
-  {{processorShell.error.message}}
+  {{processorError.processorShell.error.message}}
 </div>
 <div
-  ng-show="processorShell.state === processorStates.ERROR_COMPILE"
+  ng-show="processorError.processorShell.state === processorError.processorStates.ERROR_COMPILE"
   class="alert alert-danger">
   <div>Compile Error</div>
-  {{processorShell.error.message}}
+  {{processorError.processorShell.error.message}}
 </div>
 <div
-  ng-show="processorShell.state === processorStates.NO_RESULT"
+  ng-show="processorError.processorShell.state === processorError.processorStates.NO_RESULT"
   class="alert alert-info">
   No results were returned for this processor. May be part of a failure path that was not triggered.
 </div>

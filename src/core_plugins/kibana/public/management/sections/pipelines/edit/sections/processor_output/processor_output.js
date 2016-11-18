@@ -1,10 +1,7 @@
 import _ from 'lodash';
 import uiModules from 'ui/modules';
-import jsondiffpatch from '@bigfunger/jsondiffpatch';
-import './processor_output.less';
 import template from './processor_output.html';
-
-const htmlFormat = jsondiffpatch.formatters.html.format;
+import './processor_output.less';
 
 const app = uiModules.get('kibana');
 
@@ -15,9 +12,10 @@ app.directive('processorOutput', function () {
     scope: {
       processorShell: '='
     },
+    controllerAs: 'processorOutput',
+    bindToController: true,
     controller: function ($scope) {
-
-      $scope.outputOptions = {
+      this.options = {
         document: {
           title: 'Document'
         },
@@ -25,18 +23,17 @@ app.directive('processorOutput', function () {
           title: 'Metadata'
         }
       };
-      $scope.currentOutputOption = $scope.outputOptions.document;
+      this.currentOption = this.options.document;
+      this.onlyShowChanges = true;
 
-      $scope.onlyShowChanges = true;
+      $scope.$watch('processorOutput.processorShell.outputObject', () => {
+        const processorShell = this.processorShell;
 
-      $scope.$watch('processorShell.outputObject', () => {
-        const processorShell = $scope.processorShell;
-
-        $scope.docStates = {
+        this.docStates = {
           oldValue: _.get(processorShell.inputObject, 'doc'),
           newValue: _.get(processorShell.outputObject, 'doc')
         };
-        $scope.metaStates = {
+        this.metaStates = {
           oldValue: _.get(processorShell.inputObject, 'meta'),
           newValue: _.get(processorShell.outputObject, 'meta')
         };

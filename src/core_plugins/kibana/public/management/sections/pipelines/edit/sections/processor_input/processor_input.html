@@ -1,13 +1,13 @@
 <tertiary-nav
   class="simple"
-  options="inputOptions"
-  selected-option="currentInputOption">
+  options="processorInput.options"
+  selected-option="processorInput.currentOption">
 </tertiary-nav>
 <document-viewer
-  states="inputStatesDoc"
-  ng-show="currentInputOption === inputOptions.document">
+  states="processorInput.docStates"
+  ng-show="processorInput.currentOption === processorInput.options.document">
 </document-viewer>
 <document-viewer
-  states="inputStatesMeta"
-  ng-show="currentInputOption === inputOptions.meta">
+  states="processorInput.metaStates"
+  ng-show="processorInput.currentOption === processorInput.options.meta">
 </document-viewer>

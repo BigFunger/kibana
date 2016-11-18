@@ -12,9 +12,10 @@ app.directive('processorInput', function () {
     scope: {
       processorShell: '='
     },
-
+    controllerAs: 'processorInput',
+    bindToController: true,
     controller: function ($scope) {
-      $scope.inputOptions = {
+      this.options = {
         document: {
           title: 'Document'
         },
@@ -22,16 +23,18 @@ app.directive('processorInput', function () {
           title: 'Metadata'
         }
       };
-      $scope.currentInputOption = $scope.inputOptions.document;
+      this.currentOption = this.options.document;
 
-      $scope.$watch('processorShell.inputObject', (inputObject) => {
-        $scope.inputStatesDoc = {
-          oldValue:  _.get(inputObject, 'doc'),
-          newValue: _.get(inputObject, 'doc')
+      $scope.$watch('processorInput.processorShell.inputObject', () => {
+        const processorShell = this.processorShell;
+
+        this.docStates = {
+          oldValue:  _.get(processorShell.inputObject, 'doc'),
+          newValue: _.get(processorShell.inputObject, 'doc')
         };
-        $scope.inputStatesMeta = {
-          oldValue:  _.get(inputObject, 'meta'),
-          newValue: _.get(inputObject, 'meta')
+        this.metaStates = {
+          oldValue:  _.get(processorShell.inputObject, 'meta'),
+          newValue: _.get(processorShell.inputObject, 'meta')
         };
       });
     }

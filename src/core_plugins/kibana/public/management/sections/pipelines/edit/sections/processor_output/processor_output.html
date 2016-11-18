@@ -1,21 +1,21 @@
 <div class="header">
   <tertiary-nav
     class="simple"
-    options="outputOptions"
-    selected-option="currentOutputOption">
+    options="processorOutput.options"
+    selected-option="processorOutput.currentOption">
   </tertiary-nav>
   <label>
-    <input type="checkbox" ng-model="onlyShowChanges" />
+    <input type="checkbox" ng-model="processorOutput.onlyShowChanges" />
     Only show document changes
   </label>
 </div>
 <document-viewer
-  states="docStates"
-  ng-class="{ 'hide-unchanged': onlyShowChanges }"
-  ng-show="currentOutputOption === outputOptions.document">
+  states="processorOutput.docStates"
+  ng-class="{ 'hide-unchanged': processorOutput.onlyShowChanges }"
+  ng-show="processorOutput.currentOption === processorOutput.options.document">
 </document-viewer>
 <document-viewer
-  states="metaStates"
-  ng-class="{ 'hide-unchanged': onlyShowChanges }"
-  ng-show="currentOutputOption === outputOptions.meta">
+  states="processorOutput.metaStates"
+  ng-class="{ 'hide-unchanged': processorOutput.onlyShowChanges }"
+  ng-show="processorOutput.currentOption === processorOutput.options.meta">
 </document-viewer>
