@@ -5,7 +5,7 @@ import template from './document_viewer.html';
 import './document_viewer.less';
 
 const htmlFormat = jsondiffpatch.formatters.html.format;
-const app = uiModules.get('kibana');
+const app = uiModules.get('pipelines');
 
 app.directive('documentViewer', function ($timeout) {
   return {

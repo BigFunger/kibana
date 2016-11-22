@@ -3,7 +3,7 @@ import uiModules from 'ui/modules';
 import template from './document_selector.html';
 import './document_selector.less';
 
-const app = uiModules.get('kibana');
+const app = uiModules.get('pipelines');
 
 app.directive('documentSelector', function () {
   return {

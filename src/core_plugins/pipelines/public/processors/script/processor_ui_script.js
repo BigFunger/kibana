@@ -4,7 +4,7 @@ import template from './processor_ui_script.html';
 import './processor_ui_script.less';
 import './script_parameters';
 
-const app = uiModules.get('kibana');
+const app = uiModules.get('pipelines');
 
 //scope.pipeline, scope.processor are attached by the process_container.
 app.directive('processorUiScript', function () {

@@ -2,7 +2,7 @@ import uiModules from 'ui/modules';
 import template from './processor_ui_date_index_name.html';
 import './processor_ui_date_index_name.less';
 
-const app = uiModules.get('kibana');
+const app = uiModules.get('pipelines');
 
 //scope.pipeline, scope.processor are attached by the process_container.
 app.directive('processorUiDateIndexName', function () {

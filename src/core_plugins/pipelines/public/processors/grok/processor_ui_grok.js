@@ -4,7 +4,7 @@ import './grok_pattern_definitions';
 import './processor_ui_grok.less';
 import { pipelines as docLinks } from 'ui/documentation_links/documentation_links';
 
-const app = uiModules.get('kibana');
+const app = uiModules.get('pipelines');
 
 //scope.processor, scope.pipeline are attached by the process_container.
 app.directive('processorUiGrok', function () {

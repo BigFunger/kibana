@@ -1,6 +1,6 @@
 import uiModules from 'ui/modules';
 
-const app = uiModules.get('kibana');
+const app = uiModules.get('pipelines');
 
 app.directive('uiSelectTweaks', function ($timeout) {
   return {

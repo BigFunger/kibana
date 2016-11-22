@@ -2,7 +2,7 @@ import uiModules from 'ui/modules';
 import template from './script_parameters.html';
 import './script_parameters.less';
 
-const app = uiModules.get('kibana');
+const app = uiModules.get('pipelines');
 
 app.directive('scriptParameters', function () {
   return {

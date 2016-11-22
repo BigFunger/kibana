@@ -2,7 +2,7 @@ import uiModules from 'ui/modules';
 import template from './processor_failure_action.html';
 import './processor_failure_action.less';
 
-const app = uiModules.get('kibana');
+const app = uiModules.get('pipelines');
 
 app.directive('processorFailureAction', function () {
   return {

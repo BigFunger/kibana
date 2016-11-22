@@ -1,7 +1,7 @@
 import uiModules from 'ui/modules';
 import template from './processor_ui_join.html';
 
-const app = uiModules.get('kibana');
+const app = uiModules.get('pipelines');
 
 //scope.processor, scope.pipeline are attached by the process_container.
 app.directive('processorUiJoin', function () {

@@ -1,5 +1,5 @@
 import uiModules from 'ui/modules';
-import template from './view.html';
+import template from './list_textarea.html';
 import { compact, map, trim } from 'lodash';
 
 const app = uiModules.get('pipelines');

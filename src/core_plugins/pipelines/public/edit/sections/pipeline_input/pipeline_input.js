@@ -3,7 +3,7 @@ import uiModules from 'ui/modules';
 import template from './pipeline_input.html';
 import './pipeline_input.less';
 
-const app = uiModules.get('kibana');
+const app = uiModules.get('pipelines');
 
 app.directive('pipelineInput', function () {
   return {

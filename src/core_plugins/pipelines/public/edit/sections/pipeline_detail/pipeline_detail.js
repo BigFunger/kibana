@@ -4,7 +4,7 @@ import uiModules from 'ui/modules';
 import template from './pipeline_detail.html';
 import './pipeline_detail.less';
 
-const app = uiModules.get('kibana');
+const app = uiModules.get('pipelines');
 
 app.directive('pipelineDetail', function ($compile) {
   return {

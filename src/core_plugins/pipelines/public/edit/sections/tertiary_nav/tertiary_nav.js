@@ -1,8 +1,8 @@
-import modules from 'ui/modules';
+import uiModules from 'ui/modules';
 import template from './tertiary_nav.html';
 import './tertiary_nav.less';
 
-const app = modules.get('apps/management');
+const app = uiModules.get('pipelines');
 
 app.directive('tertiaryNav', function () {
   return {

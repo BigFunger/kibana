@@ -4,7 +4,7 @@ import template from './field_select.html';
 import './field_select.less';
 import 'ui-select';
 
-const app = uiModules.get('kibana');
+const app = uiModules.get('pipelines');
 
 app.directive('fieldSelect', function ($timeout) {
   return {

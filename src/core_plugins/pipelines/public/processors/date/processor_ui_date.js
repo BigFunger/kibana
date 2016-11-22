@@ -3,7 +3,7 @@ import uiModules from 'ui/modules';
 import template from './processor_ui_date.html';
 import './processor_ui_date.less';
 
-const app = uiModules.get('kibana');
+const app = uiModules.get('pipelines');
 
 //scope.processor, scope.pipeline are attached by the process_container.
 app.directive('processorUiDate', function () {
