@@ -1,0 +1,223 @@
+PUT _ingest/pipeline/more-complex
+{
+  "description": "",
+  "processors": [
+    {
+      "append": {
+        "tag": "append_1",
+        "field": "tags",
+        "value": [
+          "tag1",
+          "tag2",
+          "tag3",
+          "tag4"
+        ]
+      }
+    },
+    {
+      "set": {
+        "tag": "set_2",
+        "field": "income",
+        "value": "100000",
+        "override": true
+      }
+    },
+    {
+      "convert": {
+        "tag": "convert_1",
+        "field": "income",
+        "type": "float",
+        "ignore_missing": false
+      }
+    },
+    {
+      "set": {
+        "tag": "set_3",
+        "field": "birthday",
+        "value": "07/05/1979",
+        "override": true
+      }
+    },
+    {
+      "date": {
+        "tag": "date_1",
+        "field": "birthday",
+        "formats": [
+          "MM/dd/yyyy"
+        ],
+        "target_field": "birthday",
+        "timezone": "Etc/UTC",
+        "locale": "ENGLISH"
+      }
+    },
+    {
+      "date_index_name": {
+        "tag": "date_index_name_1",
+        "field": "birthday",
+        "date_rounding": "",
+        "index_name_prefix": "foobar"
+      }
+    },
+    {
+      "dot_expander": {
+        "tag": "dot_expander_2",
+        "field": "foo.bar"
+      }
+    },
+    {
+      "dot_expander": {
+        "tag": "dot_expander_3",
+        "field": "foo.baz"
+      }
+    },
+    {
+      "fail": {
+        "tag": "fail_2",
+        "on_failure": [
+          {
+            "grok": {
+              "tag": "grok_2",
+              "field": "message",
+              "patterns": [
+                "%{COMMONAPACHELOG}"
+              ],
+              "trace_match": false,
+              "ignore_missing": false
+            }
+          },
+          {
+            "geoip": {
+              "tag": "geoip_3",
+              "field": "clientip"
+            }
+          },
+          {
+            "gsub": {
+              "tag": "gsub_1",
+              "field": "verb",
+              "pattern": "GET",
+              "replacement": "GOTTEN"
+            }
+          },
+          {
+            "sort": {
+              "tag": "sort_1",
+              "field": "tags",
+              "order": "desc"
+            }
+          },
+          {
+            "join": {
+              "tag": "join_1",
+              "field": "tags",
+              "separator": " "
+            }
+          },
+          {
+            "set": {
+              "tag": "set_5",
+              "field": "json",
+              "value": "{\"firstname\":\"james\",\"lastname\":\"unger\"}",
+              "override": true
+            }
+          },
+          {
+            "uppercase": {
+              "tag": "uppercase_1",
+              "field": "json",
+              "ignore_missing": false
+            }
+          },
+          {
+            "lowercase": {
+              "tag": "lowercase_1",
+              "field": "json",
+              "ignore_missing": false
+            }
+          },
+          {
+              "json": {
+                "tag": "json_1",
+                "field": "json"
+              }
+            },
+            {
+              "rename": {
+                "tag": "rename_1",
+                "field": "json",
+                "target_field": "person",
+                "ignore_missing": false
+              }
+            },
+            {
+              "remove": {
+                "tag": "remove_1",
+                "field": "clientip"
+              }
+            },
+            {
+              "script": {
+                "tag": "script_1",
+                "lang": "painless",
+                "inline": "for (int i=0;i<10;i++) {\n    ctx['dummyField' + i] = Integer.parseInt(params.multiplier) * i;\n}",
+                "params": {
+                  "multiplier": "54321"
+                }
+              }
+            },
+            {
+              "uppercase": {
+                "tag": "uppercase_2",
+                "field": "tags",
+                "ignore_missing": false
+              }
+            },
+            {
+              "split": {
+                "tag": "split_1",
+                "field": "tags",
+                "separator": " "
+              }
+            },
+            {
+              "set": {
+                "tag": "set_6",
+                "field": "trimmablefield",
+                "value": "             dsfgasdjfhsdf adsfasdfasdf a               ",
+                "override": true
+              }
+            },
+            {
+              "trim": {
+                "tag": "trim_1",
+                "field": "trimmablefield",
+                "ignore_missing": false
+              }
+            }
+          ],
+          "message": "Oops"
+        }
+      }
+    ]
+  }
+
+PUT .kibana/pipeline-meta/more-complex
+{
+  "sample-index": 0,
+  "samples": [
+    {
+      "doc": {
+        "message": "64.242.88.10 - - [07/Mar/2004:16:58:54 -0800] \"GET /mailman/listinfo/administration HTTP/1.1\" 200 6459",
+        "foo.bar": "true",
+        "foo.baz": "false"
+      },
+      "description": "Good Document"
+    },
+    {
+      "doc": {
+        "message": "lordgun.org - - [07/Mar/2004:17:01:53 -0800] \"GET /razor.html HTTP/1.1\" 200 2869"
+      },
+      "description": "Bad Document"
+    }
+  ]
+}
