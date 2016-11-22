@@ -4,14 +4,14 @@ import './processor_ui_foreach.less';
 
 const app = uiModules.get('pipelines');
 
-//scope.pipeline, scope.processor are attached by the process_container.
+//scope.processorShell is attached by the processorDetail directive.
 app.directive('processorUiForeach', function () {
   return {
     restrict: 'E',
     template: template,
     controller : function ($scope) {
-      const processor = $scope.processor;
-      const pipeline = $scope.pipeline;
+      $scope.processor = $scope.processorShell.processor;
+      const pipeline = $scope.processorShell.pipeline;
 
       $scope.$watch('processor.field', () => {
         $scope.processor.updateProcessorCollection();
@@ -19,7 +19,7 @@ app.directive('processorUiForeach', function () {
       });
 
       $scope.defineProcessors = () => {
-        $scope.pipeline.pushProcessorCollection(processor.processorCollection);
+        $scope.pipeline.pushProcessorCollection($scope.processor.processorCollection);
       };
     }
   };

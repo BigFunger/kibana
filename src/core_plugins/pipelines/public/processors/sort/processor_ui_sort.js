@@ -3,14 +3,14 @@ import template from './processor_ui_sort.html';
 
 const app = uiModules.get('pipelines');
 
-//scope.pipeline, scope.processor are attached by the process_container.
+//scope.processorShell is attached by the processorDetail directive.
 app.directive('processorUiSort', function () {
   return {
     restrict: 'E',
     template: template,
     controller : function ($scope) {
-      const processor = $scope.processor;
-      const pipeline = $scope.pipeline;
+      $scope.processor = $scope.processorShell.processor;
+      const pipeline = $scope.processorShell.pipeline;
 
       $scope.sortOrders = {
         asc: 'Ascending',

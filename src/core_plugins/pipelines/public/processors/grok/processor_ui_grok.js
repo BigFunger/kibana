@@ -6,14 +6,14 @@ import { pipelines as docLinks } from 'ui/documentation_links/documentation_link
 
 const app = uiModules.get('pipelines');
 
-//scope.processor, scope.pipeline are attached by the process_container.
+//scope.processorShell is attached by the processorDetail directive.
 app.directive('processorUiGrok', function () {
   return {
     restrict: 'E',
     template: template,
     controller : function ($scope) {
-      const processor = $scope.processor;
-      const pipeline = $scope.pipeline;
+      $scope.processor = $scope.processorShell.processor;
+      const pipeline = $scope.processorShell.pipeline;
 
       $scope.advancedSection = {
         collapsed: true

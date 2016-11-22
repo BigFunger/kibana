@@ -4,28 +4,28 @@ import template from './processor_ui_unknown.html';
 
 const app = uiModules.get('pipelines');
 
-//scope.pipeline, scope.processor are attached by the process_container.
+//scope.processorShell is attached by the processorDetail directive.
 app.directive('processorUiUnknown', function () {
   return {
     restrict: 'E',
     template: template,
     controller : function ($scope) {
-      const processor = $scope.processor;
-      const pipeline = $scope.pipeline;
+      $scope.processor = $scope.processorShell.processor;
+      const pipeline = $scope.processorShell.pipeline;
 
-      $scope.formattedJson = JSON.stringify(processor.json);
+      $scope.formattedJson = JSON.stringify($scope.processor.json);
 
       function updateJson() {
         try {
           const json = JSON.parse($scope.formattedJson);
           if (isObject(json)) {
-            processor.json = json;
+            $scope.processor.json = json;
           } else {
-            processor.json = {};
+            $scope.processor.json = {};
           }
         }
         catch (error) {
-          processor.json = {};
+          $scope.processor.json = {};
         }
       }
 

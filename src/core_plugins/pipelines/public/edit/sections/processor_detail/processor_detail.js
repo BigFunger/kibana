@@ -29,8 +29,7 @@ app.directive('processorDetail', function ($compile, $timeout) {
         if (!processorShell) return;
 
         const newScope = $scope.$new();
-        newScope.pipeline = pipeline;
-        newScope.processor = processorShell.processor;
+        //newScope.processor = processorShell.processor;
         newScope.processorShell = processorShell;
         const typeId = processorShell.typeId;
 

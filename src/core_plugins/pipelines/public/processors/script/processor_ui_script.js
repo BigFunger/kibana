@@ -6,20 +6,20 @@ import './script_parameters';
 
 const app = uiModules.get('pipelines');
 
-//scope.pipeline, scope.processor are attached by the process_container.
+//scope.processorShell is attached by the processorDetail directive.
 app.directive('processorUiScript', function () {
   return {
     restrict: 'E',
     template: template,
     controller : function ($scope) {
-      const processor = $scope.processor;
-      const pipeline = $scope.pipeline;
+      $scope.processor = $scope.processorShell.processor;
+      const pipeline = $scope.processorShell.pipeline;
 
       $scope.advancedSection = {
         collapsed: true
       };
 
-      $scope.scriptTypes = processor.scriptTypes;
+      $scope.scriptTypes = $scope.processor.scriptTypes;
 
       $scope.aceLoaded = (editor) => {
         this.editor = editor;

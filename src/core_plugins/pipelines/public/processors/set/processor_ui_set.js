@@ -3,14 +3,14 @@ import template from './processor_ui_set.html';
 
 const app = uiModules.get('pipelines');
 
-//scope.pipeline, scope.processor are attached by the process_container.
+//scope.processorShell is attached by the processorDetail directive.
 app.directive('processorUiSet', function () {
   return {
     restrict: 'E',
     template: template,
     controller : function ($scope) {
-      const processor = $scope.processor;
-      const pipeline = $scope.pipeline;
+      $scope.processor = $scope.processorShell.processor;
+      const pipeline = $scope.processorShell.pipeline;
 
       $scope.$watch('processor.field', () => { pipeline.setDirty(); });
       $scope.$watch('processor.value', () => { pipeline.setDirty(); });
