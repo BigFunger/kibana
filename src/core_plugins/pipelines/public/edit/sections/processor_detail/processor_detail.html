@@ -1,0 +1,61 @@
+<form name="processorForm">
+  <h3 ng-show="processorShell.processor">
+    {{processorShell.processor.title}} {{processorShell.description}}
+  </h3>
+  <h3 ng-hide="processorShell.processor">
+    New Processor
+  </h3>
+  <div
+    class="alert alert-warning unknown-warning"
+    ng-show="processorShell.typeId === 'unknown'">
+    This processor is a type that is unknown by Kibana. This interface will allow you to edit and view this processor as raw JSON. It is strongly recommended that you install the plugin that corresponds to this processor type. Warning: Entering JSON that ingest does not understand can break Kibana.
+  </div>
+
+  <section-collapser
+    class="collapser-compact"
+    title="Input"
+    collapsed="pipelineProcessors.detailState.input.collapsed">
+  </section-collapser>
+  <processor-input
+    processor-shell="processorShell"
+    ng-hide="pipelineProcessors.detailState.input.collapsed">
+  </processor-input>
+
+  <section-collapser
+    class="collapser-small"
+    title="Configuration"
+    collapsed="pipelineProcessors.detailState.configuration.collapsed">
+  </section-collapser>
+  <div ng-hide="pipelineProcessors.detailState.configuration.collapsed">
+    <processor-type-select
+      processor-type-id="processorTypeId"
+      ng-show="processorShell">
+    </processor-type-select>
+    <div
+      class="processor-ui-content"
+      ng-show="processorShell.typeId">
+    </div>
+    <processor-failure-action
+      processor-shell="processorShell"
+      pipeline-processors="pipelineProcessors"
+      ng-show="processorShell.typeId">
+    </processor-failure-action>
+  </div>
+
+  <section-collapser
+    class="collapser-compact"
+    title="Output"
+    collapsed="pipelineProcessors.detailState.output.collapsed"
+    ng-show="processorShell.typeId">
+  </section-collapser>
+  <div ng-hide="pipelineProcessors.detailState.output.collapsed">
+    <processor-output
+      processor-shell="processorShell"
+      ng-if="processorShell.typeId"
+      ng-show="processorShell.state === processorStates.VALID">
+    </processor-output>
+    <processor-error
+      processor-shell="processorShell">
+    </processor-error>
+  </div>
+</form>

@@ -2,8 +2,8 @@ import Promise from 'bluebird';
 import { mkdirp as mkdirpNode } from 'mkdirp';
 import manageUuid from './server/lib/manage_uuid';
 import ingest from './server/routes/api/ingest';
-import pipelines from './server/routes/api/pipelines';
-import pipelinesManager from './server/lib/pipelines/pipelines_manager';
+//import pipelines from './server/routes/api/pipelines';
+//import pipelinesManager from './server/lib/pipelines/pipelines_manager';
 import search from './server/routes/api/search';
 import settings from './server/routes/api/settings';
 import scripts from './server/routes/api/scripts';
@@ -37,8 +37,7 @@ module.exports = function (kibana) {
           'navbarExtensions',
           'managementSections',
           'devTools',
-          'docViews',
-          'pipelinesProcessors'
+          'docViews'
         ],
 
         injectVars: function (server, options) {
@@ -117,8 +116,8 @@ module.exports = function (kibana) {
       manageUuid(server);
       // routes
       ingest(server);
-      pipelinesManager(server);
-      pipelines(server);
+      //pipelinesManager(server);
+      //pipelines(server);
       search(server);
       settings(server);
       scripts(server);
