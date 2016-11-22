@@ -1,11 +1,11 @@
 import processorRegistry from 'plugins/pipelines/processor_registry';
-import ViewModel from './view_model';
-import './directive';
+import { ForeachProcessor } from './foreach_processor';
+import './processor_ui_foreach';
 
 processorRegistry.register(() => {
   return {
     id: 'foreach',
     name: 'For Each',
-    ViewModel: ViewModel
+    ViewModel: ForeachProcessor
   };
 });

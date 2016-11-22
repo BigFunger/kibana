@@ -29,8 +29,12 @@ app.directive('processorTreeItem', function (RecursionHelper) {
       this.childItems = this.processorShell.failureProcessorCollection.processors;
 
       this.delete = () => {
-        this.rootProcessorTree.selectItem(this.processorShell.pipeline);
         this.processorShell.parentProcessorCollection.remove(this.processorShell);
+        if (this.processorShell.pipeline.processorCollection.processors.length > 0) {
+          this.rootProcessorTree.selectItem(this.processorShell.pipeline);
+        } else {
+          this.rootProcessorTree.selectItem(undefined);
+        }
       };
 
       this.selectItem = () => {

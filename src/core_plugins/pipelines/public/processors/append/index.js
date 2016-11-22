@@ -1,11 +1,11 @@
 import processorRegistry from 'plugins/pipelines/processor_registry';
-import ViewModel from './view_model';
-import './directive';
+import { AppendProcessor } from './append_processor';
+import './processor_ui_append';
 
 processorRegistry.register(() => {
   return {
     id: 'append',
     name: 'Append',
-    ViewModel: ViewModel
+    ViewModel: AppendProcessor
   };
 });

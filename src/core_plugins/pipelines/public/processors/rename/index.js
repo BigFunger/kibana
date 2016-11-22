@@ -1,11 +1,11 @@
 import processorRegistry from 'plugins/pipelines/processor_registry';
-import ViewModel from './view_model';
-import './directive';
+import { RenameProcessor } from './rename_processor';
+import './processor_ui_rename';
 
 processorRegistry.register(() => {
   return {
     id: 'rename',
     name: 'Rename',
-    ViewModel: ViewModel
+    ViewModel: RenameProcessor
   };
 });

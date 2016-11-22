@@ -1,11 +1,11 @@
 import processorRegistry from 'plugins/pipelines/processor_registry';
-import ViewModel from './view_model';
-import './directive';
+import { GrokProcessor } from './grok_processor';
+import './processor_ui_grok';
 
 processorRegistry.register(() => {
   return {
     id: 'grok',
     name: 'Grok',
-    ViewModel: ViewModel
+    ViewModel: GrokProcessor
   };
 });

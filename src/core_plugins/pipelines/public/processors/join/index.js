@@ -1,11 +1,11 @@
 import processorRegistry from 'plugins/pipelines/processor_registry';
-import ViewModel from './view_model';
-import './directive';
+import { JoinProcessor } from './join_processor';
+import './processor_ui_join';
 
 processorRegistry.register(() => {
   return {
     id: 'join',
     name: 'Join',
-    ViewModel: ViewModel
+    ViewModel: JoinProcessor
   };
 });

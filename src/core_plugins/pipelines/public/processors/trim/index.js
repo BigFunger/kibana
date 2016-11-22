@@ -1,11 +1,11 @@
 import processorRegistry from 'plugins/pipelines/processor_registry';
-import ViewModel from './view_model';
-import './directive';
+import { TrimProcessor } from './trim_processor';
+import './processor_ui_trim';
 
 processorRegistry.register(() => {
   return {
     id: 'trim',
     name: 'Trim',
-    ViewModel: ViewModel
+    ViewModel: TrimProcessor
   };
 });

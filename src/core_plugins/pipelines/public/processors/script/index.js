@@ -1,11 +1,11 @@
 import processorRegistry from 'plugins/pipelines/processor_registry';
-import ViewModel from './view_model';
-import './directive';
+import { ScriptProcessor } from './script_processor';
+import './processor_ui_script';
 
 processorRegistry.register(() => {
   return {
     id: 'script',
     name: 'Script',
-    ViewModel: ViewModel
+    ViewModel: ScriptProcessor
   };
 });

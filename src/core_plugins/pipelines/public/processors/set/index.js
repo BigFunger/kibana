@@ -1,11 +1,11 @@
 import processorRegistry from 'plugins/pipelines/processor_registry';
-import ViewModel from './view_model';
-import './directive';
+import { SetProcessor } from './set_processor';
+import './processor_ui_set';
 
 processorRegistry.register(() => {
   return {
     id: 'set',
     name: 'Set',
-    ViewModel: ViewModel
+    ViewModel: SetProcessor
   };
 });

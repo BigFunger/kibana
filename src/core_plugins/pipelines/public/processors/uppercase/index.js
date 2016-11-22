@@ -1,11 +1,11 @@
 import processorRegistry from 'plugins/pipelines/processor_registry';
-import ViewModel from './view_model';
-import './directive';
+import { UppercaseProcessor } from './uppercase_processor';
+import './processor_ui_uppercase';
 
 processorRegistry.register(() => {
   return {
     id: 'uppercase',
     name: 'Uppercase',
-    ViewModel: ViewModel
+    ViewModel: UppercaseProcessor
   };
 });

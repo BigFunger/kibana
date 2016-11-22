@@ -1,11 +1,11 @@
 import processorRegistry from 'plugins/pipelines/processor_registry';
-import ViewModel from './view_model';
-import './directive';
+import { FailProcessor } from './fail_processor';
+import './processor_ui_fail';
 
 processorRegistry.register(() => {
   return {
     id: 'fail',
     name: 'Fail',
-    ViewModel: ViewModel
+    ViewModel: FailProcessor
   };
 });

@@ -1,11 +1,11 @@
 import processorRegistry from 'plugins/pipelines/processor_registry';
-import ViewModel from './view_model';
-import './directive';
+import { LowercaseProcessor } from './lowercase_processor';
+import './processor_ui_lowercase';
 
 processorRegistry.register(() => {
   return {
     id: 'lowercase',
     name: 'Lowercase',
-    ViewModel: ViewModel
+    ViewModel: LowercaseProcessor
   };
 });

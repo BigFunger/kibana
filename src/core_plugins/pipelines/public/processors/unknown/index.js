@@ -1,6 +1,6 @@
 import processorRegistry from 'plugins/pipelines/processor_registry';
-import ViewModel from './view_model';
-import './directive';
+import { UnknownProcessor } from './unknown_processor';
+import './processor_ui_unknown';
 
 //NOTE: This processor gets added to the registry, but will not appear in the
 //processor dropdown because kibana checks with elasticsearch to determine which
@@ -10,6 +10,6 @@ processorRegistry.register(() => {
   return {
     id: 'unknown',
     name: 'Unknown',
-    ViewModel: ViewModel
+    ViewModel: UnknownProcessor
   };
 });

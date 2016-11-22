@@ -1,11 +1,11 @@
 import processorRegistry from 'plugins/pipelines/processor_registry';
-import ViewModel from './view_model';
-import './directive';
+import { ConvertProcessor } from './convert_processor';
+import './processor_ui_convert';
 
 processorRegistry.register(() => {
   return {
     id: 'convert',
     name: 'Convert',
-    ViewModel: ViewModel
+    ViewModel: ConvertProcessor
   };
 });
