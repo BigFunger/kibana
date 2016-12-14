@@ -1,5 +1,14 @@
 {
   "author": "Management Team <kibana-management@elastic.co>",
   "name": "pipelines",
-  "version": "kibana"
+  "version": "6.0.0-alpha1",
+  "dependencies": {
+    "angular-sanitize": "1.5.7",
+    "boom": "2.8.0",
+    "joi": "6.6.1",
+    "jquery": "2.1.4",
+    "lodash": "3.10.1",
+    "ui-select": "0.19.6"
+  },
+  "repository": "none"
 }
