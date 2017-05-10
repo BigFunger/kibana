@@ -7,7 +7,14 @@
     <table class="kuiTable kuiVerticalRhythm">
       <thead>
         <tr class="kuiTableRow">
-          <th class="kuiTableHeaderCell kuiTableHeaderCell--checkBox"></th>
+          <th class="kuiTableHeaderCell kuiTableHeaderCell--checkBox">
+            <div class="kuiTableRowCell__liner">
+              <check-box
+                is-selected="testbed.areAllSelected"
+                on-select-change="testbed.onSelectAllChange"
+              ></check-box>
+            </div>
+          </th>
           <th class="kuiTableHeaderCell">Item</th>
         </tr>
       </thead>
@@ -26,7 +33,7 @@
         </td>
         <td class="kuiTableRowCell">
           <div class="kuiTableRowCell__liner">
-            {{ item.name }}
+            {{ item.name }} {{ item.isSelected }}
           </div>
         </td>
       </tr>
@@ -35,6 +42,7 @@
     <p class="kuiVerticalRhythm kuiText kuiSubduedText">
       {{ testbed.message }}
     </p>
+
     <!-- CONTENT END -->
 
   </div>
